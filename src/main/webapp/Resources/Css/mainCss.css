@@ -1,0 +1,328 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 08-Jul-2017, 14:41:10
+    Author     : ASUS
+*/
+
+nav{
+    margin: 15px;
+}
+
+.nav > ul > li > a:hover{
+    background-color: white;
+    color: black;
+    /*
+    -webkit-box-shadow: inset 0px 0px 49px -7px rgba(168,13,168,1);
+    -moz-box-shadow: inset 0px 0px 49px -7px rgba(168,13,168,1);
+    box-shadow: inset 0px 0px 49px -7px rgba(168,13,168,1);*/
+}
+.nav.navbar-nav{
+    background-color: #9B11C2;
+    border-radius: 20%;
+}
+.nav.navbar-nav.adminNav{
+    background-color: #9B11C2;
+}
+.nav.navbar-nav > li.dropdown.active.open > a, 
+.nav.navbar-nav > li.dropdown.active.open > ul.dropdown-menu a,
+.nav.navbar-nav > li.dropdown.open > a, 
+.nav.navbar-nav > li.dropdown.open > ul.dropdown-menu a{
+    background-color: #9B11C2;
+    color: white;
+}
+.nav.navbar-nav > li.dropdown.active.open > a, 
+.nav.navbar-nav > li.dropdown.active.open > ul.dropdown-menu a:hover,
+.nav.navbar-nav > li.dropdown.open > a, 
+.nav.navbar-nav > li.dropdown.open > ul.dropdown-menu a:hover
+{
+    background-color: #C124ED;
+    color: white;
+    -webkit-box-shadow: inset 0px 0px 49px -7px rgba(168,13,168,1);
+    -moz-box-shadow: inset 0px 0px 49px -7px rgba(168,13,168,1);
+    box-shadow: inset 0px 0px 49px -7px rgba(168,13,168,1);
+}
+.navbar-nav .dropdown .dropdown-menu
+{
+        float: none;
+        width: auto;
+        margin-top: 0;
+        color: white;
+        background-color:#9B11C2;
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
+        position:absolute;
+        margin:0;
+}
+.navbar-nav .dropdown .dropdown-menu > li > a {
+    background-color: #9B11C2;
+    color: white;
+}
+.navbar-header > a:hover{
+    color: #ffffff;
+}
+.navbarItem{  
+    color: white;
+    font-weight: bold;
+    font-style: normal;
+}
+.navbarColour{
+    background-color: white;    
+}
+.navbar-brand{
+    color: white;
+    font-weight: bold;
+}
+div.horizontalRule {
+    clear:both;
+    width:100%;
+    background-color:#550982;
+    height:5px;
+    margin-bottom:15px;
+}
+div.horizontalRuleMain {
+    clear:both;
+    width:100%;
+    background-color:#a6a6a6;
+    height:5px;
+    margin-bottom:5px;
+}
+.headerImageSize{
+    height: 50px;
+    width: 250px;
+}
+.mainBox{
+    width: 100%;
+    height: 380px;    
+    margin-right: 5px;
+    padding:5px;
+    background-image: url("../Images/port-eco-house.png");
+    -webkit-box-shadow: 2px 3px 19px -1px rgba(107,61,107,0.44);
+    -moz-box-shadow: 2px 3px 19px -1px rgba(107,61,107,0.44);
+    box-shadow: 2px 3px 19px -1px rgba(107,61,107,0.44);
+    /*background-color: #a6a6a6;*/
+}
+.infoBox{    
+    height: 400px;
+    width:100%;
+    /*
+    background-color: #785d82;
+    opacity : 0.85; 
+    border: solid;
+    text-align: center;*/
+}
+.titleBox{
+    height: 60px;
+    width: 350px;
+    background-color: #785d82;
+    opacity: 0.95;
+}
+.extraBox{
+    height:235px;    
+}
+.extraBox2{
+    height:26px;
+    width:100px;
+    margin-bottom: 2px;
+    background-color: black;
+}
+.departmentBox{
+    height:43px;
+    width: 280px;
+    background-color: #6326ad;
+    margin-bottom: 5px;
+}
+.departmentFont{
+    padding-left: 5px;
+    font-size: 30px;
+    color: white;
+    font-family: HelveticaNeue;
+}
+.titleFont{
+    padding-left: 5px;
+    font-size: 53px;
+    color: white;
+    font-family: HelveticaNeue;
+}
+.infoTitle{
+    margin:15px;
+    font-size: 25px;
+    color: #9B11C2;
+    font-family: HelveticaNeue;
+    font-weight: bold;
+}
+.extraBox2Font{
+    padding-left: 5px;
+    font-size: 20px;
+    color: white;
+    font-family: HelveticaNeue;
+}
+.mainDiv{
+    background-image: url("../Images/pattern1.jpg");
+    background-repeat: repeat-y;
+}
+.questionMarkImage{
+    width:50px;
+    height: 50px;
+}
+.facilitiesContainer{
+    align-content: center;
+    width: 100%;
+    height: 380px;    
+    margin-right: 5px;
+    padding:5px;
+    background-image: url("../Images/whitepattern.jpg");
+    background-repeat: repeat;
+}
+
+.facilityTitleFont{
+    text-align: center;
+    font-family: Comic Sans MS;
+    font-size: 45px;
+    color: black;
+        
+}
+.facilityItem{
+    width:332px;
+    height: 230px;
+    margin: 5px;
+    background-color: white;
+    opacity: 0.65;
+}
+
+.facTitleFont{
+    text-align: center;
+    font-family: Comic Sans MS;
+    font-size: 25px;
+    color: black;
+    font-weight: bold;
+    
+}
+.borderCss{
+    text-align: center;
+    border-bottom: dotted;
+    margin-bottom: 15px;
+}
+.buttonPosition{
+    margin : 10px;
+    float: right;
+}
+.buttonStyle{
+    /*
+    background-color: #9B11C2;
+    border: none;
+    color: white;
+    font-size: 15px;
+    font-family: Comic Sans MS;
+    text-align: center;
+    
+    -webkit-border-radius: 10;
+    -moz-border-radius: 10;
+    */
+    background: #c030f0;
+    background-image: -webkit-linear-gradient(top, #c030f0, #931fba);
+    background-image: -moz-linear-gradient(top, #c030f0, #931fba);
+    background-image: -ms-linear-gradient(top, #c030f0, #931fba);
+    background-image: -o-linear-gradient(top, #c030f0, #931fba);
+    background-image: linear-gradient(to bottom, #c030f0, #931fba);
+    
+    border-radius: 10px;
+    font-family: Georgia;
+    color: #ffffff;
+    font-size: 15px;
+    padding: 10px 20px 10px 20px;
+    text-decoration: none;
+}
+
+.buttonStyle:hover{
+    background: #7417a3;
+    background-image: -webkit-linear-gradient(top, #7417a3, #641085);
+    background-image: -moz-linear-gradient(top, #7417a3, #641085);
+    background-image: -ms-linear-gradient(top, #7417a3, #641085);
+    background-image: -o-linear-gradient(top, #7417a3, #641085);
+    background-image: linear-gradient(to bottom, #7417a3, #641085);
+    text-decoration: none;
+}
+
+#bookingPage{
+    background-color: #e8e8e8;
+}
+
+.mainContent{
+    background-color: white;
+    border: solid;
+    margin-top: 40px;
+}
+
+div.purpleLine{
+    clear:both;
+    width:100%;
+    background-color:#550982;
+    height:5px;
+    margin-bottom:15px;
+}
+.bookingTitleFont{
+    text-align: center;
+    color: #550982;
+    font-family: Comic Sans MS;
+}
+
+.bookingLabelFont{
+    padding-right: 3px;
+    color: #550982;
+    font-family: Comic Sans MS;
+    font-size: 15px;
+}
+
+.inputTextStyle{
+    border: none;
+    border-bottom: solid #550982;
+    margin: 10px;
+}
+
+.row1{
+    background-color: grey;
+    height: 250px;
+    width: 100%;
+    margin-top: 10px;
+    opacity: 0.5;
+}
+
+.row2{
+    height: 250px;
+    width: 100%;
+    margin-top: 10px;   
+}
+
+.row3{
+    background-color: grey;
+    height: 250px;
+    width: 100%;
+    margin-top: 10px;
+    opacity: 0.5;  
+}
+
+.contactInfo{
+    background-color: #decce5;
+    border-radius: 50%;
+    -webkit-box-shadow: 2px 3px 19px -1px rgba(107,61,107,0.44);
+    -moz-box-shadow: 2px 3px 19px -1px rgba(107,61,107,0.44);
+    box-shadow: 2px 3px 19px -1px rgba(107,61,107,0.44);
+    height: 300px;
+    width: 300px;
+    float: right;
+}
+
+.contactFont{
+    margin-top: 55px;
+    font-size: 25px;
+    color: black;
+    font-family: HelveticaNeue;
+    font-weight: bold;
+}
+
+
+
+
