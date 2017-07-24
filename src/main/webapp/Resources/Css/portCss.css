@@ -1,0 +1,583 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 15-Jul-2017, 23:03:53
+    Author     : ASUS
+*/
+
+#loginPage{
+    background-color: #dbdbdb;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover; 
+    background-size: 100% 100%;
+}
+#bookingPanel{
+    background-color: #dbdbdb;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover; 
+    background-size: 100% 100%;
+}
+#memberPage{
+    background-color: #dbdbdb;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover; 
+    background-size: 100% 100%;
+}
+.navbar {
+    position: relative;
+    min-height: 50px;
+    border: none;
+    min-width: 1000px;
+}
+.headerBackground{
+    background-image: url("../Images/stonearchitecture.jpg");
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 180px;
+}
+.insideHeaderBackground{
+    background-image: url("../Images/stonearchitecture.jpg");
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 150px;
+}
+.navbarItem{
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    font-style: normal;
+    font-family: Georgia;
+}
+.navbarColour{
+    background-color: #4d454f;
+}
+.secondNavColour{
+    background-color: #4d454f;
+}
+
+.navbar-default .navbar-nav>li>a.navbarItem{
+    color: white;
+    font-family: Georgia;
+    font-size: 18px;
+    margin-right: 15px;
+}
+.navbar-default .navbar-nav>li>a.navbarItem:hover{
+    color: #2c0b42;
+    font-family: Georgia;
+    font-size: 18px;
+}
+.navbar-default .navbar-brand{
+    color: white;
+    font-family: Georgia;
+}
+.navbar-default .navbar-brand > a.navHeaderColour:hover{
+    color: white;
+    font-family: Georgia;
+}
+.boxes{
+    margin: 0 auto;
+    margin-top: 40px;
+    width: 600px;
+    height: 200px;
+}
+.boxes2{
+    margin: 0 auto;
+    margin-top: 75px;
+    width: 600px;
+    height: 200px;
+}
+.logoBox{
+    margin: 0 auto;
+    width: 300px;
+    height: 50px;
+    background-color: white;
+}
+.firstBox{
+    width: 600px;
+    height: 70px;
+    background-color: black;
+}
+.secondBox{
+    margin: 0 auto;
+    width: 600px;
+    height: 65px;
+    background-color: #550982;
+    opacity: 0.8;
+}
+.insideBox{
+    width: 600px;
+    height: 70px;
+    background-color: black;
+}
+.webTitle{
+    text-align: center;
+    font-family: Georgia;
+    font-size: 70px;
+    color: white;
+    text-shadow: 1px -2px 13px rgba(150, 150, 150, 1);
+}
+.webTitle2{
+    font-family: Georgia;
+    font-size: 35px;
+    color: #550982;
+    text-shadow: 1px -2px 13px rgba(150, 150, 150, 1);
+}
+.navBarColumn{
+    background-color: #4d454f;
+    max-height: 50px;
+}
+.logoImage{
+}
+.contentPanel{
+    background-color: #dbdbdb;
+    height: 600px;
+    width: 100%;
+}
+.inventoryContentPanel{
+    background-color: #dbdbdb;
+    height: 500px;
+    width: 100%;
+}
+.inventoryContentPanel2{
+    background-color: white;
+    width: 100%;
+    height: 300px;
+}
+.adminMemberPanel{
+    background-color: #dbdbdb;
+    height: 100%;
+    width: 100%;
+}
+.adminMemberPanel2{
+    background-color: #dbdbdb;
+    height: 100%;
+    width: 100%;
+}
+.aboutPanel{
+    background-color: white;
+    height: 300px;
+    width: 100%;
+}
+.loginPanel{
+    background-color: #dbdbdb;
+    width: 100%;    
+}
+.bookingPanel{
+    background-color: #dbdbdb;
+    width: 100%;
+}
+.memberPanel{
+    background-color: #dbdbdb;
+    width: 100%;
+}
+.titleFont{
+    text-align: center;
+    font-family: Georgia;
+    color: black;
+    font-size: 40px;
+}
+.facilityImages{
+    width: 240px;
+    height: 240px;
+    border-radius: 10%;
+    -webkit-transition: all 0.5s ease;
+     -moz-transition: all 0.5s ease;
+       -o-transition: all 0.5s ease;
+      -ms-transition: all 0.5s ease;
+          transition: all 0.5s ease;
+}
+.circleBox{
+    margin-left: 50px;
+    width: 250px;
+    height: 250px;
+    background-color: #3f2a4c;
+    padding: 5px;
+    border-radius: 10%;
+    -webkit-transition: all 0.5s ease;
+     -moz-transition: all 0.5s ease;
+       -o-transition: all 0.5s ease;
+      -ms-transition: all 0.5s ease;
+          transition: all 0.5s ease;
+}
+.circleBox2{
+    margin-left: 50px;
+    width: 250px;
+    height: 250px;
+    background-color: #3f2a4c;
+    padding: 5px;
+    border-radius: 10%;
+    -webkit-transition: all 0.5s ease;
+     -moz-transition: all 0.5s ease;
+       -o-transition: all 0.5s ease;
+      -ms-transition: all 0.5s ease;
+          transition: all 0.5s ease;
+}
+.circleBox3{
+    background-color: #3f2a4c;
+    margin-left: 50px;
+    width: 250px;
+    height: 250px;
+    padding: 5px;
+    border-radius: 10%;
+    -webkit-transition: all 0.5s ease;
+     -moz-transition: all 0.5s ease;
+       -o-transition: all 0.5s ease;
+      -ms-transition: all 0.5s ease;
+          transition: all 0.5s ease;
+}
+.image1{
+    background-image: url("../Images/mainhouse.jpg");    
+    width: 240px;
+    height: 240px;
+    border-radius: 10%;
+    -webkit-transition: all 0.5s ease;
+     -moz-transition: all 0.5s ease;
+       -o-transition: all 0.5s ease;
+      -ms-transition: all 0.5s ease;
+          transition: all 0.5s ease;
+}
+/*.image1:hover{
+    border-radius: 50%; 
+}*/
+.image2{
+    background-image: url("../Images/garden6.jpg");    
+    width: 240px;
+    height: 240px;
+    border-radius: 10%;
+    -webkit-transition: all 0.5s ease;
+     -moz-transition: all 0.5s ease;
+       -o-transition: all 0.5s ease;
+      -ms-transition: all 0.5s ease;
+          transition: all 0.5s ease;
+}
+/*.image2:hover{
+    border-radius: 50%; 
+}*/
+.image3{
+    background-image: url("../Images/control.jpg");    
+    width: 240px;
+    height: 240px;
+    border-radius: 10%;
+    -webkit-transition: all 0.5s ease;
+     -moz-transition: all 0.5s ease;
+       -o-transition: all 0.5s ease;
+      -ms-transition: all 0.5s ease;
+          transition: all 0.5s ease;
+}
+/*.image3:hover{
+    border-radius: 50%; 
+}
+.circleBox:hover {
+  border-radius: 50%;
+}
+
+.circleBox2:hover {
+  border-radius: 50%;
+}
+
+.circleBox3:hover {
+  border-radius: 50%;
+}
+
+.facilityImages:hover{
+   border-radius: 50%;     
+}*/
+.fontFacility{
+    text-align: center;
+    font-family: Georgia;
+    color: black;
+    font-size: 25px;
+    
+}
+.facilityLink{
+    position: relative;
+    margin: 0 auto;
+}
+.buttonStyle{
+    /*
+    background-color: #9B11C2;
+    border: none;
+    color: white;
+    font-size: 15px;
+    font-family: Comic Sans MS;
+    text-align: center;
+    
+    -webkit-border-radius: 10;
+    -moz-border-radius: 10;
+    */
+    background: #7e1499;
+    background-image: -webkit-linear-gradient(top, #7e1499, #35025e);
+    background-image: -moz-linear-gradient(top, #7e1499, #35025e);
+    background-image: -ms-linear-gradient(top, #7e1499, #35025e);
+    background-image: -o-linear-gradient(top, #7e1499, #35025e);
+    background-image: linear-gradient(to bottom, #7e1499, #35025e);
+    border-radius: 10px;
+    font-family: Georgia;
+    color: #ffffff;
+    font-size: 16px;
+    padding: 10px 20px 10px 20px;
+    text-decoration: none;
+}
+.buttonStyle3{
+    /*
+    background-color: #9B11C2;
+    border: none;
+    color: white;
+    font-size: 15px;
+    font-family: Comic Sans MS;
+    text-align: center;
+    
+    -webkit-border-radius: 10;
+    -moz-border-radius: 10;
+    */
+    background: #7e1499;
+    background-image: -webkit-linear-gradient(top, #7e1499, #35025e);
+    background-image: -moz-linear-gradient(top, #7e1499, #35025e);
+    background-image: -ms-linear-gradient(top, #7e1499, #35025e);
+    background-image: -o-linear-gradient(top, #7e1499, #35025e);
+    background-image: linear-gradient(to bottom, #7e1499, #35025e);
+    border-radius: 10px;
+    font-family: Georgia;
+    color: #ffffff;
+    font-size: 16px;
+    padding: 10px 20px 10px 20px;
+    width: 200px;
+    text-decoration: none;
+}
+.titleDescription{
+    text-align: center;
+    font-family: Georgia;
+    font-size: 16px;
+    color: white;
+    text-shadow: 1px -2px 13px rgba(150, 150, 150, 1);
+    padding: 5px;
+}
+.facilityDescription{
+    margin: 10px;    
+    text-align: center;
+    font-family: Georgia;
+    font-size: 16px;
+    color: #50235e;
+}
+.aboutDescription{   
+    text-align: center;
+    font-family: Georgia;
+    font-size: 16px;
+    color: #50235e;
+}
+.buttonPanel{
+    margin: 0 auto;
+    margin-top: 20px;
+}
+.aboutColumn{
+    width: 700px;
+    height: 200px;
+}
+.aboutPanelTitleFont{
+    text-align: center;
+    font-family: Georgia;
+    color: black;
+    font-size: 25px;
+}
+.contactColumn{
+    
+}
+.contactInfo{
+    background-color: #decce5;
+    border-radius: 50%;
+    -webkit-box-shadow: 2px 3px 19px -1px rgba(107,61,107,0.44);
+    -moz-box-shadow: 2px 3px 19px -1px rgba(107,61,107,0.44);
+    box-shadow: 2px 3px 19px -1px rgba(107,61,107,0.44);
+    height: 260px;
+    width: 260px;
+    float: right;
+    margin-top: 15px;
+    
+}
+.footerPanel{
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    background-color: #4d454f;
+}
+.footerFont{
+    padding-top: 5px;
+    color: white;
+    font-family: Georgia;
+    font-size: 13px;
+}
+.quickBox{
+    width: 265px;
+    height: 70px;
+    background-color: #faf2fc;
+    margin: 5px;
+}
+.box1{
+    width: 540px;
+    height: 300px;
+    background-color: #faf2fc;
+    margin: 5px;
+}
+.box2{
+    width: 265px;
+    height: 300px;
+    background-color: #faf2fc;
+    margin: 5px;
+}
+.bookingLabelFont{
+    padding-right: 3px;
+    color: #550982;
+    font-family: Georgia;
+    font-size: 15px;
+}
+.outputLabelFont{
+    margin: 10px;
+    padding-right: 3px;
+    color: #550982;
+    font-family: Georgia;
+    font-size: 15px;
+}
+.inputTextStyle{
+    margin: 10px;
+    color: #550982;
+    font-family: Georgia;
+    font-size: 15px;
+    padding: 5px;
+}
+.inputTextStyleM{
+    color: #550982;
+    font-family: Georgia;
+    font-size: 15px;
+}
+.font1{
+    font-family: Georgia;
+    color: black;
+    font-size: 25px;
+    
+}
+.quickPanel{
+    text-align: center;
+    margin: 0 auto;
+}
+.quickPanelSub{
+    background: #7e1499;
+    background-image: -webkit-linear-gradient(top, #7e1499, #35025e);
+    background-image: -moz-linear-gradient(top, #7e1499, #35025e);
+    background-image: -ms-linear-gradient(top, #7e1499, #35025e);
+    background-image: -o-linear-gradient(top, #7e1499, #35025e);
+    background-image: linear-gradient(to bottom, #7e1499, #35025e);
+    -webkit-box-shadow: 2px 3px 19px -1px rgba(107,61,107,0.44);
+    -moz-box-shadow: 2px 3px 19px -1px rgba(107,61,107,0.44);
+    box-shadow: 2px 3px 19px -1px rgba(107,61,107,0.44);
+    border-radius: 10px;
+    
+    margin-top: 5px;
+    text-align: center;
+    height: 50px;
+    width: 270px;
+    border-radius: 10px;
+    padding: 10px;
+    
+}
+.quickPanelSub2{
+    background: #7e1499;
+    background-image: -webkit-linear-gradient(top, #7e1499, #35025e);
+    background-image: -moz-linear-gradient(top, #7e1499, #35025e);
+    background-image: -ms-linear-gradient(top, #7e1499, #35025e);
+    background-image: -o-linear-gradient(top, #7e1499, #35025e);
+    background-image: linear-gradient(to bottom, #7e1499, #35025e);
+    border-radius: 10px;
+    
+    margin-top: 5px;
+    text-align: center;
+    height: 50px;
+    width: 200px;
+    border-radius: 10px;
+    padding: 10px;
+    
+}
+a.quickLink{
+    color:white;
+    font-family: Georgia;
+    font-size: 15px;
+}
+a.quickLink2{
+    color:white;
+    font-family: Georgia;
+    font-size: 20px;
+}
+a.quickLink:hover{
+    text-decoration: none;
+    color:#1d0b2d;
+    font-family: Georgia;
+    font-size: 15px;    
+}
+a.quickLink2:hover{
+    text-decoration: none;
+    color:#1d0b2d;
+    font-family: Georgia;
+    font-size: 20px;
+}
+.loginOption{
+    font-family: Georgia;
+    font-size: 13px;
+    color: #50235e;
+}
+.navbar-default .navbar-nav>li.navbarItemActive{
+    background-color: #765e7c;
+    border-radius: 10px;
+}
+.mainTable{
+    border-collapse:collapse;
+}
+.tableHeader{
+    text-align:center;
+    background:none repeat scroll 0 0 #9B11C2;
+    color : white;
+    border-bottom:1px solid #BBBBBB;
+    padding:15px;
+}
+.tableRowEven{
+    text-align:center;
+    background:none repeat scroll 0 0 #E7D5EB;
+    border-top:1px solid #BBBBBB;
+    padding: 15px;
+}
+.tableRowOdd{
+    text-align:center;
+    background:none repeat scroll 0 0 #F9F9F9;
+    border-top:1px solid #BBBBBB;
+    padding: 15px;
+}
+.tableItem{
+     padding: 10px;
+}
+.memberPanel{
+    height: 600px;
+}
+.badgeStyle{
+    background-color: #dd2758;
+    color: white;
+    font-family: Georgia;
+    padding: 7px;
+}
+.mainForm{
+    background-color: #bdb1c6;
+    width: 650px;
+    height: 130px;
+    padding:10px;
+    border-radius: 10px;
+}
+.detailsForm{
+    width: 650px;
+    padding:10px;
+}

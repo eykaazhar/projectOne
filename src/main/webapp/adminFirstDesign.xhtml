@@ -1,0 +1,130 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <meta charset="utf-8"/>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="Resources/Css/mainCss.css" rel="stylesheet" type="text/css"/>
+    
+    <h:head>
+        <title>Port-Eco House</title>
+    </h:head>
+    <h:body>
+       <div class="container-fluid">            
+            <div class="col-xs-2">
+            </div>
+            <div class="col-xs-2">
+                <img class="headerImageSize" src="Resources/Images/logo-left.jpg" alt=""/>
+            </div>
+            <div class="col-xs-8">
+                <h1 class="webTitle">Port-Eco House</h1>
+            </div>             
+        </div>
+        <nav class="navbar navbar-default navbarColour">
+        <div class="container-fluid">
+            <div class="col-xs-12">
+            <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                  </button>
+                  <a class="navbar-brand navHeaderColour" href="#" style="color: white; font-family: Adelle; font-size: 18px;">Administrator</a>
+                </div>
+                <div class="nav navbar-nav">
+                    <ul class="nav navbar-nav">   
+                        <li>
+                            <a class="navbarItem" href="#aboutPanel" style="color: white; font-family: Adelle; font-size: 15px;">MEMBER</a>
+                        </li>
+                        <li>
+                            <a class="navbarItem" href="#facilityPanel" style="color: white; font-family: Adelle; font-size: 15px;">FACILITIES</a>
+                        </li>
+                        <li>
+                            <a class="navbarItem" href="loginPage.xhtml" style="color: white; font-family: Adelle; font-size: 15px;">INVENTORY</a>
+                        </li>
+                    </ul>
+                </div>  
+                <div class="nav navbar-nav navbar-right">
+                    <ul class="nav navbar-nav">  
+                        <li>
+                            <a class="navbarItem" href="#{mainController.logout()}" style="color: white; font-family: Adelle; font-size: 15px;">LOGOUT</a>
+                        </li>
+                    </ul>
+                </div>            
+            </div><!-- /.container-fluid -->            
+            </div>  
+        </nav>
+        <div class="admin-container">           
+            <div class="col-xs-4">
+                <div class="adminBoxes">                    
+                    <h3 class="adminTitleFont">MEMBER</h3>
+                    <div class="col-xs-12" style="margin-top:25px;">
+                        <div class="row" style="text-align: center; margin-bottom: 10px;">
+                        <h:form>
+                            <h:commandButton class="buttonStyle" value="Register New Member" action="#{mainController.goToRegistrationPage()}"></h:commandButton>
+                        </h:form>
+                    </div>
+                    <div class="row" style="text-align: center; margin-bottom: 10px;">
+                        <h:form>
+                            <h:commandButton class="buttonStyle" value="View Member List" action="#"></h:commandButton>
+                        </h:form>
+                    </div>
+                    <div class="row" style="text-align: center; margin-bottom: 10px;">
+                        <h:form>
+                            <h:commandButton class="buttonStyle" value="View Admin List" action="#"></h:commandButton>
+                        </h:form>
+                    </div>
+                    </div>
+                    
+                    <!--
+                     -->
+                </div>
+            </div>
+            <div class="col-xs-4">
+                <div class="adminBoxes">
+                    <h3 class="adminTitleFont">FACILITY</h3>
+                    <h:form id="memberList" style="margin: 10px;">
+                        <h:dataTable border="1" value="#{mainController.memberList}" var="member" styleClass="mainTable" headerClass="tableHeader" rowClasses="tableRowEven,tableRowOdd">                    
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Username" />
+                                </f:facet>
+                                <h:outputText value="#{member.username}"/>
+                            </h:column>  
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Email" />
+                                </f:facet>
+                                <h:outputText value="#{member.email}"/>
+                            </h:column>  
+                            <h:column>
+                                <f:facet name="header">Action</f:facet>
+                                <h:commandButton value="Edit" action="#">
+                                    <f:ajax onevent="checkSuccessful" render="projectIdeaForm"/>
+                                </h:commandButton>
+                            </h:column>
+                        </h:dataTable>                    
+                    </h:form>
+                </div>
+            </div>
+            <div class="col-xs-4">
+                <div class="adminBoxes">
+                    <h3 class="adminTitleFont">INVENTORY</h3>
+                </div>
+            </div> 
+            
+            <footer class="navbar-fixed-bottom">
+                <p>&copy; BSc(Hons) Building Survey</p>
+            </footer>
+        </div>
+        
+    </h:body>
+</html>
+

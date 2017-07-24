@@ -6,6 +6,7 @@
 package Session;
 
 import Entity.RegisteredMember;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -36,6 +37,28 @@ public class RegisteredMemberFacade extends AbstractFacade<RegisteredMember> {
         }
         else
             return Boolean.TRUE;
+    }
+    
+    public RegisteredMember getMember(String username, String password){
+        TypedQuery<RegisteredMember> Query=getEntityManager().createNamedQuery("RegisteredMember.FindUser", RegisteredMember.class);
+        Query.setParameter("userName", username);
+        Query.setParameter("password", password);
+        return Query.getSingleResult();
+    }
+    
+    public RegisteredMember getAdminActive(){
+        TypedQuery<RegisteredMember> Query=getEntityManager().createNamedQuery("RegisteredMember.AllAdmin", RegisteredMember.class);        
+        return Query.getSingleResult();
+    }
+    
+    public List<RegisteredMember> getAllMember(){
+        TypedQuery<RegisteredMember> Query=getEntityManager().createNamedQuery("RegisteredMember.AllMember", RegisteredMember.class);
+        return Query.getResultList();
+    }
+    
+    public List<RegisteredMember> getAllAdmin(){
+        TypedQuery<RegisteredMember> Query=getEntityManager().createNamedQuery("RegisteredMember.AllAdmin", RegisteredMember.class);
+        return Query.getResultList();
     }
 
     public RegisteredMemberFacade() {

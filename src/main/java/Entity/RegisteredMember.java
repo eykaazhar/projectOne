@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
 /**
@@ -18,12 +19,17 @@ import javax.persistence.NamedQuery;
  * @author ASUS
  */
 @Entity
-@NamedQuery(name="RegisteredMember.FindUser", query="SELECT r FROM RegisteredMember r WHERE r.username = :userName AND r.password = :password")
+@NamedQueries({
+    @NamedQuery(name="RegisteredMember.FindUser", query="SELECT r FROM RegisteredMember r WHERE r.username = :userName AND r.password = :password"),
+    @NamedQuery(name="RegisteredMember.AllMember", query="SELECT m FROM RegisteredMember m WHERE m.memberType = 'member'"),
+    @NamedQuery(name="RegisteredMember.AllAdmin", query="SELECT a FROM RegisteredMember a WHERE a.memberType = 'admin'")
+})
+
 public class RegisteredMember implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     public Long getId() {
@@ -44,6 +50,12 @@ public class RegisteredMember implements Serializable {
     private String contactNumber;
     @Basic 
     private String memberType;
+    @Basic
+    private String firstName;
+    @Basic
+    private String lastName;
+    @Basic
+    private String faculty;
 
     public String getUsername() {
         return username;
@@ -84,7 +96,31 @@ public class RegisteredMember implements Serializable {
     public void setMemberType(String memberType) {
         this.memberType = memberType;
     }
-    
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getFaculty() {
+        return faculty;
+    }
+
+    public void setFaculty(String faculty) {
+        this.faculty = faculty;
+    }
+        
 
     @Override
     public int hashCode() {

@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 
 /**
@@ -34,8 +35,8 @@ public class Booking implements Serializable {
         this.id = id;
     }
     
-    @Basic
-    private Long facilityID;
+    @OneToOne(targetEntity = Facility.class)
+    private Facility facility;
     
     @Basic
     private String facilityName;
@@ -56,15 +57,25 @@ public class Booking implements Serializable {
     private String userId;
     @Basic 
     private String userEmail;
-    @Basic 
+    @Basic
+    private String firstName;
+    @Basic
+    private String lastName;
+    @Basic
+    private String faculty;
+    @Basic
     private String status;
+    @Basic
+    private String purpose;
+    @Basic
+    private String message;
 
-    public Long getFacilityID() {
-        return facilityID;
+    public Facility getFacility() {
+        return facility;
     }
 
-    public void setFacilityID(Long facilityID) {
-        this.facilityID = facilityID;
+    public void setFacility(Facility facility) {
+        this.facility = facility;
     }
 
     public String getFacilityName() {
@@ -121,6 +132,46 @@ public class Booking implements Serializable {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getFaculty() {
+        return faculty;
+    }
+
+    public void setFaculty(String faculty) {
+        this.faculty = faculty;
+    }
+
+    public String getPurpose() {
+        return purpose;
+    }
+
+    public void setPurpose(String purpose) {
+        this.purpose = purpose;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
     
     

@@ -1,0 +1,129 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="Resources/Css/portCss.css" rel="stylesheet" type="text/css"/>
+    
+    <h:head>
+        <title>Port-Eco House</title>
+    </h:head>
+    <h:body>
+       <div class="container-fluid insideHeaderBackground">
+            <!--
+            <div class="logoBox">
+                <h:graphicImage class="logoImage" value="Resources/Images/logo-left.jpg"/>
+            </div> -->
+            <div class="boxes2">                
+                <div class="insideBox">
+                    <h1 class="webTitle">Port-Eco House</h1>
+                </div>                
+            </div>
+        </div>
+        <div class="container-fluid navBarColumn">
+             <nav class="navbar navbar-default navbarColour">
+                <div class="container">
+                    <div class="col-xs-12 secondNavColour">
+                        <div class="nav navbar-nav">
+                            <ul class="nav navbar-nav"> 
+                                <li>
+                                    <a class="navbarItem" href="mainPage.xhtml">Port-Eco Home</a>
+                                </li>
+                                <li class="navbarItemActive">
+                                    <a class="navbarItem" href="adminPage.xhtml">ADMIN</a>
+                                </li>
+                                <li>
+                                    <a class="navbarItem" href="adminMember.xhtml">MEMBER</a>
+                                </li>
+                                <li>
+                                    <a class="navbarItem" href="#">FACILITIES</a>
+                                </li>
+                                <li>
+                                    <a class="navbarItem" href="#">INVENTORY</a>
+                                </li>
+                            </ul>
+                        </div>  
+                        <div class="nav navbar-nav navbar-right">
+                            <ul class="nav navbar-nav">  
+                                <li>
+                                    <a class="navbarItem" href="loginPage.xhtml">LOGOUT</a>
+                                </li>
+                            </ul>
+                        </div>            
+                    </div><!-- /.container-fluid -->            
+                </div>  
+            </nav>
+        </div>
+        <div class="container-fluid inventoryContentPanel">
+            <div class="container">
+                <div class="col-xs-12">
+                    <h1 class="webTitle2"> Administrator Page</h1>
+                </div>
+                <div class="col-xs-12">
+                    <div class="col-xs-6">
+                        <h2 class="font1">Quick Access</h2>                       
+                        <div class="quickPanelSub">
+                            <a href="#" class="quickLink">New Facility Booking Request <span class="badge badgeStyle">5</span></a>                                
+                        </div>    
+                        <div class="quickPanelSub">
+                            <a href="#" class="quickLink">New Inventory Booking Request <span class="badge badgeStyle">3</span></a>
+                        </div>                                                     
+                        <div class="quickPanelSub">
+                            <a href="#" class="quickLink">New Member Request <span class="badge badgeStyle">1</span></a>
+                        </div>
+                        <div class="quickPanelSub">
+                            <a href="#" class="quickLink">Add New Inventory Equipment</a>                                
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="formPanel">
+                            <h2 class="font1">Register a Member</h2>
+                            <h:form id="loginForm">
+                                <h:panelGrid columns="3">
+                                    <h:outputLabel class="bookingLabelFont" value="Member Type"/>
+                                    <h:outputLabel class="bookingLabelFont" value=" : "/>
+                                    <h:selectOneMenu class="inputTextStyle" value="#{mainController.selectedMemberType}" onchange="submit()"
+                                                     valueChangeListener="#{mainController.changeMemberType}" style="margin:10px"> 
+                                        <f:selectItem itemValue="#{null}" itemLabel="--Select Type--"/>
+                                        <f:selectItem itemValue="member" itemLabel="Member"/>
+                                        <f:selectItem itemValue="admin" itemLabel="Admin"/>                                                   
+                                    </h:selectOneMenu>
+                                    
+                                    <h:outputLabel class="bookingLabelFont" value="Username"/>
+                                    <h:outputLabel class="bookingLabelFont" value=" : "/>
+                                    <h:inputText class="inputTextStyle" value="#{mainController.userName}"/>
+
+                                    <h:outputLabel class="bookingLabelFont" value="Password"/>
+                                    <h:outputLabel class="bookingLabelFont" value=" : "/>
+                                    <h:inputSecret class="inputTextStyle" value="#{mainController.password}"/> 
+
+                                    <h:outputLabel class="bookingLabelFont" value="Confirm Password"/>
+                                    <h:outputLabel class="bookingLabelFont" value=" : "/>
+                                    <h:inputSecret class="inputTextStyle" value="#{mainController.confrimPasword}"/>
+
+                                    <h:outputLabel class="bookingLabelFont" value="Email"/>
+                                    <h:outputLabel class="bookingLabelFont" value=" : "/>
+                                    <h:inputText class="inputTextStyle" value="#{mainController.email}"/> 
+                                </h:panelGrid>
+                                
+                                <h:commandButton class="buttonStyle" value="Register" action="#{mainController.registeredMember()}"></h:commandButton>
+                                <h:outputText value="The passwords entered are different" style="color: red;" rendered="#{not mainController.checkPassword}"/>
+                                <h:outputText value="Registration Done" style="color: blue;" rendered="#{mainController.registrationStatus}"/>                                
+                            </h:form>         
+                        </div>
+                    </div>                    
+                </div>               
+            </div>
+        </div>
+        <div class="footerPanel">           
+            <p class="footerFont">&copy; BSc(Hons) Building Survey</p>
+        </div>        
+    </h:body>
+</html>
+

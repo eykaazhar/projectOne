@@ -1,0 +1,149 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="Resources/Css/portCss.css" rel="stylesheet" type="text/css"/>
+    
+    <h:head>
+        <title>Port-Eco House</title>
+    </h:head>
+    <h:body id="memberPage">
+        <div class="container-fluid insideHeaderBackground">
+            <!--
+            <div class="logoBox">
+                <h:graphicImage class="logoImage" value="Resources/Images/logo-left.jpg"/>
+            </div> -->
+            <div class="boxes2">                
+                <div class="insideBox">
+                    <h1 class="webTitle">Port-Eco House</h1>
+                </div>                
+            </div>
+        </div>
+        <div class="container-fluid navBarColumn">
+             <nav class="navbar navbar-default navbarColour">
+                <div class="container">
+                    <div class="col-xs-12 secondNavColour">
+                        <div class="nav navbar-nav">
+                            <ul class="nav navbar-nav">
+                                <li>
+                                    <a class="navbarItem" href="mainPage.xhtml">Port-Eco Home</a>
+                                </li>
+                                <li class="navbarItemActive">
+                                    <a class="navbarItem" href="#">MY ACCOUNT</a>
+                                </li>
+                                <li>
+                                    <a class="navbarItem" href="#">INVENTORY</a>
+                                </li>
+                                <li>
+                                    <a class="navbarItem" href="#">MY ACCOUNT</a>
+                                </li>
+                            </ul>
+                        </div>  
+                        <div class="nav navbar-nav navbar-right">
+                            <ul class="nav navbar-nav">  
+                                <li>
+                                    <a class="navbarItem" href="loginPage.xhtml">LOGOUT</a>
+                                </li>
+                            </ul>
+                        </div>            
+                    </div><!-- /.container-fluid -->            
+                </div>  
+            </nav>
+        </div>
+        <div class="container-fluid memberPanel">
+            <div class="container">
+                <div class="col-xs-12">
+                    <h1 class="webTitle2"> My Account</h1>
+                </div>
+                <div class="col-xs-12">
+                    <div class="col-xs-6">
+                        <h2 class="font1">Quick Access</h2>                                                     
+                        <h:form>
+                            <h:commandButton class="buttonStyle3" value="Edit My Details" action="#{mainController.editMemberDetail()}"></h:commandButton>
+                            <br/>
+                            <h:commandButton class="buttonStyle3" value="Edit Password" action="#{mainController.editPasswordFunction()}"></h:commandButton>
+                        </h:form>              
+                    </div>                    
+                    <div class="col-xs-6">
+                        <div class="formPanel">
+                            <h2 class="font1">Member Information</h2>
+                            <h:form id="loginForm">
+                                <h:panelGrid columns="3">                                    
+                                    <h:outputLabel class="outputLabelFont" value="Username"/>
+                                    <h:outputLabel class="outputLabelFont" value=" : "/>
+                                    <h:outputText class="bookingLabelFontM" value="#{mainController.loginMember.username}"/> 
+                             
+                                    <h:outputLabel class="outputLabelFont" value="First Name"/>
+                                    <h:outputLabel class="outputLabelFont" value=" : "/>
+                                    <h:outputText class="outputLabelFont" value="#{mainController.loginMember.firstName}" rendered="#{not mainController.memberEditable}"/>
+                                    <h:inputText class="inputTextStyleM" value="#{mainController.loginMember.firstName}" rendered="#{mainController.memberEditable}"/>
+
+                                    <h:outputLabel class="outputLabelFont" value="Last Name"/>
+                                    <h:outputLabel class="outputLabelFont" value=" : "/>
+                                    <h:outputText class="outputLabelFont" value="#{mainController.loginMember.lastName}" rendered="#{not mainController.memberEditable}"/>
+                                    <h:inputText class="inputTextStyleM" value="#{mainController.loginMember.lastName}" rendered="#{mainController.memberEditable}"/>
+
+                                    <h:outputLabel class="outputLabelFont" value="Email"/>
+                                    <h:outputLabel class="outputLabelFont" value=" : "/>
+                                    <h:outputText class="outputLabelFont" value="#{mainController.loginMember.email}" rendered="#{not mainController.memberEditable}"/>   
+                                    <h:inputText class="inputTextStyleM" value="#{mainController.loginMember.email}" rendered="#{mainController.memberEditable}"/>
+
+                                    <h:outputLabel class="outputLabelFont" value="Contact Number"/>
+                                    <h:outputLabel class="outputLabelFont" value=" : "/>
+                                    <h:outputText class="outputLabelFont" value="#{mainController.loginMember.contactNumber}" rendered="#{not mainController.memberEditable}"/>
+                                    <h:inputText class="inputTextStyleM" value="#{mainController.loginMember.contactNumber}" rendered="#{mainController.memberEditable}"/>
+
+                                    <h:outputLabel class="outputLabelFont" value="Password"/>
+                                    <h:outputLabel class="outputLabelFont" value=" : "/>
+                                    <h:outputText class="outputLabelFont" value="#{mainController.loginMember.password}" rendered="#{not mainController.editPassword}"/>
+                                    <h:inputSecret class="inputTextStyleM" value="#{mainController.loginMember.password}" rendered="#{mainController.editPassword}"/>
+                                    
+                                    <h:outputLabel class="outputLabelFont" value="Confirm Password" rendered="#{mainController.editPassword}"/>
+                                    <h:outputLabel class="outputLabelFont" value=" : " rendered="#{mainController.editPassword}"/> 
+                                    <h:inputSecret class="inputTextStyleM" value="#{mainController.confrimPasword}" rendered="#{mainController.editPassword}"/>
+                                </h:panelGrid> 
+                                <h:commandButton class="buttonStyle" value="Cancel Edit" action="#{mainController.cancelMemberEdit()}" rendered="#{mainController.memberEditable}"></h:commandButton>
+                                <h:commandButton class="buttonStyle" value="Save" action="#{mainController.saveEditMemberDetail()}" rendered="#{mainController.memberEditable}"></h:commandButton>
+                                <h:commandButton class="buttonStyle" value="Save Password" action="#{mainController.saveMemberPassword()}" rendered="#{mainController.editPassword}"></h:commandButton>
+                                <h:commandButton class="buttonStyle" value="Cancel Edit Password" action="#{mainController.cancelPasswordEdit()}" rendered="#{mainController.editPassword}"></h:commandButton>
+                                <h:outputText style="color: red" value="Password is not the same" rendered="#{not mainController.checkPassword}"/>
+                            </h:form>
+                        </div>
+                        <!--
+                        <div class="row">
+                            <h:form id="passwordEditForm" rendered="#{mainController.editPassword}">
+                            <h:panelGrid columns="3">
+                                <h:outputLabel class="outputLabelFont" value="Password"/>
+                                <h:outputLabel class="outputLabelFont" value=" : "/>
+                                <h:outputText class="outputLabelFont" value="#{mainController.loginMember.password}"/>
+
+                                <h:outputLabel class="outputLabelFont" value="Confirm Password"/>
+                                <h:outputLabel class="outputLabelFont" value=" : "/> 
+                                <h:inputSecret class="inputTextStyleM" value="#{mainController.confrimPasword}"/>
+
+                            </h:panelGrid>                             
+                            <h:outputText value="Password is not the same" rendered="#{mainController.checkPassword}"/>
+                         </h:form>          
+                        </div> -->
+                    </div>                    
+                </div>
+                    
+                <!--
+                
+                <div class="footerPanel">           
+                    <p class="footerFont">&copy; BSc(Hons) Building Survey</p>
+                </div> 
+                -->
+            </div>
+        </div>               
+    </h:body>
+</html>
+

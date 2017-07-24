@@ -14,79 +14,140 @@
         <title>Port-Eco House</title>
     </h:head>
     <h:body>
-        <div class="horizontalRule"></div>
-        <nav class="navbar navbar-static-top navbarColour" role="navigation" xmlns="http://www.w3.org/1999/xhtml">
-            <div class="container">
-                <div class="col-xs-12">
-                    <div class="navbar-header">
-                        <img class="headerImageSize" src="Resources/Images/logo-left.jpg" alt=""/>
-                    </div>
-                    <div class="nav navbar-nav navbar-right">
-                        <ul class="nav navbar-nav">                            
-                            <li>
-                                <a class="navbarItem" href="loginPage.xhtml">LOGIN</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-           </div>           
-        </nav>
-        <div class="container">       
+        <!--<div class="horizontalRule"></div>-->
+        <div class="container-fluid">            
+            <div class="col-xs-2">
+            </div>
+            <div class="col-xs-2">
+                <img class="headerImageSize" src="Resources/Images/logo-left.jpg" alt=""/>
+            </div>
+            <div class="col-xs-8">
+                <h1 class="webTitle">Port-Eco House</h1>
+            </div>             
+        </div>
+        <nav class="navbar navbar-default navbarColour">
+        <div class="container-fluid">
             <div class="col-xs-12">
-                <div class="mainDiv">
-                    <div class="col-xs-9">
-                        <div class="mainBox">
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <div class="extraBox"></div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <div class="extraBox2">
-                                        <p class="extraBox2Font">BSc (Hons)</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <div class="departmentBox">                                
-                                        <p class="departmentFont">BUILDING SURVEY</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <div class="titleBox">
-                                        <p class="titleFont">Port-Eco House</p>
-                                    </div>                            
-                                </div>
-                            </div>
-                        </div>
+            <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">                  
+                  <a class="navbar-brand" href="#">Port-Eco House</a>
+                </div>
+                <div class="nav navbar-nav">
+                    <ul class="nav navbar-nav">   
+                        <li>
+                            <a class="navbarItem" href="#aboutPanel" style="color: white; font-family: Adelle; font-size: 15px;">ABOUT</a>
+                        </li>
+                        <li>
+                            <a class="navbarItem" href="#facilityPanel" style="color: white; font-family: Adelle; font-size: 15px;">FACILITIES</a>
+                        </li>
+                        <li>
+                            <a class="navbarItem" href="bookingPage.xhtml" style="color: white; font-family: Adelle; font-size: 15px;">BOOKING</a>
+                        </li>
+                    </ul>
+                </div>  
+                <div class="nav navbar-nav navbar-right">
+                    <ul class="nav navbar-nav">  
+                        <li>
+                            <a class="navbarItem" href="loginPage.xhtml">LOGIN</a>
+                        </li>
+                    </ul>
+                </div>            
+            </div><!-- /.container-fluid -->            
+            </div>  
+        </nav>
+        <div class="slideshow-container">
+            <div class="mySlides">
+                <h:graphicImage class="slidePicSize" value="Resources/Images/port-eco-house.png"/>
+                <div class="text">
+                    <span class="dot" onclick="currentSlide(1)"></span> 
+                    <span class="dot" onclick="currentSlide(2)"></span> 
+                </div>
+            </div>
+            <div class="mySlides">
+                <h:graphicImage class="slidePicSize" value="Resources/Images/uopimage.jpg"/>
+                <div class="text">
+                    <span class="dot" onclick="currentSlide(1)"></span> 
+                    <span class="dot" onclick="currentSlide(2)"></span> 
+                </div>
+            </div>
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        </div>        
+        <div id="aboutPanel" class="about-container">
+            <div class="row">
+                <div class="box1">
+                    <div>
+                        <h2 class="titleFont">ABOUT</h2>
                     </div>
-                    <div class="col-xs-3">
-                        <div class="infoBox">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="col-xs-8">
                             <div class="row">                        
                                 <h4 class="infoTitle" style="text-align: center">What is Port-Eco House?</h4>                       
                             </div>
                             <div class="row">
-                                <p>This house, which is typical of many thousands found in the UK, is located on campus. In it we have installed environmental monitoring equipment and video cameras to enable in-situ studies of the building’s performance and the behaviour of its occupants. The data from these studies is used to enhance teaching and for individual projects. The building also serves as a case study for measured and defect surveys.</p>
+                                <p class="description">
+                                    THIS HOUSE, WHICH IS TYPICAL OF MANY THOUSANDS FOUND IN THE UK, IS LOCATED ON CAMPUS BETWEEN DENNIS SCIAMA BUILDING AND THE ANGLESEA BUILDING’S LABORATORIES.
+                                    THE HOUSE WAS BUILT TO BE USED FOR CONDUCTING EXPERIMENTS AND STUDIES. 
+                                    THE HOUSE IS INSTALLED WITH ENVIRONMENTAL MONITORING EQUIPMENT AND VIDEO CAMERAS TO ENABLE IN-SITU STUDIES OF THE BUILDING’S PERFORMANCE AND THE BEHAVIOUR OF ITS OCCUPANTS.
+                                    THE DATA FROM THESE STUDIES IS USED TO ENHANCE TEACHING AND FOR INDIVIDUAL PROJECTS AND CAN BE ACCESS THROUGH THE CONTROL ROOM LOCATED BESIDE THE HOUSE.
+                                </p>
                             </div>
                         </div>
-                    </div>   
-                </div>
-            </div>            
-        </div>
-        <div class="container">
-            <div class="col-xs-12">
-                <div class="facilitiesContainer">
-                    <div class="row">
-                        <div>
-                            <p class="facilityTitleFont">FACILITIES</p>
-                        </div>                        
-                    </div>
-                    <div class="row">
                         <div class="col-xs-4">
+                            <div class="contactInfo">
+                                <h4 class="contactFont" style="text-align: center;">Contact Information</h4>
+                                <p class="contactFont" style="text-align: center;">Email</p>
+                                <p class="contactFont" style="text-align: center;">Contact No</p>
+                            </div>
+                        </div>
+                        </div>                            
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="facilityPanel" class="facility-container">
+            <div class="facilitiesContainer">
+                <div class="row">
+                    <div>
+                        <h2 class="titleFont">FACILITY</h2>
+                    </div>                        
+                </div>                 
+                <div class="row buttonRow">
+                    <div class="col-xs-2"></div>
+                    <div class="col-xs-10" style="margin: 0 auto;">
+                        <h:form> 
+                            <h:commandButton class="buttonStyle2" value="HOUSE" action="#housePanel"></h:commandButton>
+                            <h:commandButton class="buttonStyle2" value="CONTROL ROOM" action="#controlPanel"></h:commandButton>
+                            <h:commandButton class="buttonStyle2" value="EXPERIMENTAL GARDEN" action="#gardenPanel"></h:commandButton>
+                            <h:commandButton class="buttonStyle2" value="BOOK FACILITY" action="#{mainController.goToBookingPage()}"></h:commandButton>
+                            
+                        </h:form>
+                    </div>
+                </div>
+                <div id="housePanel" class="row row1">
+                    <div class="col-xs-12">
+                        <div class="col-xs-6">
+                            <div class="houseSlideshow-container">
+                                <div class="mySlides2">
+                                    <h:graphicImage class="slidePicSize2" value="Resources/Images/port-eco-house.png"/>
+                                    <div class="text">
+                                        <span class="dot2" onclick="currentSlide2(1)"></span> 
+                                        <span class="dot2" onclick="currentSlide2(2)"></span> 
+                                    </div>
+                                </div>
+                                <div class="mySlides2">
+                                    <h:graphicImage class="slidePicSize2" value="Resources/Images/uopimage.jpg"/>
+                                    <div class="text">
+                                        <span class="dot2" onclick="currentSlide2(1)"></span> 
+                                        <span class="dot2" onclick="currentSlide2(2)"></span> 
+                                    </div>
+                                </div>
+                                <a class="prev" onclick="plusSlides2(-1)">&#10094;</a>
+                                <a class="next" onclick="plusSlides2(1)">&#10095;</a>
+                            </div>        
+                        </div>
+                        <div class="col-xs-6">
                             <div class="facilityItem">
                                 <div class="row">
                                     <div class="col-xs-12">
@@ -98,67 +159,201 @@
                                 </div>
                             </div>                            
                         </div>
-                        <div class="col-xs-4">
+                    </div>
+                </div>
+                <div id="controlPanel" class="row">
+                    <div class="col-xs-12">
+                        <div class="col-xs-6"> 
                             <div class="facilityItem">
                                 <div class="row">
                                     <div class="col-xs-12">
-                                        <p class="facTitleFont">Control Room</p>
+                                        <p class="facTitleFont">CONTROL ROOM</p>
                                         <p style="margin: 5px;">
-                                            The small room beside the house where the controller of the sensors are located.
+                                            The house has 2 bedrooms and one bathrooms. With kitchen and living room include.
                                         </p>
-                                    </div>  
+                                    </div>                                    
                                 </div>
-                            </div>
+                            </div>       
                         </div>
-                        <div class="col-xs-4">
+                        <div class="col-xs-6">
+                            <div class="houseSlideshow-container">
+                                <div class="mySlides3">
+                                    <h:graphicImage class="slidePicSize2" value="Resources/Images/port-eco-house.png"/>                                    
+                                </div>
+                                <div class="mySlides3">
+                                    <h:graphicImage class="slidePicSize2" value="Resources/Images/uopimage.jpg"/>                                   
+                                </div>
+                                <a class="prev" onclick="plusSlides3(-1)">&#10094;</a>
+                                <a class="next" onclick="plusSlides3(1)">&#10095;</a>
+                            </div>     
+                        </div>
+                    </div>
+                </div>
+                <div id="gardenPanel" class="row">
+                    <div class="col-xs-12">                        
+                        <div class="col-xs-6">
+                            <div class="houseSlideshow-container">
+                                <div class="mySlides4">
+                                    <h:graphicImage class="slidePicSize2" value="Resources/Images/port-eco-house.png"/>                                    
+                                </div>
+                                <div class="mySlides4">
+                                    <h:graphicImage class="slidePicSize2" value="Resources/Images/uopimage.jpg"/>                                   
+                                </div>
+                                <a class="prev" onclick="plusSlides4(-1)">&#10094;</a>
+                                <a class="next" onclick="plusSlides4(1)">&#10095;</a>
+                            </div>     
+                        </div>
+                        <div class="col-xs-6"> 
                             <div class="facilityItem">
                                 <div class="row">
                                     <div class="col-xs-12">
-                                        <p class="facTitleFont">Experimental House</p>
+                                        <p class="facTitleFont">EXPERIMENTAL GARDEN</p>
                                         <p style="margin: 5px;">
-                                            A small garden behind the house that is suitable for any outdoor experiments.
+                                            The house has 2 bedrooms and one bathrooms. With kitchen and living room include.
                                         </p>
-                                    </div>  
+                                    </div>                                    
                                 </div>
-                            </div>
+                            </div>       
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div class="buttonPosition">
-                                <h:form>
-                                    <h:commandButton class="buttonStyle" value="BOOK FACILITY" action="#"></h:commandButton>
-                                </h:form>
-                            </div>
-                        </div>                        
-                    </div>
                 </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="col-xs-12">
-                <div class="facilityItemContainer">
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div align="center">
-                                <h:graphicImage value="Resources/Images/port-eco-house.png"/>
-                            </div>
-                        </div>                        
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div class="row2">
-                                <div class="col-xs-12">
-                                    <div class="contactInfo">
-                                        <h4 class="contactFont" style="text-align: center;">Contact Information</h4>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>   
-                    </div>                   
+                <!--
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="buttonPosition">
+                            <h:form>
+                                <h:commandButton class="buttonStyle" value="BOOK FACILITY" action="#"></h:commandButton>
+                            </h:form>
+                        </div>
+                    </div>                        
                 </div>
+                -->
             </div>
-        </div>
+            <!--
+            <footer class="navbar-fixed-bottom" style="opacity: 0.5;">
+                <p>&copy; BSc(Hons) Building Survey</p>
+            </footer>-->
+        </div>          
     </h:body>
+    
+    <script>
+        //<![CDATA[ 
+        var slideIndex = 1;
+        showSlides(slideIndex);
+
+        function plusSlides(n) {
+          showSlides(slideIndex += n);
+        }
+
+        function currentSlide(n) {
+          showSlides(slideIndex = n);
+        }
+
+        function showSlides(n) {
+          var i;
+          var slides = document.getElementsByClassName("mySlides");
+          var dots = document.getElementsByClassName("dot");
+          if (n > slides.length) {
+              slideIndex = 1;
+          }    
+          if (n < 1) {
+              slideIndex = slides.length;
+          }
+          for (i = 0; i < slides.length; i++) {
+              slides[i].style.display = "none";  
+          }
+          for (i = 0; i < dots.length; i++) {
+              dots[i].className = dots[i].className.replace(" active", "");
+          }
+          slides[slideIndex-1].style.display = "block";  
+          dots[slideIndex-1].className += " active";
+        }
+        
+        //--------Second Slide ----//
+        var slideIndex2 = 1;
+        showSlides2(slideIndex2);
+
+        function plusSlides2(n) {
+          showSlides2(slideIndex2 += n);
+        }
+
+        function currentSlide2(n) {
+          showSlides2(slideIndex2 = n);
+        }
+
+        function showSlides2(n) {
+          var i;
+          var slides = document.getElementsByClassName("mySlides2");
+          var dots = document.getElementsByClassName("dot2");
+          if (n > slides.length) {
+              slideIndex2 = 1;
+          }    
+          if (n < 1) {
+              slideIndex2 = slides.length;
+          }
+          for (i = 0; i < slides.length; i++) {
+              slides[i].style.display = "none";  
+          }
+          for (i = 0; i < dots.length; i++) {
+              dots[i].className = dots[i].className.replace(" active", "");
+          }
+          slides[slideIndex2-1].style.display = "block";  
+          dots[slideIndex2-1].className += " active";
+        }
+        
+         //--------Third Slide ----//
+        var slideIndex3= 1;
+        showSlides3(slideIndex3);
+
+        function plusSlides3(n) {
+          showSlides3(slideIndex3 += n);
+        }
+
+        function currentSlide3(n) {
+          showSlides3(slideIndex3 = n);
+        }
+
+        function showSlides3(n) {
+          var i;
+          var slides = document.getElementsByClassName("mySlides3");
+          if (n > slides.length) {
+              slideIndex3 = 1;
+          }    
+          if (n < 1) {
+              slideIndex3 = slides.length;
+          }
+          for (i = 0; i < slides.length; i++) {
+              slides[i].style.display = "none";  
+          }          
+          slides[slideIndex3-1].style.display = "block";  
+        }
+         //--------Fourth Slide ----//
+        var slideIndex4= 1;
+        showSlides4(slideIndex4);
+
+        function plusSlides4(n) {
+          showSlides4(slideIndex4 += n);
+        }
+
+        function currentSlide4(n) {
+          showSlides4(slideIndex4 = n);
+        }
+
+        function showSlides4(n) {
+          var i;
+          var slides = document.getElementsByClassName("mySlides4");
+          if (n > slides.length) {
+              slideIndex4 = 1;
+          }    
+          if (n < 1) {
+              slideIndex4 = slides.length;
+          }
+          for (i = 0; i < slides.length; i++) {
+              slides[i].style.display = "none";  
+          }          
+          slides[slideIndex4-1].style.display = "block";  
+        }
+        //]]>
+    </script>
 </html>
 

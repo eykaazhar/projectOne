@@ -8,51 +8,72 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link href="Resources/Css/mainCss.css" rel="stylesheet" type="text/css"/>
+    <link href="Resources/Css/portCss.css" rel="stylesheet" type="text/css"/>
     
     <h:head>
         <title>Port-Eco House</title>
     </h:head>
-    <h:body>
-        <div class="container">
-            <div class="col-xs-12">
-                <div class="mainContent">
-                    <div class="purpleLine"></div>
+    <h:body id="loginPage">
+        <div class="container-fluid headerBackground">
+            <!--
+            <div class="logoBox">
+                <h:graphicImage class="logoImage" value="Resources/Images/logo-left.jpg"/>
+            </div> -->
+            <div class="boxes">                
+                <div class="firstBox">
+                    <h1 class="webTitle">Port-Eco House</h1>
+                </div>
+                <div class="secondBox">
+                    <p class="titleDescription">Installed with environmental monitoring equipment and video cameras to enable in-situ studies of the building’s performance and the behaviour of its occupants</p>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid navBarColumn">
+             <nav class="navbar navbar-default navbarColour">
+                <div class="container">
+                    <div class="col-xs-12 secondNavColour">
+                        <div class="nav navbar-nav">
+                            <ul class="nav navbar-nav">   
+                                <li>
+                                    <a class="navbarItem" href="mainPage.xhtml">HOME</a>
+                                </li>                                
+                            </ul>
+                        </div> 
+                    </div>            
+                </div>  
+            </nav>
+        </div>
+        <div id="loginPanel" class="container-fluid loginPanel">
+            <div class="container">
+                <div class="col-xs-12" style="margin: 0 auto;">
                     <div class="row">
-                        <div class="col-xs-12">
-                            <div class="col-xs-8">
-                                <img class="headerImageSize" src="Resources/Images/logo-left.jpg" alt=""/>
-                            </div>
-                            <div class="col-xs-4" style="float:right">
-                                <h:form>
-                                    <h:commandButton class="buttonStyle" value="Back to Homepage" action="#{mainController.goToHomepage()}"></h:commandButton>
-                                </h:form>
-                            </div>                            
+                        <div class="col-xs-12" style="margin-top: 20px;">
+                            <h1 class="titleFont">Login Form</h1>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-12">
-                            <h1 class="bookingTitleFont">LOGIN FORM</h1>
-                        </div>
-                    </div>
-                    <div class="row" style="margin-top: 20px">
-                        <div class="col-xs-12">
+                        <div class="col-xs-12" style="text-align: center; margin-top: 20px;">
                             <div class="col-xs-4"></div>
-                            <div class="col-xs-8">
+                            <div class="col-xs-8">                                
                                 <h:form id="loginForm">
                                     <h:panelGrid columns="3">
                                         <h:outputLabel class="bookingLabelFont" value="Username"/>
                                         <h:outputLabel class="bookingLabelFont" value=" : "/>
-                                        <h:inputText class="inputTextStyle" value="#{mainController.userName}"/>
+                                        <h:inputText class="inputTextStyle" value="#{mainController.loginUsername}"/>
 
                                         <h:outputLabel class="bookingLabelFont" value="Password"/>
                                         <h:outputLabel class="bookingLabelFont" value=" : "/>
-                                        <h:inputSecret class="inputTextStyle" value="#{mainController.password}"/>                                        
-                                                                              
-                                    </h:panelGrid>     
-                                    <h:commandButton class="buttonStyle" value="Login" action="#{mainController.login()}"></h:commandButton>
-                                </h:form>                               
-                            </div>                            
+                                        <h:inputSecret class="inputTextStyle" value="#{mainController.loginPassword}"/>
+                                        
+                                        <h:outputLabel class="bookingLabelFont" value=""/>
+                                        <h:outputLabel class="bookingLabelFont" value=""/>
+                                        <h:commandButton class="buttonStyle" value="Login" action="#{mainController.login()}"></h:commandButton>
+                                    </h:panelGrid>
+                                </h:form>   
+                            </div>                                
+                        </div>                        
+                        <div class="col-xs-12" style="text-align: center; margin:10px;">
+                            <p class="loginOption">Not a member?<a href="#"> Send Request to be a member.</a></p>
                         </div>
                     </div>
                 </div>

@@ -62,6 +62,26 @@ public class PortEcoBusiness {
         return rmf.checkLogin(userName, password);
     }
     
+    public RegisteredMember getLoginMember(String userName, String password){
+        return rmf.getMember(userName, password);
+    }
+    
+    public List<RegisteredMember> getAllMemberList(){
+        return rmf.getAllMember();
+    }
+    
+    public List<RegisteredMember> getAllAdminList(){
+        return rmf.getAllAdmin();
+    }
+    
+    public void updateMember(RegisteredMember r){
+        rmf.edit(r);
+    }
+    
+    public RegisteredMember getAdminPerson(){
+        return rmf.getAdminActive();
+    }
+    
     
     
 }

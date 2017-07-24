@@ -1,0 +1,147 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="Resources/Css/portCss.css" rel="stylesheet" type="text/css"/>
+    
+    <h:head>
+        <title>Port-Eco House</title>
+    </h:head>
+    <h:body>
+        <div class="container-fluid headerBackground">
+            <!--
+            <div class="logoBox">
+                <h:graphicImage class="logoImage" value="Resources/Images/logo-left.jpg"/>
+            </div> -->
+            <div class="boxes">                
+                <div class="firstBox">
+                    <h1 class="webTitle">Port-Eco House</h1>
+                </div>
+                <div class="secondBox">
+                    <p class="titleDescription">Installed with environmental monitoring equipment and video cameras to enable in-situ studies of the building’s performance and the behaviour of its occupants</p>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid navBarColumn">
+             <nav class="navbar navbar-default navbarColour">
+                <div class="container">
+                    <div class="col-xs-12 secondNavColour">
+                        <div class="nav navbar-nav">
+                            <ul class="nav navbar-nav">   
+                                <li>
+                                    <a class="navbarItem" href="#aboutPanel">ABOUT</a>
+                                </li>
+                                <li>
+                                    <a class="navbarItem" href="#facilityPanel">FACILITIES</a>
+                                </li>
+                                <li>
+                                    <a class="navbarItem" href="bookingPage.xhtml">BOOKING</a>
+                                </li>
+                            </ul>
+                        </div>  
+                        <div class="nav navbar-nav navbar-right">
+                            <ul class="nav navbar-nav">  
+                                <li>
+                                    <a class="navbarItem" href="loginPage.xhtml">LOGIN</a>
+                                </li>
+                            </ul>
+                        </div>            
+                    </div><!-- /.container-fluid -->            
+                </div>  
+            </nav>
+        </div>
+        <div id="facilityPanel" class="container-fluid contentPanel">
+            <div class="container">
+                <div class="col-xs-12" style="margin: 0 auto;">
+                    <div class="row">
+                        <div class="col-xs-12" style="margin-top: 20px;">
+                            <h1 class="titleFont">FACILITIES</h1>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12" style="margin-top: 20px;">
+                            <div class="col-xs-4" style="text-align: center">
+                                <div class="circleBox">
+                                    <div class="image1">                                        
+                                    </div>
+                                </div>                                
+                                <h2 class="fontFacility">House</h2>                                
+                                <div class="facilityDescription">
+                                    <p> A common UK house with 2 bedrooms, toilet, living room and kitchen. Each room is installed with environmental monitoring equipment and video cameras</p> 
+                                </div>
+                            </div>
+                            <div class="col-xs-4" style="text-align: center">
+                                <div class="circleBox2">
+                                    <div class="image2">                                        
+                                    </div>
+                                </div>
+                                <h2 class="fontFacility">Experimental Garden</h2>
+                                <!--<h:form>
+                                    <h:commandButton class="buttonStyle" value="More info..." action="#"></h:commandButton>
+                                <h:graphicImage class="facilityImages" value="Resources/Images/control.jpg"/>
+                                </h:form>-->
+                                <div class="facilityDescription">
+                                    <p> A small garden located beside the house available for gardening and outside activities</p> 
+                                </div>
+                            </div>
+                            <div class="col-xs-4" style="text-align: center">
+                                <div class="circleBox3">
+                                    <div class="image3">                                        
+                                    </div>
+                                </div>
+                                <h2 class="fontFacility">Control Room</h2>                                
+                                <div class="facilityDescription">
+                                    <p> A room located beside the house that stored devices and equipment to manage the environmental monitoring equipment and video cameras. Need a special key for access. </p> 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="buttonPanel" style="text-align: center">
+                                <h:form>
+                                    <h:commandButton class="buttonStyle" value="Book Facility" action="#{mainController.goToBookingPage()}"></h:commandButton>
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid aboutPanel">
+            <div class="container">
+                <div class="col-xs-12" style="margin-top: 10px;">
+                    <div class="col-xs-8 aboutColumn">
+                        <h1 class="aboutPanelTitleFont">ABOUT US</h1>
+                        <div class="aboutDescription">
+                            <p> Port-Eco House is a university facility managed by School of Civil Engineering and Surveying. 
+                                Its focus to be used students of BSc(Hons) Building Surveying.
+                            </p>
+                        </div> 
+                        <h1 class="aboutPanelTitleFont">LOCATION</h1>
+                        <div class="aboutDescription">
+                            <p> Located on campus between Dennis Sciama Building and the Anglesea Building’s Laboratories
+                            </p>
+                            <p>The Lodge, University of 3AA, Lion Terrace, Portsmouth PO1</p>
+                        </div>                        
+                    </div>  
+                    <div class="col-xs-4 contactColumn">                        
+                         <div class="contactInfo">
+                            <h1 class="aboutPanelTitleFont" style="margin-top: 50px;">CONTACT US</h1>
+                            <p class="aboutDescription" style="margin-top: 20px;">Contact Number: 023 9284 2434</p>
+                            <p class="aboutDescription" style="margin-top: 20px;">Email: myport@ac.uk</p>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        </div>
+        <div class="footerPanel">           
+                <p class="footerFont">&copy; BSc(Hons) Building Survey</p>
+        </div>
+    </h:body>
+</html>
+

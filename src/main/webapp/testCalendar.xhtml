@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <title>jQuery UI Datepicker - Default functionality</title>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+        <link rel="stylesheet" href="/resources/demos/style.css"/>
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> 
+    </h:head>                                
+      <script type="text/javascript">
+$(document).ready(function(){
+    $('#datepickerTEXT').datepicker( {
+        changeMonth: true,
+        changeYear: true,
+        showButtonPanel: true,
+        dateFormat: 'mm/yy',
+        onClose: function(dateText, inst) { 
+          var month=$("#ui-datepicker-div .ui-datepicker-month :selected").val();
+          var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+          $('#datepickerTEXT').datepicker('setDate', new Date(year, month, 1));
+        },
+        beforeShow : function(input, inst) {
+          var tmp = $('#datepickerTEXT').val().split('/');
+          $('#datepickerTEXT').datepicker('option','defaultDate',new Date(tmp[1],tmp[0]-1,1));
+          $('#datepickerTEXT').datepicker('setDate', new Date(tmp[1], tmp[0]-1, 1));
+        }
+    });
+});
+</script>
+<style>
+.ui-datepicker-calendar {
+    display: none;
+    }
+</style>
+    <h:body>
+        <h:form>
+            <h:inputText value="#">
+            <f:ajax event="change" listener="#"/>
+            </h:inputText>
+        </h:form>
+    </h:body>
+</html>
+

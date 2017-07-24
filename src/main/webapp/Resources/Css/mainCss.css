@@ -13,25 +13,24 @@ nav{
 }
 
 .nav > ul > li > a:hover{
-    background-color: white;
-    color: black;
+    background-color: #550982;
+    color: white;
     /*
     -webkit-box-shadow: inset 0px 0px 49px -7px rgba(168,13,168,1);
     -moz-box-shadow: inset 0px 0px 49px -7px rgba(168,13,168,1);
     box-shadow: inset 0px 0px 49px -7px rgba(168,13,168,1);*/
 }
 .nav.navbar-nav{
-    background-color: #9B11C2;
-    border-radius: 20%;
+    background-color: #550982;
 }
 .nav.navbar-nav.adminNav{
-    background-color: #9B11C2;
+    background-color: white;
 }
 .nav.navbar-nav > li.dropdown.active.open > a, 
 .nav.navbar-nav > li.dropdown.active.open > ul.dropdown-menu a,
 .nav.navbar-nav > li.dropdown.open > a, 
 .nav.navbar-nav > li.dropdown.open > ul.dropdown-menu a{
-    background-color: #9B11C2;
+    background-color: #550982;
     color: white;
 }
 .nav.navbar-nav > li.dropdown.active.open > a, 
@@ -47,31 +46,42 @@ nav{
 }
 .navbar-nav .dropdown .dropdown-menu
 {
-        float: none;
-        width: auto;
-        margin-top: 0;
-        color: white;
-        background-color:#9B11C2;
-        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
-        position:absolute;
-        margin:0;
+    float: none;
+    width: auto;
+    margin-top: 0;
+    color: white;
+    background-color:#550982;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
+    position:absolute;
+    margin:0;
 }
 .navbar-nav .dropdown .dropdown-menu > li > a {
-    background-color: #9B11C2;
+    background-color: #550982;
     color: white;
 }
 .navbar-header > a:hover{
-    color: #ffffff;
+    color: #550982;
 }
 .navbarItem{  
     color: white;
     font-weight: bold;
     font-style: normal;
+    font-family: Adelle;
 }
 .navbarColour{
-    background-color: white;    
+    background-color: #550982;    
 }
-.navbar-brand{
+.navBarColour2{
+    background-color: #1b6891;
+}
+
+a.navHeaderColour{
+    color: white;
+}
+.navbarAdmin{
+    background-color: white;
+}
+a.navbar-brand{
     color: white;
     font-weight: bold;
 }
@@ -80,7 +90,7 @@ div.horizontalRule {
     width:100%;
     background-color:#550982;
     height:5px;
-    margin-bottom:15px;
+    margin: 5px;
 }
 div.horizontalRuleMain {
     clear:both;
@@ -90,8 +100,10 @@ div.horizontalRuleMain {
     margin-bottom:5px;
 }
 .headerImageSize{
-    height: 50px;
-    width: 250px;
+    margin-top: 20px;
+    height: 23px;
+    width: 80px;
+    float: right;
 }
 .mainBox{
     width: 100%;
@@ -141,17 +153,28 @@ div.horizontalRuleMain {
     font-family: HelveticaNeue;
 }
 .titleFont{
-    padding-left: 5px;
-    font-size: 53px;
-    color: white;
-    font-family: HelveticaNeue;
+    text-align: center;
+    font-size: 35px;
+    color: black;
+    font-family: Adelle;
+    font-weight: bold;
+    background-image: url("../Images/pp.jpg");
+    border-radius: 15%;
+    width: 300px;
+    margin: 0 auto;
 }
 .infoTitle{
     margin:15px;
     font-size: 25px;
-    color: #9B11C2;
-    font-family: HelveticaNeue;
+    color: #550982;
+    font-family: Adelle;
     font-weight: bold;
+}
+.description{
+    color: #251e2b;
+    font-family: Comic Sans MS;
+    font-size: 16px;
+    margin-left: 10px;
 }
 .extraBox2Font{
     padding-left: 5px;
@@ -173,28 +196,28 @@ div.horizontalRuleMain {
     height: 380px;    
     margin-right: 5px;
     padding:5px;
-    background-image: url("../Images/whitepattern.jpg");
-    background-repeat: repeat;
 }
 
 .facilityTitleFont{
     text-align: center;
-    font-family: Comic Sans MS;
-    font-size: 45px;
+    font-size: 35px;
     color: black;
+    font-family: Adelle;
+    font-weight: bold;
         
 }
 .facilityItem{
-    width:332px;
-    height: 230px;
+    width:100%;
+    height: 350px;
     margin: 5px;
-    background-color: white;
-    opacity: 0.65;
+    background-image: url("../Images/uiswatercolour.png");
+    background-size: 450px 320px;
+    background-repeat: no-repeat;
 }
 
 .facTitleFont{
     text-align: center;
-    font-family: Comic Sans MS;
+    font-family: Adelle;
     font-size: 25px;
     color: black;
     font-weight: bold;
@@ -235,6 +258,32 @@ div.horizontalRuleMain {
     padding: 10px 20px 10px 20px;
     text-decoration: none;
 }
+.buttonStyle2{
+    /*
+    background-color: #9B11C2;
+    border: none;
+    color: white;
+    font-size: 15px;
+    font-family: Comic Sans MS;
+    text-align: center;
+    
+    -webkit-border-radius: 10;
+    -moz-border-radius: 10;
+    */
+    background: #2c8fd1;
+    background-image: -webkit-linear-gradient(top, #2c8fd1, #1b6891);
+    background-image: -moz-linear-gradient(top, #2c8fd1, #1b6891);
+    background-image: -ms-linear-gradient(top, #2c8fd1, #1b6891);
+    background-image: -o-linear-gradient(top, #2c8fd1, #1b6891);
+    background-image: linear-gradient(to bottom, #2c8fd1, #1b6891);
+    
+    border-radius: 10px;
+    font-family: Georgia;
+    color: #ffffff;
+    font-size: 15px;
+    padding: 10px 20px 10px 20px;
+    text-decoration: none;
+}
 
 .buttonStyle:hover{
     background: #7417a3;
@@ -243,6 +292,15 @@ div.horizontalRuleMain {
     background-image: -ms-linear-gradient(top, #7417a3, #641085);
     background-image: -o-linear-gradient(top, #7417a3, #641085);
     background-image: linear-gradient(to bottom, #7417a3, #641085);
+    text-decoration: none;
+}
+.buttonStyle2:hover {
+    background: #1a4b69;
+    background-image: -webkit-linear-gradient(top, #1a4b69, #0d2738);
+    background-image: -moz-linear-gradient(top, #1a4b69, #0d2738);
+    background-image: -ms-linear-gradient(top, #1a4b69, #0d2738);
+    background-image: -o-linear-gradient(top, #1a4b69, #0d2738);
+    background-image: linear-gradient(to bottom, #1a4b69, #0d2738);
     text-decoration: none;
 }
 
@@ -272,38 +330,55 @@ div.purpleLine{
 .bookingLabelFont{
     padding-right: 3px;
     color: #550982;
-    font-family: Comic Sans MS;
+    font-family: Adelle;
     font-size: 15px;
 }
-
+.outputLabelFont{
+    padding-right: 3px;
+    color: #550982;
+    font-family: Adelle;
+    font-size: 15px;
+}
 .inputTextStyle{
     border: none;
     border-bottom: solid #550982;
     margin: 10px;
+    color: #550982;
+    font-family: Adelle;
+    font-size: 15px;
+}
+.inputTextStyleM{
+    border: none;
+    border-bottom: solid #550982;
+    color: #550982;
+    font-family: Adelle;
+    font-size: 15px;
 }
 
 .row1{
-    background-color: grey;
-    height: 250px;
-    width: 100%;
+    max-width: 1000px;
+    height: 350px;
     margin-top: 10px;
-    opacity: 0.5;
 }
 
 .row2{
-    height: 250px;
-    width: 100%;
-    margin-top: 10px;   
+    max-width: 1000px;
+    background-color: #9e8aaa;
+    height: 350px;
+    margin-top: 10px;
+    border-radius: 1%; 
 }
 
 .row3{
-    background-color: grey;
-    height: 250px;
-    width: 100%;
+    max-width: 1000px;
+    background-color: #aaa9d1;
+    height: 350px;
     margin-top: 10px;
-    opacity: 0.5;  
+    border-radius: 1%;
 }
-
+.buttonRow{
+    margin: 10px;
+}
 .contactInfo{
     background-color: #decce5;
     border-radius: 50%;
@@ -313,14 +388,209 @@ div.purpleLine{
     height: 300px;
     width: 300px;
     float: right;
+    margin-top: 15px;    
 }
-
+.adminBoxes{   
+    margin: 5px;
+    width: 100%;
+    height: 380px;
+    border: #550982 solid;
+}
 .contactFont{
     margin-top: 55px;
     font-size: 25px;
-    color: black;
-    font-family: HelveticaNeue;
+    color: #550982;
+    font-family: Adelle;
     font-weight: bold;
+}
+.adminTitleFont{
+    color: black;
+    font-family: Adelle;
+    font-weight: bold;
+    text-align: center;
+}
+.webTitle{
+    font-family: Adelle;
+    font-size: 70px;
+    color: #550982;
+    text-shadow: 1px -2px 13px rgba(150, 150, 150, 1);
+}
+.mySlides {display:none}
+.about-container{
+    max-width: 1000px;
+    position: relative;
+    margin: auto;
+}
+.facility-container{
+    max-width: 1000px;
+    position: relative;
+    margin: auto;
+}
+.admin-container{
+    max-width: 1200px;
+    position: relative;
+    margin: auto;
+}
+/* Slideshow container */
+.slideshow-container {
+    max-width: 1000px;
+    position: relative;
+    margin: auto;
+    -webkit-box-shadow: 2px 3px 19px -1px rgba(107,61,107,0.44);
+    -moz-box-shadow: 2px 3px 19px -1px rgba(107,61,107,0.44);
+    box-shadow: 2px 3px 19px -1px rgba(107,61,107,0.44);
+}
+.houseSlideshow-container{
+    margin-top:20px;
+    width: 350px;
+    position: relative;
+    -webkit-box-shadow: 2px 3px 19px -1px rgba(107,61,107,0.44);
+    -moz-box-shadow: 2px 3px 19px -1px rgba(107,61,107,0.44);
+    box-shadow: 2px 3px 19px -1px rgba(107,61,107,0.44);
+}
+
+/* Next & previous buttons */
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -22px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+}
+
+/* Position the "next button" to the right */
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+    background-color: rgba(0,0,0,0.8);
+}
+
+/* Caption text */
+.text {
+    color: #f2f2f2;
+    font-size: 15px;
+    padding: 8px 12px;
+    position: absolute;
+    bottom: 8px;
+    width: 100%;
+    text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+    color: #f2f2f2;
+    font-size: 12px;
+    padding: 8px 12px;
+    position: absolute;
+    top: 0;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+    cursor:pointer;
+    height: 13px;
+    width: 13px;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover {
+    background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: 1.5s;
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+  .prev, .next,.text {font-size: 11px}
+}
+
+.slidePicSize{
+    height: 400px;
+    width: 100%;
+}
+.slidePicSize2{
+    height: 250px;
+    width: 100%;    
+}
+.mySlides2{
+    display: none;
+}
+.mySlides3{
+    display: none;
+}
+.mySlides4{
+    display: none;
+}
+
+.box1{       
+    height: 450px;
+    margin: 10px;
+}
+
+footer{
+    background-color: #550982;
+    text-align: center;
+    color: white;
+    font-family: Adelle;
+    font-size: 16px;
+}
+.mainTable{
+    border-collapse:collapse;
+}
+.tableHeader{
+    text-align:center;
+    background:none repeat scroll 0 0 #9B11C2;
+    color : white;
+    border-bottom:1px solid #BBBBBB;
+    padding:15px;
+}
+.tableRowEven{
+    text-align:center;
+    background:none repeat scroll 0 0 #E7D5EB;
+    border-top:1px solid #BBBBBB;
+    padding: 15px;
+}
+.tableRowOdd{
+    text-align:center;
+    background:none repeat scroll 0 0 #F9F9F9;
+    border-top:1px solid #BBBBBB;
+    padding: 15px;
+}
+
+.member-container{
+    max-width: 1200px;
+    position: relative;
+    margin: auto;
 }
 
 

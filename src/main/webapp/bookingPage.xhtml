@@ -4,94 +4,160 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link href="Resources/Css/mainCss.css" rel="stylesheet" type="text/css"/>
+    <!--
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js" />
+    <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" />
+    -->
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>  
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>  
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script> 
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet"/>
+    
+    <!--
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
+    
+    <script src="http://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/a549aa8780dbda16f6cff545aeabc3d71073911e/src/js/bootstrap-datetimepicker.js"></script>
+    <link href="http://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/a549aa8780dbda16f6cff545aeabc3d71073911e/build/css/bootstrap-datetimepicker.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.min.css" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker3.min.css" />
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.min.js"></script>
+    -->
+    
+    
+    <link href="Resources/Css/portCss.css" rel="stylesheet" type="text/css"/>
     
     <h:head>
         <title>Port-Eco House</title>
     </h:head>
+    <script type="text/javascript">
+       $(function() {
+               $("#startdate").datepicker({ dateFormat: "dd-mm-yy" }).val();
+               $("#enddate").datepicker({ dateFormat: "dd-mm-yy" }).val();
+       });
+
+   </script>  
     <h:body id="bookingPage">
-        <div class="container">
-            <div class="col-xs-12">
-                <div class="mainContent">
-                    <div class="purpleLine"></div>
+        <div class="container-fluid headerBackground">
+            <!--
+            <div class="logoBox">
+                <h:graphicImage class="logoImage" value="Resources/Images/logo-left.jpg"/>
+            </div> -->
+            <div class="boxes">                
+                <div class="firstBox">
+                    <h1 class="webTitle">Port-Eco House</h1>
+                </div>
+                <div class="secondBox">
+                    <p class="titleDescription">Installed with environmental monitoring equipment and video cameras to enable in-situ studies of the building’s performance and the behaviour of its occupants</p>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid navBarColumn">
+             <nav class="navbar navbar-default navbarColour">
+                <div class="container">
+                    <div class="col-xs-12 secondNavColour">
+                        <div class="nav navbar-nav">
+                            <ul class="nav navbar-nav">   
+                                <li>
+                                    <a class="navbarItem" href="mainPage.xhtml">HOME</a>
+                                </li>                                
+                            </ul>
+                        </div> 
+                    </div>            
+                </div>  
+            </nav>
+        </div>
+        <div id="bookingPanel" class="container-fluid bookingPanel">
+            <div class="container">
+                <div class="col-xs-12">
                     <div class="row">
-                        <div class="col-xs-12">
-                            <div class="col-xs-8">
-                                <img class="headerImageSize" src="Resources/Images/logo-left.jpg" alt=""/>
-                            </div>
-                            <div class="col-xs-4" style="float:right">
-                                <h:form>
-                                    <h:commandButton class="buttonStyle" value="Back to Homepage" action="#{mainController.goToHomepage()}"></h:commandButton>
-                                </h:form>
-                            </div>                            
+                        <div class="col-xs-12" style="margin: 0 auto;margin-top:20px;">
+                            <h1 class="titleFont">Facility Booking Form</h1>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="col-xs-12">
-                            <h1 class="bookingTitleFont">FACILITY'S BOOKING FORM</h1>
-                        </div>
-                    </div>
-                    <div class="row" style="margin-top: 20px">
-                        <div class="col-xs-12">
-                            <div class="col-xs-4"></div>
-                            <div class="col-xs-8">
-                                <h:form id="bookingForm">
-                                    <h:panelGrid columns="3">
-                                        <h:outputLabel class="bookingLabelFont" value="Student/Staff Id"/>
-                                        <h:outputLabel class="bookingLabelFont" value=" : "/>
-                                        <h:inputText class="inputTextStyle" value="#{mainController.userId}"/>
-
-                                        <h:outputLabel class="bookingLabelFont" value="Email Address"/>
-                                        <h:outputLabel class="bookingLabelFont" value=" : "/>
-                                        <h:inputText class="inputTextStyle" value="#{mainController.userEmail}"/>
-
+                            <h:form>
+                                <div class="mainForm" style="margin: 0 auto;">                                    
+                                    <h:panelGrid columns="6">
                                         <h:outputLabel class="bookingLabelFont" value="Facility"/>
                                         <h:outputLabel class="bookingLabelFont" value=" : "/>
-                                        <h:selectOneMenu value="#{mainController.selectedFacilitId}" onchange="submit()"
+                                        <h:selectOneMenu class="inputTextStyle" value="#{mainController.selectedFacilitId}" onchange="submit()"
                                                          valueChangeListener="#{mainController.changeFcID}" style="margin:10px"> 
                                             <f:selectItem itemValue="#{null}" itemLabel="--Select Facility--"/>
                                             <f:selectItems value="#{mainController.facilities}" var="f"
                                                            itemLabel="#{f.facilityName}" itemValue="#{f.id}">
                                             </f:selectItems>                                                          
                                         </h:selectOneMenu>
-                                    </h:panelGrid>  
-                                    <h:panelGrid columns="3" rendered="#{mainController.checkFacility}">
+                                        
+                                        <h:outputLabel class="bookingLabelFont" value=""/>
+                                        <h:outputLabel class="bookingLabelFont" value=""/>
+                                        <h:outputLabel class="bookingLabelFont" value=""/>
+                                        
                                         <h:outputLabel class="bookingLabelFont" value="Booking From"/>
                                         <h:outputLabel class="bookingLabelFont" value=" : "/>
-                                        <h:inputText class="inputTextStyle" value="#{mainController.dateStart}">
-                                            <f:convertDateTime pattern="dd-MM-yyyy HH:mm"  />
-                                        </h:inputText>
-                                        
-                                        <h:outputLabel class="bookingLabelFont" value="Booking Until"/>
-                                        <h:outputLabel class="bookingLabelFont" value=" : "/>
-                                        <h:inputText id="datetimepicker2" class="inputTextStyle"/>
-                                                                         
-                                        <!--
-                                        <div class="form-group">
-                                            <div class='input-group date' id='datetimepicker2'>
-                                                <input type='text' class="form-control" />
+                                        <div class="form-group" style="margin:10px">
+                                            <div class="input-group date" data-provide="datepicker" id="dateFrom">
+                                                <input id="dateStart" type='text' class="form-control" value=""/>
                                                 <span class="input-group-addon">
                                                     <span class="glyphicon glyphicon-calendar"></span>
                                                 </span>
                                             </div>
-                                        </div>       
-                                        <h:inputText id="datetimepicker2" class="inputTextStyle" value="#{mainController.dateEnd}">
-                                            <f:convertDateTime pattern="dd-MM-yyyy HH:mm"  />
-                                        </h:inputText> -->                                        
-                                    </h:panelGrid>     
-                                    <h:commandButton class="buttonStyle" value="Book" action="#{mainController.saveBooking()}"></h:commandButton>
-                                </h:form>                               
-                            </div>                            
+                                        </div>
+                                        <h:outputLabel class="bookingLabelFont" value="Booking Until"/>
+                                        <h:outputLabel class="bookingLabelFont" value=" : "/>
+                                        <div class="form-group" style="margin:10px">
+                                            <div class="input-group date" data-provide="datepicker" id="dateUntil">
+                                                <input type='text' class="form-control" value=""/>
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                            </div>
+                                        </div>                               
+                                    </h:panelGrid>
+                                </div>
+                                <div class="detailsForm" style="margin: 0 auto;">
+                                    <h:panelGrid columns="3">
+                                        <h:outputLabel class="bookingLabelFont" value="Student/Staff Id"/>
+                                        <h:outputLabel class="bookingLabelFont" value=" : "/>
+                                        <h:inputText class="inputTextStyle" value="#{mainController.userId}"/>
+
+                                        <h:outputLabel class="bookingLabelFont" value="First Name"/>
+                                        <h:outputLabel class="bookingLabelFont" value=" : "/>
+                                        <h:inputText class="inputTextStyle" value="#{mainController.firstName}"/>
+
+                                        <h:outputLabel class="bookingLabelFont" value="Last Name"/>
+                                        <h:outputLabel class="bookingLabelFont" value=" : "/>
+                                        <h:inputText class="inputTextStyle" value="#{mainController.lastName}"/>
+
+                                        <h:outputLabel class="bookingLabelFont" value="Faculty"/>
+                                        <h:outputLabel class="bookingLabelFont" value=" : "/>
+                                        <h:inputText class="inputTextStyle" value="#{mainController.firstName}"/>
+
+                                        <h:outputLabel class="bookingLabelFont" value="Email Address"/>
+                                        <h:outputLabel class="bookingLabelFont" value=" : "/>
+                                        <h:inputText class="inputTextStyle" value="#{mainController.userEmail}"/>
+
+                                        <h:outputLabel class="bookingLabelFont" value="Purpose"/>
+                                        <h:outputLabel class="bookingLabelFont" value=" : "/>
+                                        <h:inputText class="inputTextStyle" value="#{mainController.purpose}" size="40"/>
+
+                                        <h:outputLabel class="bookingLabelFont" value="Message"/>
+                                        <h:outputLabel class="bookingLabelFont" value=" : "/>
+                                        <h:inputTextarea class="inputTextStyle" value="#{mainController.message}" cols="40" rows="5"/>
+                                        
+                                        <h:outputLabel class="bookingLabelFont" value=""/>
+                                        <h:outputLabel class="bookingLabelFont" value=""/>
+                                        <h:commandButton class="buttonStyle" style="margin: 10px;" value="Book" action="#{mainController.saveBooking()}"></h:commandButton>
+                                    </h:panelGrid>
+                                </div>
+                            </h:form>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </div>        
+        
     </h:body>
 </html>
 
