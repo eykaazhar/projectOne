@@ -11,17 +11,25 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 
 /**
  *
  * @author ASUS
  */
 @Entity
+@NamedQueries({
+    @NamedQuery(name="Inventory.GetChosenInventory", query="SELECT i FROM Inventory i WHERE i.id = :invID"),
+    @NamedQuery(name="Inventory.Search", query="SELECT i FROM Inventory i WHERE UPPER(i.equipmentName) LIKE UPPER(:searchKeyword) escape '\\'"),
+    @NamedQuery(name="Inventory.GetAvailableInventory", query="SELECT i FROM Inventory i WHERE i.status = 'available'")
+})
 public class Inventory implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     public Long getId() {
@@ -45,13 +53,17 @@ public class Inventory implements Serializable {
     @Basic
     private String accessories;    
     @Basic
-    private String patReferences;    
+    private String patReference;    
     @Basic
     private String battery;    
     @Basic
-    private String total;    
+    private int total;    
     @Basic 
     private String status;
+//    @Basic
+//    private String currentUser;
+    @OneToOne(targetEntity = RegisteredMember.class)
+    private RegisteredMember currentUser;
 
     public String getEquipmentName() {
         return equipmentName;
@@ -101,12 +113,12 @@ public class Inventory implements Serializable {
         this.accessories = accessories;
     }
 
-    public String getPatReferences() {
-        return patReferences;
+    public String getPatReference() {
+        return patReference;
     }
 
-    public void setPatReferences(String patReferences) {
-        this.patReferences = patReferences;
+    public void setPatReference(String patReference) {
+        this.patReference = patReference;
     }
 
     public String getBattery() {
@@ -117,11 +129,11 @@ public class Inventory implements Serializable {
         this.battery = battery;
     }
 
-    public String getTotal() {
+    public int getTotal() {
         return total;
     }
 
-    public void setTotal(String total) {
+    public void setTotal(int total) {
         this.total = total;
     }
 
@@ -132,8 +144,16 @@ public class Inventory implements Serializable {
     public void setStatus(String status) {
         this.status = status;
     }
- 
-    
+
+    public RegisteredMember getCurrentUser() {
+        return currentUser;
+    }
+
+    public void setCurrentUser(RegisteredMember currentUser) {
+        this.currentUser = currentUser;
+    }
+
+        
     @Override
     public int hashCode() {
         int hash = 0;

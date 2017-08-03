@@ -6,13 +6,16 @@
 package Entity;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -22,7 +25,9 @@ import javax.persistence.NamedQuery;
 @NamedQueries({
     @NamedQuery(name="RegisteredMember.FindUser", query="SELECT r FROM RegisteredMember r WHERE r.username = :userName AND r.password = :password"),
     @NamedQuery(name="RegisteredMember.AllMember", query="SELECT m FROM RegisteredMember m WHERE m.memberType = 'member'"),
-    @NamedQuery(name="RegisteredMember.AllAdmin", query="SELECT a FROM RegisteredMember a WHERE a.memberType = 'admin'")
+    @NamedQuery(name="RegisteredMember.AllAdmin", query="SELECT a FROM RegisteredMember a WHERE a.memberType = 'admin'"),
+    @NamedQuery(name="RegisteredMember.FindUserByID", query="SELECT a FROM RegisteredMember a WHERE a.id = :memberID"),
+    @NamedQuery(name="RegisteredMember.UnactiveUser", query="UPDATE RegisteredMember r SET r.memberStatus = :newStatus WHERE r.id = :memberID")
 })
 
 public class RegisteredMember implements Serializable {
@@ -56,6 +61,12 @@ public class RegisteredMember implements Serializable {
     private String lastName;
     @Basic
     private String faculty;
+    @Basic
+    private String memberStatus;
+    
+    @OneToMany(targetEntity = Inventory.class)
+    @JoinColumn
+    private List<Inventory> inventoryList;
 
     public String getUsername() {
         return username;
@@ -119,6 +130,22 @@ public class RegisteredMember implements Serializable {
 
     public void setFaculty(String faculty) {
         this.faculty = faculty;
+    }
+
+    public String getMemberStatus() {
+        return memberStatus;
+    }
+
+    public void setMemberStatus(String memberStatus) {
+        this.memberStatus = memberStatus;
+    }
+
+    public List<Inventory> getInventoryList() {
+        return inventoryList;
+    }
+
+    public void setInventoryList(List<Inventory> inventoryList) {
+        this.inventoryList = inventoryList;
     }
         
 

@@ -150,7 +150,7 @@ and open the template in the editor.
 .inventoryContentPanel2{
     background-color: white;
     width: 100%;
-    height: 300px;
+    height: 450px;
 }
 .adminMemberPanel{
     background-color: #dbdbdb;
@@ -174,6 +174,12 @@ and open the template in the editor.
 .bookingPanel{
     background-color: #dbdbdb;
     width: 100%;
+}
+.inventoryPanel{
+    background-color: #f7f4f7;
+    -webkit-box-shadow: 2px 3px 19px -1px rgba(107,61,107,0.44);
+    -moz-box-shadow: 2px 3px 19px -1px rgba(107,61,107,0.44);
+    box-shadow: 2px 3px 19px -1px rgba(107,61,107,0.44);
 }
 .memberPanel{
     background-color: #dbdbdb;
@@ -233,6 +239,22 @@ and open the template in the editor.
        -o-transition: all 0.5s ease;
       -ms-transition: all 0.5s ease;
           transition: all 0.5s ease;
+}
+.inventoryBox{
+    margin-left: 50px;
+    width: 200px;
+    height: 200px;
+    background-color: #3f2a4c;
+    padding: 5px;
+    border-radius: 10%;
+    -webkit-transition: all 0.5s ease;
+     -moz-transition: all 0.5s ease;
+       -o-transition: all 0.5s ease;
+      -ms-transition: all 0.5s ease;
+          transition: all 0.5s ease;
+}
+.inventoryBox:hover{
+    border-radius: 50%;
 }
 .image1{
     background-image: url("../Images/mainhouse.jpg");    
@@ -295,8 +317,7 @@ and open the template in the editor.
     text-align: center;
     font-family: Georgia;
     color: black;
-    font-size: 25px;
-    
+    font-size: 25px;    
 }
 .facilityLink{
     position: relative;
@@ -327,6 +348,16 @@ and open the template in the editor.
     padding: 10px 20px 10px 20px;
     text-decoration: none;
 }
+.buttonStyle:hover{
+    background: #560761;
+    background-image: -webkit-linear-gradient(top, #560761, #200129);
+    background-image: -moz-linear-gradient(top, #560761, #200129);
+    background-image: -ms-linear-gradient(top, #560761, #200129);
+    background-image: -o-linear-gradient(top, #560761, #200129);
+    background-image: linear-gradient(to bottom, #560761, #200129);
+    text-decoration: none;
+    color: #765e7c;
+}
 .buttonStyle3{
     /*
     background-color: #9B11C2;
@@ -351,6 +382,31 @@ and open the template in the editor.
     font-size: 16px;
     padding: 10px 20px 10px 20px;
     width: 200px;
+    text-decoration: none;
+}
+.buttonStyle4{
+    /*
+    background-color: #9B11C2;
+    border: none;
+    color: white;
+    font-size: 15px;
+    font-family: Comic Sans MS;
+    text-align: center;
+    
+    -webkit-border-radius: 10;
+    -moz-border-radius: 10;
+    */
+    background: #7e1499;
+    background-image: -webkit-linear-gradient(top, #7e1499, #35025e);
+    background-image: -moz-linear-gradient(top, #7e1499, #35025e);
+    background-image: -ms-linear-gradient(top, #7e1499, #35025e);
+    background-image: -o-linear-gradient(top, #7e1499, #35025e);
+    background-image: linear-gradient(to bottom, #7e1499, #35025e);
+    border-radius: 10px;
+    font-family: Georgia;
+    color: #ffffff;
+    font-size: 16px;
+    padding: 10px 20px 10px 20px;
     text-decoration: none;
 }
 .titleDescription{
@@ -439,7 +495,40 @@ and open the template in the editor.
     font-family: Georgia;
     font-size: 15px;
 }
+.outputTextFont{
+    margin: 10px;
+    color: #550982;
+    font-family: Georgia;
+    font-size: 15px;
+    padding: 5px;
+}
 .outputLabelFont{
+    display: block;
+    width: 150px;
+    margin: 10px;
+    padding-right: 3px;
+    color: #550982;
+    font-family: Georgia;
+    font-size: 15px;
+}
+.formOutputLabel{
+    display: block;
+    width: 150px;
+    margin: 10px;
+    padding-right: 3px;
+    color: black;
+    font-family: Georgia;
+    font-size: 15px;
+}
+.formOutputLabel2{
+    display: block;    
+    margin: 10px;
+    padding-right: 3px;
+    color: black;
+    font-family: Georgia;
+    font-size: 15px;
+}
+.outputLabelFont2{    
     margin: 10px;
     padding-right: 3px;
     color: #550982;
@@ -462,7 +551,7 @@ and open the template in the editor.
     font-family: Georgia;
     color: black;
     font-size: 25px;
-    
+    margin: 5px;
 }
 .quickPanel{
     text-align: center;
@@ -485,8 +574,7 @@ and open the template in the editor.
     height: 50px;
     width: 270px;
     border-radius: 10px;
-    padding: 10px;
-    
+    padding: 10px;    
 }
 .quickPanelSub2{
     background: #7e1499;
@@ -502,8 +590,7 @@ and open the template in the editor.
     height: 50px;
     width: 200px;
     border-radius: 10px;
-    padding: 10px;
-    
+    padding: 10px;    
 }
 a.quickLink{
     color:white;
@@ -534,7 +621,7 @@ a.quickLink2:hover{
 }
 .navbar-default .navbar-nav>li.navbarItemActive{
     background-color: #765e7c;
-    border-radius: 10px;
+    border-radius: 5px;
 }
 .mainTable{
     border-collapse:collapse;
@@ -559,7 +646,7 @@ a.quickLink2:hover{
     padding: 15px;
 }
 .tableItem{
-     padding: 10px;
+    padding: 10px;
 }
 .memberPanel{
     height: 600px;
@@ -577,7 +664,30 @@ a.quickLink2:hover{
     padding:10px;
     border-radius: 10px;
 }
+.inventoryMainForm{
+    background-color: #bdb1c6;
+    width: 650px;
+    height: 170px;
+    padding:10px;
+    border-radius: 10px;
+}
 .detailsForm{
     width: 650px;
     padding:10px;
+}
+.informationBox{        
+    margin-top: 5px;
+    text-align: center;
+    height: 50px;
+    width: 270px;
+    border-radius: 3px;  
+    background: #E7D5EB;
+    padding: 10px 20px 10px 20px;
+    border: solid #4d454f;
+}
+.infoFont{
+    color:black;
+    font-family: Georgia;
+    font-size: 14px;
+    font-weight: bold;
 }

@@ -37,16 +37,16 @@
                                     <a class="navbarItem" href="mainPage.xhtml">Port-Eco Home</a>
                                 </li>
                                 <li>
-                                    <a class="navbarItem" href="mainPage.xhtml">ADMIN</a>
+                                    <a class="navbarItem" href="adminPage.xhtml">ADMIN</a>
                                 </li>
                                 <li class="navbarItemActive">
-                                    <a class="navbarItem" href="#">MEMBER</a>
+                                    <a class="navbarItem" href="adminMember.xhtml">MEMBER</a>
                                 </li>
                                 <li>
                                     <a class="navbarItem" href="#">FACILITIES</a>
                                 </li>
                                 <li>
-                                    <a class="navbarItem" href="#">INVENTORY</a>
+                                    <a class="navbarItem" href="inventoryPage.xhtml">INVENTORY</a>
                                 </li>
                             </ul>
                         </div>  
@@ -81,31 +81,31 @@
                         <h2 class="font1">Register a Member</h2>
                         <h:form id="registerForm">
                             <h:panelGrid columns="3">
-                                <h:outputLabel class="bookingLabelFont" value="Username"/>
-                                <h:outputLabel class="bookingLabelFont" value=" : "/>
-                                <h:inputText class="inputTextStyle" value="#{mainController.userName}"/>
+                                    <h:outputLabel class="bookingLabelFont" value="Member Type"/>
+                                    <h:outputLabel class="bookingLabelFont" value=" : "/>
+                                    <h:selectOneMenu class="inputTextStyle" value="#{mainController.selectedMemberType}" onchange="submit()"
+                                                     valueChangeListener="#{mainController.changeMemberType}" style="margin:10px"> 
+                                        <f:selectItem itemValue="#{null}" itemLabel="--Select Type--"/>
+                                        <f:selectItem itemValue="member" itemLabel="Member"/>
+                                        <f:selectItem itemValue="admin" itemLabel="Admin"/>                                                   
+                                    </h:selectOneMenu>
+                                    
+                                    <h:outputLabel class="bookingLabelFont" value="Username"/>
+                                    <h:outputLabel class="bookingLabelFont" value=" : "/>
+                                    <h:inputText class="inputTextStyle" value="#{mainController.userName}"/>
 
-                                <h:outputLabel class="bookingLabelFont" value="Password"/>
-                                <h:outputLabel class="bookingLabelFont" value=" : "/>
-                                <h:inputSecret class="inputTextStyle" value="#{mainController.password}"/> 
+                                    <h:outputLabel class="bookingLabelFont" value="Password"/>
+                                    <h:outputLabel class="bookingLabelFont" value=" : "/>
+                                    <h:inputSecret class="inputTextStyle" value="#{mainController.password}"/> 
 
-                                <h:outputLabel class="bookingLabelFont" value="Confirm Password"/>
-                                <h:outputLabel class="bookingLabelFont" value=" : "/>
-                                <h:inputSecret class="inputTextStyle" value="#{mainController.confrimPasword}"/>
+                                    <h:outputLabel class="bookingLabelFont" value="Confirm Password"/>
+                                    <h:outputLabel class="bookingLabelFont" value=" : "/>
+                                    <h:inputSecret class="inputTextStyle" value="#{mainController.confrimPasword}"/>
 
-                                <h:outputLabel class="bookingLabelFont" value="Email"/>
-                                <h:outputLabel class="bookingLabelFont" value=" : "/>
-                                <h:inputText class="inputTextStyle" value="#{mainController.email}"/>   
-
-                                <h:outputLabel class="bookingLabelFont" value="Member Type"/>
-                                <h:outputLabel class="bookingLabelFont" value=" : "/>
-                                <h:selectOneMenu class="inputTextStyle" value="#{mainController.selectedMemberType}" onchange="submit()"
-                                                 valueChangeListener="#{mainController.changeMemberType}" style="margin:10px"> 
-                                    <f:selectItem itemValue="#{null}" itemLabel="--Select Type--"/>
-                                    <f:selectItem itemValue="member" itemLabel="Member"/>
-                                    <f:selectItem itemValue="admin" itemLabel="Admin"/>                                                   
-                                </h:selectOneMenu>
-                            </h:panelGrid>
+                                    <h:outputLabel class="bookingLabelFont" value="Email"/>
+                                    <h:outputLabel class="bookingLabelFont" value=" : "/>
+                                    <h:inputText class="inputTextStyle" value="#{mainController.email}"/> 
+                                </h:panelGrid>
                             <h:commandButton class="buttonStyle" value="Register" action="#{mainController.registeredMember()}"></h:commandButton>
                             <h:commandButton class="buttonStyle" value="Cancel">
                                 <f:ajax onevent="registerMemberCancel" render="registerForm"/>
@@ -162,35 +162,44 @@
                                 <h:panelGrid columns="3">                                    
                                     <h:outputLabel class="outputLabelFont" value="Username"/>
                                     <h:outputLabel class="outputLabelFont" value=" : "/>
-                                    <h:outputText class="bookingLabelFontM" value="#{mainController.editMember.username}"/>                        
+                                    <h:outputText class="outputTextFont" value="#{mainController.editMember.username}"/>                        
 
                                     <h:outputLabel class="outputLabelFont" value="First Name"/>
                                     <h:outputLabel class="outputLabelFont" value=" : "/>
-                                    <h:inputText class="inputTextStyleM" value="#{mainController.editMember.firstName}"/>
+                                    <h:outputText class="outputTextFont" value="#{mainController.editMember.firstName}"/> 
 
                                     <h:outputLabel class="outputLabelFont" value="Last Name"/>
                                     <h:outputLabel class="outputLabelFont" value=" : "/>
-                                    <h:inputText class="inputTextStyleM" value="#{mainController.editMember.lastName}"/>
+                                    <h:outputText class="outputTextFont" value="#{mainController.editMember.lastName}"/> 
 
                                     <h:outputLabel class="outputLabelFont" value="Email"/>
                                     <h:outputLabel class="outputLabelFont" value=" : "/>  
-                                    <h:inputText class="inputTextStyleM" value="#{mainController.editMember.email}"/>
+                                    <h:outputText class="outputTextFont" value="#{mainController.editMember.email}"/> 
 
                                     <h:outputLabel class="outputLabelFont" value="Contact Number"/>
                                     <h:outputLabel class="outputLabelFont" value=" : "/>
-                                    <h:inputText class="inputTextStyleM" value="#{mainController.loginMember.contactNumber}"/>
+                                    <h:outputText class="outputTextFont" value="#{mainController.editMember.contactNumber}"/> 
                                     
                                     <h:outputLabel class="outputLabelFont" value="Member Type"/>
                                     <h:outputLabel class="outputLabelFont" value=" : "/>
                                     <h:selectOneMenu class="inputTextStyleM" value="#{mainController.selectedMemberType}" onchange="submit()"
-                                                     valueChangeListener="#{mainController.changeMemberType}" style="margin:10px"> 
+                                                    valueChangeListener="#{mainController.changeMemberType}" style="margin:10px"> 
                                         <f:selectItem itemValue="#{null}" itemLabel="--Select Type--"/>
                                         <f:selectItem itemValue="member" itemLabel="Member"/>
                                         <f:selectItem itemValue="admin" itemLabel="Admin"/>                                                   
                                     </h:selectOneMenu>
+                                    
+                                    <h:outputLabel class="outputLabelFont" value="Member Status"/>
+                                    <h:outputLabel class="outputLabelFont" value=" : "/>
+                                    <h:selectOneMenu class="inputTextStyleM" value="#{mainController.memberStatus}" onchange="submit()"
+                                                    valueChangeListener="#{mainController.changeMemberStatus}" style="margin:10px"> 
+                                        <f:selectItem itemValue="#{null}" itemLabel="--Select Status--"/>
+                                        <f:selectItem itemValue="active" itemLabel="Active"/>
+                                        <f:selectItem itemValue="unactive" itemLabel="Unactive"/>                                                   
+                                    </h:selectOneMenu>
 
                                 </h:panelGrid> 
-                                <h:commandButton class="buttonStyle" value="Save" action="#{mainController.saveMemberDetail()}"></h:commandButton>
+                                <h:commandButton class="buttonStyle" value="Save" action="#{mainController.saveAdminMemberDetail()}"></h:commandButton>
                                 <h:commandButton class="buttonStyle" value="Cancel">
                                     <f:ajax onevent="cancelEdit" render="editMemberForm"/>
                                 </h:commandButton>                                 

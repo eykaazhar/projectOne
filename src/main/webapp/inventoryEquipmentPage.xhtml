@@ -1,0 +1,153 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="Resources/Css/portCss.css" rel="stylesheet" type="text/css"/>
+    
+    <h:head>
+        <title>Port-Eco House</title>
+    </h:head>
+    <h:body>
+        <div class="container-fluid insideHeaderBackground">
+            <!--
+            <div class="logoBox">
+                <h:graphicImage class="logoImage" value="Resources/Images/logo-left.jpg"/>
+            </div> -->
+            <div class="boxes2">                
+                <div class="insideBox">
+                    <h1 class="webTitle">Port-Eco House</h1>
+                </div>                
+            </div>
+        </div>
+        <div class="container-fluid navBarColumn">
+             <nav class="navbar navbar-default navbarColour">
+                <div class="container">
+                    <div class="col-xs-12 secondNavColour">
+                        <div class="nav navbar-nav">
+                            <ul class="nav navbar-nav"> 
+                                <li>
+                                    <a class="navbarItem" href="mainPage.xhtml">Port-Eco Home</a>
+                                </li>
+                                <li>
+                                    <a class="navbarItem" href="adminPage.xhtml">ADMIN</a>
+                                </li>
+                                <li>
+                                    <a class="navbarItem" href="adminMember.xhtml">MEMBER</a>
+                                </li>
+                                <li>
+                                    <a class="navbarItem" href="#">FACILITIES</a>
+                                </li>
+                                <li class="navbarItemActive">
+                                    <a class="navbarItem" href="adminInventory.xhtml">INVENTORY</a>
+                                </li>
+                            </ul>
+                        </div>  
+                        <div class="nav navbar-nav navbar-right">
+                            <ul class="nav navbar-nav">  
+                                <li>
+                                    <a class="navbarItem" href="loginPage.xhtml">LOGOUT</a>
+                                </li>
+                            </ul>
+                        </div>            
+                    </div><!-- /.container-fluid -->            
+                </div>  
+            </nav>
+        </div>
+        <div id="bookingPanel" class="container-fluid bookingPanel" style="padding-bottom: 20px">
+            <div class="container">
+                <div class="col-xs-12">
+                    <div class="row">
+                        <div class="col-xs-12" style="margin: 0 auto;margin-top:20px;">
+                            <h1 class="titleFont">Inventory Equipment List</h1>
+                        </div>
+                        <div class="col-xs-12">
+                            <div style="height: 450px; overflow: auto;">
+                                <h:form id="inventoryList" style="margin: 10px;" target="_blank">
+                                    <h:dataTable border="1" value="#{mainController.inventoryList}" var="inv" styleClass="mainTable" headerClass="tableHeader" rowClasses="tableRowEven,tableRowOdd">                    
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText class="tableItem" value="Equipment Name" />
+                                            </f:facet>
+                                            <h:outputText class="tableItem" value="#{inv.equipmentName}"/>
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText class="tableItem" value="Make" />
+                                            </f:facet>
+                                            <h:outputText class="tableItem" value="#{inv.make}"/>
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText class="tableItem" value="Model" />
+                                            </f:facet>
+                                            <h:outputText class="tableItem" value="#{inv.model}"/>
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText class="tableItem" value="Serial Number" />
+                                            </f:facet>
+                                            <h:outputText class="tableItem" value="#{inv.serialNumber}"/>
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText class="tableItem" value="Accessories" />
+                                            </f:facet>
+                                            <h:outputText class="tableItem" value="#{inv.accessories}"/>
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText class="tableItem" value="Pat Rreference" />
+                                            </f:facet>
+                                            <h:outputText class="tableItem" value="#{inv.patReference}"/>
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText class="tableItem" value="Battery" />
+                                            </f:facet>
+                                            <h:outputText class="tableItem" value="#{inv.battery}"/>
+                                        </h:column>  
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText class="tableItem" value="Total" />
+                                            </f:facet>
+                                            <h:outputText class="tableItem" value="#{inv.total}"/>
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText class="tableItem" value="Status" />
+                                            </f:facet>
+                                            <h:outputText class="tableItem" value="#{inv.status}"/>
+                                        </h:column> 
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText class="tableItem" value="Current User" />
+                                            </f:facet>
+                                            <h:outputText class="tableItem" value="#{inv.currentUser.username}"/>
+                                        </h:column>   
+                                        <h:column>
+                                            <f:facet name="header">Action</f:facet>
+                                            <div class="tableItem">
+                                                <h:commandButton value="Open" action="#{mainController.selectedInventoryItem(inv)}"></h:commandButton> 
+                                            </div>                               
+                                        </h:column>
+                                    </h:dataTable>                    
+                                </h:form>  
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footerPanel">           
+            <p class="footerFont">&copy; BSc(Hons) Building Survey</p>
+        </div>          
+    </h:body>
+</html>
+

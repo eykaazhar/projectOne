@@ -9,6 +9,7 @@ import Business.BusinessException;
 import Business.PortEcoBusiness;
 import Entity.Booking;
 import Entity.Facility;
+import Entity.Inventory;
 import Entity.RegisteredMember;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -19,6 +20,8 @@ import java.util.List;
 import java.util.Properties;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
 
 
@@ -52,13 +55,19 @@ public class MainController implements Serializable {
     RegisteredMember loginMember = new RegisteredMember();
     RegisteredMember editMember = new RegisteredMember();
     RegisteredMember adminActive = new RegisteredMember();
+    List<Inventory> inventoryList = new ArrayList<Inventory>();
+    Inventory chosenInventory = new Inventory();
+    RegisteredMember chosenMemberInv = new RegisteredMember();
+    Inventory inventoryFirst = new Inventory();
+    Inventory inventorySecond = new Inventory();
+    Inventory inventoryThird = new Inventory();
+    Inventory addNewInventory = new Inventory();
+    List<Inventory> availableInventoryList = new ArrayList<Inventory>();
+    RegisteredMember invtCurrentUser = new RegisteredMember();
     
     //------- List of local variables---//
     private String userId;
-    private String userEmail;
-    private Date currentDate;
-    private Date dateStart;
-    private Date dateEnd;
+    private String userEmail;    
     private String userName;
     private String password;
     private String confrimPasword;
@@ -72,16 +81,49 @@ public class MainController implements Serializable {
     private String emailSubject;
     private String emailMessage;
     private String faculty;
+    private String memberStatus;
+    private String selectedMemberType;
+    private String inventoryStatus;
+    private String invtSearchKeyword;
+    
+    private String equipementName;
+    private String equipmentDescription;
+    private String make;
+    private String model;
+    private String serialNumber;
+    private String accessories;
+    private String patReference;
+    private String battery;
+    private int total;
+    private int totalInvetory;
+    private int totalInventoryAvaiblable;
+    
+    private Date currentDate;
+    private Date dateStart;
+    private Date dateEnd;
     
     private Long selectedFacilitId;
+    private Long selectedInvID;
+    private Long chosenUserIDInv;
+    private Long firstItemId;
+    private Long secondItemId;
+    private Long thirdItemId; 
+    
     private Boolean checkFacility;
     private Boolean checkUserLogin;
     private Boolean checkPassword = Boolean.TRUE;
-    private Boolean memberEditable = Boolean.FALSE;
-    private String selectedMemberType;
+    private Boolean memberEditable = Boolean.FALSE;    
     private Boolean editPassword = Boolean.FALSE;
     private Boolean registrationStatus = Boolean.FALSE;
+    private Boolean checkMemberDetails = Boolean.TRUE;
+    private Boolean inventoryEdit = Boolean.FALSE;
+    private Boolean inventoryAssignMember = Boolean.FALSE;
+    private Boolean returnButton = Boolean.FALSE;
+    private Boolean inventoryDetail = Boolean.FALSE;
+    private Boolean saveStatus = Boolean.FALSE;
+        
 
+    //------------ Generated Setter and Getter Function---------------------//
     public Facility getFacilityID() {
         return facilityID;
     }
@@ -376,29 +418,306 @@ public class MainController implements Serializable {
 
     public void setAdminActive(RegisteredMember adminActive) {
         this.adminActive = adminActive;
-    }   
+    } 
+
+    public List<Inventory> getInventoryList() {
+        return inventoryList;
+    }
+
+    public void setInventoryList(List<Inventory> inventoryList) {
+        this.inventoryList = inventoryList;
+    }
+
+    public Inventory getChosenInventory() {
+        return chosenInventory;
+    }
+
+    public void setChosenInventory(Inventory chosenInventory) {
+        this.chosenInventory = chosenInventory;
+    }
+
+    public Long getSelectedInvID() {
+        return selectedInvID;
+    }
+
+    public void setSelectedInvID(Long selectedInvID) {
+        this.selectedInvID = selectedInvID;
+    }
+
+    public RegisteredMember getChosenMemberInv() {
+        return chosenMemberInv;
+    }
+
+    public void setChosenMemberInv(RegisteredMember chosenMemberInv) {
+        this.chosenMemberInv = chosenMemberInv;
+    }
+
+    public Long getChosenUserIDInv() {
+        return chosenUserIDInv;
+    }
+
+    public void setChosenUserIDInv(Long chosenUserIDInv) {
+        this.chosenUserIDInv = chosenUserIDInv;
+    }
+
+    public String getMemberStatus() {
+        return memberStatus;
+    }
+
+    public void setMemberStatus(String memberStatus) {
+        this.memberStatus = memberStatus;
+    }
+
+    public Long getFirstItemId() {
+        return firstItemId;
+    }
+
+    public void setFirstItemId(Long firstItemId) {
+        this.firstItemId = firstItemId;
+    }
+
+    public Long getSecondItemId() {
+        return secondItemId;
+    }
+
+    public void setSecondItemId(Long secondItemId) {
+        this.secondItemId = secondItemId;
+    }
+
+    public Long getThirdItemId() {
+        return thirdItemId;
+    }
+
+    public void setThirdItemId(Long thirdItemId) {
+        this.thirdItemId = thirdItemId;
+    }
+
+    public Inventory getInventoryFirst() {
+        return inventoryFirst;
+    }
+
+    public void setInventoryFirst(Inventory inventoryFirst) {
+        this.inventoryFirst = inventoryFirst;
+    }
+
+    public Inventory getInventorySecond() {
+        return inventorySecond;
+    }
+
+    public void setInventorySecond(Inventory inventorySecond) {
+        this.inventorySecond = inventorySecond;
+    }
+
+    public Inventory getInventoryThird() {
+        return inventoryThird;
+    }
+
+    public void setInventoryThird(Inventory inventoryThird) {
+        this.inventoryThird = inventoryThird;
+    }
+
+    public Boolean getCheckMemberDetails() {
+        return checkMemberDetails;
+    }
+
+    public void setCheckMemberDetails(Boolean checkMemberDetails) {
+        this.checkMemberDetails = checkMemberDetails;
+    }
+
+    public String getInventoryStatus() {
+        return inventoryStatus;
+    }
+
+    public void setInventoryStatus(String inventoryStatus) {
+        this.inventoryStatus = inventoryStatus;
+    }
+
+    public Boolean getInventoryEdit() {
+        return inventoryEdit;
+    }
+
+    public void setInventoryEdit(Boolean inventoryEdit) {
+        this.inventoryEdit = inventoryEdit;
+    }
+
+    public Boolean getInventoryAssignMember() {
+        return inventoryAssignMember;
+    }
+
+    public void setInventoryAssignMember(Boolean inventoryAssignMember) {
+        this.inventoryAssignMember = inventoryAssignMember;
+    }
+
+    public String getInvtSearchKeyword() {
+        return invtSearchKeyword;
+    }
+
+    public void setInvtSearchKeyword(String invtSearchKeyword) {
+        this.invtSearchKeyword = invtSearchKeyword;
+    }
+
+    public String getEquipementName() {
+        return equipementName;
+    }
+
+    public void setEquipementName(String equipementName) {
+        this.equipementName = equipementName;
+    }
+
+    public String getEquipmentDescription() {
+        return equipmentDescription;
+    }
+
+    public void setEquipmentDescription(String equipmentDescription) {
+        this.equipmentDescription = equipmentDescription;
+    }
+
+    public String getMake() {
+        return make;
+    }
+
+    public void setMake(String make) {
+        this.make = make;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public String getSerialNumber() {
+        return serialNumber;
+    }
+
+    public void setSerialNumber(String serialNumber) {
+        this.serialNumber = serialNumber;
+    }
+
+    public String getAccessories() {
+        return accessories;
+    }
+
+    public void setAccessories(String accessories) {
+        this.accessories = accessories;
+    }
+
+    public String getPatReference() {
+        return patReference;
+    }
+
+    public void setPatReference(String patReference) {
+        this.patReference = patReference;
+    }
+
+    public String getBattery() {
+        return battery;
+    }
+
+    public void setBattery(String battery) {
+        this.battery = battery;
+    }
+
+    public int getTotal() {
+        return total;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
+    }
+
+    public Inventory getAddNewInventory() {
+        return addNewInventory;
+    }
+
+    public void setAddNewInventory(Inventory addNewInventory) {
+        this.addNewInventory = addNewInventory;
+    }
+
+    public int getTotalInvetory() {
+        return totalInvetory;
+    }
+
+    public void setTotalInvetory(int totalInvetory) {
+        this.totalInvetory = totalInvetory;
+    }
+
+    public int getTotalInventoryAvaiblable() {
+        return totalInventoryAvaiblable;
+    }
+
+    public void setTotalInventoryAvaiblable(int totalInventoryAvaiblable) {
+        this.totalInventoryAvaiblable = totalInventoryAvaiblable;
+    }
+
+    public List<Inventory> getAvailableInventoryList() {
+        return availableInventoryList;
+    }
+
+    public void setAvailableInventoryList(List<Inventory> availableInventoryList) {
+        this.availableInventoryList = availableInventoryList;
+    }
+
+    public RegisteredMember getInvtCurrentUser() {
+        return invtCurrentUser;
+    }
+
+    public void setInvtCurrentUser(RegisteredMember invtCurrentUser) {
+        this.invtCurrentUser = invtCurrentUser;
+    }
+
+    public Boolean getReturnButton() {
+        return returnButton;
+    }
+
+    public void setReturnButton(Boolean returnButton) {
+        this.returnButton = returnButton;
+    }
+
+    public Boolean getInventoryDetail() {
+        return inventoryDetail;
+    }
+
+    public void setInventoryDetail(Boolean inventoryDetail) {
+        this.inventoryDetail = inventoryDetail;
+    }
+
+    public Boolean getSaveStatus() {
+        return saveStatus;
+    }
+
+    public void setSaveStatus(Boolean saveStatus) {
+        this.saveStatus = saveStatus;
+    }
+    
+    
+    //--------------------------------------------------------------------------//    
     
     @EJB
     private PortEcoBusiness pb;   
     // --- function is loaded everytime this java file is loaded ---//
     @PostConstruct
     public void onPageLoad(){
-//        insertValueIntoFacilityDB();
-//        insertValueIntoFacilityDB2();
-//        insertValueIntoFacilityDB3();
         setCheckPassword(Boolean.TRUE);
         setRegistrationStatus(Boolean.FALSE);
         getAllFacilities();
         getAllAdmin();
         getAllMember();
+        getAllInventoris();
+        getAllAvailableInventory();
         setAdminActive(pb.getAdminPerson());
         System.out.println("admin size: " + getAdminActive().getMemberType());
     }
+    
+    //------Select one menu change item functions: this functions are called when user change the selectonemenu input option//
     
     public void changeMemberType(ValueChangeEvent e) throws BusinessException{
         if(e.getNewValue() != null){
             selectedMemberType = (String) e.getNewValue();
             setSelectedMemberType(selectedMemberType);
+            getEditMember().setMemberType(getSelectedMemberType());
         }else{
             setSelectedMemberType("");
         }        
@@ -415,24 +734,68 @@ public class MainController implements Serializable {
             setCheckFacility(false);
         }
     }
-    public void insertValueIntoFacilityDB(){
-        newFacility.setFacilityName("House");
-        newFacility.setStatus("Available");
-        pb.addNewFacility(getNewFacility());        
-    }    
     
-    public void insertValueIntoFacilityDB2(){
-        newFacility.setFacilityName("Experimental Garden");
-        newFacility.setStatus("Available");
-        pb.addNewFacility(getNewFacility());
+    public void changeMemberStatus(ValueChangeEvent e) throws BusinessException{
+        System.out.println("Member Status Change");
+        if(e.getNewValue() != null){
+            memberStatus = (String) e.getNewValue();
+            setMemberStatus(memberStatus);
+            getEditMember().setMemberStatus(getMemberStatus());
+        }else{
+            setMemberStatus("");
+        }
     }
     
-    public void insertValueIntoFacilityDB3(){
-        newFacility.setFacilityName("Control Room");
-        newFacility.setStatus("Available");
-        pb.addNewFacility(getNewFacility());
+    public void changeMemberID(ValueChangeEvent e) throws BusinessException{
+        System.out.println("changeMemberID");
+        if(e.getNewValue() != null){
+            chosenUserIDInv = (Long) e.getNewValue();
+            setChosenUserIDInv(chosenUserIDInv);
+            setChosenMemberInv(pb.getMemberByID(getChosenUserIDInv()));
+        }else{
+            setChosenUserIDInv(null);
+            setChosenMemberInv(null);
+        }
+    }
+    
+    public void changeFirstItemId(ValueChangeEvent e) throws BusinessException{
+        System.out.println("changeFirstItemId");
+        if(e.getNewValue() != null){
+            firstItemId = (Long) e.getNewValue();
+            setFirstItemId(firstItemId);
+            setInventoryFirst(pb.getInventoryById(getFirstItemId()));
+        }
+    }
+    
+    public void changeSecondtemId(ValueChangeEvent e) throws BusinessException{
+        System.out.println("changeFirstItemId");
+        if(e.getNewValue() != null){
+            secondItemId = (Long) e.getNewValue();
+            setSecondItemId(secondItemId);
+            setInventorySecond(pb.getInventoryById(getFirstItemId()));
+        }
+    }
+    
+    public void changeThirdItemId(ValueChangeEvent e) throws BusinessException{
+        System.out.println("changeFirstItemId");
+        if(e.getNewValue() != null){
+            thirdItemId = (Long) e.getNewValue();
+            setThirdItemId(thirdItemId);
+            setInventoryThird(pb.getInventoryById(getFirstItemId()));
+        }
     }    
     
+    public void changeInventoryStatus(ValueChangeEvent e) throws BusinessException{
+        if(e.getNewValue() != null){
+            inventoryStatus = (String) e.getNewValue();
+            setInventoryStatus(inventoryStatus);
+            getChosenInventory().setStatus(getInventoryStatus());
+        }
+    }
+    //-------------------------------------------------------------------------//
+    
+
+    //-------- Get all data of the stated table from database -----------------//
     public void getAllFacilities(){
         setFacilities(pb.getAllFacilities());
         System.out.println("Facility set : " + getFacilities().size());
@@ -446,6 +809,19 @@ public class MainController implements Serializable {
         setAdminList(pb.getAllAdminList());
     }
     
+    public void getAllInventoris(){
+        setInventoryList(pb.getAllInventoriesList());
+        setTotalInvetory(getInventoryList().size());
+    }
+    
+    public void getAllAvailableInventory(){
+        setAvailableInventoryList(pb.getAllAvailableInventory());
+        setTotalInventoryAvaiblable(getAvailableInventoryList().size());
+    }
+    
+    //----------------------------------------------------------------------//
+    
+    //---- save booking request by user into database. this function is called from the mainPage.xhtml---////
     public void saveBooking(){
         newBooking.setUserId(getUserId());
         newBooking.setUserEmail(getUserEmail());
@@ -462,7 +838,7 @@ public class MainController implements Serializable {
         pb.addNewBooking(newBooking);
         System.out.println("test");
         bookingEmailSetting();
-        sendEmail(getAdminActive().getEmail());
+        //sendEmail(getAdminActive().getEmail());
         setUserId("");
         setUserName("");
         setUserEmail("");
@@ -473,6 +849,7 @@ public class MainController implements Serializable {
         setMessage("");
     }
     
+    //---------- Save new member detail into Database: Used by Administrator to register new member-------//
     public void registeredMember(){
         if(getPassword().equals(getConfrimPasword())){
             newMember.setUsername(getUserName());
@@ -483,7 +860,7 @@ public class MainController implements Serializable {
             setCheckPassword(Boolean.TRUE);
             System.out.println("email: " + getEmail());
             registerEmailSetting();
-            sendEmail(getEmail());
+            //sendEmail(getEmail());
             setUserName("");
             setEmail("");
             setSelectedMemberType("");
@@ -499,6 +876,7 @@ public class MainController implements Serializable {
         }
     }
     
+    //--------- Login function of the system ----------------//
     public String login(){
         String nextPage;
         setCheckUserLogin(pb.loginValidation(getLoginUsername(), getLoginPassword()));
@@ -520,11 +898,13 @@ public class MainController implements Serializable {
         return nextPage;
     }
     
+    //--- Logout function and delete user session ----//
     public String logout(){
         setUserName("");
         return "homePage.xhtml?faces-redirect=true";
     }
 
+    //---- Navigation functions ------//
     public String goToHomepage(){
         return "homePage.xhtml?faces-redirect=true";
     }
@@ -537,17 +917,50 @@ public class MainController implements Serializable {
         return "bookingPage.xhtml?faces-redirect=true";
     }
     
+    public String goToMyAccountMember(){
+        return "memberPage.xhtml";
+    }
+    
+    public String goToAllInventoryPage(){
+        return "inventoryEquipmentPage.xhtml?faces-redirect=true";
+    }
+    
+    public String goToInventoryFormPage(){
+        if(getLoginMember().getContactNumber() == null || getLoginMember().getContactNumber().equals("") 
+                || getLoginMember().getEmail() == null || getLoginMember().getEmail().equals("")
+                || getLoginMember().getFirstName() == null || getLoginMember().getFirstName().equals("")
+                || getLoginMember().getLastName() == null || getLoginMember().getLastName().equals("")){
+            
+            setCheckMemberDetails(Boolean.FALSE);
+        }else{
+            setCheckMemberDetails(Boolean.TRUE);
+        }
+        return "inventoryRequestPage.xhtml?faces-redirect=true";
+    }
+    public String goToInventoryFormPage2(){
+        setFirstItemId(getChosenInventory().getId());
+        setInventoryFirst(getChosenInventory());
+        if(getLoginMember().getContactNumber() == null || getLoginMember().getContactNumber().equals("") 
+                || getLoginMember().getEmail() == null || getLoginMember().getEmail().equals("")
+                || getLoginMember().getFirstName() == null || getLoginMember().getFirstName().equals("")
+                || getLoginMember().getLastName() == null || getLoginMember().getLastName().equals("")){
+            
+            setCheckMemberDetails(Boolean.FALSE);
+        }else{
+            setCheckMemberDetails(Boolean.TRUE);
+        }
+        return "inventoryRequestPage.xhtml?faces-redirect=true";
+    }
+    
+    //----------------------------------------------------------------------//
+    
     public void editMemberDetail(){
         setMemberEditable(Boolean.TRUE);
     }
     public String saveMemberDetail(){
-        if(getConfrimPasword().equals(getLoginMember().getPassword())){
-            pb.updateMember(getLoginMember());
-            setMemberEditable(Boolean.FALSE);
-            setCheckPassword(Boolean.TRUE);
-        }else{
-            setCheckPassword(Boolean.FALSE);
-        }        
+        
+        pb.updateMember(getLoginMember());
+        setMemberEditable(Boolean.FALSE);           
         return "memberPage.xhtml?faces-redirect=true";
     }
     
@@ -561,14 +974,20 @@ public class MainController implements Serializable {
         if(getConfrimPasword().equals(getLoginMember().getPassword())){
             pb.updateMember(getLoginMember());
             setCheckPassword(Boolean.TRUE);
+            setEditPassword(Boolean.FALSE);
         }else{
             setCheckPassword(Boolean.FALSE);
         }   
         return "memberPage.xhtml?faces-redirect=true";
     }
     
-    public void saveAdminMemberDetail(){       
+    public void saveAdminMemberDetail(){
         pb.updateMember(getEditMember());
+    }
+    
+    public void saveInventoryDetails(){
+        pb.updateInventory(getChosenInventory());
+        setInventoryEdit(Boolean.FALSE);
     }
     
     public String cancelPasswordEdit(){
@@ -586,9 +1005,107 @@ public class MainController implements Serializable {
         setEditPassword(Boolean.TRUE);
     }
     
+    public void editInventoryDetails(){
+        setInventoryEdit(Boolean.TRUE);
+    }
+    
+    public void cancelEditInventory(){
+        setInventoryEdit(Boolean.FALSE);
+    }
+    
+    public String assignInventoryToMember(Inventory ivt){
+        setChosenInventory(ivt);
+        setInventoryAssignMember(Boolean.TRUE);
+        setReturnButton(Boolean.FALSE);
+        setInventoryEdit(Boolean.FALSE);
+        return "inventoryAssignReturn.xhtml?faces-redirect=true";
+    }
+    
+    public String returnInvetoryPage(Inventory inv){
+        setChosenInventory(inv);
+        setInventoryAssignMember(Boolean.FALSE);
+        setReturnButton(Boolean.TRUE);
+        setInventoryEdit(Boolean.FALSE);
+        return "inventoryAssignReturn.xhtml?faces-redirect=true";
+    }
+    
+    public void cancelAssignInvtToMember(){
+        setInventoryAssignMember(Boolean.FALSE);
+    }
+    
+    public void saveAssignToMember(){
+        getChosenInventory().setCurrentUser(getChosenMemberInv());
+        getChosenInventory().setStatus("unavailable");
+        pb.saveAssignInvtToMember(getChosenInventory(), getChosenMemberInv());
+        setInventoryAssignMember(Boolean.FALSE);
+        setReturnButton(Boolean.TRUE);
+        setInventoryEdit(Boolean.FALSE);
+    }
+    
+    public void returnEquipment(){
+        setInvtCurrentUser(getChosenInventory().getCurrentUser());
+        getChosenInventory().setCurrentUser(null);
+        getChosenInventory().setStatus("available");
+        pb.returnEquipment(getChosenInventory(), getInvtCurrentUser());
+        setInventoryAssignMember(Boolean.TRUE);
+        setReturnButton(Boolean.FALSE);
+        setInventoryEdit(Boolean.FALSE);      
+    }
+        
     public void selectedEditMember(RegisteredMember rm){
         setEditMember(rm);
         setSelectedMemberType(rm.getMemberType());
+        setMemberStatus(rm.getMemberStatus());
+    }
+    
+    public String selectedInventoryItem(Inventory inv){
+        setChosenInventory(inv);
+        setSelectedInvID(getChosenInventory().getId());
+        setInventoryStatus(getChosenInventory().getStatus());        
+        setInventoryEdit(Boolean.FALSE);
+        return "editInventoryPage.xhtml?faces-redirect=true";
+    }
+    
+    public String retrieveSearchResult(){
+        System.out.println("keyword: " + getInvtSearchKeyword());
+        setInventoryList(pb.getInventorySearch(getInvtSearchKeyword()));
+        System.out.println("result list: " + getInventoryList().size());
+        return "adminInventory.xhtml";
+    }
+    
+    public String resetSearchResult(){
+        getAllInventoris();
+        return "adminInventory.xhtml";
+    }
+    
+    public void displayEquipmentDetail(Inventory inv){
+        setChosenInventory(inv);
+        setSelectedInvID(getChosenInventory().getId());
+    }
+    
+    public void saveNewInventory(){
+        addNewInventory.setEquipmentName(getEquipementName());
+        addNewInventory.setEquipmentDescription(getEquipmentDescription());
+        addNewInventory.setMake(getMake());
+        addNewInventory.setModel(getModel());
+        addNewInventory.setSerialNumber(getSerialNumber());
+        addNewInventory.setAccessories(getAccessories());
+        addNewInventory.setPatReference(getPatReference());
+        addNewInventory.setBattery(getBattery());
+        addNewInventory.setStatus("available");
+        pb.saveNewInventory(getAddNewInventory());
+        getAllInventoris();
+        setEquipementName("");
+        setEquipmentDescription("");
+        setMake("");
+        setModel("");
+        setSerialNumber("");
+        setAccessories("");
+        setPatReference("");
+        setBattery("");
+        setSaveStatus(Boolean.TRUE);
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage("Inventory Equipment Saved"));
     }
     
     /** All of these code for email function are retrieved from mkyong.com    **/

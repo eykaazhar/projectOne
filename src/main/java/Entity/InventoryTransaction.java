@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 
 /**
@@ -23,7 +24,7 @@ public class InventoryTransaction implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     public Long getId() {
@@ -36,20 +37,23 @@ public class InventoryTransaction implements Serializable {
     
     @Basic
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
-    private Date dateIssued;
-    
+    private Date dateIssued;    
     @Basic
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date dateReturned;
     
     @Basic
-    private String givenBy;
-    
+    private String givenBy;    
     @Basic
-    private String receivedBy;
-    
+    private String receivedBy;    
     @Basic
     private String notes;
+    @OneToOne(targetEntity = RegisteredMember.class)
+    private RegisteredMember memberId;
+    @OneToOne(targetEntity = Inventory.class)
+    private Inventory inventoryId;
+    
+    
 
     public Date getDateIssued() {
         return dateIssued;
@@ -90,8 +94,24 @@ public class InventoryTransaction implements Serializable {
     public void setNotes(String notes) {
         this.notes = notes;
     }
-    
-    
+
+    public RegisteredMember getMemberId() {
+        return memberId;
+    }
+
+    public void setMemberId(RegisteredMember memberId) {
+        this.memberId = memberId;
+    }
+
+    public Inventory getInventoryId() {
+        return inventoryId;
+    }
+
+    public void setInventoryId(Inventory inventoryId) {
+        this.inventoryId = inventoryId;
+    }
+
+     
 
     @Override
     public int hashCode() {

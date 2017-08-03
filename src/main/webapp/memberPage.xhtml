@@ -40,10 +40,7 @@
                                     <a class="navbarItem" href="#">MY ACCOUNT</a>
                                 </li>
                                 <li>
-                                    <a class="navbarItem" href="#">INVENTORY</a>
-                                </li>
-                                <li>
-                                    <a class="navbarItem" href="#">MY ACCOUNT</a>
+                                    <a class="navbarItem" href="inventoryPage.xhtml">INVENTORY</a>
                                 </li>
                             </ul>
                         </div>  
@@ -77,44 +74,63 @@
                             <h2 class="font1">Member Information</h2>
                             <h:form id="loginForm">
                                 <h:panelGrid columns="3">                                    
-                                    <h:outputLabel class="outputLabelFont" value="Username"/>
-                                    <h:outputLabel class="outputLabelFont" value=" : "/>
-                                    <h:outputText class="bookingLabelFontM" value="#{mainController.loginMember.username}"/> 
+                                    <h:outputLabel class="outputLabelFont2" value="Username"/>
+                                    <h:outputLabel class="outputLabelFont2" value=" : "/>
+                                    <h:outputText class="outputTextFont" value="#{mainController.loginMember.username}"/>                                    
                              
-                                    <h:outputLabel class="outputLabelFont" value="First Name"/>
-                                    <h:outputLabel class="outputLabelFont" value=" : "/>
-                                    <h:outputText class="outputLabelFont" value="#{mainController.loginMember.firstName}" rendered="#{not mainController.memberEditable}"/>
+                                    <h:outputLabel class="outputLabelFont2" value="First Name"/>
+                                    <h:outputLabel class="outputLabelFont2" value=" : "/>
+                                    <h:outputText class="outputTextFont" value="#{mainController.loginMember.firstName}" rendered="#{not mainController.memberEditable}"/>
                                     <h:inputText class="inputTextStyleM" value="#{mainController.loginMember.firstName}" rendered="#{mainController.memberEditable}"/>
-
-                                    <h:outputLabel class="outputLabelFont" value="Last Name"/>
-                                    <h:outputLabel class="outputLabelFont" value=" : "/>
-                                    <h:outputText class="outputLabelFont" value="#{mainController.loginMember.lastName}" rendered="#{not mainController.memberEditable}"/>
+                                                                       
+                                    <h:outputLabel class="outputLabelFont2" value="Last Name"/>
+                                    <h:outputLabel class="outputLabelFont2" value=" : "/>
+                                    <h:outputText class="outputTextFont" value="#{mainController.loginMember.lastName}" rendered="#{not mainController.memberEditable}"/>
                                     <h:inputText class="inputTextStyleM" value="#{mainController.loginMember.lastName}" rendered="#{mainController.memberEditable}"/>
+                                                                        
+                                    <h:outputLabel class="outputLabelFont2" value="Email"/>
+                                    <h:outputLabel class="outputLabelFont2" value=" : "/>
+                                    <h:outputText class="outputTextFont" value="#{mainController.loginMember.email}" rendered="#{not mainController.memberEditable}"/>   
+                                    <h:inputText id="memberEmail" class="inputTextStyleM" validatorMessage="Please use your university email" value="#{mainController.loginMember.email}" rendered="#{mainController.memberEditable}">
+                                        <f:validateRegex pattern="([a-zA-Z0-9_]+@(myport\.ac\.uk)$)?"/>
+                                    </h:inputText>
+                                    <h:outputText value=""/>
+                                    <h:outputText value=""/>
+                                    <h:message for="memberEmail" class="outputTextFont" style="color:red" />
 
-                                    <h:outputLabel class="outputLabelFont" value="Email"/>
-                                    <h:outputLabel class="outputLabelFont" value=" : "/>
-                                    <h:outputText class="outputLabelFont" value="#{mainController.loginMember.email}" rendered="#{not mainController.memberEditable}"/>   
-                                    <h:inputText class="inputTextStyleM" value="#{mainController.loginMember.email}" rendered="#{mainController.memberEditable}"/>
+                                    <h:outputLabel class="outputLabelFont2" value="Contact Number"/>
+                                    <h:outputLabel class="outputLabelFont2" value=" : "/>
+                                    <h:outputText class="outputTextFont" value="#{mainController.loginMember.contactNumber}" rendered="#{not mainController.memberEditable}"/>
+                                    <h:inputText id="memberContact" class="inputTextStyleM" validatorMessage=" Please use either pattern: +447222555555   | +44 7222 555 555 | (0722) 5555555 #2222" value="#{mainController.loginMember.contactNumber}" rendered="#{mainController.memberEditable}">
+                                        <f:validateRegex pattern="(^(((\+44\s?\d{4}|\(?0\d{4}\)?)\s?\d{3}\s?\d{3})|((\+44\s?\d{3}|\(?0\d{3}\)?)\s?\d{3}\s?\d{4})|((\+44\s?\d{2}|\(?0\d{2}\)?)\s?\d{4}\s?\d{4}))(\s?\#(\d{4}|\d{3}))?$)?"/>
+                                    </h:inputText>
+                                    <h:outputText value=""/>
+                                    <h:outputText value=""/>
+                                    <h:message for="memberContact" class="outputTextFont" style="color:red" />
 
-                                    <h:outputLabel class="outputLabelFont" value="Contact Number"/>
-                                    <h:outputLabel class="outputLabelFont" value=" : "/>
-                                    <h:outputText class="outputLabelFont" value="#{mainController.loginMember.contactNumber}" rendered="#{not mainController.memberEditable}"/>
-                                    <h:inputText class="inputTextStyleM" value="#{mainController.loginMember.contactNumber}" rendered="#{mainController.memberEditable}"/>
-
-                                    <h:outputLabel class="outputLabelFont" value="Password"/>
-                                    <h:outputLabel class="outputLabelFont" value=" : "/>
-                                    <h:outputText class="outputLabelFont" value="#{mainController.loginMember.password}" rendered="#{not mainController.editPassword}"/>
-                                    <h:inputSecret class="inputTextStyleM" value="#{mainController.loginMember.password}" rendered="#{mainController.editPassword}"/>
+                                    <h:outputLabel class="outputLabelFont2" value="Password"/>
+                                    <h:outputLabel class="outputLabelFont2" value=" : "/>
+                                    <h:outputText class="outputTextFont" value="#{mainController.loginMember.password}" rendered="#{not mainController.editPassword}"/>
+                                    <h:inputSecret id="memberPassword" class="inputTextStyleM" validatorMessage="Must contain min eight characters, at least one uppercase letter, one lowercase letter and one number" value="#{mainController.loginMember.password}" rendered="#{mainController.editPassword}">
+                                        <f:validateRegex pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"/>
+                                    </h:inputSecret>
+                                    <h:outputText value=""/>
+                                    <h:outputText value=""/>
+                                    <h:message for="memberPassword" class="outputTextFont" style="color:red" />
                                     
-                                    <h:outputLabel class="outputLabelFont" value="Confirm Password" rendered="#{mainController.editPassword}"/>
-                                    <h:outputLabel class="outputLabelFont" value=" : " rendered="#{mainController.editPassword}"/> 
-                                    <h:inputSecret class="inputTextStyleM" value="#{mainController.confrimPasword}" rendered="#{mainController.editPassword}"/>
-                                </h:panelGrid> 
+                                    <h:outputLabel class="outputLabelFont2" value="Confirm Password" rendered="#{mainController.editPassword}"/>
+                                    <h:outputLabel class="outputLabelFont2" value=" : " rendered="#{mainController.editPassword}"/> 
+                                    <h:inputSecret id="memberConfirmPassword" class="inputTextStyleM" value="#{mainController.confrimPasword}" rendered="#{mainController.editPassword}"/>
+                                    <h:outputText value=""/>
+                                    <h:outputText value=""/>
+                                    <h:outputText class="outputTextFont" style="color: red" value="Passwords are not the same" rendered="#{not mainController.checkPassword}"/>
+                                </h:panelGrid>
+                                
                                 <h:commandButton class="buttonStyle" value="Cancel Edit" action="#{mainController.cancelMemberEdit()}" rendered="#{mainController.memberEditable}"></h:commandButton>
                                 <h:commandButton class="buttonStyle" value="Save" action="#{mainController.saveEditMemberDetail()}" rendered="#{mainController.memberEditable}"></h:commandButton>
                                 <h:commandButton class="buttonStyle" value="Save Password" action="#{mainController.saveMemberPassword()}" rendered="#{mainController.editPassword}"></h:commandButton>
                                 <h:commandButton class="buttonStyle" value="Cancel Edit Password" action="#{mainController.cancelPasswordEdit()}" rendered="#{mainController.editPassword}"></h:commandButton>
-                                <h:outputText style="color: red" value="Password is not the same" rendered="#{not mainController.checkPassword}"/>
+                                
                             </h:form>
                         </div>
                         <!--

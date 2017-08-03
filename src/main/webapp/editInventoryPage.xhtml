@@ -1,0 +1,137 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="Resources/Css/portCss.css" rel="stylesheet" type="text/css"/>
+    
+    <h:head>
+        <title>Port-Eco House</title>
+    </h:head>  
+    <h:body id="bookingPage">
+        <div class="container-fluid insideHeaderBackground">
+            <!--
+            <div class="logoBox">
+                <h:graphicImage class="logoImage" value="Resources/Images/logo-left.jpg"/>
+            </div> -->
+            <div class="boxes2">                
+                <div class="insideBox">
+                    <h1 class="webTitle">Port-Eco House</h1>
+                </div>                
+            </div>
+        </div>
+        <div class="container-fluid navBarColumn">
+             <nav class="navbar navbar-default navbarColour">
+                <div class="container">
+                    <div class="col-xs-12 secondNavColour">
+                        <div class="nav navbar-nav">
+                            <ul class="nav navbar-nav"> 
+                                <li>
+                                    <a class="navbarItem" href="mainPage.xhtml">Port-Eco Home</a>
+                                </li>
+                                <li>
+                                    <a class="navbarItem" href="adminPage.xhtml">ADMIN</a>
+                                </li>
+                                <li>
+                                    <a class="navbarItem" href="adminMember.xhtml">MEMBER</a>
+                                </li>
+                                <li>
+                                    <a class="navbarItem" href="#">FACILITIES</a>
+                                </li>
+                                <li class="navbarItemActive">
+                                    <a class="navbarItem" href="adminInventory.xhtml">INVENTORY</a>
+                                </li>
+                            </ul>
+                        </div>  
+                        <div class="nav navbar-nav navbar-right">
+                            <ul class="nav navbar-nav">  
+                                <li>
+                                    <a class="navbarItem" href="loginPage.xhtml">LOGOUT</a>
+                                </li>
+                            </ul>
+                        </div>            
+                    </div><!-- /.container-fluid -->            
+                </div>  
+            </nav>
+        </div>
+        <div id="bookingPanel" class="container-fluid bookingPanel">
+            <div class="container">
+                <div class="col-xs-12">
+                    <div class="inventoryPanel">
+                        <div class="row">
+                        <div class="col-xs-12" style="margin: 0 auto;margin-top:20px;">
+                            <h1 class="titleFont">Inventory Equipment Details</h1>
+                        </div>
+                        <div class="col-xs-12">
+                            <h:form>                                
+                                <div class="detailsForm" style="margin: 0 auto;">
+                                    <h:panelGrid columns="3">
+                                        <h:outputLabel class="formOutputLabel" value="Equipment Name"/>
+                                        <h:outputLabel class="formOutputLabel2" value=" : "/>
+                                        <h:outputText class="formOutputLabel2" value="#{mainController.chosenInventory.equipmentName}" rendered="#{not mainController.inventoryEdit}"/>
+                                        <h:inputText class="inputTextStyle" value="#{mainController.chosenInventory.equipmentName}" rendered="#{mainController.inventoryEdit}"/>
+
+                                        <h:outputLabel class="formOutputLabel" value="Make"/>
+                                        <h:outputLabel class="formOutputLabel2" value=" : "/>
+                                        <h:outputText class="formOutputLabel2" value="#{mainController.chosenInventory.make}" rendered="#{not mainController.inventoryEdit}"/>
+                                        <h:inputText class="inputTextStyle" value="#{mainController.chosenInventory.make}" rendered="#{mainController.inventoryEdit}"/>
+                                        
+                                        <h:outputLabel class="formOutputLabel" value="Model"/>
+                                        <h:outputLabel class="formOutputLabel2" value=" : "/>
+                                        <h:outputText class="formOutputLabel2" value="#{mainController.chosenInventory.model}" rendered="#{not mainController.inventoryEdit}"/>
+                                        <h:inputText class="inputTextStyle" value="#{mainController.chosenInventory.model}" rendered="#{mainController.inventoryEdit}"/>
+                                        
+                                        <h:outputLabel class="formOutputLabel" value="Serial Number"/>
+                                        <h:outputLabel class="formOutputLabel2" value=" : "/>
+                                        <h:outputText class="formOutputLabel2" value="#{mainController.chosenInventory.serialNumber}" rendered="#{not mainController.inventoryEdit}"/>
+                                        <h:inputText class="inputTextStyle" value="#{mainController.chosenInventory.serialNumber}" rendered="#{mainController.inventoryEdit}"/>
+                                        
+                                        <h:outputLabel class="formOutputLabel" value="Battery"/>
+                                        <h:outputLabel class="formOutputLabel2" value=" : "/>
+                                        <h:outputText class="formOutputLabel" value="#{mainController.chosenInventory.battery}" rendered="#{not mainController.inventoryEdit}"/>
+                                        <h:inputText class="inputTextStyle" value="#{mainController.chosenInventory.battery}" rendered="#{mainController.inventoryEdit}"/>
+                                        
+                                        <h:outputLabel class="formOutputLabel" value="Pat References"/>
+                                        <h:outputLabel class="formOutputLabel2" value=" : "/>
+                                        <h:outputText class="formOutputLabel2" value="#{mainController.chosenInventory.patReference}" rendered="#{not mainController.inventoryEdit}"/>
+                                        <h:inputText class="inputTextStyle" value="#{mainController.chosenInventory.patReference}" rendered="#{mainController.inventoryEdit}"/>
+                                        
+                                        <h:outputLabel class="formOutputLabel" value="Accessories"/>
+                                        <h:outputLabel class="formOutputLabel2" value=" : "/>
+                                        <h:outputText class="formOutputLabel2" value="#{mainController.chosenInventory.accessories}" rendered="#{not mainController.inventoryEdit}"/>
+                                        <h:inputText class="inputTextStyle" value="#{mainController.chosenInventory.accessories}" rendered="#{mainController.inventoryEdit}"/>
+                                        
+                                        <h:outputLabel class="formOutputLabel" value="Status"/>
+                                        <h:outputLabel class="formOutputLabel2" value=" : "/>
+                                        <h:outputText class="formOutputLabel2" value="#{mainController.chosenInventory.status}" rendered="#{not mainController.inventoryEdit}"/>
+                                        <h:selectOneMenu class="inputTextStyle" value="#{mainController.inventoryStatus}" onchange="submit()"
+                                                         valueChangeListener="#{mainController.changeInventoryStatus}" style="margin:10px" rendered="#{mainController.inventoryEdit}"> 
+                                            <f:selectItem itemValue="#{null}" itemLabel="--Select Status--"/>
+                                            <f:selectItem itemValue="available" itemLabel="Available"/>
+                                            <f:selectItem itemValue="unavailable" itemLabel="Unavailable"/>
+                                            <f:selectItem itemValue="obsolete" itemLabel="Obsolete"/>
+                                        </h:selectOneMenu>
+                                        
+                                    <h:commandButton class="buttonStyle" style="margin: 10px;" value="Save Equipment Detail" action="#{mainController.saveInventoryDetails()}" rendered="#{mainController.inventoryEdit}"></h:commandButton>
+                                    <h:outputLabel class="bookingLabelFont" value="" rendered="#{mainController.inventoryEdit}"/>
+                                    <h:commandButton class="buttonStyle" style="margin: 10px;" value="Cancel Equipment Detail" action="#{mainController.cancelEditInventory()}" rendered="#{mainController.inventoryEdit}"></h:commandButton>                                     
+                                    </h:panelGrid>                                    
+                                    <br/>
+                                    <h:commandButton class="buttonStyle" style="margin: 10px;" value="Edit Equipment Detail" action="#{mainController.editInventoryDetails()}" rendered="#{not mainController.inventoryEdit}"></h:commandButton>                       
+                                </div>                                
+                            </h:form>
+                        </div>
+                    </div>
+                    </div>                    
+                </div>
+            </div>
+        </div> 
+    </h:body>
+</html>
+
