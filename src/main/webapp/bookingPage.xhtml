@@ -10,41 +10,25 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link href="Resources/Css/portCss.css" rel="stylesheet" type="text/css"/>
-    <!--
+    
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js" />
     <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" />
-    -->
-    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>  
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>  
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script> 
-
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet"/>
-    
-    <!--
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
-    
-    <script src="http://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/a549aa8780dbda16f6cff545aeabc3d71073911e/src/js/bootstrap-datetimepicker.js"></script>
-    <link href="http://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/a549aa8780dbda16f6cff545aeabc3d71073911e/build/css/bootstrap-datetimepicker.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.min.css" />
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker3.min.css" />
-
-    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstrap-datepicker.min.js"></script>
-    -->
-    
-    
-    <link href="Resources/Css/portCss.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
     
     <h:head>
         <title>Port-Eco House</title>
-    </h:head>
-    <script type="text/javascript">
-       $(function() {
-               $("#startdate").datepicker({ dateFormat: "dd-mm-yy" }).val();
-               $("#enddate").datepicker({ dateFormat: "dd-mm-yy" }).val();
-       });
-
-   </script>  
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $( ".datepicker" ).datepicker({
+                        dateFormat: 'd-M-yy',
+                        changeMonth: true,
+                        changeYear: true,
+                        yearRange: "2017:2027",
+                        minDate: 0
+                });
+            });
+        </script>
+    </h:head>    
     <h:body id="bookingPage">
         <div class="container-fluid headerBackground">
             <!--
@@ -78,7 +62,8 @@
         <div id="bookingPanel" class="container-fluid bookingPanel">
             <div class="container">
                 <div class="col-xs-12">
-                    <div class="row">
+                    <div class="inventoryPanel">
+                         <div class="row">
                         <div class="col-xs-12" style="margin: 0 auto;margin-top:20px;">
                             <h1 class="titleFont">Facility Booking Form</h1>
                         </div>
@@ -98,51 +83,48 @@
                                         
                                         <h:outputLabel class="bookingLabelFont" value=""/>
                                         <h:outputLabel class="bookingLabelFont" value=""/>
-                                        <h:outputLabel class="bookingLabelFont" value=""/>
+                                        <h:outputLabel class="inputTextStyle" value="" rendered="#{mainController.checkDate and mainController.checkDateFormat}"/>
+                                        <h:outputText class="loginOption" style="color:red;text-align: center;" value="*Date Cannot be Empty or Please Check Your Selected Date Format" rendered="#{not mainController.checkDateFormat}"/>
+                                        <h:outputText class="loginOption" style="color:red;text-align: center;" value="*Date(Until) cannot be before Date(From)" rendered="#{not mainController.checkDate}"/>
                                         
-                                        <h:outputLabel class="bookingLabelFont" value="Booking From"/>
+                                        <h:outputLabel class="bookingLabelFont" value="Date(From)"/>
                                         <h:outputLabel class="bookingLabelFont" value=" : "/>
-                                        <div class="form-group" style="margin:10px">
-                                            <div class="input-group date" data-provide="datepicker" id="dateFrom">
-                                                <input id="dateStart" type='text' class="form-control" value=""/>
-                                                <span class="input-group-addon">
-                                                    <span class="glyphicon glyphicon-calendar"></span>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <h:outputLabel class="bookingLabelFont" value="Booking Until"/>
+                                        <h:inputText value="#{mainController.tempDateStart}" styleClass="form-control datepicker inputDateStyle"/>
+                                        
+                                        <h:outputLabel class="bookingLabelFont" value="Date(Until)"/>
                                         <h:outputLabel class="bookingLabelFont" value=" : "/>
-                                        <div class="form-group" style="margin:10px">
-                                            <div class="input-group date" data-provide="datepicker" id="dateUntil">
-                                                <input type='text' class="form-control" value=""/>
-                                                <span class="input-group-addon">
-                                                    <span class="glyphicon glyphicon-calendar"></span>
-                                                </span>
-                                            </div>
-                                        </div>                               
-                                    </h:panelGrid>
+                                        <h:inputText class="inputTextStyle" value="#{mainController.tempDateEnd}" styleClass="form-control datepicker inputDateStyle" />
+                                                                   
+                                    </h:panelGrid>                                   
+                                    
                                 </div>
                                 <div class="detailsForm" style="margin: 0 auto;">
                                     <h:panelGrid columns="3">
                                         <h:outputLabel class="bookingLabelFont" value="Student/Staff Id"/>
                                         <h:outputLabel class="bookingLabelFont" value=" : "/>
-                                        <h:inputText class="inputTextStyle" value="#{mainController.userId}"/>
+                                        <h:inputText class="inputTextStyle" value="#{mainController.userId}"/>                                       
 
                                         <h:outputLabel class="bookingLabelFont" value="First Name"/>
                                         <h:outputLabel class="bookingLabelFont" value=" : "/>
-                                        <h:inputText class="inputTextStyle" value="#{mainController.firstName}"/>
+                                        <h:inputText class="inputTextStyle" value="#{mainController.firstName}"/>                                        
 
                                         <h:outputLabel class="bookingLabelFont" value="Last Name"/>
                                         <h:outputLabel class="bookingLabelFont" value=" : "/>
-                                        <h:inputText class="inputTextStyle" value="#{mainController.lastName}"/>
+                                        <h:inputText class="inputTextStyle" value="#{mainController.lastName}"/>                                        
 
                                         <h:outputLabel class="bookingLabelFont" value="Faculty"/>
                                         <h:outputLabel class="bookingLabelFont" value=" : "/>
-                                        <h:inputText class="inputTextStyle" value="#{mainController.firstName}"/>
+                                        <h:inputText class="inputTextStyle" value="#{mainController.faculty}"/>                                        
 
-                                        <h:outputLabel class="bookingLabelFont" value="Email Address"/>
+                                        <h:outputLabel id="emailInput" class="bookingLabelFont" value="Email Address"/>
                                         <h:outputLabel class="bookingLabelFont" value=" : "/>
-                                        <h:inputText class="inputTextStyle" value="#{mainController.userEmail}"/>
+                                        <h:inputText class="inputTextStyle" validatorMessage="Please use your university email" value="#{mainController.userEmail}">
+                                            <f:validateRegex pattern="(([a-zA-Z0-9_]+@(myport\.ac\.uk)$)?)|(([a-zA-Z0-9_]+@(port\.ac\.uk)$)?)"/>
+                                        </h:inputText>
+                                        
+                                        <h:outputLabel class="bookingLabelFont" value=""/>
+                                        <h:outputLabel class="bookingLabelFont" value=""/>
+                                        <h:message for="emailInput" class="bookingLabelFont" style="color:red" />
 
                                         <h:outputLabel class="bookingLabelFont" value="Purpose"/>
                                         <h:outputLabel class="bookingLabelFont" value=" : "/>
@@ -151,7 +133,7 @@
                                         <h:outputLabel class="bookingLabelFont" value="Message"/>
                                         <h:outputLabel class="bookingLabelFont" value=" : "/>
                                         <h:inputTextarea class="inputTextStyle" value="#{mainController.message}" cols="40" rows="5"/>
-                                        
+                                                                                
                                         <h:outputLabel class="bookingLabelFont" value=""/>
                                         <h:outputLabel class="bookingLabelFont" value=""/>
                                         <h:commandButton class="buttonStyle" style="margin: 10px;" value="Book" action="#{mainController.saveBooking()}"></h:commandButton>
@@ -159,6 +141,7 @@
                                 </div>
                             </h:form>
                         </div>
+                    </div>
                     </div>
                 </div>
             </div>

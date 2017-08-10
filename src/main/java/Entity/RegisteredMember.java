@@ -24,8 +24,8 @@ import javax.persistence.OneToMany;
 @Entity
 @NamedQueries({
     @NamedQuery(name="RegisteredMember.FindUser", query="SELECT r FROM RegisteredMember r WHERE r.username = :userName AND r.password = :password"),
-    @NamedQuery(name="RegisteredMember.AllMember", query="SELECT m FROM RegisteredMember m WHERE m.memberType = 'member'"),
-    @NamedQuery(name="RegisteredMember.AllAdmin", query="SELECT a FROM RegisteredMember a WHERE a.memberType = 'admin'"),
+    @NamedQuery(name="RegisteredMember.AllMember", query="SELECT m FROM RegisteredMember m WHERE m.memberType = 'Member'"),
+    @NamedQuery(name="RegisteredMember.AllAdmin", query="SELECT a FROM RegisteredMember a WHERE a.memberType = 'Admin'"),
     @NamedQuery(name="RegisteredMember.FindUserByID", query="SELECT a FROM RegisteredMember a WHERE a.id = :memberID"),
     @NamedQuery(name="RegisteredMember.UnactiveUser", query="UPDATE RegisteredMember r SET r.memberStatus = :newStatus WHERE r.id = :memberID")
 })

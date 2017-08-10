@@ -12,8 +12,12 @@ import Session.RegisteredMemberFacade;
 import Entity.Booking;
 import Entity.Facility;
 import Entity.Inventory;
+import Entity.InventoryRequest;
+import Entity.InventoryTransaction;
 import Entity.RegisteredMember;
 import Session.InventoryFacade;
+import Session.InventoryRequestFacade;
+import Session.InventoryTransactionFacade;
 import java.util.List;
 import javax.ejb.EJB;
 
@@ -32,6 +36,11 @@ public class PortEcoBusiness {
     private BookingFacade bf;
     @EJB
     private RegisteredMemberFacade rmf;
+    @EJB
+    private InventoryRequestFacade irf;
+    @EJB
+    private InventoryTransactionFacade itf;
+   
     
     //-- get all facilities from database --//
     public List<Facility> getAllFacilities(){
@@ -110,18 +119,52 @@ public class PortEcoBusiness {
     }
     //-- save new inventory into database --//
     public void saveNewInventory(Inventory inv){
-        invf.create(inv);
-        
+        invf.create(inv);        
     }
     //-- get all available inventory --//
     public List<Inventory> getAllAvailableInventory(){
         return invf.getAvailableInventory();
     }
-    
+   //-- return borrowed inventory equipment --//
     public void returnEquipment(Inventory i, RegisteredMember r){
         invf.edit(i);
         r = rmf.edit2(r);
         r.getInventoryList().remove(i);
+    }
+    // save new inventory request into database --//
+    public void saveNewInventoryRequest(InventoryRequest ir){
+        irf.create(ir);
+    }
+    //-- get all inventory request from database --//
+    public List<InventoryRequest> getAllRequestList(){
+        return irf.findAll();
+    }
+    public void saveInventoryRequestChanges(InventoryRequest ir){
+        irf.edit(ir);
+    }
+    public void saveNewTransaction(InventoryTransaction it){
+        itf.create(it);
+    }
+    public List<InventoryTransaction> getChosenInvtTransaction(Long invtID){
+        return itf.getChosenInvtTransaction(invtID);
+    }
+    public List<InventoryTransaction> getMemberTransaction(Long memberID){
+        return itf.getMemberTransaction(memberID);
+    }
+    public List<InventoryRequest> getMemberRequests(Long memberID){
+        return irf.getMemberRequests(memberID);
+    }
+    public List<Booking> getAllBookingList(){
+        return bf.findAll();
+    }
+    public void updateBooking(Booking bb){
+        bf.edit(bb);
+    }
+    public List<Inventory> getMemberEquipment(Long memberID){
+        return invf.getMemberInventory(memberID);
+    }
+    public List<InventoryTransaction> getChosenRequestTransaction(Long reqID){
+        return itf.getChosenRequestTransaction(reqID);
     }
     
 }

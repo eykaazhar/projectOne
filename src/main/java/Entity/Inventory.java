@@ -23,7 +23,8 @@ import javax.persistence.OneToOne;
 @NamedQueries({
     @NamedQuery(name="Inventory.GetChosenInventory", query="SELECT i FROM Inventory i WHERE i.id = :invID"),
     @NamedQuery(name="Inventory.Search", query="SELECT i FROM Inventory i WHERE UPPER(i.equipmentName) LIKE UPPER(:searchKeyword) escape '\\'"),
-    @NamedQuery(name="Inventory.GetAvailableInventory", query="SELECT i FROM Inventory i WHERE i.status = 'available'")
+    @NamedQuery(name="Inventory.GetAvailableInventory", query="SELECT i FROM Inventory i WHERE i.status = 'Available'"),
+    @NamedQuery(name="Inventory.GetMemberInventory", query="SELECT i FROM Inventory i WHERE i.currentUser.id = :memberID")
 })
 public class Inventory implements Serializable {
 

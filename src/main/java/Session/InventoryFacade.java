@@ -47,4 +47,10 @@ public class InventoryFacade extends AbstractFacade<Inventory> {
         TypedQuery<Inventory> Query = getEntityManager().createNamedQuery("Inventory.GetAvailableInventory", Inventory.class);
         return Query.getResultList();
     }
+    
+    public List<Inventory> getMemberInventory(Long memberID){
+        TypedQuery<Inventory> Query=getEntityManager().createNamedQuery("Inventory.GetMemberInventory", Inventory.class);
+        Query.setParameter("memberID", memberID);
+        return Query.getResultList();
+    }
 }

@@ -1,0 +1,324 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="Resources/Css/portCss.css" rel="stylesheet" type="text/css"/>
+    
+    <h:head>
+        <title>Port-Eco House</title>
+    </h:head>
+    <h:body id="memberPage">
+        <div class="container-fluid insideHeaderBackground">
+            <!--
+            <div class="logoBox">
+                <h:graphicImage class="logoImage" value="Resources/Images/logo-left.jpg"/>
+            </div> -->
+            <div class="boxes2">                
+                <div class="insideBox">
+                    <h1 class="webTitle">Port-Eco House</h1>
+                </div>                
+            </div>
+        </div>
+        <div class="container-fluid navBarColumn">
+             <nav class="navbar navbar-default navbarColour">
+                <div class="container">
+                    <div class="col-xs-12 secondNavColour">
+                        <div class="nav navbar-nav">
+                            <ul class="nav navbar-nav"> 
+                                <li>
+                                    <a class="navbarItem" href="mainPage.xhtml">Port-Eco Home</a>
+                                </li>
+                                <li>
+                                    <a class="navbarItem" href="adminPage.xhtml">ADMIN</a>
+                                </li>
+                                <li class="navbarItemActive">
+                                    <a class="navbarItem" href="adminMember.xhtml">MEMBER</a>
+                                </li>
+                                <li>
+                                    <a class="navbarItem" href="#">FACILITIES</a>
+                                </li>
+                                <li>
+                                    <a class="navbarItem" href="adminInventory.xhtml">INVENTORY</a>
+                                </li>
+                            </ul>
+                        </div>  
+                        <div class="nav navbar-nav navbar-right">
+                            <ul class="nav navbar-nav">  
+                                <li>
+                                    <a class="navbarItem" href="loginPage.xhtml">LOGOUT</a>
+                                </li>
+                            </ul>
+                        </div>            
+                    </div><!-- /.container-fluid -->            
+                </div>  
+            </nav>
+        </div>
+        <div class="container-fluid">
+            <div class="container">                
+                <div class="col-xs-12" style="margin-top: 20px;">
+                    <div class="col-xs-6">
+                        <div>
+                            <h2 class="font1">Member Details</h2>
+                            <div class="memberInfoPanel" style="max-height: 400px;">
+                                <h:form id="memberForm" rendered="#{not mainController.memberEditable}">
+                                    <h:panelGrid columns="3">                                    
+                                        <h:outputLabel class="formOutputLabel" value="Username"/>
+                                        <h:outputLabel class="formOutputLabel2" value=" : "/>
+                                        <h:outputText class="formOutputLabel2" value="#{mainController.editMember.username}"/>                        
+
+                                        <h:outputLabel class="formOutputLabel" value="First Name"/>
+                                        <h:outputLabel class="formOutputLabel2" value=" : "/>
+                                        <h:outputText class="formOutputLabel2" value="#{mainController.editMember.firstName}"/> 
+
+                                        <h:outputLabel class="formOutputLabel" value="Last Name"/>
+                                        <h:outputLabel class="formOutputLabel2" value=" : "/>
+                                        <h:outputText class="formOutputLabel2" value="#{mainController.editMember.lastName}"/> 
+
+                                        <h:outputLabel class="formOutputLabel" value="Email"/>
+                                        <h:outputLabel class="formOutputLabel2" value=" : "/>  
+                                        <h:outputText class="formOutputLabel2" value="#{mainController.editMember.email}"/> 
+
+                                        <h:outputLabel class="formOutputLabel" value="Contact Number"/>
+                                        <h:outputLabel class="formOutputLabel2" value=" : "/>
+                                        <h:outputText class="formOutputLabel2" value="#{mainController.editMember.contactNumber}"/> 
+
+                                        <h:outputLabel class="formOutputLabel" value="Member Type"/>
+                                        <h:outputLabel class="formOutputLabel2" value=" : "/>
+                                        <h:outputText class="formOutputLabel2" value="#{mainController.editMember.memberType}"/>
+
+                                        <h:outputLabel class="formOutputLabel" value="Member Status"/>
+                                        <h:outputLabel class="formOutputLabel2" value=" : "/>
+                                        <h:outputText class="formOutputLabel2" value="#{mainController.editMember.memberStatus}"/>
+                                    </h:panelGrid> 
+                                    <h:commandButton class="buttonStyle" value="Edit Member Detail" action="#{mainController.editMemberDetail()}"></h:commandButton> 
+                                </h:form>
+                                <h:form id="editMemberForm" rendered="#{mainController.memberEditable}">
+                                    <h:panelGrid columns="3">                                    
+                                        <h:outputLabel class="formOutputLabel" value="Username"/>
+                                        <h:outputLabel class="formOutputLabel2" value=" : "/>
+                                        <h:outputText class="formOutputLabel2" value="#{mainController.editMember.username}"/>                        
+
+                                        <h:outputLabel class="formOutputLabel" value="First Name"/>
+                                        <h:outputLabel class="formOutputLabel2" value=" : "/>
+                                        <h:outputText class="formOutputLabel2" value="#{mainController.editMember.firstName}"/> 
+
+                                        <h:outputLabel class="formOutputLabel" value="Last Name"/>
+                                        <h:outputLabel class="formOutputLabel2" value=" : "/>
+                                        <h:outputText class="formOutputLabel2" value="#{mainController.editMember.lastName}"/> 
+
+                                        <h:outputLabel class="formOutputLabel" value="Email"/>
+                                        <h:outputLabel class="formOutputLabel2" value=" : "/>  
+                                        <h:outputText class="formOutputLabel2" value="#{mainController.editMember.email}"/> 
+
+                                        <h:outputLabel class="formOutputLabel" value="Contact Number"/>
+                                        <h:outputLabel class="formOutputLabel2" value=" : "/>
+                                        <h:outputText class="formOutputLabel2" value="#{mainController.editMember.contactNumber}"/>  
+
+                                        <h:outputLabel class="outputLabelFont" value="Member Type"/>
+                                        <h:outputLabel class="outputTextFont" value=" : "/>
+                                        <h:selectOneMenu class="inputTextStyleM" value="#{mainController.selectedMemberType}" onchange="submit()"
+                                                        valueChangeListener="#{mainController.changeMemberType}" style="margin:10px"> 
+                                            <f:selectItem itemValue="#{null}" itemLabel="--Select Type--"/>
+                                            <f:selectItem itemValue="Member" itemLabel="Member"/>
+                                            <f:selectItem itemValue="Admin" itemLabel="Admin"/>                                                   
+                                        </h:selectOneMenu>
+
+                                        <h:outputLabel class="outputLabelFont" value="Member Status"/>
+                                        <h:outputLabel class="outputTextFont" value=" : "/>
+                                        <h:selectOneMenu class="inputTextStyleM" value="#{mainController.memberStatus}" onchange="submit()"
+                                                        valueChangeListener="#{mainController.changeMemberStatus}" style="margin:10px"> 
+                                            <f:selectItem itemValue="#{null}" itemLabel="--Select Status--"/>
+                                            <f:selectItem itemValue="Active" itemLabel="Active"/>
+                                            <f:selectItem itemValue="Unactive" itemLabel="Unactive"/>                                                   
+                                        </h:selectOneMenu>
+                                    </h:panelGrid> 
+                                    <h:commandButton class="buttonStyle" value="Save" action="#{mainController.saveAdminMemberDetail()}"></h:commandButton>
+                                    <h:commandButton class="buttonStyle" value="Cancel" action="#{mainController.cancelEditMember()}"></h:commandButton>
+                                    
+                                </h:form>
+                            </div>
+                        </div>               
+                    </div>                    
+                    <div class="col-xs-6">
+                        <h2 class="font1">Inventory Equipment in Hand</h2>
+                        <div class="memberInfoPanel">
+                            <div style="margin: 0 auto;max-height: 400px;overflow: auto;" >
+                                <h:form id="invList" style="margin: 10px;" target="_blank" rendered="#{mainController.memberInventoryList.size() != 0}">
+                                    <h:dataTable border="1" value="#{mainController.memberInventoryList}" var="inv" styleClass="mainTable" headerClass="memberTableHeader" rowClasses="memberTableRowEven,memberTableRowOdd">                    
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText class="tableItemHeader" value="Equipment Name" />
+                                            </f:facet>
+                                            <h:outputText class="tableItem" value="#{inv.equipmentName}"/>
+                                        </h:column>
+                                        <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText class="tableItem" value="Accessories" />
+                                        </f:facet>
+                                        <h:outputText class="tableItem" value="#{inv.accessories}"/>
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText class="tableItem" value="Battery" />
+                                            </f:facet>
+                                            <h:outputText class="tableItem" value="#{inv.battery}"/>
+                                        </h:column>                                                  
+                                    </h:dataTable>                    
+                                </h:form>  
+                            </div>
+                            <h:outputText class="outputLabelFont2" value="No current inventory equipment in posess" rendered="#{mainController.memberInventoryList.size() == 0}"></h:outputText>
+                        </div>                                  
+                    </div>                    
+                </div>
+                <div class="col-xs-12">
+                    <h2 class="font1">Inventory Equipment Requests</h2>
+                    <div class="memberInfoPanel">
+                        <div style="margin: 0 auto;max-height: 400px;overflow: auto;">
+                            <h:form id="requestList" style="margin: 10px;" target="_blank" rendered="#{mainController.requestList.size() != 0}">
+                                <h:dataTable border="1" value="#{mainController.requestList}" var="req" styleClass="mainTable" headerClass="memberTableHeader" rowClasses="tableRowEven,tableRowOdd">                    
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText class="tableItemHeader" value="Date Issued" />
+                                        </f:facet>
+                                        <h:outputText class="tableItem" value="#{req.dateIssued}">
+                                            <f:convertDateTime pattern="dd-MM-yyyy"/>
+                                        </h:outputText>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText class="tableItemHeader" value="Equipment Name" />
+                                        </f:facet>
+                                       <h:outputText class="tableItem" value="#{req.firstInventoryId.equipmentName}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText class="tableItemHeader" value="Equipment Name (Second)" />
+                                        </f:facet>
+                                       <h:outputText class="tableItem" value="#{req.secondInventoryId.equipmentName}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText class="tableItemHeader" value="Equipment Name (Third)" />
+                                        </f:facet>
+                                       <h:outputText class="tableItem" value="#{req.thirdInventoryId.equipmentName}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText class="tableItemHeader" value="Status" />
+                                        </f:facet>
+                                        <h:outputText class="tableItem" value="#{req.status}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText class="tableItemHeader" value="Action" />
+                                        </f:facet>
+                                        <div class="tableItem">
+                                            <h:commandButton value="Accept" action="#{mainController.invetoryRequestWithAction(req)}" rendered="#{req.status == 'Waiting'}"></h:commandButton> 
+                                            <h:commandButton value="Return" action="#{mainController.invetoryRequestWithAction(req)}" rendered="#{req.status == 'Accepted'}"></h:commandButton> 
+                                        </div>                              
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText class="tableItemHeader" value="Detail" />
+                                        </f:facet>
+                                        <div class="tableItem">
+                                            <h:commandButton value="View" action="#{mainController.goToInventoryRequestDetailPage(req)}" ></h:commandButton>
+                                        </div>                               
+                                    </h:column>
+                                </h:dataTable>                  
+                            </h:form>  
+                        </div>
+                        <h:outputText class="outputLabelFont2" value="No inventory equipment request has been made" rendered="#{mainController.requestList.size() == 0}"></h:outputText>
+                    </div>              
+                </div>
+                <div class="col-xs-12">                    
+                    <h2 class="font1">Inventory Equipment Transaction Record</h2>
+                    <div class="memberInfoPanel">
+                        <div style="margin: 0 auto;max-height: 400px;overflow: auto;">
+                            <h:form id="trasactionList" style="margin: 10px;" target="_blank" rendered="#{mainController.transactionList.size() != 0}">
+                                <h:dataTable border="1" value="#{mainController.transactionList}" var="trans" styleClass="mainTable" headerClass="memberTableHeader" rowClasses="tableRowEven,tableRowOdd">                    
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText class="tableTransactionItem" value="Date Issued" />
+                                        </f:facet>
+                                        <h:outputText class="tableItem" value="#{trans.dateIssued}">
+                                            <f:convertDateTime type="date" pattern="dd-MM-yyyy"/>
+                                        </h:outputText>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText class="tableTransactionItem" value="Transaction Type" />
+                                        </f:facet>
+                                        <h:outputText class="tableItem" value="#{trans.transactionFor}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText class="tableTransactionItem" value="Inventory Name" />
+                                        </f:facet>
+                                        <h:outputText class="tableItem" value="#{trans.inventoryId.equipmentName}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText class="tableTransactionItem" value="Assign By" />
+                                        </f:facet>
+                                        <h:outputText class="tableItem" value="#{trans.assigner}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText class="tableTransactionItem" value="Action" />
+                                        </f:facet>
+                                        <h:outputText class="tableTransactionItem" value="#{trans.transactionPurpose}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText class="tableTransactionItem" value="Given Out By" />
+                                        </f:facet>
+                                        <h:outputText class="tableTransactionItem" value="#{trans.givenBy}"/>
+                                    </h:column>                                        
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText class="tableTransactionItem" value="Returned By" />
+                                        </f:facet>
+                                        <h:outputText class="tableTransactionItem" value="#{trans.receivedBy}"/>
+                                    </h:column>                                        
+                                </h:dataTable>                  
+                            </h:form>  
+                        </div>
+                        <h:outputText class="outputLabelFont2" value="No transaction record" rendered="#{mainController.transactionList.size() == 0}"></h:outputText>
+                    </div>                                           
+                </div>
+            </div>
+        </div>        
+    </h:body>
+    <script type="text/javascript">
+        function displayMemberTransaction(){
+            $("#transactionPanel").show();
+            $("#showButton").hide();
+            $("#hideButton").show();
+        }
+        function hideMemberTransaction(){
+            $("#transactionPanel").hide();
+             $("#showButton").show();
+            $("#hideButton").hide();
+        }
+        function displayMemberRequest(){
+            $("#requestPanel").show();
+            $("#showRequestButton").hide();
+            $("#hideRequestButton").show();
+        }
+        function hideMemberRequest(){
+            $("#requestPanel").hide();
+            $("#showRequestButton").show();
+            $("#hideRequestButton").hide();
+        }
+        
+    </script>
+</html>
+

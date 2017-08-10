@@ -12,6 +12,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 
@@ -20,6 +22,11 @@ import javax.persistence.Temporal;
  * @author ASUS
  */
 @Entity
+@NamedQueries({
+    @NamedQuery(name="InventoryRequest.GetMemberRequest", query="SELECT i FROM InventoryRequest i WHERE i.memberId.id = :memberID"),
+    @NamedQuery(name="InventoryRequest.GetAcceptedRequest", query="SELECT i FROM InventoryRequest i WHERE i.status = 'Accepted'")
+})
+
 public class InventoryRequest implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -28,7 +35,11 @@ public class InventoryRequest implements Serializable {
     private Long id;
 
     @OneToOne(targetEntity = Inventory.class)
-    private Inventory inventoryId;
+    private Inventory firstInventoryId;
+    @OneToOne(targetEntity = Inventory.class)
+    private Inventory secondInventoryId;
+    @OneToOne(targetEntity = Inventory.class)
+    private Inventory thirdInventoryId;
     @OneToOne(targetEntity = RegisteredMember.class)
     private RegisteredMember memberId;
     
@@ -37,13 +48,20 @@ public class InventoryRequest implements Serializable {
     private Date dateIssued;    
     @Basic
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
-    private Date dateStart;    
+    private Date dateBorrowed;    
     @Basic
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
-    private Date dateEnd;
-    
+    private Date dateReturned;    
     @Basic
-    private String status; 
+    private String status;
+    @Basic 
+    private Boolean memberAgreement;
+    @Basic
+    private String givenOut;
+    @Basic
+    private String returnedBy;
+    @Basic
+    private String remarks;
     
     public Long getId() {
         return id;
@@ -53,12 +71,28 @@ public class InventoryRequest implements Serializable {
         this.id = id;
     }
 
-    public Inventory getInventoryId() {
-        return inventoryId;
+    public Inventory getFirstInventoryId() {
+        return firstInventoryId;
     }
 
-    public void setInventoryId(Inventory inventoryId) {
-        this.inventoryId = inventoryId;
+    public void setFirstInventoryId(Inventory firstInventoryId) {
+        this.firstInventoryId = firstInventoryId;
+    }
+
+    public Inventory getSecondInventoryId() {
+        return secondInventoryId;
+    }
+
+    public void setSecondInventoryId(Inventory secondInventoryId) {
+        this.secondInventoryId = secondInventoryId;
+    }
+
+    public Inventory getThirdInventoryId() {
+        return thirdInventoryId;
+    }
+
+    public void setThirdInventoryId(Inventory thirdInventoryId) {
+        this.thirdInventoryId = thirdInventoryId;
     }
 
     public RegisteredMember getMemberId() {
@@ -77,20 +111,20 @@ public class InventoryRequest implements Serializable {
         this.dateIssued = dateIssued;
     }
 
-    public Date getDateStart() {
-        return dateStart;
+    public Date getDateBorrowed() {
+        return dateBorrowed;
     }
 
-    public void setDateStart(Date dateStart) {
-        this.dateStart = dateStart;
+    public void setDateBorrowed(Date dateBorrowed) {
+        this.dateBorrowed = dateBorrowed;
     }
 
-    public Date getDateEnd() {
-        return dateEnd;
+    public Date getDateReturned() {
+        return dateReturned;
     }
 
-    public void setDateEnd(Date dateEnd) {
-        this.dateEnd = dateEnd;
+    public void setDateReturned(Date dateReturned) {
+        this.dateReturned = dateReturned;
     }
 
     public String getStatus() {
@@ -99,6 +133,38 @@ public class InventoryRequest implements Serializable {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Boolean getMemberAgreement() {
+        return memberAgreement;
+    }
+
+    public void setMemberAgreement(Boolean memberAgreement) {
+        this.memberAgreement = memberAgreement;
+    }
+
+    public String getGivenOut() {
+        return givenOut;
+    }
+
+    public void setGivenOut(String givenOut) {
+        this.givenOut = givenOut;
+    }
+
+    public String getReturnedBy() {
+        return returnedBy;
+    }
+
+    public void setReturnedBy(String returnedBy) {
+        this.returnedBy = returnedBy;
+    }
+
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
     }
 
     

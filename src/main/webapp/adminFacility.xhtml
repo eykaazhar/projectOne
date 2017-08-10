@@ -1,0 +1,182 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="Resources/Css/portCss.css" rel="stylesheet" type="text/css"/>
+    
+    <h:head>
+        <title>Port-Eco House</title>
+    </h:head>
+    <h:body>
+        <div class="container-fluid insideHeaderBackground">
+            <!--
+            <div class="logoBox">
+                <h:graphicImage class="logoImage" value="Resources/Images/logo-left.jpg"/>
+            </div> -->
+            <div class="boxes2">                
+                <div class="insideBox">
+                    <h1 class="webTitle">Port-Eco House</h1>
+                </div>                
+            </div>
+        </div>
+        <div class="container-fluid navBarColumn">
+             <nav class="navbar navbar-default navbarColour">
+                <div class="container">
+                    <div class="col-xs-12 secondNavColour">
+                        <div class="nav navbar-nav">
+                            <ul class="nav navbar-nav"> 
+                                <li>
+                                    <a class="navbarItem" href="mainPage.xhtml">Port-Eco Home</a>
+                                </li>
+                                <li>
+                                    <a class="navbarItem" href="adminPage.xhtml">ADMIN</a>
+                                </li>
+                                <li>
+                                    <a class="navbarItem" href="adminMember.xhtml">MEMBER</a>
+                                </li>
+                                <li class="navbarItemActive">
+                                    <a class="navbarItem" href="adminFacility.xhtml">FACILITIES</a>
+                                </li>
+                                <li>
+                                    <a class="navbarItem" href="adminInventory.xhtml">INVENTORY</a>
+                                </li>
+                            </ul>
+                        </div>  
+                        <div class="nav navbar-nav navbar-right">
+                            <ul class="nav navbar-nav">  
+                                <li>
+                                    <a class="navbarItem" href="loginPage.xhtml">LOGOUT</a>
+                                </li>
+                            </ul>
+                        </div>            
+                    </div><!-- /.container-fluid -->            
+                </div>  
+            </nav>
+        </div>
+        <div class="container-fluid adminMemberPanel">
+            <div class="container">
+                <div class="col-xs-12">
+                    <h1 class="webTitle2"> Member Page</h1>
+                </div>
+                <div class="col-xs-12" style="padding-bottom: 10px;">
+                    <div class="col-xs-4">
+                        <h2 class="font1">Quick Information</h2>                       
+                        <div class="informationBox">
+                            <p class="infoFont">Total Booking <span class="badge badgeStyle">#{mainController.totalInvetory}</span></p>                                
+                        </div>                          
+                    </div>
+                    <div class="col-xs-6">
+                        <h2 class="font1">Add New Facility</h2>
+                        <div class="memberInfoPanel">                            
+                            <h:form id="loginForm">
+                                <h:panelGrid columns="3">           
+                                    <h:outputLabel class="bookingLabelFont" value="Facility Name"/>
+                                    <h:outputLabel class="bookingLabelFont" value=" : "/>
+                                    <h:inputText class="inputTextStyle" value="#{mainController.faciliyName}"/>
+                                    
+                                    <h:outputLabel class="bookingLabelFont" value="Status"/>
+                                    <h:outputLabel class="bookingLabelFont" value=" : "/>
+                                    <h:selectOneMenu class="inputTextStyle" value="#{mainController.selectedStatus}" onchange="submit()"
+                                                     valueChangeListener="#{mainController.changeStatus}" style="margin:10px"> 
+                                        <f:selectItem itemValue="#{null}" itemLabel="--Select Status--"/>
+                                        <f:selectItem itemValue="Available" itemLabel="Available"/>
+                                        <f:selectItem itemValue="Unavailable" itemLabel="Unavailable"/>                                                   
+                                    </h:selectOneMenu>                                    
+                                </h:panelGrid>
+                                
+                                <h:commandButton class="buttonStyle" value="Save Facility" action="#{mainController.registeredMember()}"></h:commandButton>                                
+                                <h:outputText value="Registration Done" style="color: blue;" rendered="#{mainController.saveStatus}"/>                                
+                            </h:form>         
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+        </div>         
+        <div class="container-fluid adminMemberPanel2">
+            <div class="container">
+                <div class="col-xs-12">
+                    <div style="max-height: 450px; width: 950px; overflow: auto; margin: 0 auto;">                        
+                        <h1 class="titleFont" style="text-align:center"> Booking's List</h1>                         
+                         <h:form id="memberList" style="margin: 10px;" target="_blank">
+                             <h:dataTable border="1" value="#{mainController.bookingList}" var="book" styleClass="mainTable" headerClass="tableHeader" rowClasses="tableRowEven,tableRowOdd">                    
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText class="tableItemHeader" value="Date Issued" />
+                                    </f:facet>
+                                    <h:outputText class="tableItem" value="#{book.dateRequested}">
+                                        <f:convertDateTime pattern="dd-MM-yyyy"/>
+                                    </h:outputText>
+                                </h:column>
+                                 <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText class="tableItemHeader" value="Facility" />
+                                    </f:facet>
+                                    <h:outputText class="tableItem" value="#{book.facilityName}"/>
+                                </h:column>
+                                 <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText class="tableItemHeader" value="From" />
+                                    </f:facet>
+                                    <h:outputText class="tableItem" value="#{book.dateFrom}">
+                                        <f:convertDateTime pattern="dd-MM-yyyy"/>
+                                    </h:outputText>
+                                </h:column>
+                                 <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText class="tableItemHeader" value="Until" />
+                                    </f:facet>
+                                    <h:outputText class="tableItem" value="#{book.dateUntil}">
+                                        <f:convertDateTime pattern="dd-MM-yyyy"/>
+                                    </h:outputText>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText class="tableItemHeader" value="Requester Id" />
+                                    </f:facet>
+                                    <h:outputText class="tableItem" value="#{book.userId}"/>
+                                </h:column>  
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText class="tableItemHeader" value="Name" />
+                                    </f:facet>
+                                    <h:outputText class="tableItem" value="#{book.firstName} #{book.lastName}"/>
+                                </h:column> 
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText class="tableItemHeader" value="Email" />
+                                    </f:facet>
+                                    <h:outputText class="tableItem" value="#{book.userEmail}"/>
+                                </h:column>  
+                                  <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText class="tableItemHeader" value="Status" />
+                                    </f:facet>
+                                    <h:outputText class="tableItem" value="#{book.status}"/>
+                                </h:column>    
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText class="tableItemHeader" value="Detail" />
+                                    </f:facet>
+                                    <div class="tableItem">
+                                        <h:commandButton value="View" action="#{mainController.selectedBooking(book)}"></h:commandButton> 
+                                    </div>                               
+                                </h:column>
+                             </h:dataTable>                    
+                         </h:form>
+                    </div>
+                </div>             
+            </div>
+        </div>
+        <div class="footerPanel">           
+            <p class="footerFont">&copy; BSc(Hons) Building Survey</p>
+        </div>        
+    </h:body>
+</html>
+

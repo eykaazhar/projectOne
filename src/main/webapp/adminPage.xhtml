@@ -14,7 +14,7 @@
     <h:head>
         <title>Port-Eco House</title>
     </h:head>
-    <h:body>
+    <h:body id="bodyWhite">
        <div class="container-fluid insideHeaderBackground">
             <!--
             <div class="logoBox">
@@ -42,7 +42,7 @@
                                     <a class="navbarItem" href="adminMember.xhtml">MEMBER</a>
                                 </li>
                                 <li>
-                                    <a class="navbarItem" href="#">FACILITIES</a>
+                                    <a class="navbarItem" href="adminFacility.xhtml">FACILITIES</a>
                                 </li>
                                 <li>
                                     <a class="navbarItem" href="adminInventory.xhtml">INVENTORY</a>
@@ -60,22 +60,19 @@
                 </div>  
             </nav>
         </div>
-        <div class="container-fluid inventoryContentPanel">
+        <div class="container-fluid inventoryContentPanel" style="margin-bottom: 20px;">
             <div class="container">
                 <div class="col-xs-12">
                     <h1 class="webTitle2"> Administrator Page</h1>
                 </div>
                 <div class="col-xs-12">
                     <div class="col-xs-6">
-                        <h2 class="font1">Quick Access</h2>                       
+                        <h2 class="font1">Quick Information</h2>                       
                         <div class="quickPanelSub">
-                            <a href="#" class="quickLink">New Facility Booking Request <span class="badge badgeStyle">5</span></a>                                
+                            <a href="#" class="quickLink">Facility Booking Request <span class="badge badgeStyle">5</span></a>                                
                         </div>    
                         <div class="quickPanelSub">
-                            <a href="#" class="quickLink">New Inventory Booking Request <span class="badge badgeStyle">3</span></a>
-                        </div>                                                     
-                        <div class="quickPanelSub">
-                            <a href="#" class="quickLink">New Member Request <span class="badge badgeStyle">1</span></a>
+                            <a href="#" class="quickLink">Inventory Booking Request <span class="badge badgeStyle">3</span></a>
                         </div>
                         <div class="quickPanelSub">
                             <a href="#" class="quickLink">Add New Inventory Equipment</a>                                
@@ -83,7 +80,7 @@
                     </div>
                     <div class="col-xs-6">
                         <div class="formPanel">
-                            <h2 class="font1">Register a Member</h2>
+                            <h2 class="font1">Register New Administrator</h2>
                             <h:form id="loginForm">
                                 <h:panelGrid columns="3">
                                     <h:outputLabel class="bookingLabelFont" value="Member Type"/>
@@ -91,8 +88,8 @@
                                     <h:selectOneMenu class="inputTextStyle" value="#{mainController.selectedMemberType}" onchange="submit()"
                                                      valueChangeListener="#{mainController.changeMemberType}" style="margin:10px"> 
                                         <f:selectItem itemValue="#{null}" itemLabel="--Select Type--"/>
-                                        <f:selectItem itemValue="member" itemLabel="Member"/>
-                                        <f:selectItem itemValue="admin" itemLabel="Admin"/>                                                   
+                                        <f:selectItem itemValue="Member" itemLabel="Member"/>
+                                        <f:selectItem itemValue="Admin" itemLabel="Admin"/>                                                   
                                     </h:selectOneMenu>
                                     
                                     <h:outputLabel class="bookingLabelFont" value="Username"/>
@@ -119,6 +116,57 @@
                         </div>
                     </div>                    
                 </div>               
+            </div>
+        </div>
+        <div class="container-fluid adminMemberPanel2">
+            <div class="container">
+                <div class="col-xs-12">                    
+                    <div style="max-height: 450px; width: 850px; overflow: auto; margin: 0 auto;">                        
+                        <h1 class="titleFont" style="text-align:center"> Administrator's List</h1>                         
+                        <h:form id="memberList" style="margin: 10px;" target="_blank">
+                            <h:dataTable border="1" value="#{mainController.adminList}" var="admin" styleClass="mainTable" headerClass="tableHeader" rowClasses="tableRowEven,tableRowOdd">                    
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText class="tableItemHeader" value="Username" />
+                                    </f:facet>
+                                    <h:outputText class="tableItem" value="#{admin.username}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText class="tableItemHeader" value="Full Name" />
+                                    </f:facet>
+                                    <h:outputText class="tableItem" value="#{admin.firstName} #{admin.lastName}"/>
+                                </h:column>  
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText class="tableItemHeader" value="Email" />
+                                    </f:facet>
+                                    <h:outputText class="tableItem" value="#{admin.email}"/>
+                                </h:column> 
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText class="tableItemHeader" value="Contact Number" />
+                                    </f:facet>
+                                    <h:outputText class="tableItem" value="#{admin.contactNumber}"/>
+                                </h:column> 
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText class="tableItemHeader" value="Member Status" />
+                                    </f:facet>
+                                    <h:outputText class="tableItem" value="#{admin.memberStatus}"/>
+                                </h:column>  
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText class="tableItemHeader" value="Detail" />
+                                    </f:facet>
+                                    <div class="tableItem">
+                                        <h:commandButton value="View" action="#{mainController.selectedEditAdmin(admin)}"></h:commandButton> 
+                                    </div>                               
+                                </h:column>
+                             </h:dataTable>                    
+                         </h:form>
+                    </div>
+                </div> 
             </div>
         </div>
         <div class="footerPanel">           

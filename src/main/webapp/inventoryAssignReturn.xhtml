@@ -103,29 +103,35 @@
                                         <h:outputLabel class="formOutputLabel" value="Status"/>
                                         <h:outputLabel class="formOutputLabel2" value=" : "/>
                                         <h:outputText class="formOutputLabel2" value="#{mainController.chosenInventory.status}"/>
-                                    </h:panelGrid>                                    
-                                    <div class="mainForm" style="margin: 0 auto;">                                    
-                                        <h:panelGrid columns="3">
-                                            <h:outputLabel class="formOutputLabel" value="Assign To" rendered="#{mainController.inventoryAssignMember}"/>
-                                            <h:outputLabel class="formOutputLabel2" value=" : " rendered="#{mainController.inventoryAssignMember}"/>
-                                            <h:selectOneMenu class="inputTextStyle" value="#{mainController.chosenUserIDInv}" onchange="submit()"
-                                                             valueChangeListener="#{mainController.changeMemberID}" style="margin:10px" rendered="#{mainController.inventoryAssignMember}"> 
-                                                <f:selectItem itemValue="#{null}" itemLabel="--Select Member--"/>
-                                                <f:selectItems value="#{mainController.memberList}" var="m"
-                                                               itemLabel="#{m.username}, #{m.firstName}" itemValue="#{m.id}">
-                                                </f:selectItems>                                                          
-                                            </h:selectOneMenu>
+                                                                   
+                                       
+                                        <h:outputLabel class="formOutputLabel" value="Assign To" rendered="#{mainController.inventoryAssignMember}"/>
+                                        <h:outputLabel class="formOutputLabel2" value=" : " rendered="#{mainController.inventoryAssignMember}"/>
+                                        <h:selectOneMenu class="inputTextStyle" value="#{mainController.chosenUserIDInv}" onchange="submit()"
+                                                         valueChangeListener="#{mainController.changeMemberID}" style="margin:10px" rendered="#{mainController.inventoryAssignMember}"> 
+                                            <f:selectItem itemValue="#{null}" itemLabel="--Select Member--"/>
+                                            <f:selectItems value="#{mainController.memberList}" var="m"
+                                                           itemLabel="#{m.username}, #{m.firstName}" itemValue="#{m.id}">
+                                            </f:selectItems>                                                          
+                                        </h:selectOneMenu>
 
-                                            <h:outputLabel class="formOutputLabel" value="Current User"  rendered="#{mainController.returnButton}"/>
-                                            <h:outputLabel class="formOutputLabel2" value=" : "  rendered="#{mainController.returnButton}"/>
-                                            <h:outputText class="formOutputLabel2" value="#{mainController.chosenInventory.currentUser.username}" rendered="#{mainController.returnButton}"/>
+                                        <h:outputLabel class="formOutputLabel" value="Given Out By" rendered="#{mainController.inventoryAssignMember}"/>
+                                        <h:outputLabel class="formOutputLabel2" value=" : " rendered="#{mainController.inventoryAssignMember}"/>
+                                        <h:inputText class="formOutputLabel2" value="#{mainController.giveOutBy}" rendered="#{mainController.inventoryAssignMember}"/>
 
-                                            <h:outputLabel class="formOutputLabel" value=""/>
-                                            <h:outputLabel class="formOutputLabel2" value=""/>
-                                            <h:commandButton class="buttonStyle" style="margin: 10px;" value="Assign to Member" action="#{mainController.saveAssignToMember()}" rendered="#{mainController.inventoryAssignMember}"></h:commandButton>                                                                              
-                                            <h:commandButton class="buttonStyle" style="margin: 10px;" value="Return Equipment" action="#{mainController.returnEquipment()}" rendered="#{mainController.returnButton}"></h:commandButton>               
-                                        </h:panelGrid>
-                                    </div>                                    
+                                        <h:outputLabel class="formOutputLabel" value="Current User"  rendered="#{mainController.returnButton}"/>
+                                        <h:outputLabel class="formOutputLabel2" value=" : "  rendered="#{mainController.returnButton}"/>
+                                        <h:outputText class="formOutputLabel2" value="#{mainController.chosenInventory.currentUser.username}" rendered="#{mainController.returnButton}"/>
+
+                                        <h:outputLabel class="formOutputLabel" value="Returned By" rendered="#{mainController.returnButton}"/>
+                                        <h:outputLabel class="formOutputLabel2" value=" : " rendered="#{mainController.returnButton}"/>
+                                        <h:inputText class="formOutputLabel2" value="#{mainController.returnBy}" rendered="#{mainController.returnButton}"/>
+
+                                        <h:outputLabel class="formOutputLabel" value=""/>
+                                        <h:outputLabel class="formOutputLabel2" value=""/>
+                                        <h:commandButton class="buttonStyle" style="margin: 10px;" value="Assign to Member" action="#{mainController.saveAssignToMember()}" rendered="#{mainController.inventoryAssignMember}"></h:commandButton>                                                                              
+                                        <h:commandButton class="buttonStyle" style="margin: 10px;" value="Return Equipment" action="#{mainController.returnEquipment()}" rendered="#{mainController.returnButton}"></h:commandButton>               
+                                    </h:panelGrid>                  
                                 </div>                                
                             </h:form>
                         </div>

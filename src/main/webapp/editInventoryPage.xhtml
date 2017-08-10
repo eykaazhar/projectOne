@@ -42,7 +42,7 @@
                                     <a class="navbarItem" href="adminMember.xhtml">MEMBER</a>
                                 </li>
                                 <li>
-                                    <a class="navbarItem" href="#">FACILITIES</a>
+                                    <a class="navbarItem" href="adminFacility.xhtml">FACILITIES</a>
                                 </li>
                                 <li class="navbarItemActive">
                                     <a class="navbarItem" href="adminInventory.xhtml">INVENTORY</a>
@@ -63,75 +63,181 @@
         <div id="bookingPanel" class="container-fluid bookingPanel">
             <div class="container">
                 <div class="col-xs-12">
-                    <div class="inventoryPanel">
-                        <div class="row">
-                        <div class="col-xs-12" style="margin: 0 auto;margin-top:20px;">
-                            <h1 class="titleFont">Inventory Equipment Details</h1>
-                        </div>
-                        <div class="col-xs-12">
-                            <h:form>                                
-                                <div class="detailsForm" style="margin: 0 auto;">
-                                    <h:panelGrid columns="3">
-                                        <h:outputLabel class="formOutputLabel" value="Equipment Name"/>
-                                        <h:outputLabel class="formOutputLabel2" value=" : "/>
-                                        <h:outputText class="formOutputLabel2" value="#{mainController.chosenInventory.equipmentName}" rendered="#{not mainController.inventoryEdit}"/>
-                                        <h:inputText class="inputTextStyle" value="#{mainController.chosenInventory.equipmentName}" rendered="#{mainController.inventoryEdit}"/>
-
-                                        <h:outputLabel class="formOutputLabel" value="Make"/>
-                                        <h:outputLabel class="formOutputLabel2" value=" : "/>
-                                        <h:outputText class="formOutputLabel2" value="#{mainController.chosenInventory.make}" rendered="#{not mainController.inventoryEdit}"/>
-                                        <h:inputText class="inputTextStyle" value="#{mainController.chosenInventory.make}" rendered="#{mainController.inventoryEdit}"/>
-                                        
-                                        <h:outputLabel class="formOutputLabel" value="Model"/>
-                                        <h:outputLabel class="formOutputLabel2" value=" : "/>
-                                        <h:outputText class="formOutputLabel2" value="#{mainController.chosenInventory.model}" rendered="#{not mainController.inventoryEdit}"/>
-                                        <h:inputText class="inputTextStyle" value="#{mainController.chosenInventory.model}" rendered="#{mainController.inventoryEdit}"/>
-                                        
-                                        <h:outputLabel class="formOutputLabel" value="Serial Number"/>
-                                        <h:outputLabel class="formOutputLabel2" value=" : "/>
-                                        <h:outputText class="formOutputLabel2" value="#{mainController.chosenInventory.serialNumber}" rendered="#{not mainController.inventoryEdit}"/>
-                                        <h:inputText class="inputTextStyle" value="#{mainController.chosenInventory.serialNumber}" rendered="#{mainController.inventoryEdit}"/>
-                                        
-                                        <h:outputLabel class="formOutputLabel" value="Battery"/>
-                                        <h:outputLabel class="formOutputLabel2" value=" : "/>
-                                        <h:outputText class="formOutputLabel" value="#{mainController.chosenInventory.battery}" rendered="#{not mainController.inventoryEdit}"/>
-                                        <h:inputText class="inputTextStyle" value="#{mainController.chosenInventory.battery}" rendered="#{mainController.inventoryEdit}"/>
-                                        
-                                        <h:outputLabel class="formOutputLabel" value="Pat References"/>
-                                        <h:outputLabel class="formOutputLabel2" value=" : "/>
-                                        <h:outputText class="formOutputLabel2" value="#{mainController.chosenInventory.patReference}" rendered="#{not mainController.inventoryEdit}"/>
-                                        <h:inputText class="inputTextStyle" value="#{mainController.chosenInventory.patReference}" rendered="#{mainController.inventoryEdit}"/>
-                                        
-                                        <h:outputLabel class="formOutputLabel" value="Accessories"/>
-                                        <h:outputLabel class="formOutputLabel2" value=" : "/>
-                                        <h:outputText class="formOutputLabel2" value="#{mainController.chosenInventory.accessories}" rendered="#{not mainController.inventoryEdit}"/>
-                                        <h:inputText class="inputTextStyle" value="#{mainController.chosenInventory.accessories}" rendered="#{mainController.inventoryEdit}"/>
-                                        
-                                        <h:outputLabel class="formOutputLabel" value="Status"/>
-                                        <h:outputLabel class="formOutputLabel2" value=" : "/>
-                                        <h:outputText class="formOutputLabel2" value="#{mainController.chosenInventory.status}" rendered="#{not mainController.inventoryEdit}"/>
-                                        <h:selectOneMenu class="inputTextStyle" value="#{mainController.inventoryStatus}" onchange="submit()"
-                                                         valueChangeListener="#{mainController.changeInventoryStatus}" style="margin:10px" rendered="#{mainController.inventoryEdit}"> 
-                                            <f:selectItem itemValue="#{null}" itemLabel="--Select Status--"/>
-                                            <f:selectItem itemValue="available" itemLabel="Available"/>
-                                            <f:selectItem itemValue="unavailable" itemLabel="Unavailable"/>
-                                            <f:selectItem itemValue="obsolete" itemLabel="Obsolete"/>
-                                        </h:selectOneMenu>
-                                        
-                                    <h:commandButton class="buttonStyle" style="margin: 10px;" value="Save Equipment Detail" action="#{mainController.saveInventoryDetails()}" rendered="#{mainController.inventoryEdit}"></h:commandButton>
-                                    <h:outputLabel class="bookingLabelFont" value="" rendered="#{mainController.inventoryEdit}"/>
-                                    <h:commandButton class="buttonStyle" style="margin: 10px;" value="Cancel Equipment Detail" action="#{mainController.cancelEditInventory()}" rendered="#{mainController.inventoryEdit}"></h:commandButton>                                     
-                                    </h:panelGrid>                                    
-                                    <br/>
-                                    <h:commandButton class="buttonStyle" style="margin: 10px;" value="Edit Equipment Detail" action="#{mainController.editInventoryDetails()}" rendered="#{not mainController.inventoryEdit}"></h:commandButton>                       
-                                </div>                                
-                            </h:form>
-                        </div>
+                    <div class="col-xs-12" style="margin: 0 auto;margin-top:20px;">
+                        <h1 class="titleFont">Inventory Equipment Details</h1>
                     </div>
-                    </div>                    
+                    <div class="inventoryPanel">
+                        <div class="row">                            
+                            <div class="col-xs-12">
+                                <h:form id="InventoryDetail" rendered="#{not mainController.inventoryEdit}">                                
+                                    <div class="detailsForm" style="margin: 0 auto;">
+                                        <h:panelGrid columns="3">
+                                            <h:outputLabel class="formOutputLabel" value="Equipment Name"/>
+                                            <h:outputLabel class="formOutputLabel2" value=" : "/>
+                                            <h:outputText class="formOutputLabel2" value="#{mainController.chosenInventory.equipmentName}"/>
+
+                                            <h:outputLabel class="formOutputLabel" value="Make"/>
+                                            <h:outputLabel class="formOutputLabel2" value=" : "/>
+                                            <h:outputText class="formOutputLabel2" value="#{mainController.chosenInventory.make}"/>
+
+                                            <h:outputLabel class="formOutputLabel" value="Model"/>
+                                            <h:outputLabel class="formOutputLabel2" value=" : "/>
+                                            <h:outputText class="formOutputLabel2" value="#{mainController.chosenInventory.model}"/>
+
+                                            <h:outputLabel class="formOutputLabel" value="Serial Number"/>
+                                            <h:outputLabel class="formOutputLabel2" value=" : "/>
+                                            <h:outputText class="formOutputLabel2" value="#{mainController.chosenInventory.serialNumber}"/>
+
+                                            <h:outputLabel class="formOutputLabel" value="Battery"/>
+                                            <h:outputLabel class="formOutputLabel2" value=" : "/>
+                                            <h:outputText class="formOutputLabel" value="#{mainController.chosenInventory.battery}"/>
+
+                                            <h:outputLabel class="formOutputLabel" value="Pat References"/>
+                                            <h:outputLabel class="formOutputLabel2" value=" : "/>
+                                            <h:outputText class="formOutputLabel2" value="#{mainController.chosenInventory.patReference}"/>
+
+                                            <h:outputLabel class="formOutputLabel" value="Accessories"/>
+                                            <h:outputLabel class="formOutputLabel2" value=" : "/>
+                                            <h:outputText class="formOutputLabel2" value="#{mainController.chosenInventory.accessories}"/>
+
+                                            <h:outputLabel class="formOutputLabel" value="Status"/>
+                                            <h:outputLabel class="formOutputLabel2" value=" : "/>
+                                            <h:outputText class="formOutputLabel2" value="#{mainController.chosenInventory.status}"/>
+                                        </h:panelGrid>                                    
+                                        <br/>
+                                        <h:commandButton class="buttonStyle" style="margin: 10px;" value="Edit Equipment Detail" action="#{mainController.editInventoryDetails()}"></h:commandButton>  
+                                    </div>                                
+                                </h:form>
+                                <h:form id="InventoryDetailEdit" rendered="#{mainController.inventoryEdit}">                                
+                                    <div class="detailsForm" style="margin: 0 auto;">
+                                        <h:panelGrid columns="3">
+                                            <h:outputLabel class="outputLabelFont" value="Equipment Name"/>
+                                            <h:outputLabel class="outputLabelFont2" value=" : "/>
+                                            <h:inputText class="inputTextStyle" value="#{mainController.chosenInventory.equipmentName}" rendered="#{mainController.inventoryEdit}"/>
+
+                                            <h:outputLabel class="outputLabelFont" value="Make"/>
+                                            <h:outputLabel class="outputLabelFont2" value=" : "/>
+                                            <h:inputText class="inputTextStyle" value="#{mainController.chosenInventory.make}"/>
+
+                                            <h:outputLabel class="outputLabelFont" value="Model"/>
+                                            <h:outputLabel class="outputLabelFont2" value=" : "/>
+                                            <h:inputText class="inputTextStyle" value="#{mainController.chosenInventory.model}"/>
+
+                                            <h:outputLabel class="outputLabelFont" value="Serial Number"/>
+                                            <h:outputLabel class="outputLabelFont2" value=" : "/>
+                                            <h:inputText class="inputTextStyle" value="#{mainController.chosenInventory.serialNumber}"/>
+
+                                            <h:outputLabel class="outputLabelFont" value="Battery"/>
+                                            <h:outputLabel class="outputLabelFont2" value=" : "/>
+                                            <h:inputText class="inputTextStyle" value="#{mainController.chosenInventory.battery}"/>
+
+                                            <h:outputLabel class="outputLabelFont" value="Pat References"/>
+                                            <h:outputLabel class="outputLabelFont2" value=" : "/>
+                                            <h:inputText class="inputTextStyle" value="#{mainController.chosenInventory.patReference}"/>
+
+                                            <h:outputLabel class="outputLabelFont" value="Accessories"/>
+                                            <h:outputLabel class="outputLabelFont2" value=" : "/>
+                                            <h:inputText class="inputTextStyle" value="#{mainController.chosenInventory.accessories}"/>
+
+                                            <h:outputLabel class="outputLabelFont" value="Status"/>
+                                            <h:outputLabel class="outputLabelFont2" value=" : "/>
+                                            <h:selectOneMenu class="inputTextStyle" value="#{mainController.inventoryStatus}" onchange="submit()"
+                                                             valueChangeListener="#{mainController.changeInventoryStatus}" style="margin:10px"> 
+                                                <f:selectItem itemValue="#{null}" itemLabel="--Select Status--"/>
+                                                <f:selectItem itemValue="Available" itemLabel="Available"/>
+                                                <f:selectItem itemValue="Unavailable" itemLabel="Unavailable"/>
+                                                <f:selectItem itemValue="Obsolete" itemLabel="Obsolete"/>
+                                            </h:selectOneMenu>
+
+                                        <h:commandButton class="buttonStyle" style="margin: 10px;" value="Save Equipment Detail" action="#{mainController.saveInventoryDetails()}"></h:commandButton>
+                                        <h:outputLabel class="bookingLabelFont" value="" rendered="#{mainController.inventoryEdit}"/>
+                                        <h:commandButton class="buttonStyle" style="margin: 10px;" value="Cancel Equipment Detail" action="#{mainController.cancelEditInventory()}"></h:commandButton>                                     
+                                        </h:panelGrid>                                    
+                                        <br/>
+                                    </div>                                
+                                </h:form>                                
+                                <div class="detailsForm" style="margin: 0 auto;">
+                                    <h:form id="showButton">
+                                        <h:commandButton class="buttonStyle" style="margin: 10px;" value="Equipment Transaction Record" action="#{mainController.viewTransaction()}">
+                                            <f:ajax onevent="displayInventoryTransaction" render="transactionList"/>
+                                        </h:commandButton> 
+                                    </h:form>
+                                    <h:form id="hideButton" style="display:none">
+                                        <h:commandButton class="buttonStyle" style="margin: 10px;" value="Hide Transaction Record" action="#{mainController.cancelTransaction()}">
+                                            <f:ajax onevent="hideInventoryTransaction" render="transactionList"/>
+                                        </h:commandButton>
+                                    </h:form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div id="transactionPanel" class="col-xs-12" style="display:none">
+                                <div class="transactionColumn" style="margin: 0 auto;">
+                                    <h:form id="transactionList" target="_blank" rendered="#{mainController.transactionList.size() != 0}">
+                                    <div style="margin: 0 auto;">
+                                        <h:dataTable border="1" value="#{mainController.transactionList}" var="trans" styleClass="mainTable" headerClass="tableHeader" rowClasses="tableRowEven,tableRowOdd">                    
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText class="tableTransactionItem" value="Date Issued" />
+                                            </f:facet>
+                                            <h:outputText class="tableItem" value="#{trans.dateIssued}">
+                                                <f:convertDateTime type="date" pattern="dd-MM-yyyy"/>
+                                            </h:outputText>
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText class="tableTransactionItem" value="Assign By" />
+                                            </f:facet>
+                                            <h:outputText class="tableItem" value="#{trans.assigner}"/>
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText class="tableTransactionItem" value="Action" />
+                                            </f:facet>
+                                            <h:outputText class="tableTransactionItem" value="#{trans.transactionPurpose}"/>
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText class="tableTransactionItem" value="Given Out By" />
+                                            </f:facet>
+                                            <h:outputText class="tableTransactionItem" value="#{trans.givenBy}"/>
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText class="tableTransactionItem" value="Member Username" />
+                                            </f:facet>
+                                            <h:outputText class="tableTransactionItem" value="#{trans.memberId.username}"/>
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText class="tableTransactionItem" value="Returned By" />
+                                            </f:facet>
+                                            <h:outputText class="tableTransactionItem" value="#{trans.receivedBy}"/>
+                                        </h:column>                                        
+                                    </h:dataTable> 
+                                    </div>         
+                                </h:form> 
+                                    <h:outputText class="outputLabelFont2" value="No transaction record found" rendered="#{mainController.transactionList.size() == 0}"></h:outputText>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                                       
                 </div>
             </div>
         </div> 
     </h:body>
+    <script type="text/javascript">
+        function displayInventoryTransaction(){
+            $("#transactionPanel").show();
+            $("#showButton").hide();
+            $("#hideButton").show();
+        }
+        function hideInventoryTransaction(){
+            $("#transactionPanel").hide();
+             $("#showButton").show();
+            $("#hideButton").hide();
+        }
+        
+    </script>
 </html>
 

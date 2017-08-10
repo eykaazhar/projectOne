@@ -6,9 +6,11 @@
 package Session;
 
 import Entity.InventoryRequest;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -27,6 +29,12 @@ public class InventoryRequestFacade extends AbstractFacade<InventoryRequest> {
 
     public InventoryRequestFacade() {
         super(InventoryRequest.class);
+    }
+    
+    public List<InventoryRequest> getMemberRequests(Long memberID){
+        TypedQuery<InventoryRequest> Query = getEntityManager().createNamedQuery("InventoryRequest.GetMemberRequest", InventoryRequest.class);
+        Query.setParameter("memberID", memberID);
+        return Query.getResultList();
     }
     
 }

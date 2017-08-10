@@ -63,8 +63,8 @@
                                         <h:selectOneMenu value="#{mainController.selectedMemberType}" onchange="submit()"
                                                          valueChangeListener="#{mainController.changeMemberType}" style="margin:10px"> 
                                             <f:selectItem itemValue="#{null}" itemLabel="--Select Type--"/>
-                                            <f:selectItem itemValue="member" itemLabel="Member"/>
-                                            <f:selectItem itemValue="admin" itemLabel="Admin"/>                                                   
+                                            <f:selectItem itemValue="Member" itemLabel="Member"/>
+                                            <f:selectItem itemValue="Admin" itemLabel="Admin"/>                                                   
                                         </h:selectOneMenu>
                                     </h:panelGrid>  
                                     <h:outputText value="Password is not the same" rendered="#{not mainController.checkPassword}"/>

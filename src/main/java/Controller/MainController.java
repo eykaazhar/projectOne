@@ -10,14 +10,21 @@ import Business.PortEcoBusiness;
 import Entity.Booking;
 import Entity.Facility;
 import Entity.Inventory;
+import Entity.InventoryRequest;
+import Entity.InventoryTransaction;
 import Entity.RegisteredMember;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.text.Format;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -64,6 +71,15 @@ public class MainController implements Serializable {
     Inventory addNewInventory = new Inventory();
     List<Inventory> availableInventoryList = new ArrayList<Inventory>();
     RegisteredMember invtCurrentUser = new RegisteredMember();
+    InventoryRequest newInvtRequest = new InventoryRequest();
+    List<InventoryRequest> requestList = new ArrayList<InventoryRequest>();
+    InventoryRequest chosenRequest = new InventoryRequest();
+    InventoryTransaction invtTrans = new InventoryTransaction();
+    List<InventoryTransaction> transactionList = new ArrayList<InventoryTransaction>();
+    RegisteredMember chosenMember = new RegisteredMember();
+    List<Booking> bookingList = new ArrayList<Booking>();
+    Booking chosenBooking = new Booking();
+    List<Inventory> memberInventoryList = new ArrayList<Inventory>();
     
     //------- List of local variables---//
     private String userId;
@@ -84,8 +100,7 @@ public class MainController implements Serializable {
     private String memberStatus;
     private String selectedMemberType;
     private String inventoryStatus;
-    private String invtSearchKeyword;
-    
+    private String invtSearchKeyword;    
     private String equipementName;
     private String equipmentDescription;
     private String make;
@@ -94,6 +109,13 @@ public class MainController implements Serializable {
     private String accessories;
     private String patReference;
     private String battery;
+    private String giveOutBy;
+    private String returnBy;
+    private String tempDateStart;
+    private String tempDateEnd;
+    private String faciliyName;
+    private String selectedStatus;
+    
     private int total;
     private int totalInvetory;
     private int totalInventoryAvaiblable;
@@ -121,8 +143,16 @@ public class MainController implements Serializable {
     private Boolean returnButton = Boolean.FALSE;
     private Boolean inventoryDetail = Boolean.FALSE;
     private Boolean saveStatus = Boolean.FALSE;
+    private Boolean memberAgreement = Boolean.FALSE;
+    private Boolean transactionShow = Boolean.FALSE;
+    private Boolean memberRequestShow = Boolean.FALSE;
+    private Boolean checkLoginStatus = Boolean.TRUE;
+    private Boolean checkStatus = Boolean.TRUE;
+    private Boolean checkDate = Boolean.TRUE;
+    private Boolean checkDateFormat = Boolean.TRUE;
         
-
+    Format format = new SimpleDateFormat("dd MM yyyy");
+    SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
     //------------ Generated Setter and Getter Function---------------------//
     public Facility getFacilityID() {
         return facilityID;
@@ -691,7 +721,182 @@ public class MainController implements Serializable {
     public void setSaveStatus(Boolean saveStatus) {
         this.saveStatus = saveStatus;
     }
-    
+
+    public InventoryRequest getNewInvtRequest() {
+        return newInvtRequest;
+    }
+
+    public void setNewInvtRequest(InventoryRequest newInvtRequest) {
+        this.newInvtRequest = newInvtRequest;
+    }
+
+    public Boolean getMemberAgreement() {
+        return memberAgreement;
+    }
+
+    public void setMemberAgreement(Boolean memberAgreement) {
+        this.memberAgreement = memberAgreement;
+    }
+
+    public List<InventoryRequest> getRequestList() {
+        return requestList;
+    }
+
+    public void setRequestList(List<InventoryRequest> requestList) {
+        this.requestList = requestList;
+    }
+
+    public InventoryRequest getChosenRequest() {
+        return chosenRequest;
+    }
+
+    public void setChosenRequest(InventoryRequest chosenRequest) {
+        this.chosenRequest = chosenRequest;
+    }
+
+    public InventoryTransaction getInvtTrans() {
+        return invtTrans;
+    }
+
+    public void setInvtTrans(InventoryTransaction invtTrans) {
+        this.invtTrans = invtTrans;
+    }
+
+    public String getGiveOutBy() {
+        return giveOutBy;
+    }
+
+    public void setGiveOutBy(String giveOutBy) {
+        this.giveOutBy = giveOutBy;
+    }
+
+    public String getReturnBy() {
+        return returnBy;
+    }
+
+    public void setReturnBy(String returnBy) {
+        this.returnBy = returnBy;
+    }
+
+    public List<InventoryTransaction> getTransactionList() {
+        return transactionList;
+    }
+
+    public void setTransactionList(List<InventoryTransaction> transactionList) {
+        this.transactionList = transactionList;
+    }
+
+    public Boolean getTransactionShow() {
+        return transactionShow;
+    }
+
+    public void setTransactionShow(Boolean transactionShow) {
+        this.transactionShow = transactionShow;
+    }
+
+    public RegisteredMember getChosenMember() {
+        return chosenMember;
+    }
+
+    public void setChosenMember(RegisteredMember chosenMember) {
+        this.chosenMember = chosenMember;
+    }
+
+    public Boolean getMemberRequestShow() {
+        return memberRequestShow;
+    }
+
+    public void setMemberRequestShow(Boolean memberRequestShow) {
+        this.memberRequestShow = memberRequestShow;
+    }
+
+    public Boolean getCheckLoginStatus() {
+        return checkLoginStatus;
+    }
+
+    public void setCheckLoginStatus(Boolean checkLoginStatus) {
+        this.checkLoginStatus = checkLoginStatus;
+    }
+
+    public String getTempDateStart() {
+        return tempDateStart;
+    }
+
+    public void setTempDateStart(String tempDateStart) {
+        this.tempDateStart = tempDateStart;
+    }
+
+    public String getTempDateEnd() {
+        return tempDateEnd;
+    }
+
+    public void setTempDateEnd(String tempDateEnd) {
+        this.tempDateEnd = tempDateEnd;
+    }
+
+    public List<Booking> getBookingList() {
+        return bookingList;
+    }
+
+    public void setBookingList(List<Booking> bookingList) {
+        this.bookingList = bookingList;
+    }
+
+    public Booking getChosenBooking() {
+        return chosenBooking;
+    }
+
+    public void setChosenBooking(Booking chosenBooking) {
+        this.chosenBooking = chosenBooking;
+    }
+
+    public String getFaciliyName() {
+        return faciliyName;
+    }
+
+    public void setFaciliyName(String faciliyName) {
+        this.faciliyName = faciliyName;
+    }
+
+    public String getSelectedStatus() {
+        return selectedStatus;
+    }
+
+    public void setSelectedStatus(String selectedStatus) {
+        this.selectedStatus = selectedStatus;
+    }
+
+    public Boolean getCheckStatus() {
+        return checkStatus;
+    }
+
+    public void setCheckStatus(Boolean checkStatus) {
+        this.checkStatus = checkStatus;
+    }
+
+    public Boolean getCheckDate() {
+        return checkDate;
+    }
+
+    public void setCheckDate(Boolean checkDate) {
+        this.checkDate = checkDate;
+    }
+
+    public List<Inventory> getMemberInventoryList() {
+        return memberInventoryList;
+    }
+
+    public void setMemberInventoryList(List<Inventory> memberInventoryList) {
+        this.memberInventoryList = memberInventoryList;
+    }
+
+    public Boolean getCheckDateFormat() {
+        return checkDateFormat;
+    }
+
+    public void setCheckDateFormat(Boolean checkDateFormat) {
+        this.checkDateFormat = checkDateFormat;
+    }
     
     //--------------------------------------------------------------------------//    
     
@@ -707,6 +912,8 @@ public class MainController implements Serializable {
         getAllMember();
         getAllInventoris();
         getAllAvailableInventory();
+        getAllInventoryRequest();
+        getAllBookingList();
         setAdminActive(pb.getAdminPerson());
         System.out.println("admin size: " + getAdminActive().getMemberType());
     }
@@ -764,16 +971,24 @@ public class MainController implements Serializable {
             firstItemId = (Long) e.getNewValue();
             setFirstItemId(firstItemId);
             setInventoryFirst(pb.getInventoryById(getFirstItemId()));
+        }else{
+            setFirstItemId(null);
+            setInventoryFirst(null);
         }
     }
     
-    public void changeSecondtemId(ValueChangeEvent e) throws BusinessException{
-        System.out.println("changeFirstItemId");
+    public void changeSecondItemId(ValueChangeEvent e) throws BusinessException{
+        System.out.println("changeSecondItemId" + e.getNewValue());
         if(e.getNewValue() != null){
             secondItemId = (Long) e.getNewValue();
             setSecondItemId(secondItemId);
-            setInventorySecond(pb.getInventoryById(getFirstItemId()));
+            setInventorySecond(pb.getInventoryById(getSecondItemId()));
+        }else{
+            setSecondItemId(null);
+            setInventorySecond(null);
+            System.out.println("changeSecondItemId2");
         }
+        
     }
     
     public void changeThirdItemId(ValueChangeEvent e) throws BusinessException{
@@ -781,7 +996,10 @@ public class MainController implements Serializable {
         if(e.getNewValue() != null){
             thirdItemId = (Long) e.getNewValue();
             setThirdItemId(thirdItemId);
-            setInventoryThird(pb.getInventoryById(getFirstItemId()));
+            setInventoryThird(pb.getInventoryById(getThirdItemId()));
+        }else{
+            setThirdItemId(null);
+            setInventoryThird(null);
         }
     }    
     
@@ -790,6 +1008,23 @@ public class MainController implements Serializable {
             inventoryStatus = (String) e.getNewValue();
             setInventoryStatus(inventoryStatus);
             getChosenInventory().setStatus(getInventoryStatus());
+        }
+    }
+    
+    public void changeRequestStatus(ValueChangeEvent e) throws BusinessException{
+        if(e.getNewValue() != null){
+            inventoryStatus = (String) e.getNewValue();
+            setInventoryStatus(inventoryStatus);
+            getChosenRequest().setStatus(getInventoryStatus());
+        }
+    }
+    
+    public void changeStatus(ValueChangeEvent e) throws BusinessException{
+        if(e.getNewValue() != null){
+            selectedStatus = (String) e.getNewValue();
+            setSelectedStatus(selectedStatus);
+        }else{
+            setSelectedStatus(null);
         }
     }
     //-------------------------------------------------------------------------//
@@ -819,23 +1054,54 @@ public class MainController implements Serializable {
         setTotalInventoryAvaiblable(getAvailableInventoryList().size());
     }
     
+    public void getAllInventoryRequest(){
+        setRequestList(pb.getAllRequestList());
+    }
+    
+    public void getAllBookingList(){
+        setBookingList(pb.getAllBookingList());
+    }
+    
     //----------------------------------------------------------------------//
     
     //---- save booking request by user into database. this function is called from the mainPage.xhtml---////
     public void saveBooking(){
+        todayDate();
+        System.out.println("date " + getTempDateStart());        
+        System.out.println("date 2" + getTempDateEnd());        
+        try {
+            setDateStart(formatter.parse(getTempDateStart()));
+            setDateEnd(formatter.parse(getTempDateEnd()));
+            if(getDateEnd().before(getDateStart())){
+                setCheckDate(Boolean.FALSE);
+                setCheckDateFormat(Boolean.TRUE);
+            }else{
+                setCheckDateFormat(Boolean.TRUE);
+                setCheckDate(Boolean.TRUE);
+            }            
+            
+        } catch (ParseException ex) {
+            setCheckDateFormat(Boolean.FALSE);
+            setCheckDate(Boolean.TRUE);
+        }
         newBooking.setUserId(getUserId());
         newBooking.setUserEmail(getUserEmail());
-        newBooking.setStatus("Not Accepted");
+        newBooking.setStatus("Waiting");
         newBooking.setFacility(getSelectFacility());
         newBooking.setFacilityName(getSelectFacility().getFacilityName());
-        newBooking.setFirstName(getFirstName());
-        newBooking.setLastName(getLastName());
-//        newBooking.setDateFrom(getDateStart());
-//        newBooking.setDateUntil(getDateEnd());
+        newBooking.setFaculty(getFaculty());
+        newBooking.setFirstName(getFirstName());       
+        newBooking.setDateUntil(getDateEnd());
         newBooking.setFaculty(getFaculty());
         newBooking.setPurpose(getPurpose());
         newBooking.setMessage(getMessage());
-        pb.addNewBooking(newBooking);
+        newBooking.setDateRequested(getCurrentDate());
+        
+        if(getCheckDate() && getCheckDateFormat()){
+            newBooking.setLastName(getLastName());
+            newBooking.setDateFrom(getDateStart());
+            pb.addNewBooking(newBooking);
+        }
         System.out.println("test");
         bookingEmailSetting();
         //sendEmail(getAdminActive().getEmail());
@@ -846,7 +1112,7 @@ public class MainController implements Serializable {
         setFirstName("");
         setLastName("");
         setPurpose("");
-        setMessage("");
+        setMessage("");        
     }
     
     //---------- Save new member detail into Database: Used by Administrator to register new member-------//
@@ -876,6 +1142,66 @@ public class MainController implements Serializable {
         }
     }
     
+    //--------------- save member inventory Request into database --//
+    public void saveInventoryRequest(){
+        todayDate();
+        if(getMemberAgreement()){
+            try {
+                setDateStart(formatter.parse(getTempDateStart()));
+                setDateEnd(formatter.parse(getTempDateEnd()));
+                if(getDateEnd().before(getDateStart())){
+                    setCheckDateFormat(Boolean.TRUE);
+                    setCheckDate(Boolean.FALSE);
+                }else{
+                    setCheckDateFormat(Boolean.TRUE);
+                    setCheckDate(Boolean.TRUE);
+                }            
+
+            } catch (ParseException ex) {
+                setCheckDateFormat(Boolean.FALSE);
+                setCheckDate(Boolean.TRUE);
+            }
+            newInvtRequest.setMemberId(getLoginMember());
+            newInvtRequest.setFirstInventoryId(getInventoryFirst());            
+            newInvtRequest.setMemberAgreement(getMemberAgreement());            
+            newInvtRequest.setDateIssued(getCurrentDate());
+            newInvtRequest.setStatus("Waiting");
+            if(getSecondItemId() != null){
+                newInvtRequest.setSecondInventoryId(getInventorySecond());
+                System.out.println("test 2 : " + getSecondItemId() + "test 3"+ getInventorySecond().getEquipmentName());
+            }
+            if(getThirdItemId() != null){
+                newInvtRequest.setThirdInventoryId(getInventoryThird());
+            }
+            
+            if(getCheckDate() && getCheckDateFormat()){
+                newInvtRequest.setDateBorrowed(getDateStart());
+                newInvtRequest.setDateReturned(getDateEnd());
+                pb.saveNewInventoryRequest(newInvtRequest);
+                System.out.println("test");
+                setSaveStatus(Boolean.TRUE);
+                setCheckStatus(Boolean.TRUE);
+                setInventoryFirst(null);
+                setInventorySecond(null);
+                setInventoryThird(null);
+                newInvtRequest.setSecondInventoryId(null);
+                newInvtRequest.setThirdInventoryId(null);
+            }
+            
+        }else{
+            setSaveStatus(Boolean.FALSE);
+            setCheckStatus(Boolean.FALSE);
+        }
+        
+    }
+    
+    public void saveNewFacility(){
+        newFacility.setFacilityName(getFaciliyName());
+        newFacility.setStatus(getSelectedStatus());
+        pb.addNewFacility(newFacility);
+        setSaveStatus(Boolean.TRUE);
+    }
+    
     //--------- Login function of the system ----------------//
     public String login(){
         String nextPage;
@@ -883,17 +1209,22 @@ public class MainController implements Serializable {
         System.out.println(getLoginUsername()+ " and " + getLoginPassword());
         if(getCheckUserLogin()){
             setLoginMember(pb.getLoginMember(getLoginUsername(), getLoginPassword()));
-            if(getLoginMember().getMemberType().equals("member")){
+            if(getLoginMember().getMemberType().equals("Member")){
+                setRequestList(pb.getMemberRequests(getLoginMember().getId()));
+                setMemberInventoryList(pb.getMemberEquipment(getLoginMember().getId()));
                 nextPage = "memberPage.xhtml?faces-redirect=true";
                 System.out.println("test1");
             }else{
                 nextPage = "adminPage.xhtml?faces-redirect=true";
                 System.out.println("test2");
             }
+            setCheckLoginStatus(Boolean.TRUE);
         }
-        else nextPage = "loginPage.xhtml?faces-redirect=true";
+        else{
+            nextPage = "loginPage.xhtml?faces-redirect=true";
+            setCheckLoginStatus(Boolean.FALSE);
+        }
         setUserName(""); 
-        
         System.out.println("test3");
         return nextPage;
     }
@@ -923,6 +1254,41 @@ public class MainController implements Serializable {
     
     public String goToAllInventoryPage(){
         return "inventoryEquipmentPage.xhtml?faces-redirect=true";
+    }
+    
+    public String goToAddInventory(){
+        return "addNewInventory.xhtml?faces-redirect=true";
+    }
+    
+    public String goToInventoryRequestDetailPage(InventoryRequest ir){
+        setChosenRequest(ir);
+        setInventoryEdit(Boolean.FALSE);
+        setTransactionList(pb.getChosenRequestTransaction(getChosenRequest().getId()));
+        todayDate();
+        return "requestDetailPage.xhtml?faces-redirect=true";
+    }
+    public String goToMemberRequestDetail(InventoryRequest ir){
+        setChosenRequest(ir);
+        setInventoryEdit(Boolean.FALSE);
+        return "memberEditRequest.xhtml?faces-redirect=true";
+    }
+    
+    public String invetoryRequestWithAction(InventoryRequest ir){
+        setChosenRequest(ir);
+        setInventoryEdit(Boolean.TRUE);        
+        if(getChosenRequest().getStatus().equals("Waiting")){
+            setInventoryStatus("Accepted");
+            getChosenRequest().setStatus("Accepted");
+            setGiveOutBy(getLoginMember().getUsername());
+            System.out.println("Accepted");
+        }else if(getChosenRequest().getStatus().equals("Accepted")){
+            setInventoryStatus("Returned");
+            getChosenRequest().setStatus("Returned");
+            setReturnBy(getLoginMember().getUsername());
+        }
+        //setInventoryStatus(getChosenRequest().getStatus());
+        
+        return "requestDetailPage.xhtml?faces-redirect=true";
     }
     
     public String goToInventoryFormPage(){
@@ -960,7 +1326,7 @@ public class MainController implements Serializable {
     public String saveMemberDetail(){
         
         pb.updateMember(getLoginMember());
-        setMemberEditable(Boolean.FALSE);           
+        setMemberEditable(Boolean.FALSE);        
         return "memberPage.xhtml?faces-redirect=true";
     }
     
@@ -971,7 +1337,8 @@ public class MainController implements Serializable {
         return "memberPage.xhtml?faces-redirect=true";
     }
     public String saveMemberPassword(){
-        if(getConfrimPasword().equals(getLoginMember().getPassword())){
+        if(getConfrimPasword().equals(getPassword())){
+            getLoginMember().setPassword(getPassword());
             pb.updateMember(getLoginMember());
             setCheckPassword(Boolean.TRUE);
             setEditPassword(Boolean.FALSE);
@@ -981,12 +1348,26 @@ public class MainController implements Serializable {
         return "memberPage.xhtml?faces-redirect=true";
     }
     
+    public void saveEditInventoryRequest(){
+        pb.saveInventoryRequestChanges(getChosenRequest());
+    }
+    
     public void saveAdminMemberDetail(){
         pb.updateMember(getEditMember());
+        setMemberEditable(Boolean.FALSE);
     }
     
     public void saveInventoryDetails(){
         pb.updateInventory(getChosenInventory());
+        setInventoryEdit(Boolean.FALSE);
+    }   
+    
+    public void editInventoryRequestDetail(){
+        setInventoryEdit(Boolean.TRUE);
+        setInventoryStatus(getChosenRequest().getStatus());
+    }
+    
+    public void cancelInventoryRequestEdit(){
         setInventoryEdit(Boolean.FALSE);
     }
     
@@ -1001,6 +1382,10 @@ public class MainController implements Serializable {
         return "memberPage.xhtml?faces-redirect=true";
     }
     
+    public void cancelEditMember(){
+        setMemberEditable(Boolean.FALSE);
+    }
+    
     public void editPasswordFunction(){
         setEditPassword(Boolean.TRUE);
     }
@@ -1013,8 +1398,23 @@ public class MainController implements Serializable {
         setInventoryEdit(Boolean.FALSE);
     }
     
+    public void editBookingStatus(){
+        setCheckFacility(Boolean.TRUE);
+        setSelectedStatus(getChosenBooking().getStatus());
+    }
+    
+    public void saveBookingStatus(){
+        pb.updateBooking(getChosenBooking());
+        setCheckFacility(Boolean.FALSE);
+    }
+    
+    public void cancelBookingStatus(){
+        setCheckFacility(Boolean.FALSE);
+    }
+        
     public String assignInventoryToMember(Inventory ivt){
         setChosenInventory(ivt);
+        setGiveOutBy(getLoginMember().getUsername());
         setInventoryAssignMember(Boolean.TRUE);
         setReturnButton(Boolean.FALSE);
         setInventoryEdit(Boolean.FALSE);
@@ -1023,6 +1423,7 @@ public class MainController implements Serializable {
     
     public String returnInvetoryPage(Inventory inv){
         setChosenInventory(inv);
+        setGiveOutBy(getLoginMember().getUsername());
         setInventoryAssignMember(Boolean.FALSE);
         setReturnButton(Boolean.TRUE);
         setInventoryEdit(Boolean.FALSE);
@@ -1035,27 +1436,40 @@ public class MainController implements Serializable {
     
     public void saveAssignToMember(){
         getChosenInventory().setCurrentUser(getChosenMemberInv());
-        getChosenInventory().setStatus("unavailable");
+        getChosenInventory().setStatus("Unavailable");
         pb.saveAssignInvtToMember(getChosenInventory(), getChosenMemberInv());
         setInventoryAssignMember(Boolean.FALSE);
         setReturnButton(Boolean.TRUE);
         setInventoryEdit(Boolean.FALSE);
+        settingInventoryTransaction("Inventory");
     }
     
     public void returnEquipment(){
         setInvtCurrentUser(getChosenInventory().getCurrentUser());
         getChosenInventory().setCurrentUser(null);
-        getChosenInventory().setStatus("available");
+        getChosenInventory().setStatus("Available");
         pb.returnEquipment(getChosenInventory(), getInvtCurrentUser());
         setInventoryAssignMember(Boolean.TRUE);
         setReturnButton(Boolean.FALSE);
-        setInventoryEdit(Boolean.FALSE);      
+        setInventoryEdit(Boolean.FALSE);     
+        settingInventoryTransaction("Inventory");
     }
         
-    public void selectedEditMember(RegisteredMember rm){
+    public String selectedEditMember(RegisteredMember rm){
         setEditMember(rm);
         setSelectedMemberType(rm.getMemberType());
         setMemberStatus(rm.getMemberStatus());
+        setRequestList(pb.getMemberRequests(getEditMember().getId()));
+        setTransactionList(pb.getMemberTransaction(getEditMember().getId()));
+        setMemberInventoryList(pb.getMemberEquipment(getEditMember().getId()));
+        return "memberDetailsPage.xhtml?faces-redirect=true";
+    }
+    
+    public String selectedEditAdmin(RegisteredMember rm){
+        setEditMember(rm);
+        setSelectedMemberType(rm.getMemberType());
+        setMemberStatus(rm.getMemberStatus());
+        return "adminDetailsPage.xhtml?faces-redirect=true";
     }
     
     public String selectedInventoryItem(Inventory inv){
@@ -1064,6 +1478,11 @@ public class MainController implements Serializable {
         setInventoryStatus(getChosenInventory().getStatus());        
         setInventoryEdit(Boolean.FALSE);
         return "editInventoryPage.xhtml?faces-redirect=true";
+    }
+    
+    public String selectedBooking(Booking bb){
+        setChosenBooking(bb);
+        return "editBookingPage.xhtml?faces-redirect=true";
     }
     
     public String retrieveSearchResult(){
@@ -1083,6 +1502,12 @@ public class MainController implements Serializable {
         setSelectedInvID(getChosenInventory().getId());
     }
     
+    public void todayDate(){
+        currentDate = new Date();
+        setCurrentDate(currentDate);        
+        System.out.println(format.format(getCurrentDate()) + "date" );
+    }
+    
     public void saveNewInventory(){
         addNewInventory.setEquipmentName(getEquipementName());
         addNewInventory.setEquipmentDescription(getEquipmentDescription());
@@ -1092,7 +1517,7 @@ public class MainController implements Serializable {
         addNewInventory.setAccessories(getAccessories());
         addNewInventory.setPatReference(getPatReference());
         addNewInventory.setBattery(getBattery());
-        addNewInventory.setStatus("available");
+        addNewInventory.setStatus("Available");
         pb.saveNewInventory(getAddNewInventory());
         getAllInventoris();
         setEquipementName("");
@@ -1106,6 +1531,105 @@ public class MainController implements Serializable {
         setSaveStatus(Boolean.TRUE);
         FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage("Inventory Equipment Saved"));
+    }
+    
+    public void saveRequestChange(){
+        
+        if(!getChosenRequest().getStatus().equals("Cancel")){
+            settingInventoryTransaction("Request");
+            setChosenMemberInv(getChosenRequest().getMemberId()); 
+        }
+        pb.saveInventoryRequestChanges(getChosenRequest());
+        setInventoryEdit(Boolean.FALSE);          
+        
+        if(getChosenRequest().getStatus().equals("Accepted")){
+            setChosenInventory(getChosenRequest().getFirstInventoryId());
+            setGiveOutBy(getChosenRequest().getGivenOut());
+            saveAssignToMember();
+            if(getChosenRequest().getSecondInventoryId() != null){
+                setChosenInventory(getChosenRequest().getSecondInventoryId());
+                saveAssignToMember();
+            }
+            if(getChosenRequest().getThirdInventoryId() != null){
+                setChosenInventory(getChosenRequest().getThirdInventoryId());
+                saveAssignToMember();
+            }
+        }else if(getChosenRequest().getStatus().equals("Returned")){
+            setChosenInventory(getChosenRequest().getFirstInventoryId());
+            setGiveOutBy(getChosenRequest().getGivenOut());
+            returnEquipment();
+            if(getChosenRequest().getSecondInventoryId() != null){
+                setChosenInventory(getChosenRequest().getSecondInventoryId());
+                returnEquipment();
+            }
+            if(getChosenRequest().getThirdInventoryId() != null){
+                setChosenInventory(getChosenRequest().getThirdInventoryId());
+                returnEquipment();
+            }
+        }
+    }
+    
+    public void settingInventoryTransaction(String transFor){
+        if(transFor.equals("Inventory")){
+            invtTrans.setInventoryId(getChosenInventory());
+            invtTrans.setMemberId(getChosenMemberInv());
+            invtTrans.setTransactionFor("Inventory");
+            
+            if(getChosenInventory().getStatus().equals("Unavailable")){            
+                invtTrans.setTransactionPurpose("Assign");
+                invtTrans.setGivenBy(getGiveOutBy());
+            }else if(getChosenInventory().getStatus().equals("Available")){            
+                invtTrans.setTransactionPurpose("Return"); 
+                invtTrans.setReceivedBy(getReturnBy());
+            }
+        }else if(transFor.equals("Request")){
+            invtTrans.setInvtRequestId(getChosenRequest());
+            invtTrans.setMemberId(getChosenRequest().getMemberId());
+            invtTrans.setTransactionFor("Request");
+            
+            if(getChosenRequest().getStatus().equals("Accepted")){            
+                invtTrans.setTransactionPurpose("Assign");
+                invtTrans.setGivenBy(getChosenRequest().getGivenOut());
+            }else if(getChosenRequest().getStatus().equals("Returned")){            
+                invtTrans.setTransactionPurpose("Return"); 
+                invtTrans.setReceivedBy(getChosenRequest().getReturnedBy());
+            }
+        }
+        invtTrans.setAssigner(getLoginMember().getUsername());
+        todayDate();
+        invtTrans.setDateIssued(getCurrentDate());       
+        pb.saveNewTransaction(invtTrans);
+    }
+    
+    public void viewTransaction(){
+        Long tempId;
+        tempId = getChosenInventory().getId();
+        setTransactionList(pb.getChosenInvtTransaction(tempId));
+        setTransactionShow(Boolean.TRUE);
+    }
+    
+    public void cancelTransaction(){
+        setTransactionShow(Boolean.FALSE);
+    }
+    
+    public void viewMemberTransaction(){
+        Long tempId;
+        tempId = getEditMember().getId();
+        setTransactionList(pb.getMemberTransaction(tempId));
+        setTransactionShow(Boolean.TRUE);
+    }
+    
+    public void cancelMemberTransaction(){
+        setTransactionShow(Boolean.FALSE);        
+    }
+    
+    public void viewMemberRequest(){
+        setRequestList(pb.getMemberRequests(getEditMember().getId()));
+        setMemberRequestShow(Boolean.TRUE);
+    }
+    
+    public void cancelMemberRequest(){
+        setMemberRequestShow(Boolean.FALSE);
     }
     
     /** All of these code for email function are retrieved from mkyong.com    **/
