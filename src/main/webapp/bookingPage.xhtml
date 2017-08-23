@@ -68,7 +68,7 @@
                             <h1 class="titleFont">Facility Booking Form</h1>
                         </div>
                         <div class="col-xs-12">
-                            <h:form>
+                            <h:form rendered="#{not mainController.isMember}">
                                 <div class="mainForm" style="margin: 0 auto;">                                    
                                     <h:panelGrid columns="6">
                                         <h:outputLabel class="bookingLabelFont" value="Facility"/>
@@ -110,17 +110,17 @@
 
                                         <h:outputLabel class="bookingLabelFont" value="Last Name"/>
                                         <h:outputLabel class="bookingLabelFont" value=" : "/>
-                                        <h:inputText class="inputTextStyle" value="#{mainController.lastName}"/>                                        
-
-                                        <h:outputLabel class="bookingLabelFont" value="Faculty"/>
-                                        <h:outputLabel class="bookingLabelFont" value=" : "/>
-                                        <h:inputText class="inputTextStyle" value="#{mainController.faculty}"/>                                        
+                                        <h:inputText class="inputTextStyle" value="#{mainController.lastName}"/>  
 
                                         <h:outputLabel id="emailInput" class="bookingLabelFont" value="Email Address"/>
                                         <h:outputLabel class="bookingLabelFont" value=" : "/>
                                         <h:inputText class="inputTextStyle" validatorMessage="Please use your university email" value="#{mainController.userEmail}">
                                             <f:validateRegex pattern="(([a-zA-Z0-9_]+@(myport\.ac\.uk)$)?)|(([a-zA-Z0-9_]+@(port\.ac\.uk)$)?)"/>
                                         </h:inputText>
+                                        
+                                        <h:outputLabel class="bookingLabelFont" value="Faculty"/>
+                                        <h:outputLabel class="bookingLabelFont" value=" : "/>
+                                        <h:inputText class="inputTextStyle" value="#{mainController.faculty}"/>  
                                         
                                         <h:outputLabel class="bookingLabelFont" value=""/>
                                         <h:outputLabel class="bookingLabelFont" value=""/>
@@ -136,7 +136,83 @@
                                                                                 
                                         <h:outputLabel class="bookingLabelFont" value=""/>
                                         <h:outputLabel class="bookingLabelFont" value=""/>
-                                        <h:commandButton class="buttonStyle" style="margin: 10px;" value="Book" action="#{mainController.saveBooking()}"></h:commandButton>
+                                        <h:commandButton class="buttonStyle" style="margin: 10px;" value="Book" action="#{mainController.saveBooking()}" rendered="#{not mainController.saveStatus}"></h:commandButton>
+                                        <h:outputLabel class="bookingLabelFont" value="You booking have been sent for processing" rendered="#{mainController.saveStatus}"/>
+                                    </h:panelGrid>
+                                </div>
+                            </h:form>
+                            <h:form rendered="#{mainController.isMember}">
+                                <div class="mainForm" style="margin: 0 auto;">
+                                    <h:outputText value="Sorry but you need to complete all your details before you can proceed with the request" class="outputTextFont" style="color: red;" rendered="#{not mainController.checkMemberDetails}"/>                                    
+                                    <h:panelGrid columns="6">
+                                        <h:outputLabel class="bookingLabelFont" value="Facility"/>
+                                        <h:outputLabel class="bookingLabelFont" value=" : "/>
+                                        <h:selectOneMenu class="inputTextStyle" value="#{mainController.selectedFacilitId}" onchange="submit()"
+                                                         valueChangeListener="#{mainController.changeFcID}" style="margin:10px"> 
+                                            <f:selectItem itemValue="#{null}" itemLabel="--Select Facility--"/>
+                                            <f:selectItems value="#{mainController.facilities}" var="f"
+                                                           itemLabel="#{f.facilityName}" itemValue="#{f.id}">
+                                            </f:selectItems>                                                          
+                                        </h:selectOneMenu>
+                                        
+                                        <h:outputLabel class="bookingLabelFont" value=""/>
+                                        <h:outputLabel class="bookingLabelFont" value=""/>
+                                        <h:outputLabel class="inputTextStyle" value="" rendered="#{mainController.checkDate and mainController.checkDateFormat}"/>
+                                        <h:outputText class="loginOption" style="color:red;text-align: center;" value="*Date Cannot be Empty or Please Check Your Selected Date Format" rendered="#{not mainController.checkDateFormat}"/>
+                                        <h:outputText class="loginOption" style="color:red;text-align: center;" value="*Date(Until) cannot be before Date(From)" rendered="#{not mainController.checkDate}"/>
+                                        
+                                        <h:outputLabel class="bookingLabelFont" value="Date(From)"/>
+                                        <h:outputLabel class="bookingLabelFont" value=" : "/>
+                                        <h:inputText value="#{mainController.tempDateStart}" styleClass="form-control datepicker inputDateStyle"/>
+                                        
+                                        <h:outputLabel class="bookingLabelFont" value="Date(Until)"/>
+                                        <h:outputLabel class="bookingLabelFont" value=" : "/>
+                                        <h:inputText class="inputTextStyle" value="#{mainController.tempDateEnd}" styleClass="form-control datepicker inputDateStyle" />
+                                                                   
+                                    </h:panelGrid>                                   
+                                    
+                                </div>
+                                <div class="detailsForm" style="margin: 0 auto;">
+                                    <h:panelGrid columns="3">
+                                        <h:outputLabel class="bookingLabelFont" value="Student/Staff Id"/>
+                                        <h:outputLabel class="bookingLabelFont" value=" : "/>
+                                        <h:inputText class="inputTextStyle" value="#{mainController.loginMember.username}"/>                                       
+
+                                        <h:outputLabel class="bookingLabelFont" value="First Name"/>
+                                        <h:outputLabel class="bookingLabelFont" value=" : "/>
+                                        <h:inputText class="inputTextStyle" value="#{mainController.loginMember.firstName}"/>                                        
+
+                                        <h:outputLabel class="bookingLabelFont" value="Last Name"/>
+                                        <h:outputLabel class="bookingLabelFont" value=" : "/>
+                                        <h:inputText class="inputTextStyle" value="#{mainController.loginMember.lastName}"/>  
+                                        
+                                        <h:outputLabel id="emailInput" class="bookingLabelFont" value="Email Address"/>
+                                        <h:outputLabel class="bookingLabelFont" value=" : "/>
+                                        <h:inputText class="inputTextStyle" validatorMessage="Please use your university email" value="#{mainController.loginMember.email}">
+                                            <f:validateRegex pattern="(([a-zA-Z0-9_]+@(myport\.ac\.uk)$)?)|(([a-zA-Z0-9_]+@(port\.ac\.uk)$)?)"/>
+                                        </h:inputText>
+                                        
+                                        <h:outputLabel class="bookingLabelFont" value="Faculty"/>
+                                        <h:outputLabel class="bookingLabelFont" value=" : "/>
+                                        <h:inputText class="inputTextStyle" value="#{mainController.faculty}"/>  
+                                        
+                                        <h:outputLabel class="bookingLabelFont" value=""/>
+                                        <h:outputLabel class="bookingLabelFont" value=""/>
+                                        <h:message for="emailInput" class="bookingLabelFont" style="color:red" />
+
+                                        <h:outputLabel class="bookingLabelFont" value="Purpose"/>
+                                        <h:outputLabel class="bookingLabelFont" value=" : "/>
+                                        <h:inputText class="inputTextStyle" value="#{mainController.purpose}" size="40"/>
+
+                                        <h:outputLabel class="bookingLabelFont" value="Message"/>
+                                        <h:outputLabel class="bookingLabelFont" value=" : "/>
+                                        <h:inputTextarea class="inputTextStyle" value="#{mainController.message}" cols="40" rows="5"/>
+                                                                                
+                                        <h:outputLabel class="bookingLabelFont" value=""/>
+                                        <h:outputLabel class="bookingLabelFont" value=""/>
+                                        <h:commandButton class="buttonStyle" style="margin: 10px;" value="Book" action="#{mainController.saveBookingMember()}" rendered="#{mainController.checkMemberDetails and not mainController.saveStatus}"></h:commandButton>
+                                        <h:commandButton class="buttonStyle" style="margin: 10px;" value="Go to My Account" action="#{mainController.goToMyAccountMember()}" rendered="#{not mainController.checkMemberDetails}"></h:commandButton>
+                                        <h:outputLabel class="bookingLabelFont" value="You booking have been sent for processing" rendered="#{mainController.saveStatus}"/>
                                     </h:panelGrid>
                                 </div>
                             </h:form>

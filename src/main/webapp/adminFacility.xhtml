@@ -104,7 +104,7 @@
                 <div class="col-xs-12">
                     <div style="max-height: 450px; width: 950px; overflow: auto; margin: 0 auto;">                        
                         <h1 class="titleFont" style="text-align:center"> Booking's List</h1>                         
-                         <h:form id="memberList" style="margin: 10px;" target="_blank">
+                         <h:form id="memberList" style="margin: 10px;" target="_blank" rendered="#{mainController.bookingList.size() != 0}">
                              <h:dataTable border="1" value="#{mainController.bookingList}" var="book" styleClass="mainTable" headerClass="tableHeader" rowClasses="tableRowEven,tableRowOdd">                    
                                 <h:column>
                                     <f:facet name="header">
@@ -170,6 +170,9 @@
                                 </h:column>
                              </h:dataTable>                    
                          </h:form>
+                        <div style="text-align: center">
+                            <h:outputText class="outputLabelFont2" value="No Facility Booking Request" rendered="#{mainController.bookingList.size() == 0}"></h:outputText>
+                        </div> 
                     </div>
                 </div>             
             </div>

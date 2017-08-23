@@ -7,6 +7,9 @@ and open the template in the editor.
     Created on : 15-Jul-2017, 23:03:53
     Author     : ASUS
 */
+body{
+    min-width: 1200px!important;
+}
 #bodyWhite{
     background-color: white;
     -webkit-background-size: cover;
@@ -47,11 +50,12 @@ and open the template in the editor.
     background-size: cover; 
     background-size: 100% 100%;
 }
-.navbar {
-    position: relative;
-    min-height: 50px;
-    border: none;
-    min-width: 1000px;
+.container-fluid {
+    min-width: 1200px;
+}
+.container {
+  min-width: 1200px;
+  max-width: none !important;
 }
 .headerBackground{
     background-image: url("../Images/stonearchitecture.jpg");
@@ -65,39 +69,65 @@ and open the template in the editor.
     width: 100%;
     height: 150px;
 }
-.navbarItem{
-    text-align: center;
-    color: white;
-    font-weight: bold;
-    font-style: normal;
-    font-family: Georgia;
-}
-.navbarColour{
-    background-color: #4d454f;
-}
-.secondNavColour{
-    background-color: #4d454f;
+
+@media (min-width: 1000px) {
+    .container-fluid {
+        min-width: 1200px;
+    }
+    .navbar-nav{
+        position: relative;
+        min-height: 50px;
+        border: none;
+    }
+    .navbar {   
+        position: relative;
+        min-height: 50px;
+        border: none;
+    }
+    .navbarItem{
+        text-align: center;
+        color: white;
+        font-weight: bold;
+        font-style: normal;
+        font-family: Georgia;
+    }
+    .navbarColour{
+        background-color: #4d454f;
+    }
+    .secondNavColour{
+        background-color: #4d454f;
+    }    
+
+    .navbar-default .navbar-nav>li>a.navbarItem{
+        color: white;
+        font-family: Georgia;
+        font-size: 18px;
+        margin-right: 15px;
+    }
+    .navbar-default .navbar-nav>li>a.navbarItem:hover{
+        color: #2c0b42;
+        font-family: Georgia;
+        font-size: 18px;
+    }
+    .navbar-default .navbar-brand{
+        color: white;
+        font-family: Georgia;
+    }
+    .navbar-default .navbar-brand > a.navHeaderColour:hover{
+        color: white;
+        font-family: Georgia;
+    }
+    .navbar-default .navbar-nav>li.navbarItemActive{
+        background-color: #765e7c;
+        border-radius: 5px;
+    }
+    .navBarColumn{
+        background-color: #4d454f;
+        max-height: 50px;
+        min-width: 1000px;
+    }
 }
 
-.navbar-default .navbar-nav>li>a.navbarItem{
-    color: white;
-    font-family: Georgia;
-    font-size: 18px;
-    margin-right: 15px;
-}
-.navbar-default .navbar-nav>li>a.navbarItem:hover{
-    color: #2c0b42;
-    font-family: Georgia;
-    font-size: 18px;
-}
-.navbar-default .navbar-brand{
-    color: white;
-    font-family: Georgia;
-}
-.navbar-default .navbar-brand > a.navHeaderColour:hover{
-    color: white;
-    font-family: Georgia;
-}
 .boxes{
     margin: 0 auto;
     margin-top: 40px;
@@ -146,13 +176,11 @@ and open the template in the editor.
     color: #550982;
     text-shadow: 1px -2px 13px rgba(150, 150, 150, 1);
 }
-.navBarColumn{
-    background-color: #4d454f;
-    max-height: 50px;
-}
+
 .logoImage{
 }
 .contentPanel{
+    min-width: 1200px;
     background-color: #dbdbdb;
     height: 600px;
     width: 100%;
@@ -603,6 +631,7 @@ and open the template in the editor.
     font-family: Georgia;
     font-size: 15px;
     padding: 5px;
+    border-radius: 5px;
 }
 .inputTextStyleM{
     color: #550982;
@@ -696,10 +725,7 @@ a.quickLink2:hover{
     font-size: 13px;
     color: #50235e;
 }
-.navbar-default .navbar-nav>li.navbarItemActive{
-    background-color: #765e7c;
-    border-radius: 5px;
-}
+
 .mainTable{
     border-collapse:collapse;
 }
@@ -748,7 +774,7 @@ a.quickLink2:hover{
 }
 .memberTableRowOdd{
     text-align:center;
-    background:none repeat scroll 0 0 #E7D5EB;
+    background:none repeat scroll 0 0 #F9F9F9;
     border-top:1px solid #8c8c8c;
     padding: 15px;
     color: black;
@@ -795,6 +821,10 @@ a.quickLink2:hover{
     width: 500px;
     padding:10px;
 }
+.inventoryDetail2{
+    width: 350px;
+    max-height: 400px;
+}
 .transactionColumn{
     width: 750px;
     padding:10px;
@@ -823,4 +853,12 @@ a.quickLink2:hover{
     -moz-box-shadow: 2px 3px 19px -1px rgba(107,61,107,0.44);
     box-shadow: 2px 3px 19px -1px rgba(107,61,107,0.44);
     margin-bottom: 20px;
+}
+.messageIcon{
+    width:50px;
+    height:50px;
+}
+.messageIcon:hover{
+    width:60px;
+    height:60px;
 }

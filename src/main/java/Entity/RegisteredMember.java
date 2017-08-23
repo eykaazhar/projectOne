@@ -27,7 +27,10 @@ import javax.persistence.OneToMany;
     @NamedQuery(name="RegisteredMember.AllMember", query="SELECT m FROM RegisteredMember m WHERE m.memberType = 'Member'"),
     @NamedQuery(name="RegisteredMember.AllAdmin", query="SELECT a FROM RegisteredMember a WHERE a.memberType = 'Admin'"),
     @NamedQuery(name="RegisteredMember.FindUserByID", query="SELECT a FROM RegisteredMember a WHERE a.id = :memberID"),
-    @NamedQuery(name="RegisteredMember.UnactiveUser", query="UPDATE RegisteredMember r SET r.memberStatus = :newStatus WHERE r.id = :memberID")
+    @NamedQuery(name="RegisteredMember.UnactiveUser", query="UPDATE RegisteredMember r SET r.memberStatus = :newStatus WHERE r.id = :memberID"),
+    @NamedQuery(name="RegisteredMember.Search", query="SELECT r FROM RegisteredMember r WHERE (UPPER(r.username) LIKE UPPER(:searchKeyword) escape '\\')"
+                + " OR (UPPER(r.firstName) LIKE UPPER(:searchKeyword) escape '\\')"
+                + " OR (UPPER(r.lastName) LIKE UPPER(:searchKeyword) escape '\\')")
 })
 
 public class RegisteredMember implements Serializable {

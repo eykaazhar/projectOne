@@ -11,10 +11,12 @@ import Session.FacilityFacade;
 import Session.RegisteredMemberFacade;
 import Entity.Booking;
 import Entity.Facility;
+import Entity.GeneralMessage;
 import Entity.Inventory;
 import Entity.InventoryRequest;
 import Entity.InventoryTransaction;
 import Entity.RegisteredMember;
+import Session.GeneralMessageFacade;
 import Session.InventoryFacade;
 import Session.InventoryRequestFacade;
 import Session.InventoryTransactionFacade;
@@ -40,6 +42,9 @@ public class PortEcoBusiness {
     private InventoryRequestFacade irf;
     @EJB
     private InventoryTransactionFacade itf;
+    @EJB
+    private GeneralMessageFacade gmf;
+    
    
     
     //-- get all facilities from database --//
@@ -111,6 +116,10 @@ public class PortEcoBusiness {
     public List<Inventory> getInventorySearch(String searchKeyword){
         return invf.getSearchResult(searchKeyword);
     }
+    // get inventory list by the search keyword --//
+    public List<Inventory> getInventoryFullSearch(String searchKeyword){
+        return invf.getFullSearchResult(searchKeyword);
+    }
     //-- assign inventory to registered member --//
     public void saveAssignInvtToMember(Inventory i, RegisteredMember rm){
         invf.edit(i);
@@ -165,6 +174,18 @@ public class PortEcoBusiness {
     }
     public List<InventoryTransaction> getChosenRequestTransaction(Long reqID){
         return itf.getChosenRequestTransaction(reqID);
+    }
+    public List<RegisteredMember> getSearchMemberResult(String searchKeyword){
+        return rmf.getSearchMember(searchKeyword);
+    }
+    public void saveNewMessage(GeneralMessage gm){
+        gmf.create(gm);
+    }
+    public List<GeneralMessage> getWaitingMessage(){
+        return gmf.getMessage();
+    }
+    public List<Booking> getMemberBooking(String username){
+        return bf.getMemberBooking(username);
     }
     
 }

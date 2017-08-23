@@ -155,7 +155,7 @@
                     </div>
                     <div class="row">
                         <div style="max-height: 450px; overflow: auto;">
-                            <h:form id="inventoryRequestList" style="margin: 10px;" target="_blank">
+                            <h:form id="inventoryRequestList" style="margin: 10px;" target="_blank" rendered="#{mainController.requestList.size() != 0}">
                             <h:dataTable border="1" value="#{mainController.requestList}" var="req" styleClass="mainTable" headerClass="tableHeader" rowClasses="tableRowEven,tableRowOdd">                    
                                 <h:column>
                                     <f:facet name="header">
@@ -207,15 +207,18 @@
                                         <h:outputText class="tableItem" value="Detail" />
                                     </f:facet>
                                     <div class="tableItem">
-                                        <h:commandButton value="View" action="#{mainController.goToInventoryRequestDetailPage(req)}" ></h:commandButton>
+                                        <h:commandButton value="View" action="#{mainController.goToInventoryRequestDetailPage(req)}"></h:commandButton>
                                     </div>                               
                                 </h:column>
                             </h:dataTable>                    
-                            </h:form>  
+                            </h:form>
+                            <div style="text-align: center">
+                                <h:outputText class="outputLabelFont2" value="No current inventory equipment in posess"  rendered="#{mainController.requestList.size() == 0}"></h:outputText>
+                            </div> 
                         </div>
                         <div class="buttonPanel" style="text-align: right">
-                            <h:form target="_blank">
-                                <h:commandButton class="buttonStyle" value="Open Table" action="#{mainController.goToAllInventoryPage()}"></h:commandButton>
+                            <h:form target="_blank"  rendered="#{mainController.requestList.size() != 0}">
+                                <h:commandButton class="buttonStyle" value="Open Table" action="#{mainController.goToAllRequest()}"></h:commandButton>
                             </h:form>
                         </div>  
                     </div>

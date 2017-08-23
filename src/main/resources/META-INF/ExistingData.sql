@@ -1,10 +1,10 @@
-INSERT INTO FACILITY(ID, FACILITYNAME, STATUS) VALUES(1, 'House','available');
-INSERT INTO FACILITY(ID, FACILITYNAME, STATUS) VALUES(2, 'Control Room', 'available');
-INSERT INTO FACILITY(ID, FACILITYNAME, STATUS) VALUES(3, 'Experimental Garden', 'available');
+INSERT INTO FACILITY(ID, FACILITYNAME, STATUS) VALUES(1, 'House','Available');
+INSERT INTO FACILITY(ID, FACILITYNAME, STATUS) VALUES(2, 'Control Room', 'Available');
+INSERT INTO FACILITY(ID, FACILITYNAME, STATUS) VALUES(3, 'Experimental Garden', 'Available');
 
-INSERT INTO REGISTEREDMEMBER(ID, EMAIL, USERNAME, FIRSTNAME, PASSWORD, MEMBERTYPE) VALUES(-1,'member@gmail.com', '123456', 'Syafiqah', 'password', 'member');
-INSERT INTO REGISTEREDMEMBER(ID, EMAIL, USERNAME, FIRSTNAME, PASSWORD, MEMBERTYPE) VALUES(-2,'member@gmail.com', '123457', 'Akihito', 'password', 'member');
-INSERT INTO REGISTEREDMEMBER(ID, EMAIL, USERNAME, FIRSTNAME, PASSWORD, MEMBERTYPE) VALUES(-3,'admin@gmail.com', 'admin', 'Admin', 'password', 'admin');
+INSERT INTO REGISTEREDMEMBER(ID, EMAIL, USERNAME, FIRSTNAME, PASSWORD, MEMBERTYPE) VALUES(-1,'member@gmail.com', '123456', 'Syafiqah', 'password', 'Member');
+INSERT INTO REGISTEREDMEMBER(ID, EMAIL, USERNAME, FIRSTNAME, PASSWORD, MEMBERTYPE) VALUES(-2,'member@gmail.com', '123457', 'Akihito', 'password', 'Member');
+INSERT INTO REGISTEREDMEMBER(ID, EMAIL, USERNAME, FIRSTNAME, PASSWORD, MEMBERTYPE) VALUES(-3,'admin@gmail.com', 'admin', 'Admin', 'password', 'Admin');
 
 INSERT INTO STATUSDESCRIPTION(ID,STATUSDES, STATUSLABEL) VALUES(-1, 'admin', 'Administrator');
 INSERT INTO STATUSDESCRIPTION(ID,STATUSDES, STATUSLABEL) VALUES(-2, 'member', 'Member');
@@ -18,28 +18,28 @@ INSERT INTO STATUSDESCRIPTION(ID,STATUSDES, STATUSLABEL) VALUES(-9, 'processed',
 INSERT INTO STATUSDESCRIPTION(ID,STATUSDES, STATUSLABEL) VALUES(-10, 'notProcessed', 'Not yet To be Processed');
 
 INSERT INTO INVENTORY(ID, EQUIPMENTNAME, MAKE, MODEL, SERIALNUMBER, ACCESSORIES, PATREFERENCE, BATTERY, STATUS) 
-VALUES(-1, 'FLIR Thermal Imaging Camera', 'FLIR T420bx', 'T62108667', '62108667', 'Flight Case; 2x batteries & charger; cables; documentation CD; 4GB SD HC memory card', '2a 2b(USB)', 'Flir', 'available');
+VALUES(-1, 'FLIR Thermal Imaging Camera', 'FLIR T420bx', 'T62108667', '62108667', 'Flight Case; 2x batteries & charger; cables; documentation CD; 4GB SD HC memory card', '2a 2b(USB)', 'Flir', 'Available');
 
 INSERT INTO INVENTORY(ID, EQUIPMENTNAME, MAKE, MODEL, SERIALNUMBER, ACCESSORIES, PATREFERENCE, BATTERY, STATUS) 
-VALUES(-2, 'FLIR Thermal Imaging Camera', 'Testo', '880-3', '1715573', 'Flight Case; 2x batteries & charger; cables; 27mm f1.0lens; documentation CD; 1GB SD HC memory card; tripod bracker', '1', 'Testo', 'available');
+VALUES(-2, 'FLIR Thermal Imaging Camera', 'Testo', '880-3', '1715573', 'Flight Case; 2x batteries & charger; cables; 27mm f1.0lens; documentation CD; 1GB SD HC memory card; tripod bracker', '1', 'Testo', 'Available');
 
 INSERT INTO INVENTORY(ID, EQUIPMENTNAME, MAKE, MODEL, SERIALNUMBER, ACCESSORIES, PATREFERENCE, BATTERY, STATUS) 
-VALUES(-3, 'EXTECH Moisture Meter', 'Extech', 'MO297', '130321267', 'Carry case; hygrometer cap; external pin probe; user manual', '', '9v', 'available');
+VALUES(-3, 'EXTECH Moisture Meter', 'Extech', 'MO297', '130321267', 'Carry case; hygrometer cap; external pin probe; user manual', '', '9v', 'Available');
 
 INSERT INTO INVENTORY(ID, EQUIPMENTNAME, MAKE, MODEL, SERIALNUMBER, ACCESSORIES, PATREFERENCE, BATTERY, STATUS) 
-VALUES(-4, 'TESTO Handled Logger', 'Testo', '720', '02805843', '(Probes listed separately)', '', '9v', 'available');
+VALUES(-4, 'TESTO Handled Logger', 'Testo', '720', '02805843', '(Probes listed separately)', '', '9v', 'Available');
 
 INSERT INTO INVENTORY(ID, EQUIPMENTNAME, MAKE, MODEL, SERIALNUMBER, ACCESSORIES, PATREFERENCE, BATTERY, STATUS) 
-VALUES(-5, 'TESTO NTC Air Probe', 'Testo', '06131712', '02805843', '(Use with Testo 720)', '', 'N/A', 'available');
+VALUES(-5, 'TESTO NTC Air Probe', 'Testo', '06131712', '02805843', '(Use with Testo 720)', '', 'N/A', 'Available');
 
 INSERT INTO INVENTORY(ID, EQUIPMENTNAME, MAKE, MODEL, SERIALNUMBER, ACCESSORIES, PATREFERENCE, BATTERY, STATUS) 
-VALUES(-6, 'TESTO NTC Surface Probe', 'Testo', '06131712', '02805843', '(Use with Testo 720)', '', 'N/A', 'available');
+VALUES(-6, 'TESTO NTC Surface Probe', 'Testo', '06131712', '02805843', '(Use with Testo 720)', '', 'N/A', 'Available');
 
 INSERT INTO INVENTORY(ID, EQUIPMENTNAME, MAKE, MODEL, SERIALNUMBER, ACCESSORIES, PATREFERENCE, BATTERY, STATUS) 
-VALUES(-7, 'VAISALA Handled Humicap', 'Vaisala', 'HM40', 'K2840001', 'HMP 113 Probe listed separately; User manual', '', '2xAA', 'available');
+VALUES(-7, 'VAISALA Handled Humicap', 'Vaisala', 'HM40', 'K2840001', 'HMP 113 Probe listed separately; User manual', '', '2xAA', 'Available');
 
 INSERT INTO INVENTORY(ID, EQUIPMENTNAME, MAKE, MODEL, SERIALNUMBER, ACCESSORIES, PATREFERENCE, BATTERY, STATUS) 
-VALUES(-8, 'VAISALA Humicap Probe', 'Vaisala', 'HMP113', 'K2730001', '(Use with HM40)', '', 'N/A', 'available');
+VALUES(-8, 'VAISALA Humicap Probe', 'Vaisala', 'HMP113', 'K2730001', '(Use with HM40)', '', 'N/A', 'Available');
 
 INSERT INTO INVENTORY(ID, EQUIPMENTNAME, MAKE, MODEL, SERIALNUMBER, ACCESSORIES, PATREFERENCE, BATTERY, STATUS) 
-VALUES(-9, 'TSI Airflow Handled Anemometer', 'Airflow', 'LCA501', 'LCA5014', 'Flight Case; User manual', '', '2xAA', 'available');
+VALUES(-9, 'TSI Airflow Handled Anemometer', 'Airflow', 'LCA501', 'LCA5014', 'Flight Case; User manual', '', '2xAA', 'Available');

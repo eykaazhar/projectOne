@@ -8,7 +8,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link href="Resources/Css/portCss.css" rel="stylesheet" type="text/css"/>
-    
     <h:head>
         <title>Port-Eco House</title>
     </h:head>
@@ -63,89 +62,117 @@
                 <div class="col-xs-12">
                     <div class="row">
                         <div class="col-xs-12" style="margin: 0 auto;margin-top:20px;">
-                            <h1 class="titleFont">Inventory Equipment List</h1>
+                            <h1 class="titleFont">Request List</h1>
                         </div>
                         <div class="col-xs-12">
-                            <div style="margin: 10px;">                                
-                                <h:form>
-                                    <h:panelGrid columns="4">
-                                        <h:outputText class="font1" value="Search"/>
-                                        <h:inputText value="#{mainController.invtSearchKeyword}" class="inputTextStyleM"  style="margin-right: 10px;"/>
-                                        <h:commandButton class="buttonStyle" value="Go" action="#{mainController.retrieveInventorySearchResult()}"></h:commandButton>
-                                        <h:commandButton class="buttonStyle" value="Reset Search" action="#{mainController.resetInventorySearchResult()}"></h:commandButton>
-                                    </h:panelGrid>
-                                </h:form>
-                            </div>
+                            
                             <div style="width:1200px;height: 450px; overflow: auto;">
                                 <h:form id="inventoryList" style="margin: 10px;" target="_blank">
-                                    <h:dataTable border="1" value="#{mainController.inventoryList}" var="inv" styleClass="mainTable" headerClass="tableHeader" rowClasses="tableRowEven,tableRowOdd">                    
+                                    <h:dataTable border="1" value="#{mainController.requestList}" var="req" styleClass="mainTable" headerClass="tableHeader" rowClasses="tableRowEven,tableRowOdd">                    
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText class="tableItem" value="Date Issued" />
+                                            </f:facet>
+                                            <h:outputText class="tableItem" value="#{req.dateIssued}">
+                                                <f:convertDateTime pattern="dd-MM-yyyy"/>
+                                            </h:outputText>
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText class="tableItem" value="Username" />
+                                            </f:facet>
+                                            <h:outputText class="tableItem" value="#{req.memberId.username}"/>
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText class="tableItem" value="Name" />
+                                            </f:facet>
+                                            <h:outputText class="tableItem" value="#{req.memberId.firstName} #{req.memberId.lastName}"/>
+                                        </h:column>                                        
                                         <h:column>
                                             <f:facet name="header">
                                                 <h:outputText class="tableItem" value="Equipment Name" />
                                             </f:facet>
-                                            <h:outputText class="tableItem" value="#{inv.equipmentName}"/>
+                                           <h:outputText class="tableItem" value="#{req.firstInventoryId.equipmentName}"/>
                                         </h:column>
                                         <h:column>
                                             <f:facet name="header">
-                                                <h:outputText class="tableItem" value="Make" />
+                                                <h:outputText class="tableItem" value="Equipment Name (Second)" />
                                             </f:facet>
-                                            <h:outputText class="tableItem" value="#{inv.make}"/>
+                                           <h:outputText class="tableItem" value="#{req.secondInventoryId.equipmentName}"/>
                                         </h:column>
                                         <h:column>
                                             <f:facet name="header">
-                                                <h:outputText class="tableItem" value="Model" />
+                                                <h:outputText class="tableItem" value="Equipment Name (Third)" />
                                             </f:facet>
-                                            <h:outputText class="tableItem" value="#{inv.model}"/>
+                                           <h:outputText class="tableItem" value="#{req.thirdInventoryId.equipmentName}"/>
                                         </h:column>
                                         <h:column>
                                             <f:facet name="header">
-                                                <h:outputText class="tableItem" value="Serial Number" />
+                                                <h:outputText class="tableItem" value="Date Borrowed" />
                                             </f:facet>
-                                            <h:outputText class="tableItem" value="#{inv.serialNumber}"/>
+                                            <h:outputText class="tableItem" value="#{req.dateBorrowed}">
+                                                <f:convertDateTime pattern="dd-MM-yyyy"/>
+                                            </h:outputText>
                                         </h:column>
                                         <h:column>
                                             <f:facet name="header">
-                                                <h:outputText class="tableItem" value="Accessories" />
+                                                <h:outputText class="tableItem" value="Date Returned" />
                                             </f:facet>
-                                            <h:outputText class="tableItem" value="#{inv.accessories}"/>
+                                            <h:outputText class="tableItem" value="#{req.dateReturned}">
+                                                <f:convertDateTime pattern="dd-MM-yyyy"/>
+                                            </h:outputText>
                                         </h:column>
                                         <h:column>
                                             <f:facet name="header">
-                                                <h:outputText class="tableItem" value="Pat Rreference" />
+                                                <h:outputText class="tableItem" value="Agreement" />
                                             </f:facet>
-                                            <h:outputText class="tableItem" value="#{inv.patReference}"/>
+                                            <h:outputText class="tableItem" value="Yes" rendered="#{req.memberAgreement}"></h:outputText>
+                                            <h:outputText class="tableItem" value="No" rendered="#{not req.memberAgreement}"></h:outputText>                                               
                                         </h:column>
                                         <h:column>
                                             <f:facet name="header">
-                                                <h:outputText class="tableItem" value="Battery" />
+                                                <h:outputText class="tableItem" value="Contact Number" />
                                             </f:facet>
-                                            <h:outputText class="tableItem" value="#{inv.battery}"/>
-                                        </h:column>  
+                                            <h:outputText class="tableItem" value="#{req.memberId.contactNumber}"/>
+                                        </h:column>
                                         <h:column>
                                             <f:facet name="header">
-                                                <h:outputText class="tableItem" value="Total" />
+                                                <h:outputText class="tableItem" value="Email" />
                                             </f:facet>
-                                            <h:outputText class="tableItem" value="#{inv.total}"/>
+                                            <h:outputText class="tableItem" value="#{req.memberId.contactNumber}"/>
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText class="tableItem" value="Given Out By" />
+                                            </f:facet>
+                                            <h:outputText class="tableItem" value="#{req.givenOut}"/>
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText class="tableItem" value="Returned By" />
+                                            </f:facet>
+                                            <h:outputText class="tableItem" value="#{req.returnedBy}"/>
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText class="tableItem" value="Remarks" />
+                                            </f:facet>
+                                            <h:outputText class="tableItem" value="#{req.remarks}"/>
                                         </h:column>
                                         <h:column>
                                             <f:facet name="header">
                                                 <h:outputText class="tableItem" value="Status" />
                                             </f:facet>
-                                            <h:outputText class="tableItem" value="#{inv.status}"/>
-                                        </h:column> 
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <h:outputText class="tableItem" value="Current User" />
-                                            </f:facet>
-                                            <h:outputText class="tableItem" value="#{inv.currentUser.username}"/>
-                                        </h:column>   
+                                            <h:outputText class="tableItem" value="#{req.status}"/>
+                                        </h:column>
                                         <h:column>
                                             <f:facet name="header">Action</f:facet>
                                             <div class="tableItem">
-                                                <h:commandButton value="Open" action="#{mainController.selectedInventoryItem(inv)}"></h:commandButton> 
+                                                <h:commandButton value="Open" action="#{mainController.goToInventoryRequestDetailPage(req)}"></h:commandButton> 
                                             </div>                               
                                         </h:column>
-                                    </h:dataTable>                    
+                                    </h:dataTable>     
                                 </h:form>  
                             </div>
                         </div>
@@ -155,7 +182,7 @@
         </div>
         <div class="footerPanel">           
             <p class="footerFont">&copy; BSc(Hons) Building Survey</p>
-        </div>          
+        </div>     
     </h:body>
 </html>
 

@@ -38,7 +38,14 @@ public class InventoryFacade extends AbstractFacade<Inventory> {
     }
     
     public List<Inventory> getSearchResult(String searchKeyword){
+        String searchKeywordFormat = "%" + searchKeyword + "%";
         TypedQuery<Inventory> Query=getEntityManager().createNamedQuery("Inventory.Search", Inventory.class);
+        Query.setParameter("searchKeyword", searchKeywordFormat);
+        return Query.getResultList();
+    }
+    
+    public List<Inventory> getFullSearchResult(String searchKeyword){        
+        TypedQuery<Inventory> Query=getEntityManager().createNamedQuery("Inventory.FullSearch", Inventory.class);
         Query.setParameter("searchKeyword", searchKeyword);
         return Query.getResultList();
     }

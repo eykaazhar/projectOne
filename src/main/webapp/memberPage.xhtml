@@ -57,7 +57,6 @@
         </div>
         <div class="container-fluid memberPanel">
             <div class="container">
-                
                 <div class="col-xs-12" style="margin-top: 20px;">
                     <div class="col-xs-3">
                         <h2 class="font1">Quick Access</h2>                                                     
@@ -167,11 +166,11 @@
                     </div>                    
                     <div class="col-xs-9">
                         <div class="row">
-                            <div class="col-xs-7">
+                            <div class="col-xs-6">
                                 <h2 class="font1">Inventory Equipment in Hand</h2>
                                 <div class="memberInfoPanel">
                                     <div style="margin: 0 auto;max-height: 400px;overflow: auto;" >
-                                        <h:form id="invList" style="margin: 10px;" target="_blank" rendered="#{mainController.memberInventoryList.size() != 0}">
+                                        <h:form id="invList" style="margin: 10px;" rendered="#{mainController.memberInventoryList.size() != 0}">
                                             <h:dataTable border="1" value="#{mainController.memberInventoryList}" var="inv" styleClass="mainTable" headerClass="memberTableHeader" rowClasses="memberTableRowEven,memberTableRowOdd">                    
                                                 <h:column>
                                                     <f:facet name="header">
@@ -180,30 +179,49 @@
                                                     <h:outputText class="tableItem" value="#{inv.equipmentName}"/>
                                                 </h:column>
                                                 <h:column>
-                                                <f:facet name="header">
-                                                    <h:outputText class="tableItem" value="Accessories" />
-                                                </f:facet>
-                                                <h:outputText class="tableItem" value="#{inv.accessories}"/>
-                                                </h:column>
-                                                <h:column>
-                                                    <f:facet name="header">
-                                                        <h:outputText class="tableItem" value="Battery" />
-                                                    </f:facet>
-                                                    <h:outputText class="tableItem" value="#{inv.battery}"/>
-                                                </h:column>                                                  
+                                                    <f:facet name="header">Action</f:facet>
+                                                    <div class="tableItem">
+                                                        <h:commandButton class="buttonStyle4" value="View" action="#{mainController.displayEquipmentDetail(inv)}">
+                                                            <f:ajax onevent="displayInventoryDetail" render="inventoryForm"/>
+                                                        </h:commandButton> 
+                                                    </div>                               
+                                                </h:column>                                                
                                             </h:dataTable>                    
                                         </h:form>  
                                     </div>
                                     <h:outputText class="outputLabelFont2" value="No current inventory equipment in posess" rendered="#{mainController.memberInventoryList.size() == 0}"></h:outputText>
                                 </div>
                             </div>
-                            <div class="col-xs-5">
-                                <h2 class="font1">Facility in Use</h2>
-                                <div class="memberInfoPanel">
+                            <div class="col-xs-6">
+                                <h2 class="font1">Equipment Details</h2>
+                                <div class="memberInfoPanel" style="overflow: auto;">
+                                    <h:form id="inventoryForm" style="display:none;" target="_blank">
+                                        <div class="inventoryDetail2">
+                                            <h:panelGrid columns="3">
+                                                <h:outputLabel class="formOutputLabel2" value="Equipment Name"/>
+                                                <h:outputLabel class="formOutputLabel2" value=" : "/>
+                                                <h:outputText class="formOutputLabel2" value="#{mainController.chosenInventory.equipmentName}"/>
 
+                                                <h:outputLabel class="formOutputLabel2" value="Make"/>
+                                                <h:outputLabel class="formOutputLabel2" value=" : "/>
+                                                <h:outputText class="formOutputLabel2" value="#{mainController.chosenInventory.make}"/>
+
+                                                <h:outputLabel class="formOutputLabel2" value="Model"/>
+                                                <h:outputLabel class="formOutputLabel2" value=" : "/>
+                                                <h:outputText class="formOutputLabel2" value="#{mainController.chosenInventory.model}"/>
+
+                                                <h:outputLabel class="formOutputLabel2" value="Battery"/>
+                                                <h:outputLabel class="formOutputLabel2" value=" : "/>
+                                                <h:outputText class="formOutputLabel2" value="#{mainController.chosenInventory.battery}"/>                                       
+
+                                                <h:outputLabel class="formOutputLabel2" value="Accessories"/>
+                                                <h:outputLabel class="formOutputLabel2" value=" : "/>
+                                                <h:outputText class="formOutputLabel2" value="#{mainController.chosenInventory.accessories}"/> 
+                                            </h:panelGrid>
+                                        </div>
+                                    </h:form>      
                                 </div>
-                            </div>
-                            
+                            </div>                            
                         </div>                        
                     </div>                   
                 </div>
@@ -270,18 +288,66 @@
                         <div>
                             <h2 class="font1">My Facility Bookings</h2>
                             <div class="memberInfoPanel">
-                                
+                                <div class="transactionColumn" style="margin: 0 auto;max-height: 400px;overflow: auto;">
+                                    <h:form id="bookingList" style="margin: 10px;" target="_blank" rendered="#{mainController.memberBooking.size() != 0}">
+                                        <h:dataTable border="1" value="#{mainController.memberBooking}" var="book" styleClass="mainTable" headerClass="memberTableHeader" rowClasses="memberTableRowEven,memberTableRowOdd">                    
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText class="tableItemHeader" value="Date Requested" />
+                                                </f:facet>
+                                                <h:outputText class="tableItem" value="#{book.dateRequested}">
+                                                    <f:convertDateTime pattern="dd-MM-yyyy"/>
+                                                </h:outputText>
+                                            </h:column>                                            
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText class="tableItemHeader" value="Facility Name" />
+                                                </f:facet>
+                                                <h:outputText class="tableItem" value="#{book.facilityName}"/>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText class="tableItemHeader" value="Date (From)" />
+                                                </f:facet>
+                                                <h:outputText class="tableItem" value="#{book.dateFrom}">
+                                                    <f:convertDateTime pattern="dd-MM-yyyy"/>
+                                                </h:outputText>
+                                            </h:column>        
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText class="tableItemHeader" value="Date (Until)" />
+                                                </f:facet>
+                                                <h:outputText class="tableItem" value="#{book.dateUntil}">
+                                                    <f:convertDateTime pattern="dd-MM-yyyy"/>
+                                                </h:outputText>
+                                            </h:column>  
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText class="tableItemHeader" value="Status" />
+                                                </f:facet>
+                                                <h:outputText class="tableItem" value="#{book.status}"/>
+                                            </h:column>   
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText class="tableItemHeader" value="Details" />
+                                                </f:facet>
+                                                <h:commandButton value="View" action="#{mainController.viewMemberBookingDetails(book)}" ></h:commandButton>
+                                            </h:column> 
+                                        </h:dataTable>                    
+                                    </h:form>  
+                                </div>
+                                <h:outputText class="outputLabelFont2" value="No inventory equipment request has been made" rendered="#{mainController.requestList.size() == 0}"></h:outputText>
                             </div>
                         </div>                        
                     </div>                   
                 </div>
             </div>
-             
-        </div>  
-        <!--
-        <div class="footerPanel">           
-            <p class="footerFont">&copy; BSc(Hons) Building Survey</p>
-        </div> -->
+        </div>        
     </h:body>
+    <script type="text/javascript">
+        function displayInventoryDetail(){
+            $("#inventoryForm").show();
+        }
+    </script>
 </html>
 

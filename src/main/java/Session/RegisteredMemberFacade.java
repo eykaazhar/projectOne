@@ -73,6 +73,12 @@ public class RegisteredMemberFacade extends AbstractFacade<RegisteredMember> {
         Query.setParameter("memberID", memberID);
         Query.executeUpdate();
     }
+    
+    public List<RegisteredMember> getSearchMember(String searchKeyword){
+        TypedQuery<RegisteredMember> Query=getEntityManager().createNamedQuery("RegisteredMember.Search", RegisteredMember.class);
+        Query.setParameter("searchKeyword", searchKeyword);
+        return Query.getResultList();
+    }
 
     public RegisteredMemberFacade() {
         super(RegisteredMember.class);

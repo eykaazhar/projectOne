@@ -82,8 +82,7 @@
                                             <h:outputText class="tableItem" value="Model" />
                                         </f:facet>
                                         <h:outputText class="tableItem" value="#{inv.model}"/>
-                                    </h:column>
-                                                                                                                       
+                                    </h:column>                                                                      
                                     <h:column>
                                         <f:facet name="header">Action</f:facet>
                                         <div class="tableItem">
@@ -101,7 +100,7 @@
                             <div class="memberInfoPanel">
                                 <h:form id="requestButton" style="text-align: center" target="_blank">                            
                                 <br/>
-                                <h:commandButton class="buttonStyle3" value="Request Equipment" action="#{mainController.goToInventoryFormPage()}"></h:commandButton>                                                       
+                                    <h:commandButton class="buttonStyle3" value="Request Equipment" action="#{mainController.goToInventoryFormPage()}"></h:commandButton>                                                       
                                 </h:form>  
                                 <h:form id="inventoryForm" style="display:none;" target="_blank">  
                                 <h2 class="font1">Inventory Equipment Detail</h2> 
@@ -130,10 +129,13 @@
                                         <h:outputLabel class="formOutputLabel" value="Availability"/>
                                         <h:outputLabel class="formOutputLabel2" value=" : "/>
                                         <h:outputText class="formOutputLabel2" value="Available"/>
-
-                                        <h:outputLabel class="formOutputLabel" value=""/>
-                                        <h:outputLabel class="formOutputLabel2" value=""/>
+                                        
+                                    </h:panelGrid>
+                                    <h:panelGrid columns="2">
                                         <h:commandButton class="buttonStyle" style="margin: 10px;" value="Request Equipment" action="#{mainController.goToInventoryFormPage2()}"></h:commandButton>
+                                        <h:commandButton class="buttonStyle" style="margin: 10px;" value="Close Equipment Detail" action="#{mainController.cancelEquipmentDetailView()}">
+                                                <f:ajax onevent="hideInventoryForm" render="inventoryForm requestButton"/>
+                                            </h:commandButton> 
                                     </h:panelGrid>
                                 </div>
                             </h:form>      
@@ -152,6 +154,10 @@
         function displayInventoryForm(){
             $("#inventoryForm").show();
             $("#requestButton").hide();
+        }
+        function hideInventoryForm(){
+            $("#inventoryForm").hide();
+            $("#requestButton").show();
         }
     </script>
 </html>

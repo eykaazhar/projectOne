@@ -148,7 +148,7 @@
                                         <h:panelGrid columns="3">
                                             <h:outputLabel class="bookingLabelFont" value=""/>
                                             <h:outputLabel class="bookingLabelFont" value=""/>
-                                            <h:commandButton class="buttonStyle" style="margin: 10px;" value="Send request" action="#{mainController.saveInventoryRequest()}" rendered="#{mainController.checkMemberDetails}"></h:commandButton>
+                                            <h:commandButton class="buttonStyle" style="margin: 10px;" value="Send request" action="#{mainController.saveInventoryRequest()}" rendered="#{mainController.checkMemberDetails and not mainController.saveStatus}"></h:commandButton>
                                             <h:commandButton class="buttonStyle" style="margin: 10px;" value="Go to My Account" action="#{mainController.goToMyAccountMember()}" rendered="#{not mainController.checkMemberDetails}"></h:commandButton>
                                         </h:panelGrid>
                                         <h:outputLabel class="bookingLabelFont" value="You request have been sent for processing" rendered="#{mainController.saveStatus}"/>   

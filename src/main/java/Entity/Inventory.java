@@ -22,7 +22,13 @@ import javax.persistence.OneToOne;
 @Entity
 @NamedQueries({
     @NamedQuery(name="Inventory.GetChosenInventory", query="SELECT i FROM Inventory i WHERE i.id = :invID"),
-    @NamedQuery(name="Inventory.Search", query="SELECT i FROM Inventory i WHERE UPPER(i.equipmentName) LIKE UPPER(:searchKeyword) escape '\\'"),
+    @NamedQuery(name="Inventory.Search", query="SELECT i FROM Inventory i WHERE (UPPER(i.equipmentName) LIKE UPPER(:searchKeyword) escape '\\') OR (UPPER(i.make) LIKE UPPER(:searchKeyword) escape '\\') OR (UPPER(i.model) LIKE UPPER(:searchKeyword) escape '\\')"),
+    @NamedQuery(name="Inventory.FullSearch", query="SELECT i FROM Inventory i WHERE (UPPER(i.equipmentName) LIKE UPPER(:searchKeyword) escape '\\') OR (UPPER(i.make) LIKE UPPER(:searchKeyword) escape '\\') OR (UPPER(i.model) LIKE UPPER(:searchKeyword) escape '\\')" 
+                        + " OR (UPPER(i.serialNumber) LIKE UPPER(:searchKeyword) escape '\\')"
+                        + " OR (UPPER(i.accessories) LIKE UPPER(:searchKeyword) escape '\\')"
+                        + " OR (UPPER(i.patReference) LIKE UPPER(:searchKeyword) escape '\\')"
+                        + " OR (UPPER(i.status) LIKE UPPER(:searchKeyword) escape '\\')"
+                        + " OR (UPPER(i.battery) LIKE UPPER(:searchKeyword) escape '\\')"),
     @NamedQuery(name="Inventory.GetAvailableInventory", query="SELECT i FROM Inventory i WHERE i.status = 'Available'"),
     @NamedQuery(name="Inventory.GetMemberInventory", query="SELECT i FROM Inventory i WHERE i.currentUser.id = :memberID")
 })
