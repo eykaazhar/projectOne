@@ -9,6 +9,7 @@ import Business.BusinessException;
 import Business.PortEcoBusiness;
 import Entity.Booking;
 import Entity.Facility;
+import Entity.GeneralMessage;
 import Entity.Inventory;
 import Entity.InventoryRequest;
 import Entity.InventoryTransaction;
@@ -23,8 +24,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -34,7 +33,6 @@ import javax.faces.event.ValueChangeEvent;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
@@ -80,6 +78,10 @@ public class MainController implements Serializable {
     List<Booking> bookingList = new ArrayList<Booking>();
     Booking chosenBooking = new Booking();
     List<Inventory> memberInventoryList = new ArrayList<Inventory>();
+    GeneralMessage newMessage = new GeneralMessage();
+    List<GeneralMessage> messageList = new ArrayList<GeneralMessage>();
+    GeneralMessage chosenMessage = new GeneralMessage();
+    List<Booking> memberBooking = new ArrayList<Booking>();
     
     //------- List of local variables---//
     private String userId;
@@ -115,6 +117,8 @@ public class MainController implements Serializable {
     private String tempDateEnd;
     private String faciliyName;
     private String selectedStatus;
+    private String searchKeyword;
+    private String contactInfo;
     
     private int total;
     private int totalInvetory;
@@ -150,6 +154,10 @@ public class MainController implements Serializable {
     private Boolean checkStatus = Boolean.TRUE;
     private Boolean checkDate = Boolean.TRUE;
     private Boolean checkDateFormat = Boolean.TRUE;
+    private Boolean editable = Boolean.FALSE;
+//    public Boolean isLogged = Boolean.FALSE;
+    private Boolean isAdmin = Boolean.FALSE;
+    private Boolean isMember = Boolean.FALSE;
         
     Format format = new SimpleDateFormat("dd MM yyyy");
     SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
@@ -897,6 +905,88 @@ public class MainController implements Serializable {
     public void setCheckDateFormat(Boolean checkDateFormat) {
         this.checkDateFormat = checkDateFormat;
     }
+
+    public String getSearchKeyword() {
+        return searchKeyword;
+    }
+
+    public void setSearchKeyword(String searchKeyword) {
+        this.searchKeyword = searchKeyword;
+    }
+
+    public GeneralMessage getNewMessage() {
+        return newMessage;
+    }
+
+    public void setNewMessage(GeneralMessage newMessage) {
+        this.newMessage = newMessage;
+    }
+
+    public String getContactInfo() {
+        return contactInfo;
+    }
+
+    public void setContactInfo(String contactInfo) {
+        this.contactInfo = contactInfo;
+    }
+
+    public List<GeneralMessage> getMessageList() {
+        return messageList;
+    }
+
+    public void setMessageList(List<GeneralMessage> messageList) {
+        this.messageList = messageList;
+    }
+
+    public GeneralMessage getChosenMessage() {
+        return chosenMessage;
+    }
+
+    public void setChosenMessage(GeneralMessage chosenMessage) {
+        this.chosenMessage = chosenMessage;
+    }
+
+    public Boolean getEditable() {
+        return editable;
+    }
+
+    public void setEditable(Boolean editable) {
+        this.editable = editable;
+    }
+
+    public List<Booking> getMemberBooking() {
+        return memberBooking;
+    }
+
+    public void setMemberBooking(List<Booking> memberBooking) {
+        this.memberBooking = memberBooking;
+    }
+
+    
+    
+//    public Boolean getIsLogged() {
+//        return isLogged;
+//    }
+//
+//    public void setIsLogged(Boolean isLogged) {
+//        this.isLogged = isLogged;
+//    }
+//
+    public Boolean getIsAdmin() {
+        return isAdmin;
+    }
+
+    public void setIsAdmin(Boolean isAdmin) {
+        this.isAdmin = isAdmin;
+    }
+
+    public Boolean getIsMember() {
+        return isMember;
+    }
+
+    public void setIsMember(Boolean isMember) {
+        this.isMember = isMember;
+    }
     
     //--------------------------------------------------------------------------//    
     
@@ -914,6 +1004,7 @@ public class MainController implements Serializable {
         getAllAvailableInventory();
         getAllInventoryRequest();
         getAllBookingList();
+        getWaitingMessage();
         setAdminActive(pb.getAdminPerson());
         System.out.println("admin size: " + getAdminActive().getMemberType());
     }
@@ -1062,6 +1153,15 @@ public class MainController implements Serializable {
         setBookingList(pb.getAllBookingList());
     }
     
+    public void getWaitingMessage(){
+        setMessageList(pb.getWaitingMessage());
+        System.out.println("message " + getMemberList().size());
+    }
+    
+    public void getMemberBookingList(){
+        setMemberBooking(pb.getMemberBooking(getLoginMember().getUsername()));
+    }
+    
     //----------------------------------------------------------------------//
     
     //---- save booking request by user into database. this function is called from the mainPage.xhtml---////
@@ -1101,6 +1201,7 @@ public class MainController implements Serializable {
             newBooking.setLastName(getLastName());
             newBooking.setDateFrom(getDateStart());
             pb.addNewBooking(newBooking);
+            setSaveStatus(Boolean.TRUE);
         }
         System.out.println("test");
         bookingEmailSetting();
@@ -1113,6 +1214,50 @@ public class MainController implements Serializable {
         setLastName("");
         setPurpose("");
         setMessage("");        
+    }
+    public void saveBookingMember(){
+        todayDate();
+        System.out.println("date " + getTempDateStart());        
+        System.out.println("date 2" + getTempDateEnd());        
+        try {
+            setDateStart(formatter.parse(getTempDateStart()));
+            setDateEnd(formatter.parse(getTempDateEnd()));
+            if(getDateEnd().before(getDateStart())){
+                setCheckDate(Boolean.FALSE);
+                setCheckDateFormat(Boolean.TRUE);
+            }else{
+                setCheckDateFormat(Boolean.TRUE);
+                setCheckDate(Boolean.TRUE);
+            }            
+            
+        } catch (ParseException ex) {
+            setCheckDateFormat(Boolean.FALSE);
+            setCheckDate(Boolean.TRUE);
+        }
+        newBooking.setUserId(getLoginMember().getUsername());
+        newBooking.setUserEmail(getLoginMember().getEmail());
+        newBooking.setStatus("Waiting");
+        newBooking.setFacility(getSelectFacility());
+        newBooking.setFacilityName(getSelectFacility().getFacilityName());
+        newBooking.setFaculty(getFaculty());
+        newBooking.setFirstName(getLoginMember().getFirstName()); 
+        newBooking.setLastName(getLoginMember().getLastName());
+        newBooking.setDateUntil(getDateEnd());
+        newBooking.setFaculty(getFaculty());
+        newBooking.setPurpose(getPurpose());
+        newBooking.setMessage(getMessage());
+        newBooking.setDateRequested(getCurrentDate());
+        
+        if(getCheckDate() && getCheckDateFormat()){
+            newBooking.setLastName(getLastName());
+            newBooking.setDateFrom(getDateStart());
+            pb.addNewBooking(newBooking);
+            setSaveStatus(Boolean.TRUE);
+        }
+        System.out.println("test");
+        //bookingEmailSetting();
+        //sendEmail(getAdminActive().getEmail());
+             
     }
     
     //---------- Save new member detail into Database: Used by Administrator to register new member-------//
@@ -1208,19 +1353,28 @@ public class MainController implements Serializable {
         setCheckUserLogin(pb.loginValidation(getLoginUsername(), getLoginPassword()));
         System.out.println(getLoginUsername()+ " and " + getLoginPassword());
         if(getCheckUserLogin()){
+//            setIsLogged(Boolean.TRUE);
             setLoginMember(pb.getLoginMember(getLoginUsername(), getLoginPassword()));
             if(getLoginMember().getMemberType().equals("Member")){
+                getMemberBookingList();
                 setRequestList(pb.getMemberRequests(getLoginMember().getId()));
                 setMemberInventoryList(pb.getMemberEquipment(getLoginMember().getId()));
+                FacesContext context = FacesContext.getCurrentInstance();
+                context.getExternalContext().getSessionMap().put("user", "Member");
+                setIsMember(Boolean.TRUE);
                 nextPage = "memberPage.xhtml?faces-redirect=true";
                 System.out.println("test1");
             }else{
+                setIsAdmin(Boolean.TRUE);
+                FacesContext context = FacesContext.getCurrentInstance();
+                context.getExternalContext().getSessionMap().put("user", "Admin");
                 nextPage = "adminPage.xhtml?faces-redirect=true";
                 System.out.println("test2");
             }
             setCheckLoginStatus(Boolean.TRUE);
         }
         else{
+//            setIsLogged(Boolean.FALSE);
             nextPage = "loginPage.xhtml?faces-redirect=true";
             setCheckLoginStatus(Boolean.FALSE);
         }
@@ -1245,6 +1399,17 @@ public class MainController implements Serializable {
     }
     
     public String goToBookingPage(){
+        if(getIsMember()){
+            if(getLoginMember().getContactNumber() == null || getLoginMember().getContactNumber().equals("") 
+                || getLoginMember().getEmail() == null || getLoginMember().getEmail().equals("")
+                || getLoginMember().getFirstName() == null || getLoginMember().getFirstName().equals("")
+                || getLoginMember().getLastName() == null || getLoginMember().getLastName().equals("")){
+            
+                setCheckMemberDetails(Boolean.FALSE);
+            }else{
+                setCheckMemberDetails(Boolean.TRUE);
+            }
+        }
         return "bookingPage.xhtml?faces-redirect=true";
     }
     
@@ -1258,6 +1423,10 @@ public class MainController implements Serializable {
     
     public String goToAddInventory(){
         return "addNewInventory.xhtml?faces-redirect=true";
+    }
+    
+    public String goToAllRequest(){
+        return "requestFullPage.xhtml?faces-redirect=true";
     }
     
     public String goToInventoryRequestDetailPage(InventoryRequest ir){
@@ -1292,6 +1461,15 @@ public class MainController implements Serializable {
     }
     
     public String goToInventoryFormPage(){
+        setFirstItemId(null);
+        setInventoryFirst(null);
+        setSecondItemId(null);
+        setInventorySecond(null);
+        setThirdItemId(null);
+        setInventoryThird(null);
+        setTempDateStart("");
+        setTempDateEnd("");
+        setMemberAgreement(Boolean.FALSE);
         if(getLoginMember().getContactNumber() == null || getLoginMember().getContactNumber().equals("") 
                 || getLoginMember().getEmail() == null || getLoginMember().getEmail().equals("")
                 || getLoginMember().getFirstName() == null || getLoginMember().getFirstName().equals("")
@@ -1304,6 +1482,13 @@ public class MainController implements Serializable {
         return "inventoryRequestPage.xhtml?faces-redirect=true";
     }
     public String goToInventoryFormPage2(){
+        setSecondItemId(null);
+        setInventorySecond(null);
+        setThirdItemId(null);
+        setInventoryThird(null);
+        setTempDateStart("");
+        setTempDateEnd("");
+        setMemberAgreement(Boolean.FALSE);
         setFirstItemId(getChosenInventory().getId());
         setInventoryFirst(getChosenInventory());
         if(getLoginMember().getContactNumber() == null || getLoginMember().getContactNumber().equals("") 
@@ -1317,7 +1502,18 @@ public class MainController implements Serializable {
         }
         return "inventoryRequestPage.xhtml?faces-redirect=true";
     }
-    
+     
+    public void cancelEquipmentDetailView(){
+        setFirstItemId(null);
+        setInventoryFirst(null);
+        setSecondItemId(null);
+        setInventorySecond(null);
+        setThirdItemId(null);
+        setInventoryThird(null);
+        setTempDateStart("");
+        setTempDateEnd("");
+        setMemberAgreement(Boolean.FALSE);
+    }
     //----------------------------------------------------------------------//
     
     public void editMemberDetail(){
@@ -1484,6 +1680,10 @@ public class MainController implements Serializable {
         setChosenBooking(bb);
         return "editBookingPage.xhtml?faces-redirect=true";
     }
+    public String viewMemberBookingDetails(Booking bb){
+        setChosenBooking(bb);
+        return "memberBookingDetailsPage.xhtml";
+    }
     
     public String retrieveSearchResult(){
         System.out.println("keyword: " + getInvtSearchKeyword());
@@ -1497,9 +1697,45 @@ public class MainController implements Serializable {
         return "adminInventory.xhtml";
     }
     
+    public String retrieveInventorySearchResult(){
+        System.out.println("keyword: " + getInvtSearchKeyword());
+        String searchKeywordFormat = getInvtSearchKeyword();
+        if(!getInvtSearchKeyword().equalsIgnoreCase("available") && !getInvtSearchKeyword().equalsIgnoreCase("unavailable")){
+            searchKeywordFormat = "%" + getInvtSearchKeyword() + "%";
+        }
+        System.out.println("keyword: " + searchKeywordFormat);
+        setInventoryList(pb.getInventoryFullSearch(searchKeywordFormat));
+        System.out.println("result list: " + getInventoryList().size());
+        return "inventoryEquipmentPage.xhtml";
+    }
+    
+    public String resetInventorySearchResult(){
+        getAllInventoris();
+        return "inventoryEquipmentPage.xhtml";
+    }
+    
+    public String retrieveMemberSearchResult(){
+        System.out.println("keyword: " + getSearchKeyword());
+        String searchKeywordFormat = getSearchKeyword();
+        searchKeywordFormat = "%" + getSearchKeyword() + "%";
+        setMemberList(pb.getSearchMemberResult(searchKeywordFormat));
+        System.out.println("result list: " + getMemberList().size());
+        return "adminMember.xhtml";
+    }
+    
+    public String resetMemberSearchResult(){
+        getAllMember();
+        return "adminMember.xhtml";
+    }
+    
+    
     public void displayEquipmentDetail(Inventory inv){
         setChosenInventory(inv);
         setSelectedInvID(getChosenInventory().getId());
+    }
+    
+    public void displayMessageDetail(GeneralMessage gm){
+        setChosenMessage(gm);
     }
     
     public void todayDate(){
@@ -1540,7 +1776,8 @@ public class MainController implements Serializable {
             setChosenMemberInv(getChosenRequest().getMemberId()); 
         }
         pb.saveInventoryRequestChanges(getChosenRequest());
-        setInventoryEdit(Boolean.FALSE);          
+        setInventoryEdit(Boolean.FALSE);     
+        setTransactionList(pb.getChosenRequestTransaction(getChosenRequest().getId()));
         
         if(getChosenRequest().getStatus().equals("Accepted")){
             setChosenInventory(getChosenRequest().getFirstInventoryId());
@@ -1632,6 +1869,20 @@ public class MainController implements Serializable {
         setMemberRequestShow(Boolean.FALSE);
     }
     
+    public void sendMessage(){
+        todayDate();
+        newMessage.setUserID(getUserId());
+        newMessage.setUserName(getUserName());
+        newMessage.setContactInfo(getContactInfo());
+        newMessage.setSubject(getPurpose());
+        newMessage.setMessage(getMessage());
+        newMessage.setStatus("Waiting");
+        newMessage.setDateIssued(getCurrentDate());
+        pb.saveNewMessage(newMessage);
+        setSaveStatus(Boolean.TRUE);
+    }
+    
+        
     /** All of these code for email function are retrieved from mkyong.com    **/
     public void sendEmail(String email){
         System.out.println("here done");
@@ -1703,6 +1954,22 @@ public class MainController implements Serializable {
                         + "\n Name: " + getFirstName() + " " + getLastName()
                         + "\n Faculty: " + getFaculty()
                         + "\n Email: " + getEmail()
+                        + "\n Purpose: " + getPurpose()
+                        + "\n Message: " + getMessage()
+                        + "\n You can login from this link to manage the booking request : " + portEcoLink
+                        + "\n\n Regards,"
+                        + "\n Port-Eco House managemenet teams");
+    }
+    
+    public void memberBookingEmailSetting(){
+    final String portEcoLink = "http://localhost:8080/PortEcoHouse/faces/loginPage.xhtml";       
+        setEmailSubject("Port-Eco House Facility Booking Request");
+        setEmailMessage("Dear admin, "
+                        + "\n\n This email is to infrom you that you are now a user have made a booking request. Below is the user details regarding the matters: \n"
+                        + "\n User Id: " + getLoginMember().getUsername()
+                        + "\n Name: " + getLoginMember().getFirstName()+ " " + getLoginMember().getLastName()
+                        + "\n Faculty: " + getFaculty()
+                        + "\n Email: " + getLoginMember().getEmail()
                         + "\n Purpose: " + getPurpose()
                         + "\n Message: " + getMessage()
                         + "\n You can login from this link to manage the booking request : " + portEcoLink
