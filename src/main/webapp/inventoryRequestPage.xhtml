@@ -83,18 +83,24 @@
 
                                     </div>
                                     <div class="detailsForm" style="margin: 0 auto;">
-                                        <h:panelGrid columns="3">
-                                            <h:outputLabel class="bookingLabelFont" value="Short name of equipment borrowed"/>
+                                        <h:panelGrid columns="3">                                            
+                                            <h:panelGroup class="bookingLabelFont">
+                                                <h:outputLabel class="bookingLabelFont" value="Short name of equipment borrowed"/>
+                                                <h:outputLabel style="color:red" value=" * "/>
+                                            </h:panelGroup>
                                             <h:outputLabel class="bookingLabelFont" value=" : "/>
-                                            <h:selectOneMenu class="inputTextStyle" value="#{mainController.firstItemId}" onchange="submit()"
-                                                             valueChangeListener="#{mainController.changeFirstItemId}" style="margin:10px"> 
+                                            <h:selectOneMenu id="firstEquip" class="inputTextStyle" value="#{mainController.firstItemId}" onchange="submit()"
+                                                             valueChangeListener="#{mainController.changeFirstItemId}" style="margin:10px" required="true" label="Equipment Name"> 
                                                 <f:selectItem itemValue="#{null}" itemLabel="--Select First Equipment--"/>
                                                 <f:selectItems value="#{mainController.inventoryList}" var="inv"
                                                                itemLabel="#{inv.equipmentName}" itemValue="#{inv.id}">
                                                 </f:selectItems>                                                          
                                             </h:selectOneMenu>
-
-                                            <h:outputLabel class="bookingLabelFont" value="Short name of equipment borrowed (second item)"/>
+                                            <h:outputText value=""/>
+                                            <h:outputText value=""/>
+                                            <h:message for="firstEquip" class="outputTextFont" style="color:red" />
+                                            
+                                            <h:outputLabel class="bookingLabelFont" value="Short name of equipment borrowed (second item)"/>                                        
                                             <h:outputLabel class="bookingLabelFont" value=" : "/>
                                             <h:selectOneMenu class="inputTextStyle" value="#{mainController.secondItemId}" onchange="submit()"
                                                              valueChangeListener="#{mainController.changeSecondItemId}" style="margin:10px"> 
@@ -114,25 +120,40 @@
                                                 </f:selectItems>                                                          
                                             </h:selectOneMenu>
 
-                                            <h:outputLabel class="bookingLabelFont" value="Date Borrow (From)"/>
+                                            <h:panelGroup class="bookingLabelFont">
+                                                <h:outputLabel class="bookingLabelFont" value="Date Borrow (From)"/>
+                                                <h:outputLabel style="color:red" value=" * "/>
+                                            </h:panelGroup>                                             
                                             <h:outputLabel class="bookingLabelFont" value=" : "/>
-                                            <h:inputText value="#{mainController.tempDateStart}" styleClass="form-control datepicker inputDateStyle"/>
+                                            <h:inputText id="dateStart" value="#{mainController.tempDateStart}" styleClass="form-control datepicker inputDateStyle" required="true" label="Date"/>
+                                            <h:outputText value=""/>
+                                            <h:outputText value=""/>
+                                            <h:message for="dateStart" class="outputTextFont" style="color:red" />
 
-                                            <h:outputLabel class="bookingLabelFont" value="Date Return (Until)"/>
+                                            <h:panelGroup class="bookingLabelFont">
+                                                <h:outputLabel class="bookingLabelFont" value="Date Return (Until)"/>
+                                                <h:outputLabel style="color:red" value=" * "/>
+                                            </h:panelGroup>                                             
                                             <h:outputLabel class="bookingLabelFont" value=" : "/>
-                                            <h:inputText value="#{mainController.tempDateEnd}" styleClass="form-control datepicker inputDateStyle"/>
+                                            <h:inputText id="dateEnd" value="#{mainController.tempDateEnd}" styleClass="form-control datepicker inputDateStyle"  required="true" label="Date"/>
+                                            <h:outputText value=""/>
+                                            <h:outputText value=""/>
+                                            <h:message for="dateEnd" class="outputTextFont" style="color:red" />
                                             
                                             <h:outputLabel class="bookingLabelFont" value="" rendered="#{not mainController.checkDateFormat}"/>
                                             <h:outputLabel class="bookingLabelFont" value="" rendered="#{not mainController.checkDateFormat}"/>
-                                            <h:outputText class="loginOption" style="color:red;text-align: center;" value="*Date Cannot be Empty or Please Check Your Selected Date Format" rendered="#{not mainController.checkDateFormat}"/>
+                                            <h:outputText class="loginOption" style="color:red;text-align: center;" value="*Please Check Your Selected Date Format" rendered="#{not mainController.checkDateFormat}"/>
                                             
                                             <h:outputLabel class="bookingLabelFont" value="" rendered="#{not mainController.checkDate}"/>
                                             <h:outputLabel class="bookingLabelFont" value="" rendered="#{not mainController.checkDate}"/>
                                             <h:outputText class="loginOption" style="color:red;text-align: center;" value="*Date(Until) cannot be before Date(From)" rendered="#{not mainController.checkDate}"/>
 
                                         </h:panelGrid>
-                                        <div class="agreementPanel" style="margin: 0 auto;">
-                                            <h:outputLabel class="agreementfont" value="Agreement *"/>
+                                        <div class="agreementPanel" style="margin: 0 auto;">                                            
+                                            <h:panelGroup class="agreementfont">
+                                                <h:outputLabel class="agreementfont" value="Agreement"/>
+                                                <h:outputLabel style="color:red" value=" * "/>
+                                            </h:panelGroup>  
                                             <p class="agreementfont">
                                                 I (the borrower) accept responsibilities for any loss or damage to the equipment.
                                                 (Note to student borrowers: your assessment results will be withheld until the equipment is returned,

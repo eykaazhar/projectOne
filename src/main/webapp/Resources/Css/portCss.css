@@ -61,7 +61,7 @@ body{
     background-image: url("../Images/stonearchitecture.jpg");
     background-repeat: no-repeat;
     width: 100%;
-    height: 180px;
+    height: 240px;
 }
 .insideHeaderBackground{
     background-image: url("../Images/stonearchitecture.jpg");
@@ -69,63 +69,152 @@ body{
     width: 100%;
     height: 150px;
 }
+.navbar-collapse.collapse{
+  display: block !important;
+}
+.navbar-nav>li, .navbar-nav{
+  float: left !important;
+}
+.navbar-right{
+  float: right !important;
+} 
+.navbar-nav{
+    position: relative;
+    min-height: 50px;
+    border: none;
+}
+.navbar {   
+    position: relative;
+    min-height: 50px;
+    border: none;
+}
+.navbarItem{
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    font-style: normal;
+    font-family: Avant Garde, Arial, Helvetica;
+}
+.navbarColour{
+    background-color: #4d454f;
+}
+.secondNavColour{
+    background-color: #4d454f;
+    min-width: 900px;
+} 
+.navbar-default .navbar-nav>li>a.navbarItem{
+    color: white;
+    font-family: Avant Garde, Arial, Helvetica;
+    font-size: 18px;
+    margin-right: 15px;
+}
+.breadcrumb{
+    margin: 0;
+    max-height: 50px;
+    background-color: #4d454f;
+    color: white;
+    font-family: Avant Garde, Arial, Helvetica;
+    font-size: 18px;
+}
+.breadcrumb>li>a.navbarItem:hover{
+    text-decoration: none;
+    color: #2c0b42;;
+    font-family: Avant Garde, Arial, Helvetica;
+    font-size: 18px;
+}
+.breadcrumb>li+li:before{    
+    color:#ccc;
+    content:"/\00a0";
+}
+.breadcrumb>li>a.navbarItemActive{
+    text-decoration: underline;
+}
+.breadcrumb>li>a.navbarItemActive:hover{
+    text-decoration: underline;
+    color: white;
+    font-family: Avant Garde, Arial, Helvetica;
+    font-size: 18px;
+}
+.navbar-default .navbar-nav>li>a.navbarItem:hover{
+    color: #2c0b42;
+    font-family: Avant Garde, Arial, Helvetica;
+    font-size: 18px;
+}
+.navbar-default .navbar-brand{
+    color: white;
+    font-family: Avant Garde, Arial, Helvetica;
+}
+.navbar-default .navbar-brand > a.navHeaderColour:hover{
+    color: white;
+    font-family: Avant Garde, Arial, Helvetica;
+}
+.navbar-default .navbar-nav>li.navbarItemActive{
+    background-color: #765e7c;
+    border-radius: 5px;
+}
+.navBarColumn{
+    background-color: #4d454f;
+    max-height: 50px;
+    min-width: 1000px;
+}
+.container.secondNavColour{
+    min-width: 1000px !important;
+}
+.navbar-nav .dropdown .dropdown-menu
+{
+        float: none;
+        width: auto;
+        margin-top: 0;
+        color: white;
+        background-color: #4d454f;
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
+        position:absolute;
+        margin:0;
+}
+.navbar-nav .dropdown .dropdown-menu > li > a,
+.navbar-nav .dropdown .dropdown-menu > li > .navbarItem
+{
+        color: white;
+        text-shadow: 0.5px 0.5px white;
+        text-transform: uppercase;
+        font-weight: 600;
+        letter-spacing: 2px;
+        font-size: 15px;
+        padding:10px;
+}
 
-@media (min-width: 1000px) {
-    .container-fluid {
-        min-width: 1200px;
-    }
-    .navbar-nav{
-        position: relative;
-        min-height: 50px;
-        border: none;
-    }
-    .navbar {   
-        position: relative;
-        min-height: 50px;
-        border: none;
-    }
-    .navbarItem{
-        text-align: center;
+.navbar-nav .dropdown .dropdown-menu > li > a:hover,
+.navbar-nav .dropdown .dropdown-menu > li > .navbarItem:hover
+{
         color: white;
-        font-weight: bold;
-        font-style: normal;
-        font-family: Georgia;
-    }
-    .navbarColour{
-        background-color: #4d454f;
-    }
-    .secondNavColour{
-        background-color: #4d454f;
-    }    
-
-    .navbar-default .navbar-nav>li>a.navbarItem{
+        text-shadow: 0.5px 0.5px white;
+        text-transform: uppercase;
+        font-weight: 600;
+        letter-spacing: 2px;
+        font-size: 15px;
+        padding:10px;
+}
+ 
+.nav.navbar-nav > li.dropdown.active.open > a, 
+.nav.navbar-nav > li.dropdown.active.open > ul.dropdown-menu a,
+.nav.navbar-nav > li.dropdown.open > a, 
+.nav.navbar-nav > li.dropdown.open > ul.dropdown-menu a{
+	color: white;
+	background-color: #4d454f;  	
+  	border-top-left-radius: 25px;
+	border-bottom-left-radius: 25px;
+	margin:0;
+}
+.nav.navbar-nav > li.dropdown.active.open > a, 
+.nav.navbar-nav > li.dropdown.active.open > ul.dropdown-menu a:hover,
+.nav.navbar-nav > li.dropdown.open > a, 
+.nav.navbar-nav > li.dropdown.open > ul.dropdown-menu a:hover
+{
         color: white;
-        font-family: Georgia;
-        font-size: 18px;
-        margin-right: 15px;
-    }
-    .navbar-default .navbar-nav>li>a.navbarItem:hover{
-        color: #2c0b42;
-        font-family: Georgia;
-        font-size: 18px;
-    }
-    .navbar-default .navbar-brand{
-        color: white;
-        font-family: Georgia;
-    }
-    .navbar-default .navbar-brand > a.navHeaderColour:hover{
-        color: white;
-        font-family: Georgia;
-    }
-    .navbar-default .navbar-nav>li.navbarItemActive{
-        background-color: #765e7c;
-        border-radius: 5px;
-    }
-    .navBarColumn{
-        background-color: #4d454f;
-        max-height: 50px;
-        min-width: 1000px;
-    }
+  	background-color: #4d454f;
+  	border-top-left-radius: 25px;
+	border-bottom-left-radius: 25px;
+	margin:0;
 }
 
 .boxes{
@@ -144,7 +233,7 @@ body{
     margin: 0 auto;
     width: 300px;
     height: 50px;
-    background-color: white;
+    background-color: #d1d1d1;
 }
 .firstBox{
     width: 600px;
@@ -165,25 +254,27 @@ body{
 }
 .webTitle{
     text-align: center;
-    font-family: Georgia;
+    font-family: Avant Garde, Arial, Helvetica;
     font-size: 70px;
     color: white;
     text-shadow: 1px -2px 13px rgba(150, 150, 150, 1);
 }
 .webTitle2{
-    font-family: Georgia;
+    font-family: Avant Garde, Arial, Helvetica;
     font-size: 35px;
     color: #550982;
     text-shadow: 1px -2px 13px rgba(150, 150, 150, 1);
 }
 
 .logoImage{
+    width: 300px;
+    height: 50px;
 }
 .contentPanel{
     min-width: 1200px;
-    background-color: #dbdbdb;
-    height: 600px;
+    background-color: #dbdbdb;    
     width: 100%;
+    padding-bottom: 10px;
 }
 .inventoryContentPanel{
     background-color: #dbdbdb;    
@@ -231,7 +322,7 @@ body{
 }
 .titleFont{
     text-align: center;
-    font-family: Georgia;
+    font-family: Avant Garde, Arial, Helvetica;
     color: black;
     font-size: 40px;
 }
@@ -359,7 +450,7 @@ body{
 }*/
 .fontFacility{
     text-align: center;
-    font-family: Georgia;
+    font-family: Avant Garde, Arial, Helvetica;
     color: black;
     font-size: 25px;    
 }
@@ -386,7 +477,7 @@ body{
     background-image: -o-linear-gradient(top, #7e1499, #35025e);
     background-image: linear-gradient(to bottom, #7e1499, #35025e);
     border-radius: 10px;
-    font-family: Georgia;
+    font-family: Avant Garde, Arial, Helvetica;
     color: #ffffff;
     font-size: 16px;
     padding: 10px 20px 10px 20px;
@@ -421,13 +512,14 @@ body{
     background-image: -o-linear-gradient(top, #7e1499, #35025e);
     background-image: linear-gradient(to bottom, #7e1499, #35025e);
     border-radius: 10px;
-    font-family: Georgia;
+    font-family: Avant Garde, Arial, Helvetica;
     color: #ffffff;
     font-size: 16px;
     padding: 10px 20px 10px 20px;
     text-decoration: none;
     height: 50px;
     width: 270px;
+    text-align: center;
 }
 .buttonStyle2:hover{
     background: #560761;
@@ -458,7 +550,7 @@ body{
     background-image: -o-linear-gradient(top, #7e1499, #35025e);
     background-image: linear-gradient(to bottom, #7e1499, #35025e);
     border-radius: 10px;
-    font-family: Georgia;
+    font-family: Avant Garde, Arial, Helvetica;
     color: #ffffff;
     font-size: 16px;
     padding: 10px 20px 10px 20px;
@@ -484,7 +576,7 @@ body{
     background-image: -o-linear-gradient(top, #7e1499, #35025e);
     background-image: linear-gradient(to bottom, #7e1499, #35025e);
     border-radius: 10px;
-    font-family: Georgia;
+    font-family: Avant Garde, Arial, Helvetica;
     color: #ffffff;
     font-size: 16px;
     padding: 10px 20px 10px 20px;
@@ -492,7 +584,7 @@ body{
 }
 .titleDescription{
     text-align: center;
-    font-family: Georgia;
+    font-family: Avant Garde, Arial, Helvetica;
     font-size: 16px;
     color: white;
     text-shadow: 1px -2px 13px rgba(150, 150, 150, 1);
@@ -501,13 +593,13 @@ body{
 .facilityDescription{
     margin: 10px;    
     text-align: center;
-    font-family: Georgia;
+    font-family: Avant Garde, Arial, Helvetica;
     font-size: 16px;
     color: #50235e;
 }
 .aboutDescription{   
     text-align: center;
-    font-family: Georgia;
+    font-family: Avant Garde, Arial, Helvetica;
     font-size: 16px;
     color: #50235e;
 }
@@ -521,7 +613,7 @@ body{
 }
 .aboutPanelTitleFont{
     text-align: center;
-    font-family: Georgia;
+    font-family: Avant Garde, Arial, Helvetica;
     color: black;
     font-size: 25px;
 }
@@ -549,7 +641,7 @@ body{
 .footerFont{
     padding-top: 5px;
     color: white;
-    font-family: Georgia;
+    font-family: Avant Garde, Arial, Helvetica;
     font-size: 13px;
 }
 .quickBox{
@@ -573,13 +665,13 @@ body{
 .bookingLabelFont{
     padding-right: 3px;
     color: #550982;
-    font-family: Georgia;
+    font-family: Avant Garde, Arial, Helvetica;
     font-size: 15px;
 }
 .outputTextFont{
     margin: 10px;
     color: #550982;
-    font-family: Georgia;
+    font-family: Avant Garde, Arial, Helvetica;
     font-size: 15px;
     padding: 5px;
 }
@@ -589,7 +681,7 @@ body{
     margin: 10px;
     padding-right: 3px;
     color: #550982;
-    font-family: Georgia;
+    font-family: Avant Garde, Arial, Helvetica;
     font-size: 15px;
 }
 .accessoriesFont{
@@ -598,7 +690,7 @@ body{
     margin: 10px;
     padding-right: 3px;
     color: #550982;
-    font-family: Georgia;
+    font-family: Avant Garde, Arial, Helvetica;
     font-size: 15px;
 }
 .formOutputLabel{
@@ -607,7 +699,7 @@ body{
     margin: 10px;
     padding-right: 3px;
     color: black;
-    font-family: Georgia;
+    font-family: Avant Garde, Arial, Helvetica;
     font-size: 15px;
 }
 .formOutputLabel2{
@@ -615,33 +707,34 @@ body{
     margin: 10px;
     padding-right: 3px;
     color: black;
-    font-family: Georgia;
+    font-family: Avant Garde, Arial, Helvetica;
     font-size: 15px;
 }
 .outputLabelFont2{    
     margin: 10px;
     padding-right: 3px;
     color: #550982;
-    font-family: Georgia;
+    font-family: Avant Garde, Arial, Helvetica;
     font-size: 15px;
 }
 .inputTextStyle{
     margin: 10px;
     color: #550982;
-    font-family: Georgia;
+    font-family: Avant Garde, Arial, Helvetica;
     font-size: 15px;
     padding: 5px;
     border-radius: 5px;
 }
 .inputTextStyleM{
     color: #550982;
-    font-family: Georgia;
+    font-family: Avant Garde, Arial, Helvetica;
     font-size: 15px;
+    border-radius: 5px;
 }
 .inputDateStyle{
     margin: 10px;
     color: #550982;
-    font-family: Georgia;
+    font-family: Avant Garde, Arial, Helvetica;
     font-size: 15px;
     padding: 5px;
     width: 180px;
@@ -649,12 +742,12 @@ body{
 .agreementfont{
     margin: 5px;
     color: #550982;
-    font-family: Georgia;
+    font-family: Avant Garde, Arial, Helvetica;
     font-size: 15px;
     padding: 5px;
 }
 .font1{
-    font-family: Georgia;
+    font-family: Avant Garde, Arial, Helvetica;
     color: black;
     font-size: 25px;
     margin: 5px;
@@ -699,29 +792,31 @@ body{
     padding: 10px;    
 }
 a.quickLink{
+    text-align: center;
     color:white;
-    font-family: Georgia;
-    font-size: 15px;
+    font-family: Avant Garde, Arial, Helvetica;
+    font-size: 20px;
 }
 a.quickLink2{
     color:white;
-    font-family: Georgia;
+    font-family: Avant Garde, Arial, Helvetica;
     font-size: 20px;
 }
 a.quickLink:hover{
     text-decoration: none;
-    color:#1d0b2d;
-    font-family: Georgia;
-    font-size: 15px;    
+    text-align: center;
+    color:white;
+    font-family: Avant Garde, Arial, Helvetica;
+    font-size: 20px;   
 }
 a.quickLink2:hover{
     text-decoration: none;
     color:#1d0b2d;
-    font-family: Georgia;
+    font-family: Avant Garde, Arial, Helvetica;
     font-size: 20px;
 }
 .loginOption{
-    font-family: Georgia;
+    font-family: Avant Garde, Arial, Helvetica;
     font-size: 13px;
     color: #50235e;
 }
@@ -751,18 +846,18 @@ a.quickLink2:hover{
 .tableItem{
     padding: 10px;
     text-align: center;
-    font-family: Georgia;    
+    font-family: Avant Garde, Arial, Helvetica;    
 }
 .tableTransactionItem{
     text-align: center;
-    font-family: Georgia;   
+    font-family: Avant Garde, Arial, Helvetica;   
     padding: 2px;
 }
 
 .tableItemHeader{
     text-decoration: none;
     text-align: center;
-    font-family: Georgia;   
+    font-family: Avant Garde, Arial, Helvetica;   
     padding: 2px;    
 }
 .memberTableHeader{
@@ -789,7 +884,7 @@ a.quickLink2:hover{
 .badgeStyle{
     background-color: #dd2758;
     color: white;
-    font-family: Georgia;
+    font-family: Avant Garde, Arial, Helvetica;
     padding: 7px;
 }
 .mainForm{
@@ -799,10 +894,23 @@ a.quickLink2:hover{
     padding:10px;
     border-radius: 10px;
 }
+.bookingMainForm{
+    background-color: #bdb1c6;
+    width: 750px;
+    padding:10px;    
+    border-radius: 10px;
+}
 .inventoryMainForm{
     background-color: #bdb1c6;
     width: 650px;
     height: 170px;
+    padding:10px;
+    border-radius: 10px;
+}
+.mainPageFacilityDes{
+    
+    background-color: #bababa;
+    width: 650px;
     padding:10px;
     border-radius: 10px;
 }
@@ -839,9 +947,19 @@ a.quickLink2:hover{
     padding: 10px 20px 10px 20px;
     border: solid #4d454f;
 }
+.informationBoxSmall{        
+    margin-top: 5px;
+    text-align: center;
+    height: 50px;
+    width: 200px;
+    border-radius: 3px;  
+    background: #E7D5EB;
+    padding: 10px 20px 10px 20px;
+    border: solid #4d454f;
+}
 .infoFont{
     color:black;
-    font-family: Georgia;
+    font-family: Avant Garde, Arial, Helvetica;
     font-size: 14px;
     font-weight: bold;
 }

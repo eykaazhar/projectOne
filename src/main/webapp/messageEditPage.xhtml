@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="Resources/Css/portCss.css" rel="stylesheet" type="text/css"/>
+    
+    <h:head>
+        <title>Port-Eco House</title>
+    </h:head>
+    <h:body id="bodyPage">
+        <div class="container-fluid insideHeaderBackground">
+            <!--
+            <div class="logoBox">
+                <h:graphicImage class="logoImage" value="Resources/Images/logo-left.jpg"/>
+            </div> -->
+            <div class="boxes2">                
+                <div class="insideBox">
+                    <h1 class="webTitle">Port-Eco House</h1>
+                </div>                
+            </div>
+        </div>
+        <div class="container-fluid navBarColumn">
+             <nav class="navbar navbar-default navbarColour">
+                <div class="container">
+                    <div class="col-xs-12 secondNavColour">                                  
+                    </div><!-- /.container-fluid -->            
+                </div>  
+            </nav>
+        </div>
+        <div id="bookingPanel" class="container-fluid bookingPanel">
+            <div class="container">
+                <div class="col-xs-12">
+                    <div class="col-xs-12" style="margin: 0 auto;margin-top:20px;">
+                        <h1 class="titleFont">Message Reply Form</h1>
+                    </div>
+                    <div class="inventoryPanel">
+                        <div class="row">                            
+                            <div class="col-xs-12">                                
+                                <h:form>
+                                    <div class="mainForm" style="margin: 0 auto;text-align: center;">
+                                        <div style="width:400px;text-align: center;">
+                                            <h:panelGrid columns="3">
+                                            <h:outputLabel class="formOutputLabel" value="To"/>
+                                            <h:outputLabel class="formOutputLabel2" value=" : "/>
+                                            <h:outputLabel class="formOutputLabel2" value="#{mainController.chosenMessage.contactInfo}"/>
+                                                                                        
+                                            <h:outputLabel class="formOutputLabel" value="User Id"/>
+                                            <h:outputLabel class="formOutputLabel2" value=" : "/>
+                                            <h:outputLabel class="formOutputLabel2" value="#{mainController.chosenMessage.userID}"/>
+                                            
+                                            <h:outputLabel class="formOutputLabel" value="Name"/>
+                                            <h:outputLabel class="formOutputLabel2" value=" : "/>
+                                            <h:outputLabel class="formOutputLabel2" value="#{mainController.chosenMessage.userName}"/>
+
+                                        </h:panelGrid>     
+                                        </div>
+                                         
+                                    </div>
+                                    <div class="detailsForm" style="margin: 0 auto;">
+                                        <h:panelGrid columns="3">
+
+                                            <h:outputLabel class="outputLabelFont2" value="Subject"/>
+                                            <h:outputLabel class="outputLabelFont2" value=" : "/>
+                                            <h:outputLabel class="inputTextStyle" value="RE: #{mainController.chosenMessage.subject}"/>
+
+                                            <h:outputLabel class="outputLabelFont2" value="Message"/>
+                                            <h:outputLabel class="outputLabelFont2" value=" : "/>
+                                            <h:inputTextarea class="inputTextStyle" value="#{mainController.message}" cols="50" rows="5"/> 
+                                            
+                                            <h:outputLabel class="outputLabelFont2" value=""/>
+                                            <h:outputLabel class="outputLabelFont2" value=""/>
+                                            <h:commandButton class="buttonStyle" style="margin: 10px;" value="Send Message" action="#{mainController.sendMessage()}" rendered="#{not mainController.saveStatus}"></h:commandButton>
+                                        </h:panelGrid>
+                                        
+                                    </div>
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>                                       
+                </div>
+            </div>
+        </div> 
+    </h:body>
+</html>
+

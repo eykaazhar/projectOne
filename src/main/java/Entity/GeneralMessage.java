@@ -22,7 +22,7 @@ import javax.persistence.Temporal;
  */
 @Entity
 @NamedQueries({
-    @NamedQuery(name="GeneralMessage.getWaitingMessage", query="SELECT m FROM GeneralMessage m WHERE m.status = 'Waiting'")
+    @NamedQuery(name="GeneralMessage.getWaitingMessage", query="SELECT m FROM GeneralMessage m Order By m.status DESC")
 })
 public class GeneralMessage implements Serializable {
 

@@ -17,12 +17,10 @@
     </h:head>
     <h:body id="bodyWhite">
         <div class="container-fluid headerBackground">
-            <!--
             <div class="logoBox">
-                <h:graphicImage class="logoImage" value="Resources/Images/logo-left.jpg"/>
-            </div> 
-            
-      xmlns:m="http://code.google.com/p/gmaps4jsf/"-->
+                <h:graphicImage class="logoImage" value="Resources/Images/uop1.png"/>
+            </div>            
+            <!--xmlns:m="http://code.google.com/p/gmaps4jsf/"-->
             <div class="boxes">                
                 <div class="firstBox">
                     <h1 class="webTitle">Port-Eco House</h1>
@@ -33,30 +31,60 @@
             </div>
         </div>
         <div class="container-fluid navBarColumn">
-            <nav class ="navbar navbar-default navbarColour" >
-                <div class="container">
-                    <div class="col-xs-12 secondNavColour">
-                        <div class="nav navbar-nav">
-                            <ul class="nav navbar-nav">   
+            <nav class ="navbar navbar-default navbarColour" style="min-width: 1000px;">
+                <div class="container secondNavColour"> 
+                    <div class="nav navbar-nav">
+                        <ul class="nav navbar-nav">
+                            <li>
+                                <a class="navbarItem" href="#aboutPanel">ABOUT</a>
+                            </li>
+                            <li>
+                                <a class="navbarItem" href="#facilityPanel">FACILITIES</a>
+                            </li>
+                            <li>
+                                <a class="navbarItem" href="bookingPage.xhtml">BOOKING</a>
+                            </li>                                
+                        </ul>
+                    </div>  
+                    <div class="nav navbar-nav navbar-right">
+                        <ul class="nav navbar-nav">                                  
+                            <h:panelGroup rendered="#{not mainController.isAdmin and not mainController.isMember}">
                                 <li>
-                                    <a class="navbarItem" href="#aboutPanel">ABOUT</a>
+                                    <a class="navbarItem" href="loginPage.xhtml">LOG IN</a>
+                                </li>                                    
+                            </h:panelGroup>
+                            <h:panelGroup rendered="#{mainController.isAdmin}">
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle navbarItem" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">ADMINISTRATOR<span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a class="navbarItem" href="adminPage.xhtml">MY ACCOUNT</a>
+                                        </li>
+                                        <li>
+                                            <h:form class="navbarItem">
+                                                <h:commandLink class="navbarItem" style="text-decoration: none;" action="#{mainController.logout()}" value="LOG OUT"/>
+                                            </h:form>
+                                        </li>
+                                    </ul>
                                 </li>
-                                <li>
-                                    <a class="navbarItem" href="#facilityPanel">FACILITIES</a>
+                            </h:panelGroup>
+                            <h:panelGroup rendered="#{mainController.isMember}">
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle navbarItem" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">MEMBER <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a class="navbarItem" href="memberPage.xhtml">MY ACCOUNT</a>
+                                        </li>
+                                        <li>                                                
+                                            <h:form class="navbarItem">
+                                                <h:commandLink class="navbarItem" style="text-decoration: none;" action="#{mainController.logout()}" value="LOG OUT"/>
+                                            </h:form>
+                                      </li>
+                                    </ul>
                                 </li>
-                                <li>
-                                    <a class="navbarItem" href="bookingPage.xhtml">BOOKING</a>
-                                </li>
-                            </ul>
-                        </div>  
-                        <div class="nav navbar-nav navbar-right">
-                            <ul class="nav navbar-nav">  
-                                <li>
-                                    <a class="navbarItem" href="loginPage.xhtml">LOGIN</a>
-                                </li>
-                            </ul>
-                        </div>            
-                    </div>         
+                            </h:panelGroup>
+                        </ul>
+                    </div> 
                 </div>  
             </nav>
         </div>
@@ -104,6 +132,15 @@
                                     <p> A room located beside the house that stored devices and equipment to manage the environmental monitoring equipment and video cameras. Need a special key for access. </p> 
                                 </div>
                             </div>
+                        </div>                        
+                        <div class="col-xs-12">
+                            <div class="mainPageFacilityDes" style="margin: 0 auto;margin-top: 10px;">
+                                <p class="facilityDescription">The house and the garden are available for any kind of experiments that are suitable to be held. 
+                                    For the house, you can either use the entire house or just a part of it that relates with the test you want to conduct. 
+                                    For example, it is possible if you just want to use a part of the kitchen or just want to conduct test regarding the house electricity.
+                                    Feels free to contact us for any enquiries regarding Port-Eco House
+                                </p>
+                            </div>
                         </div>
                         <div class="col-xs-12">
                             <div class="buttonPanel" style="text-align: center">
@@ -136,17 +173,16 @@
                     </div>  
                     <div class="col-xs-4 contactColumn">                        
                          <div class="contactInfo" style="text-align: center;">
-                            <h1 class="aboutPanelTitleFont" style="margin-top: 45px;margin-bottom: 15px;">CONTACT US</h1>
+                            <h1 class="aboutPanelTitleFont" style="margin-top: 45px;margin-bottom: 15px;">CONTACT US</h1>                            
                             <p class="aboutDescription" style="margin:5px;">Contact Number:</p>
                             <p class="aboutDescription" style="font-weight: bold;">023 9284 2434</p>
                             <p class="aboutDescription" style="margin:5px;">Email:</p>
-                            <p class="aboutDescription" style="font-weight: bold;"> myport@ac.uk</p>
+                            <p class="aboutDescription" style="font-weight: bold;"> #{mainController.adminEmail.emailAddress}</p>  
                             <h:form target="_blank">
-                                 <h:commandLink action="#">
-                                <h:graphicImage value="Resources/Images/msjpurple.png" class="messageIcon" alt="Send us a message"/>
-                            </h:commandLink>
+                                <h:commandLink action="#{mainController.goToMessagePage()}">
+                                    <h:graphicImage value="Resources/Images/msjpurple.png" class="messageIcon" alt="Send us a message"/>
+                                </h:commandLink>
                             </h:form>
-                            
                         </div>
                     </div> 
                 </div>

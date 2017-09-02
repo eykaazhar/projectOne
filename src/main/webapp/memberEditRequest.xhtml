@@ -13,191 +13,228 @@
     <h:head>
         <title>Port-Eco House</title>
     </h:head>
-    <h:body>
-        <div class="container-fluid insideHeaderBackground">
-            <!--
-            <div class="logoBox">
-                <h:graphicImage class="logoImage" value="Resources/Images/logo-left.jpg"/>
-            </div> -->
-            <div class="boxes2">                
-                <div class="insideBox">
-                    <h1 class="webTitle">Port-Eco House</h1>
-                </div>                
-            </div>
-        </div>
-        <div class="container-fluid navBarColumn">
-             <nav class="navbar navbar-default navbarColour">
-                <div class="container">
-                    <div class="col-xs-12 secondNavColour">
-                        <div class="nav navbar-nav">
-                            <ul class="nav navbar-nav">
-                                <li>
-                                    <a class="navbarItem" href="mainPage.xhtml">Port-Eco Home</a>
-                                </li>
-                                <li class="navbarItemActive">
-                                    <a class="navbarItem" href="memberPage.xhtml">MY ACCOUNT</a>
-                                </li>
-                                <li>
-                                    <a class="navbarItem" href="inventoryPage.xhtml">INVENTORY</a>
-                                </li>
-                            </ul>
-                        </div>  
-                        <div class="nav navbar-nav navbar-right">
-                            <ul class="nav navbar-nav">  
-                                <li>
-                                    <a class="navbarItem" href="loginPage.xhtml">LOGOUT</a>
-                                </li>
-                            </ul>
-                        </div>            
-                    </div><!-- /.container-fluid -->            
-                </div>  
-            </nav>
-        </div>
-        <div id="bookingPanel" class="container-fluid bookingPanel">
-            <div class="container">
-                <div class="col-xs-12">
-                    <div class="inventoryPanel">
-                        <div class="row">
-                        <div class="col-xs-12" style="margin: 0 auto;margin-top:20px;">
-                            <h1 class="titleFont">Inventory Request Details</h1>
-                        </div>
-                        <div class="col-xs-12">
-                            <h:form rendered="#{not mainController.inventoryEdit}">                                
-                                <div class="detailsForm" style="margin: 0 auto;">
-                                    <h:panelGrid columns="3">
-                                        <h:outputLabel class="formOutputLabel" value="Username"/>
-                                        <h:outputLabel class="formOutputLabel2" value=" : "/>
-                                        <h:outputText class="formOutputLabel2" value="#{mainController.chosenRequest.memberId.username}"/>
-                                        
-                                        <h:outputLabel class="formOutputLabel" value="Name"/>
-                                        <h:outputLabel class="formOutputLabel2" value=" : "/>
-                                        <h:outputText class="formOutputLabel2" value="#{mainController.chosenRequest.memberId.firstName} #{mainController.chosenRequest.memberId.lastName}"/>
-                                        
-                                        <h:outputLabel class="formOutputLabel" value="Contact Number"/>
-                                        <h:outputLabel class="formOutputLabel2" value=" : "/>
-                                        <h:outputText class="formOutputLabel2" value="#{mainController.chosenRequest.memberId.contactNumber}"/>
-                                        
-                                        <h:outputLabel class="formOutputLabel" value="Email"/>
-                                        <h:outputLabel class="formOutputLabel2" value=" : "/>
-                                        <h:outputText class="formOutputLabel2" value="#{mainController.chosenRequest.memberId.email}"/>
-                                        
-                                        <h:outputLabel class="formOutputLabel" value="Date Requested"/>
-                                        <h:outputLabel class="formOutputLabel2" value=" : "/>                                        
-                                        <h:outputText class="formOutputLabel2" value="#{mainController.chosenRequest.dateIssued}">
-                                            <f:convertDateTime pattern="dd-MM-yyyy"/>
-                                        </h:outputText>
-                                        
-                                        <h:outputLabel class="formOutputLabel" value="Equipment Name"/>
-                                        <h:outputLabel class="formOutputLabel2" value=" : "/>
-                                        <h:outputText class="formOutputLabel2" value="#{mainController.chosenRequest.firstInventoryId.equipmentName}"/>
-                                        
-                                        <h:outputLabel class="formOutputLabel" value="Equipment Name (Second)"/>
-                                        <h:outputLabel class="formOutputLabel2" value=" : "/>
-                                        <h:outputText class="formOutputLabel2" value="#{mainController.chosenRequest.secondInventoryId.equipmentName}"/>
-                                        
-                                        <h:outputLabel class="formOutputLabel" value="Equipment Name (Third)"/>
-                                        <h:outputLabel class="formOutputLabel2" value=" : "/>
-                                        <h:outputText class="formOutputLabel2" value="#{mainController.chosenRequest.thirdInventoryId.equipmentName}"/>
-                                        
-                                        <h:outputLabel class="formOutputLabel" value="Date (From)"/>
-                                        <h:outputLabel class="formOutputLabel2" value=" : "/>
-                                        <h:outputText class="formOutputLabel2" value="#{mainController.chosenRequest.dateBorrowed}">
-                                            <f:convertDateTime pattern="dd-MM-yyyy"/>
-                                        </h:outputText>
-                                        
-                                        <h:outputLabel class="formOutputLabel" value="Date (Until)"/>
-                                        <h:outputLabel class="formOutputLabel2" value=" : "/>
-                                        <h:outputText class="formOutputLabel2" value="#{mainController.chosenRequest.dateReturned}">
-                                            <f:convertDateTime pattern="dd-MM-yyyy"/>
-                                        </h:outputText>
-                                        
-                                        <h:outputLabel class="formOutputLabel" value="Agreement"/>
-                                        <h:outputLabel class="formOutputLabel2" value=" : "/>
-                                        <h:outputText class="formOutputLabel2" value="Yes" rendered="#{mainController.chosenRequest.memberAgreement}"/>
-                                        <h:outputText class="formOutputLabel2" value="No" rendered="#{not mainController.chosenRequest.memberAgreement}"/>
-                                        
-                                        <h:outputLabel class="formOutputLabel" value="Status"/>
-                                        <h:outputLabel class="formOutputLabel2" value=" : "/>                                        
-                                        <h:outputText class="formOutputLabel2" value="#{mainController.chosenRequest.status}"/>
-                                        
-                                    </h:panelGrid>
-                                    <h:commandButton class="buttonStyle" style="margin: 10px;" value="Edit Request" action="#{mainController.editInventoryRequestDetail()}" rendered="#{mainController.chosenRequest.status == 'Waiting'}"></h:commandButton> 
-                                </div>                                
-                            </h:form>
-                            <h:form  rendered="#{mainController.inventoryEdit}">                                
-                                <div class="detailsForm" style="margin: 0 auto;">
-                                    <h:panelGrid columns="3">
-                                        <h:outputLabel class="formOutputLabel" value="Username"/>
-                                        <h:outputLabel class="formOutputLabel2" value=" : "/>
-                                        <h:outputText class="formOutputLabel2" value="#{mainController.chosenRequest.memberId.username}"/>
-                                        
-                                        <h:outputLabel class="formOutputLabel" value="Name"/>
-                                        <h:outputLabel class="formOutputLabel2" value=" : "/>
-                                        <h:outputText class="formOutputLabel2" value="#{mainController.chosenRequest.memberId.firstName} #{mainController.chosenRequest.memberId.lastName}"/>
-                                        
-                                        <h:outputLabel class="formOutputLabel" value="Contact Number"/>
-                                        <h:outputLabel class="formOutputLabel2" value=" : "/>
-                                        <h:outputText class="formOutputLabel2" value="#{mainController.chosenRequest.memberId.contactNumber}"/>
-                                        
-                                        <h:outputLabel class="formOutputLabel" value="Email"/>
-                                        <h:outputLabel class="formOutputLabel2" value=" : "/>
-                                        <h:outputText class="formOutputLabel2" value="#{mainController.chosenRequest.memberId.email}"/>
-                                        
-                                        <h:outputLabel class="formOutputLabel" value="Date Requested"/>
-                                        <h:outputLabel class="formOutputLabel2" value=" : "/>                                        
-                                        <h:outputText class="formOutputLabel2" value="#{mainController.chosenRequest.dateIssued}">
-                                            <f:convertDateTime pattern="dd-MM-yyyy"/>
-                                        </h:outputText>
-                                        
-                                        <h:outputLabel class="formOutputLabel" value="Equipment Name"/>
-                                        <h:outputLabel class="formOutputLabel2" value=" : "/>
-                                        <h:outputText class="formOutputLabel2" value="#{mainController.chosenRequest.firstInventoryId.equipmentName}"/>
-                                        
-                                        <h:outputLabel class="formOutputLabel" value="Equipment Name (Second)"/>
-                                        <h:outputLabel class="formOutputLabel2" value=" : "/>
-                                        <h:outputText class="formOutputLabel2" value="#{mainController.chosenRequest.secondInventoryId.equipmentName}"/>
-                                        
-                                        <h:outputLabel class="formOutputLabel" value="Equipment Name (Third)"/>
-                                        <h:outputLabel class="formOutputLabel2" value=" : "/>
-                                        <h:outputText class="formOutputLabel2" value="#{mainController.chosenRequest.thirdInventoryId.equipmentName}"/>
-                                        
-                                        <h:outputLabel class="formOutputLabel" value="Date (From)"/>
-                                        <h:outputLabel class="formOutputLabel2" value=" : "/>
-                                        <h:outputText class="formOutputLabel2" value="#{mainController.chosenRequest.dateBorrowed}">
-                                            <f:convertDateTime pattern="dd-MM-yyyy"/>
-                                        </h:outputText>
-                                        
-                                        <h:outputLabel class="formOutputLabel" value="Date (Until)"/>
-                                        <h:outputLabel class="formOutputLabel2" value=" : "/>
-                                        <h:outputText class="formOutputLabel2" value="#{mainController.chosenRequest.dateReturned}">
-                                            <f:convertDateTime pattern="dd-MM-yyyy"/>
-                                        </h:outputText>
-                                        
-                                        <h:outputLabel class="formOutputLabel" value="Agreement"/>
-                                        <h:outputLabel class="formOutputLabel2" value=" : "/>
-                                        <h:outputText class="formOutputLabel2" value="Yes" rendered="#{mainController.chosenRequest.memberAgreement}"/>
-                                        <h:outputText class="formOutputLabel2" value="No" rendered="#{not mainController.chosenRequest.memberAgreement}"/>
-                                        
-                                        <h:outputLabel class="formOutputLabel" value="Status"/>
-                                        <h:outputLabel class="formOutputLabel2" value=" : "/>                                        
-                                        <h:selectOneMenu class="formOutputLabel2" value="#{mainController.inventoryStatus}" onchange="submit()"
-                                                         valueChangeListener="#{mainController.changeRequestStatus}" style="margin:10px"> 
-                                            <f:selectItem itemValue="#{null}" itemLabel="--Select Status--"/>                                            
-                                            <f:selectItem itemValue="Cancelled" itemLabel="Cancel Request"/>
-                                            <f:selectItem itemValue="Waiting" itemLabel="Waiting"/>
-                                        </h:selectOneMenu>
-                                        
-                                    </h:panelGrid>  
-                                    <h:commandButton class="buttonStyle" style="margin: 10px;" value="Save Changes" action="#{mainController.saveRequestChange()}"></h:commandButton>
-                                    <h:commandButton class="buttonStyle" style="margin: 10px;" value="Cancel" action="#{mainController.cancelInventoryRequestEdit()}"></h:commandButton>
-                                </div>                                
-                            </h:form>
-                        </div>
-                    </div>
-                    </div>                    
+    <h:body id="bodyPage">
+        <h:panelGroup rendered="#{mainController.isMember}">
+            <div class="container-fluid insideHeaderBackground">
+                <!--
+                <div class="logoBox">
+                    <h:graphicImage class="logoImage" value="Resources/Images/logo-left.jpg"/>
+                </div> -->
+                <div class="boxes2">                
+                    <div class="insideBox">
+                        <h1 class="webTitle">Port-Eco House</h1>
+                    </div>                
                 </div>
             </div>
-        </div> 
+            <div class="container-fluid navBarColumn">
+                 <nav class="navbar navbar-default navbarColour">
+                    <div class="container">
+                        <div class="col-xs-12 secondNavColour">
+                            <div class="nav navbar-nav">
+                                <ul class="breadcrumb"> 
+                                    <li>
+                                        <a class="navbarItem" href="memberPage.xhtml">MY ACCOUNT</a>
+                                    </li>
+                                    <li>
+                                        <a class="navbarItem navbarItemActive" href="#">EDIT REQUEST</a>
+                                    </li>                                
+                                </ul>
+                            </div>  
+                            <div class="nav navbar-nav navbar-right">
+                                <ul class="nav navbar-nav">  
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle navbarItem" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">#{mainController.loginMember.username}<span class="caret"></span></a>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <a class="navbarItem" href="memberPage.xhtml">MY ACCOUNT</a>
+                                            </li>
+                                            <li>
+                                                <h:form class="navbarItem">
+                                                    <h:commandLink class="navbarItem" style="text-decoration: none;" action="#{mainController.logout()}" value="LOG OUT"/>
+                                                </h:form>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>                  
+                        </div><!-- /.container-fluid -->            
+                    </div>  
+                </nav>
+            </div>
+            <div id="bookingPanel" class="container-fluid bookingPanel">
+                <div class="container">
+                    <div class="col-xs-12">
+                        <div class="inventoryPanel">
+                            <div class="row">
+                            <div class="col-xs-12" style="margin: 0 auto;margin-top:20px;">
+                                <h1 class="titleFont">Inventory Request Details</h1>
+                            </div>
+                            <div class="col-xs-12">
+                                <h:form rendered="#{not mainController.inventoryEdit}">                                
+                                    <div class="detailsForm" style="margin: 0 auto;">
+                                        <h:panelGrid columns="3">
+                                            <h:outputLabel class="formOutputLabel" value="Username"/>
+                                            <h:outputLabel class="formOutputLabel2" value=" : "/>
+                                            <h:outputText class="formOutputLabel2" value="#{mainController.chosenRequest.memberId.username}"/>
+
+                                            <h:outputLabel class="formOutputLabel" value="Name"/>
+                                            <h:outputLabel class="formOutputLabel2" value=" : "/>
+                                            <h:outputText class="formOutputLabel2" value="#{mainController.chosenRequest.memberId.firstName} #{mainController.chosenRequest.memberId.lastName}"/>
+
+                                            <h:outputLabel class="formOutputLabel" value="Contact Number"/>
+                                            <h:outputLabel class="formOutputLabel2" value=" : "/>
+                                            <h:outputText class="formOutputLabel2" value="#{mainController.chosenRequest.memberId.contactNumber}"/>
+
+                                            <h:outputLabel class="formOutputLabel" value="Email"/>
+                                            <h:outputLabel class="formOutputLabel2" value=" : "/>
+                                            <h:outputText class="formOutputLabel2" value="#{mainController.chosenRequest.memberId.email}"/>
+
+                                            <h:outputLabel class="formOutputLabel" value="Date Requested"/>
+                                            <h:outputLabel class="formOutputLabel2" value=" : "/>                                        
+                                            <h:outputText class="formOutputLabel2" value="#{mainController.chosenRequest.dateIssued}">
+                                                <f:convertDateTime pattern="dd-MM-yyyy"/>
+                                            </h:outputText>
+
+                                            <h:outputLabel class="formOutputLabel" value="Equipment Name"/>
+                                            <h:outputLabel class="formOutputLabel2" value=" : "/>
+                                            <h:outputText class="formOutputLabel2" value="#{mainController.chosenRequest.firstInventoryId.equipmentName}"/>
+
+                                            <h:outputLabel class="formOutputLabel" value="Equipment Name (Second)"/>
+                                            <h:outputLabel class="formOutputLabel2" value=" : "/>
+                                            <h:outputText class="formOutputLabel2" value="#{mainController.chosenRequest.secondInventoryId.equipmentName}"/>
+
+                                            <h:outputLabel class="formOutputLabel" value="Equipment Name (Third)"/>
+                                            <h:outputLabel class="formOutputLabel2" value=" : "/>
+                                            <h:outputText class="formOutputLabel2" value="#{mainController.chosenRequest.thirdInventoryId.equipmentName}"/>
+
+                                            <h:outputLabel class="formOutputLabel" value="Date (From)"/>
+                                            <h:outputLabel class="formOutputLabel2" value=" : "/>
+                                            <h:outputText class="formOutputLabel2" value="#{mainController.chosenRequest.dateBorrowed}">
+                                                <f:convertDateTime pattern="dd-MM-yyyy"/>
+                                            </h:outputText>
+
+                                            <h:outputLabel class="formOutputLabel" value="Date (Until)"/>
+                                            <h:outputLabel class="formOutputLabel2" value=" : "/>
+                                            <h:outputText class="formOutputLabel2" value="#{mainController.chosenRequest.dateReturned}">
+                                                <f:convertDateTime pattern="dd-MM-yyyy"/>
+                                            </h:outputText>
+
+                                            <h:outputLabel class="formOutputLabel" value="Agreement"/>
+                                            <h:outputLabel class="formOutputLabel2" value=" : "/>
+                                            <h:outputText class="formOutputLabel2" value="Yes" rendered="#{mainController.chosenRequest.memberAgreement}"/>
+                                            <h:outputText class="formOutputLabel2" value="No" rendered="#{not mainController.chosenRequest.memberAgreement}"/>
+
+                                            <h:outputLabel class="formOutputLabel" value="Status"/>
+                                            <h:outputLabel class="formOutputLabel2" value=" : "/>                                        
+                                            <h:outputText class="formOutputLabel2" value="#{mainController.chosenRequest.status}"/>
+
+                                        </h:panelGrid>
+                                        <h:commandButton class="buttonStyle" style="margin: 10px;" value="Edit Request" action="#{mainController.editInventoryRequestDetail()}" rendered="#{mainController.chosenRequest.status == 'Waiting'}"></h:commandButton> 
+                                    </div>                                
+                                </h:form>
+                                <h:form  rendered="#{mainController.inventoryEdit}">                                
+                                    <div class="detailsForm" style="margin: 0 auto;">
+                                        <h:panelGrid columns="3">
+                                            <h:outputLabel class="formOutputLabel" value="Username"/>
+                                            <h:outputLabel class="formOutputLabel2" value=" : "/>
+                                            <h:outputText class="formOutputLabel2" value="#{mainController.chosenRequest.memberId.username}"/>
+
+                                            <h:outputLabel class="formOutputLabel" value="Name"/>
+                                            <h:outputLabel class="formOutputLabel2" value=" : "/>
+                                            <h:outputText class="formOutputLabel2" value="#{mainController.chosenRequest.memberId.firstName} #{mainController.chosenRequest.memberId.lastName}"/>
+
+                                            <h:outputLabel class="formOutputLabel" value="Contact Number"/>
+                                            <h:outputLabel class="formOutputLabel2" value=" : "/>
+                                            <h:outputText class="formOutputLabel2" value="#{mainController.chosenRequest.memberId.contactNumber}"/>
+
+                                            <h:outputLabel class="formOutputLabel" value="Email"/>
+                                            <h:outputLabel class="formOutputLabel2" value=" : "/>
+                                            <h:outputText class="formOutputLabel2" value="#{mainController.chosenRequest.memberId.email}"/>
+
+                                            <h:outputLabel class="formOutputLabel" value="Date Requested"/>
+                                            <h:outputLabel class="formOutputLabel2" value=" : "/>                                        
+                                            <h:outputText class="formOutputLabel2" value="#{mainController.chosenRequest.dateIssued}">
+                                                <f:convertDateTime pattern="dd-MM-yyyy"/>
+                                            </h:outputText>
+
+                                            <h:outputLabel class="formOutputLabel" value="Equipment Name"/>
+                                            <h:outputLabel class="formOutputLabel2" value=" : "/>
+                                            <h:outputText class="formOutputLabel2" value="#{mainController.chosenRequest.firstInventoryId.equipmentName}"/>
+
+                                            <h:outputLabel class="formOutputLabel" value="Equipment Name (Second)"/>
+                                            <h:outputLabel class="formOutputLabel2" value=" : "/>
+                                            <h:outputText class="formOutputLabel2" value="#{mainController.chosenRequest.secondInventoryId.equipmentName}"/>
+
+                                            <h:outputLabel class="formOutputLabel" value="Equipment Name (Third)"/>
+                                            <h:outputLabel class="formOutputLabel2" value=" : "/>
+                                            <h:outputText class="formOutputLabel2" value="#{mainController.chosenRequest.thirdInventoryId.equipmentName}"/>
+
+                                            <h:outputLabel class="formOutputLabel" value="Date (From)"/>
+                                            <h:outputLabel class="formOutputLabel2" value=" : "/>
+                                            <h:outputText class="formOutputLabel2" value="#{mainController.chosenRequest.dateBorrowed}">
+                                                <f:convertDateTime pattern="dd-MM-yyyy"/>
+                                            </h:outputText>
+
+                                            <h:outputLabel class="formOutputLabel" value="Date (Until)"/>
+                                            <h:outputLabel class="formOutputLabel2" value=" : "/>
+                                            <h:outputText class="formOutputLabel2" value="#{mainController.chosenRequest.dateReturned}">
+                                                <f:convertDateTime pattern="dd-MM-yyyy"/>
+                                            </h:outputText>
+
+                                            <h:outputLabel class="formOutputLabel" value="Agreement"/>
+                                            <h:outputLabel class="formOutputLabel2" value=" : "/>
+                                            <h:outputText class="formOutputLabel2" value="Yes" rendered="#{mainController.chosenRequest.memberAgreement}"/>
+                                            <h:outputText class="formOutputLabel2" value="No" rendered="#{not mainController.chosenRequest.memberAgreement}"/>
+
+                                            <h:outputLabel class="formOutputLabel" value="Status"/>
+                                            <h:outputLabel class="formOutputLabel2" value=" : "/>                                        
+                                            <h:selectOneMenu class="formOutputLabel2" value="#{mainController.inventoryStatus}" onchange="submit()"
+                                                             valueChangeListener="#{mainController.changeRequestStatus}" style="margin:10px"> 
+                                                <f:selectItem itemValue="#{null}" itemLabel="--Select Status--"/>                                            
+                                                <f:selectItem itemValue="Cancelled" itemLabel="Cancel Request"/>
+                                                <f:selectItem itemValue="Waiting" itemLabel="Waiting"/>
+                                            </h:selectOneMenu>
+
+                                        </h:panelGrid>  
+                                        <h:commandButton class="buttonStyle" style="margin: 10px;" value="Save Changes" action="#{mainController.saveRequestChange()}"></h:commandButton>
+                                        <h:commandButton class="buttonStyle" style="margin: 10px;" value="Cancel" action="#{mainController.cancelInventoryRequestEdit()}"></h:commandButton>
+                                    </div>                                
+                                </h:form>
+                            </div>
+                        </div>
+                        </div>                    
+                    </div>
+                </div>
+            </div> 
+        </h:panelGroup>
+        <h:panelGroup rendered="#{not mainController.isMember}">
+            <div class="container-fluid headerBackground">            
+                <div class="boxes">                
+                    <div class="firstBox">
+                        <h1 class="webTitle">Port-Eco House</h1>
+                    </div>
+                    <div class="secondBox">
+                        <p class="titleDescription">Installed with environmental monitoring equipment and video cameras to enable in-situ studies of the building’s performance and the behaviour of its occupants</p>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid navBarColumn">
+                <nav class ="navbar navbar-default navbarColour" style="min-width: 1000px;">
+                    <div class="container secondNavColour">
+                        <div class="nav navbar-nav">
+                            <ul class="nav navbar-nav">   
+                                <li>
+                                    <a class="navbarItem" href="mainPage.xhtml">HOME</a>
+                                </li>                                    
+                            </ul>
+                        </div>  
+                    </div>  
+                </nav>
+            </div>
+            <div>
+                <h2 class="fontFacility" style="color: red;">Sorry, You need to log in as a member to be able to use member's functions and features</h2>
+            </div>
+        </h:panelGroup>
     </h:body>
 </html>
 

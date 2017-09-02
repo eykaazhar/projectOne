@@ -15,174 +15,198 @@
         <title>Port-Eco House</title>
     </h:head>
     <h:body id="bodyPage">
-        <div class="container-fluid insideHeaderBackground">
-            <!--
-            <div class="logoBox">
-                <h:graphicImage class="logoImage" value="Resources/Images/logo-left.jpg"/>
-            </div> -->
-            <div class="boxes2">                
-                <div class="insideBox">
-                    <h1 class="webTitle">Port-Eco House</h1>
-                </div>                
+        <h:panelGroup rendered="#{mainController.isAdmin}">
+            <div class="container-fluid insideHeaderBackground">
+                <!--
+                <div class="logoBox">
+                    <h:graphicImage class="logoImage" value="Resources/Images/logo-left.jpg"/>
+                </div> -->
+                <div class="boxes2">                
+                    <div class="insideBox">
+                        <h1 class="webTitle">Port-Eco House</h1>
+                    </div>                
+                </div>
             </div>
-        </div>
-        <div class="container-fluid navBarColumn">
-             <nav class="navbar navbar-default navbarColour">
-                <div class="container">
-                    <div class="col-xs-12 secondNavColour">
-                        <div class="nav navbar-nav">
-                            <ul class="nav navbar-nav"> 
-                                <li>
-                                    <a class="navbarItem" href="mainPage.xhtml">Port-Eco Home</a>
-                                </li>
-                                <li>
-                                    <a class="navbarItem" href="adminPage.xhtml">ADMIN</a>
-                                </li>
-                                <li class="navbarItemActive">
-                                    <a class="navbarItem" href="adminMember.xhtml">MEMBER</a>
-                                </li>
-                                <li>
-                                    <a class="navbarItem" href="adminFacility.xhtml">FACILITIES</a>
-                                </li>
-                                <li>
-                                    <a class="navbarItem" href="adminInventory.xhtml">INVENTORY</a>
-                                </li>
-                            </ul>
-                        </div>  
-                        <div class="nav navbar-nav navbar-right">
-                            <ul class="nav navbar-nav">  
-                                <li>
-                                    <a class="navbarItem" href="loginPage.xhtml">LOGOUT</a>
-                                </li>
-                            </ul>
-                        </div>            
-                    </div><!-- /.container-fluid -->            
-                </div>  
-            </nav>
-        </div>
-        <div class="container-fluid adminMemberPanel">
-            <div class="container">                
-                <div class="col-xs-12" style="padding-bottom: 10px;padding-top: 20px;"> 
-                    <div class="col-xs-4">
-                        <h2 class="font1">Quick Information</h2>
-                         <div class="quickPanelSub">
-                            <a href="#" class="quickLink">Total Member<span class="badge badgeStyle">5</span></a>                                
-                        </div>    
-                        <div class="quickPanelSub">
-                            <a href="#" class="quickLink">Active Member <span class="badge badgeStyle">3</span></a>
-                        </div> 
-                    </div>
-                    <div class="col-xs-6">
-                        <h2 class="font1">Register New Member/Administrator</h2>
-                        <div class="memberInfoPanel">
-                            <h:form id="loginForm">
-                                <h:panelGrid columns="3">
-                                    <h:outputLabel class="bookingLabelFont" value="Member Type"/>
-                                    <h:outputLabel class="bookingLabelFont" value=" : "/>
-                                    <h:selectOneMenu class="inputTextStyle" value="#{mainController.selectedMemberType}" onchange="submit()"
-                                                     valueChangeListener="#{mainController.changeMemberType}" style="margin:10px"> 
-                                        <f:selectItem itemValue="#{null}" itemLabel="--Select Type--"/>
-                                        <f:selectItem itemValue="Member" itemLabel="Member"/>
-                                        <f:selectItem itemValue="Admin" itemLabel="Admin"/>                                                   
-                                    </h:selectOneMenu>
-
-                                    <h:outputLabel class="bookingLabelFont" value="Username"/>
-                                    <h:outputLabel class="bookingLabelFont" value=" : "/>
-                                    <h:inputText class="inputTextStyle" value="#{mainController.userName}"/>
-
-                                    <h:outputLabel class="bookingLabelFont" value="Password"/>
-                                    <h:outputLabel class="bookingLabelFont" value=" : "/>
-                                    <h:inputSecret class="inputTextStyle" value="#{mainController.password}"/> 
-
-                                    <h:outputLabel class="bookingLabelFont" value="Confirm Password"/>
-                                    <h:outputLabel class="bookingLabelFont" value=" : "/>
-                                    <h:inputSecret class="inputTextStyle" value="#{mainController.confrimPasword}"/>
-
-                                    <h:outputLabel class="bookingLabelFont" value="Email"/>
-                                    <h:outputLabel class="bookingLabelFont" value=" : "/>
-                                    <h:inputText class="inputTextStyle" value="#{mainController.email}"/> 
-                                </h:panelGrid>
-
-                                <h:commandButton class="buttonStyle" value="Register" action="#{mainController.registeredMember()}"></h:commandButton>
-                                <h:outputText value="The passwords entered are different" style="color: red;" rendered="#{not mainController.checkPassword}"/>
-                                <h:outputText value="Registration Done" style="color: blue;" rendered="#{mainController.registrationStatus}"/>                                
-                            </h:form>         
-                        </div>
-                    </div>
-                </div>                              
+            <div class="container-fluid navBarColumn">
+                <nav class="navbar navbar-default navbarColour">
+                    <div class="container">
+                        <div class="col-xs-12 secondNavColour">
+                            <div class="nav navbar-nav">
+                                <ul class="nav navbar-nav"> 
+                                    <li>
+                                        <a class="navbarItem" href="mainPage.xhtml">Port-Eco Home</a>
+                                    </li>
+                                    <li>
+                                        <a class="navbarItem" href="adminPage.xhtml">MY ACCOUNT</a>
+                                    </li>
+                                    <li class="navbarItemActive">
+                                        <a class="navbarItem" href="adminMember.xhtml">MEMBER</a>
+                                    </li>
+                                    <li>
+                                        <a class="navbarItem" href="adminFacility.xhtml">FACILITIES</a>
+                                    </li>
+                                    <li>
+                                        <a class="navbarItem" href="adminInventory.xhtml">INVENTORY</a>
+                                    </li>
+                                </ul>
+                            </div>  
+                            <div class="nav navbar-nav navbar-right">
+                                <ul class="nav navbar-nav">  
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle navbarItem" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">ADMINISTRATOR<span class="caret"></span></a>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <h:form class="navbarItem">
+                                                    <h:commandLink class="navbarItem" style="text-decoration: none;" action="#{mainController.logout()}" value="LOG OUT"/>
+                                                </h:form>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>            
+                        </div><!-- /.container-fluid -->            
+                    </div>  
+                </nav>
             </div>
-        </div>
-        <div class="container-fluid adminMemberPanel2">
-            <div class="container">
-                <div class="col-xs-12">  
-                    <div style="max-height: 450px; width: 850px; overflow: auto; margin: 0 auto;">                        
-                        <h1 class="titleFont" style="text-align:center"> Member List</h1>
-                        <div style="margin: 10px;">                                
-                            <h:form rendered="#{mainController.memberList.size() != 0}">
-                                <h:panelGrid columns="4">
-                                    <h:outputText class="font1" value="Search"/>
-                                    <h:inputText value="#{mainController.searchKeyword}" class="inputTextStyleM"  style="margin-right: 10px;"/>
-                                    <h:commandButton class="buttonStyle" value="Go" action="#{mainController.retrieveMemberSearchResult()}"></h:commandButton>
-                                    <h:commandButton class="buttonStyle" value="Reset Search" action="#{mainController.resetMemberSearchResult()}"></h:commandButton>
-                                </h:panelGrid>
-                            </h:form>
+            <div class="container-fluid adminMemberPanel">
+                <div class="container">                
+                    <div class="col-xs-12" style="padding-bottom: 10px;padding-top: 20px;"> 
+                        <div class="col-xs-4">
+                            <h2 class="font1">Member Action</h2>
+                            <div class="buttonStyle2">
+                                <a href="#addMember" class="quickLink">Add New Member</a>
+                            </div>
+                            <h2 class="font1">Quick Information</h2>
+                            <div class="informationBox">
+                                <p class="infoFont">Total Member <span class="badge badgeStyle">#{mainController.totalMember}</span></p>                                
+                            </div>  
                         </div>
-                        <h:form id="memberList" style="margin: 10px;" target="_blank" rendered="#{mainController.memberList.size() != 0}">
-                            <h:dataTable border="1" value="#{mainController.memberList}" var="member" styleClass="mainTable" headerClass="tableHeader" rowClasses="tableRowEven,tableRowOdd">                    
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText class="tableItemHeader" value="Username" />
-                                    </f:facet>
-                                    <h:outputText class="tableItem" value="#{member.username}"/>
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText class="tableItemHeader" value="Full Name" />
-                                    </f:facet>
-                                    <h:outputText class="tableItem" value="#{member.firstName} #{member.lastName}"/>
-                                </h:column>  
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText class="tableItemHeader" value="Email" />
-                                    </f:facet>
-                                    <h:outputText class="tableItem" value="#{member.email}"/>
-                                </h:column> 
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText class="tableItemHeader" value="Contact Number" />
-                                    </f:facet>
-                                    <h:outputText class="tableItem" value="#{member.contactNumber}"/>
-                                </h:column> 
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText class="tableItemHeader" value="Member Status" />
-                                    </f:facet>
-                                    <h:outputText class="tableItem" value="#{member.memberStatus}"/>
-                                </h:column>  
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText class="tableItemHeader" value="Detail" />
-                                    </f:facet>
-                                    <div class="tableItem">
-                                        <h:commandButton value="View" action="#{mainController.selectedEditMember(member)}"></h:commandButton> 
-                                    </div>                               
-                                </h:column>
-                             </h:dataTable>                    
-                        </h:form>
-                        <div style="text-align: center">
-                            <h:outputText class="outputLabelFont2" value="No Registered Member Data"  rendered="#{mainController.memberList.size() == 0}"></h:outputText>
-                        </div> 
+                        <div class="col-xs-6">
+                            <div class="row">
+                                <h2 class="font1">Member List</h2>
+                                <div class="memberInfoPanel">
+                                    <div style="max-height: 450px; width: 550px; overflow: auto; margin: 0 auto;">                        
+                                        <div style="margin: 10px;">                                
+                                            <h:form rendered="#{mainController.memberList.size() != 0}">
+                                                <h:panelGrid columns="4">
+                                                    <h:outputText class="font1" value="Search"/>
+                                                    <h:inputText value="#{mainController.searchKeyword}" class="inputTextStyleM" style="margin-right: 10px;width: 150px;"/>
+                                                    <h:commandButton class="buttonStyle" value="Go" action="#{mainController.retrieveMemberSearchResult()}"></h:commandButton>
+                                                    <h:commandButton class="buttonStyle" value="Reset Search" action="#{mainController.resetMemberSearchResult()}"></h:commandButton>
+                                                </h:panelGrid>
+                                            </h:form>
+                                        </div>
+                                        <h:form id="memberList" style="margin: 10px;" rendered="#{mainController.memberList.size() != 0 and mainController.isAdmin}">
+                                            <h:dataTable border="1" value="#{mainController.memberList}" var="member" styleClass="mainTable" headerClass="tableHeader" rowClasses="tableRowEven,tableRowOdd">                    
+                                                <h:column>
+                                                    <f:facet name="header">
+                                                        <h:outputText class="tableItemHeader" value="Username" />
+                                                    </f:facet>
+                                                    <h:outputText class="tableItem" value="#{member.username}"/>
+                                                </h:column>
+                                                <h:column>
+                                                    <f:facet name="header">
+                                                        <h:outputText class="tableItemHeader" value="Full Name" />
+                                                    </f:facet>
+                                                    <h:outputText class="tableItem" value="#{member.firstName} #{member.lastName}"/>
+                                                </h:column>  
+                                                <h:column>
+                                                    <f:facet name="header">
+                                                        <h:outputText class="tableItemHeader" value="Email" />
+                                                    </f:facet>
+                                                    <h:outputText class="tableItem" value="#{member.email}"/>
+                                                </h:column>                                     
+                                                <h:column>
+                                                    <f:facet name="header">
+                                                        <h:outputText class="tableItemHeader" value="Detail" />
+                                                    </f:facet>
+                                                    <div class="tableItem">
+                                                        <h:commandButton value="View" action="#{mainController.selectedEditMember(member)}"></h:commandButton> 
+                                                    </div>                               
+                                                </h:column>
+                                             </h:dataTable>                    
+                                        </h:form>
+                                        <div style="text-align: center">
+                                            <h:outputText class="outputLabelFont2" value="No Registered Member Data"  rendered="#{mainController.memberList.size() == 0}"></h:outputText>
+                                        </div> 
+                                    </div>  
+                                </div>
+                            </div>
+                            <div class="row" id="addMember">
+                                <h2 class="font1">Add New Member</h2>
+                                <div class="memberInfoPanel">
+                                    <h:form id="addForm">
+                                        <h:panelGrid columns="3">
+                                            <h:outputLabel class="bookingLabelFont" value="Member Type"/>
+                                            <h:outputLabel class="bookingLabelFont" value=" : "/>
+                                            <h:selectOneMenu class="inputTextStyle" value="#{mainController.selectedMemberType}" onchange="submit()"
+                                                             valueChangeListener="#{mainController.changeMemberType}" style="margin:10px"> 
+                                                <f:selectItem itemValue="Member" itemLabel="Member"/>                                                  
+                                            </h:selectOneMenu>
+
+                                            <h:outputLabel class="bookingLabelFont" value="Username"/>
+                                            <h:outputLabel class="bookingLabelFont" value=" : "/>
+                                            <h:inputText class="inputTextStyle" value="#{mainController.userName}"/>
+
+                                            <h:outputLabel class="bookingLabelFont" value="Password"/>
+                                            <h:outputLabel class="bookingLabelFont" value=" : "/>
+                                            <h:inputSecret class="inputTextStyle" value="#{mainController.password}"/> 
+
+                                            <h:outputLabel class="bookingLabelFont" value="Confirm Password"/>
+                                            <h:outputLabel class="bookingLabelFont" value=" : "/>
+                                            <h:inputSecret class="inputTextStyle" value="#{mainController.confrimPasword}"/>
+
+                                            <h:outputLabel class="bookingLabelFont" value="Email"/>
+                                            <h:outputLabel class="bookingLabelFont" value=" : "/>
+                                            <h:inputText class="inputTextStyle" value="#{mainController.email}"/> 
+                                        </h:panelGrid>
+
+                                        <h:commandButton class="buttonStyle" value="Register" action="#{mainController.registeredMember()}"></h:commandButton>
+                                        <h:outputText value="The passwords entered are different" style="color: red;" rendered="#{not mainController.checkPassword}"/>
+                                        <h:outputText value="Registration Done" style="color: blue;" rendered="#{mainController.registrationStatus}"/>                                
+                                    </h:form>     
+                                </div>
+                            </div>
+                        </div>
+                    </div>                              
+                </div>
+            </div>            
+            <div class="footerPanel">           
+                <p class="footerFont">&copy; BSc(Hons) Building Survey</p>
+            </div>        
+        </h:panelGroup>
+        <h:panelGroup rendered="#{not mainController.isAdmin}">
+            <div class="container-fluid headerBackground">            
+                <div class="boxes">                
+                    <div class="firstBox">
+                        <h1 class="webTitle">Port-Eco House</h1>
+                    </div>
+                    <div class="secondBox">
+                        <p class="titleDescription">Installed with environmental monitoring equipment and video cameras to enable in-situ studies of the building’s performance and the behaviour of its occupants</p>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="footerPanel">           
-            <p class="footerFont">&copy; BSc(Hons) Building Survey</p>
-        </div>        
+            <div class="container-fluid navBarColumn">
+                <nav class ="navbar navbar-default navbarColour" style="min-width: 1000px;">
+                    <div class="container secondNavColour">
+                        <div class="nav navbar-nav">
+                            <ul class="nav navbar-nav">   
+                                <li>
+                                    <a class="navbarItem" href="mainPage.xhtml">HOME</a>
+                                </li>                                    
+                            </ul>
+                        </div>  
+                    </div>  
+                </nav>
+            </div>
+            <div>
+                <h2 class="fontFacility" style="color: red;">Sorry, You need to log in as administrator to be able to use administrator's functions and features</h2>
+            </div>
+        </h:panelGroup> 
     </h:body>
     <script type="text/javascript">
-        function registerMember(){
-            $("#formPanel").show();
+        function focusOnAdd(){
+            $("#addForm").show();
         }        
         function registerMemberCancel(){
             $("#formPanel").hide();

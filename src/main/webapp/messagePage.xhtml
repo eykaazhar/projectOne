@@ -1,7 +1,8 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -56,35 +57,57 @@
                                                 <h:outputLabel style="color:red" value=" * "/>
                                             </h:panelGroup>   
                                             <h:outputLabel class="outputLabelFont2" value=" : "/>
-                                            <h:inputText class="inputTextStyle" value="#{mainController.userId}"/>
+                                            <h:inputText id="Id" class="inputTextStyle" value="#{mainController.userId}" required="true" label="Student/Staff Id"/>
+                                            
+                                            <h:outputText value=""/>
+                                            <h:outputText value=""/>
+                                            <h:message for="Id" class="outputTextFont" style="color:red" />
 
                                              <h:panelGroup class="outputLabelFont">
                                                 <h:outputLabel value="Name"/>
                                                 <h:outputLabel style="color:red" value=" * "/>
                                             </h:panelGroup>   
                                             <h:outputLabel class="outputLabelFont2" value=" : "/>
-                                            <h:inputText class="inputTextStyle" value="#{mainController.userName}"/>
+                                            <h:inputText id="name" class="inputTextStyle" value="#{mainController.userName}" required="true" label="Name"/>
+                                            
+                                            <h:outputText value=""/>
+                                            <h:outputText value=""/>
+                                            <h:message for="name" class="outputTextFont" style="color:red" />
 
                                             <h:panelGroup class="outputLabelFont">
-                                                <h:outputLabel value="Contact Information"/>
+                                                <h:outputLabel value="Email"/>
                                                 <h:outputLabel style="color:red" value=" * "/>
                                             </h:panelGroup>   
                                             <h:outputLabel class="outputLabelFont2" value=" : "/>
-                                            <h:inputText class="inputTextStyle" value="#{mainController.contactInfo}" size="40"/>
+                                            <h:inputText id="email" class="inputTextStyle" validatorMessage="Please use your university email" value="#{mainController.contactInfo}">
+                                                <f:validateRegex pattern="[a-zA-Z0-9_]+@(myport\.ac\.uk)$"/>
+                                            </h:inputText>
+                                            
+                                            <h:outputText value=""/>
+                                            <h:outputText value=""/>
+                                            <h:message for="email" class="outputTextFont" style="color:red" />
                                             
                                             <h:panelGroup class="outputLabelFont">
                                                 <h:outputLabel value="Subject"/>
                                                 <h:outputLabel style="color:red" value=" * "/>
                                             </h:panelGroup>   
                                             <h:outputLabel class="outputLabelFont2" value=" : "/>
-                                            <h:inputText class="inputTextStyle" value="#{mainController.purpose}" size="40"/>
+                                            <h:inputText id="subjet" class="inputTextStyle" value="#{mainController.purpose}" size="40" required="true" label="Subject"/>
+                                            
+                                            <h:outputText value=""/>
+                                            <h:outputText value=""/>
+                                            <h:message for="subjet" class="outputTextFont" style="color:red" />
 
                                             <h:panelGroup class="outputLabelFont">
                                                 <h:outputLabel value="Message"/>
                                                 <h:outputLabel style="color:red" value=" * "/>
                                             </h:panelGroup>   
                                             <h:outputLabel class="outputLabelFont2" value=" : "/>
-                                            <h:inputTextarea class="inputTextStyle" value="#{mainController.message}" cols="40" rows="5"/>                                           
+                                            <h:inputTextarea id="message" class="inputTextStyle" value="#{mainController.message}" cols="40" rows="5" required="true" label="Message"/>                                           
+                                            
+                                            <h:outputText value=""/>
+                                            <h:outputText value=""/>
+                                            <h:message for="message" class="outputTextFont" style="color:red" />
                                         </h:panelGrid>                                    
                                         <br/>
                                         <h:commandButton class="buttonStyle" style="margin: 10px;" value="Send Message" action="#{mainController.sendMessage()}" rendered="#{not mainController.saveStatus}"></h:commandButton>

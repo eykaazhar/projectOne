@@ -7,6 +7,7 @@ package Controller;
 
 import Business.BusinessException;
 import Business.PortEcoBusiness;
+import Entity.AdminEmail;
 import Entity.Booking;
 import Entity.Facility;
 import Entity.GeneralMessage;
@@ -82,6 +83,8 @@ public class MainController implements Serializable {
     List<GeneralMessage> messageList = new ArrayList<GeneralMessage>();
     GeneralMessage chosenMessage = new GeneralMessage();
     List<Booking> memberBooking = new ArrayList<Booking>();
+    AdminEmail adminEmail = new AdminEmail();
+    Facility chosenFacility = new Facility();
     
     //------- List of local variables---//
     private String userId;
@@ -123,6 +126,11 @@ public class MainController implements Serializable {
     private int total;
     private int totalInvetory;
     private int totalInventoryAvaiblable;
+    private int totalBooking;
+    private int totalMessage;
+    private int totalRequest;
+    private int totalMember;
+    
     
     private Date currentDate;
     private Date dateStart;
@@ -158,6 +166,8 @@ public class MainController implements Serializable {
 //    public Boolean isLogged = Boolean.FALSE;
     private Boolean isAdmin = Boolean.FALSE;
     private Boolean isMember = Boolean.FALSE;
+    private Boolean editEmail = Boolean.FALSE;
+    private Boolean messageDetailShow = Boolean.FALSE;
         
     Format format = new SimpleDateFormat("dd MM yyyy");
     SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy");
@@ -987,6 +997,70 @@ public class MainController implements Serializable {
     public void setIsMember(Boolean isMember) {
         this.isMember = isMember;
     }
+
+    public AdminEmail getAdminEmail() {
+        return adminEmail;
+    }
+
+    public void setAdminEmail(AdminEmail adminEmail) {
+        this.adminEmail = adminEmail;
+    }
+
+    public Boolean getEditEmail() {
+        return editEmail;
+    }
+
+    public void setEditEmail(Boolean editEmail) {
+        this.editEmail = editEmail;
+    }
+
+    public int getTotalBooking() {
+        return totalBooking;
+    }
+
+    public void setTotalBooking(int totalBooking) {
+        this.totalBooking = totalBooking;
+    }
+
+    public int getTotalMessage() {
+        return totalMessage;
+    }
+
+    public void setTotalMessage(int totalMessage) {
+        this.totalMessage = totalMessage;
+    }
+
+    public int getTotalRequest() {
+        return totalRequest;
+    }
+
+    public void setTotalRequest(int totalRequest) {
+        this.totalRequest = totalRequest;
+    }
+
+    public int getTotalMember() {
+        return totalMember;
+    }
+
+    public void setTotalMember(int totalMember) {
+        this.totalMember = totalMember;
+    }
+
+    public Facility getChosenFacility() {
+        return chosenFacility;
+    }
+
+    public void setChosenFacility(Facility chosenFacility) {
+        this.chosenFacility = chosenFacility;
+    }
+
+    public Boolean getMessageDetailShow() {
+        return messageDetailShow;
+    }
+
+    public void setMessageDetailShow(Boolean messageDetailShow) {
+        this.messageDetailShow = messageDetailShow;
+    }
     
     //--------------------------------------------------------------------------//    
     
@@ -999,14 +1073,9 @@ public class MainController implements Serializable {
         setRegistrationStatus(Boolean.FALSE);
         getAllFacilities();
         getAllAdmin();
-        getAllMember();
-        getAllInventoris();
-        getAllAvailableInventory();
-        getAllInventoryRequest();
-        getAllBookingList();
-        getWaitingMessage();
-        setAdminActive(pb.getAdminPerson());
-        System.out.println("admin size: " + getAdminActive().getMemberType());
+        getAllMember();  
+        setAdminEmail(pb.getAdministratorEmail());
+        //setAdminActive(pb.getAdminPerson());
     }
     
     //------Select one menu change item functions: this functions are called when user change the selectonemenu input option//
@@ -1031,6 +1100,7 @@ public class MainController implements Serializable {
         }else{
             setCheckFacility(false);
         }
+        setSaveStatus(Boolean.FALSE);
     }
     
     public void changeMemberStatus(ValueChangeEvent e) throws BusinessException{
@@ -1190,22 +1260,24 @@ public class MainController implements Serializable {
         newBooking.setFacility(getSelectFacility());
         newBooking.setFacilityName(getSelectFacility().getFacilityName());
         newBooking.setFaculty(getFaculty());
-        newBooking.setFirstName(getFirstName());       
-        newBooking.setDateUntil(getDateEnd());
+        newBooking.setFirstName(getFirstName());  
+        newBooking.setLastName(getLastName());        
         newBooking.setFaculty(getFaculty());
         newBooking.setPurpose(getPurpose());
         newBooking.setMessage(getMessage());
         newBooking.setDateRequested(getCurrentDate());
         
         if(getCheckDate() && getCheckDateFormat()){
-            newBooking.setLastName(getLastName());
+            newBooking.setDateUntil(getDateEnd());
             newBooking.setDateFrom(getDateStart());
             pb.addNewBooking(newBooking);
             setSaveStatus(Boolean.TRUE);
         }
         System.out.println("test");
-        bookingEmailSetting();
-        //sendEmail(getAdminActive().getEmail());
+        adminBookingEmailSetting();
+        sendEmail(getAdminEmail().getEmailAddress());
+        memberBookingEmailSetting();
+        sendEmail(getUserEmail());
         setUserId("");
         setUserName("");
         setUserEmail("");
@@ -1213,7 +1285,10 @@ public class MainController implements Serializable {
         setFirstName("");
         setLastName("");
         setPurpose("");
-        setMessage("");        
+        setMessage("");
+        setTempDateEnd("");
+        setTempDateStart("");
+        setSelectedFacilitId(null);
     }
     public void saveBookingMember(){
         todayDate();
@@ -1234,6 +1309,8 @@ public class MainController implements Serializable {
             setCheckDateFormat(Boolean.FALSE);
             setCheckDate(Boolean.TRUE);
         }
+        setFirstName(getLoginMember().getFirstName());//for email setting purpose
+        setLastName(getLoginMember().getLastName());//for email setting purpose
         newBooking.setUserId(getLoginMember().getUsername());
         newBooking.setUserEmail(getLoginMember().getEmail());
         newBooking.setStatus("Waiting");
@@ -1241,23 +1318,30 @@ public class MainController implements Serializable {
         newBooking.setFacilityName(getSelectFacility().getFacilityName());
         newBooking.setFaculty(getFaculty());
         newBooking.setFirstName(getLoginMember().getFirstName()); 
-        newBooking.setLastName(getLoginMember().getLastName());
-        newBooking.setDateUntil(getDateEnd());
+        newBooking.setLastName(getLoginMember().getLastName());        
         newBooking.setFaculty(getFaculty());
         newBooking.setPurpose(getPurpose());
         newBooking.setMessage(getMessage());
         newBooking.setDateRequested(getCurrentDate());
         
         if(getCheckDate() && getCheckDateFormat()){
-            newBooking.setLastName(getLastName());
+            newBooking.setDateUntil(getDateEnd());
             newBooking.setDateFrom(getDateStart());
             pb.addNewBooking(newBooking);
             setSaveStatus(Boolean.TRUE);
         }
+        setFaculty("");
+        setPurpose("");
+        setMessage("");
+        setTempDateEnd("");
+        setTempDateStart("");
+        
+        setSelectedFacilitId(null);
         System.out.println("test");
-        //bookingEmailSetting();
-        //sendEmail(getAdminActive().getEmail());
-             
+        memberBookingEmailSetting();
+        sendEmail(getLoginMember().getEmail());
+        adminBookingEmailSetting();
+        sendEmail(getAdminEmail().getEmailAddress());
     }
     
     //---------- Save new member detail into Database: Used by Administrator to register new member-------//
@@ -1271,7 +1355,7 @@ public class MainController implements Serializable {
             setCheckPassword(Boolean.TRUE);
             System.out.println("email: " + getEmail());
             registerEmailSetting();
-            //sendEmail(getEmail());
+            sendEmail(getEmail());
             setUserName("");
             setEmail("");
             setSelectedMemberType("");
@@ -1280,7 +1364,8 @@ public class MainController implements Serializable {
             }else{
                 getMemberList();
             }
-            setRegistrationStatus(Boolean.TRUE);            
+            setRegistrationStatus(Boolean.TRUE); 
+            settingAllAdminFunction();
         }else{
             setCheckPassword(Boolean.FALSE);
             setRegistrationStatus(Boolean.FALSE);
@@ -1323,7 +1408,11 @@ public class MainController implements Serializable {
                 newInvtRequest.setDateBorrowed(getDateStart());
                 newInvtRequest.setDateReturned(getDateEnd());
                 pb.saveNewInventoryRequest(newInvtRequest);
-                System.out.println("test");
+                System.out.println("test1");
+                memberInventoryRequestEmailSetting();
+                sendEmail(getLoginMember().getEmail());
+                adminInventoryRequestEmailSetting();
+                sendEmail(getAdminEmail().getEmailAddress());
                 setSaveStatus(Boolean.TRUE);
                 setCheckStatus(Boolean.TRUE);
                 setInventoryFirst(null);
@@ -1356,18 +1445,11 @@ public class MainController implements Serializable {
 //            setIsLogged(Boolean.TRUE);
             setLoginMember(pb.getLoginMember(getLoginUsername(), getLoginPassword()));
             if(getLoginMember().getMemberType().equals("Member")){
-                getMemberBookingList();
-                setRequestList(pb.getMemberRequests(getLoginMember().getId()));
-                setMemberInventoryList(pb.getMemberEquipment(getLoginMember().getId()));
-                FacesContext context = FacesContext.getCurrentInstance();
-                context.getExternalContext().getSessionMap().put("user", "Member");
-                setIsMember(Boolean.TRUE);
+                settingAllMemberFunction();
                 nextPage = "memberPage.xhtml?faces-redirect=true";
                 System.out.println("test1");
             }else{
-                setIsAdmin(Boolean.TRUE);
-                FacesContext context = FacesContext.getCurrentInstance();
-                context.getExternalContext().getSessionMap().put("user", "Admin");
+                settingAllAdminFunction();
                 nextPage = "adminPage.xhtml?faces-redirect=true";
                 System.out.println("test2");
             }
@@ -1385,10 +1467,37 @@ public class MainController implements Serializable {
     
     //--- Logout function and delete user session ----//
     public String logout(){
-        setUserName("");
-        return "homePage.xhtml?faces-redirect=true";
+        setIsAdmin(Boolean.FALSE);
+        setIsMember(Boolean.FALSE);  
+        setLoginUsername("");
+        return "loginPage.xhtml?faces-redirect=true";
+    }
+    
+    public void settingAllMemberFunction(){
+        getMemberBookingList();
+        setRequestList(pb.getMemberRequests(getLoginMember().getId()));
+        setMemberInventoryList(pb.getMemberEquipment(getLoginMember().getId()));
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.getExternalContext().getSessionMap().put("user", "Member");
+        setIsMember(Boolean.TRUE);
+        getAllInventoris();
     }
 
+    public void settingAllAdminFunction(){
+        setIsAdmin(Boolean.TRUE);
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.getExternalContext().getSessionMap().put("user", "Admin");
+        getAllInventoris();
+        getAllAvailableInventory();
+        getAllInventoryRequest();
+        getAllBookingList();
+        getWaitingMessage();
+        setTotalBooking(getBookingList().size());
+        setTotalMessage(getMessageList().size());
+        setTotalMember(getMemberList().size());
+        setTotalRequest(getRequestList().size());
+        setAdminEmail(pb.getAdministratorEmail());
+    }
     //---- Navigation functions ------//
     public String goToHomepage(){
         return "homePage.xhtml?faces-redirect=true";
@@ -1429,6 +1538,16 @@ public class MainController implements Serializable {
         return "requestFullPage.xhtml?faces-redirect=true";
     }
     
+    public String goToMessagePage(){
+        setSaveStatus(Boolean.FALSE);
+        return "messagePage.xhtml?faces-redirect=true";
+    }
+    
+    public String goToReplyMessagePage(){
+        setSaveStatus(Boolean.FALSE);
+        return "messageEditPage.xhtml?faces-redirect=true";
+    }
+    
     public String goToInventoryRequestDetailPage(InventoryRequest ir){
         setChosenRequest(ir);
         setInventoryEdit(Boolean.FALSE);
@@ -1461,6 +1580,7 @@ public class MainController implements Serializable {
     }
     
     public String goToInventoryFormPage(){
+        setSaveStatus(Boolean.FALSE);
         setFirstItemId(null);
         setInventoryFirst(null);
         setSecondItemId(null);
@@ -1482,6 +1602,7 @@ public class MainController implements Serializable {
         return "inventoryRequestPage.xhtml?faces-redirect=true";
     }
     public String goToInventoryFormPage2(){
+        setSaveStatus(Boolean.FALSE);
         setSecondItemId(null);
         setInventorySecond(null);
         setThirdItemId(null);
@@ -1517,13 +1638,26 @@ public class MainController implements Serializable {
     //----------------------------------------------------------------------//
     
     public void editMemberDetail(){
+        setPassword(null);
         setMemberEditable(Boolean.TRUE);
     }
-    public String saveMemberDetail(){
-        
-        pb.updateMember(getLoginMember());
-        setMemberEditable(Boolean.FALSE);        
-        return "memberPage.xhtml?faces-redirect=true";
+    
+    public String saveAdminDetail(){        
+        if(!getPassword().equals("") && getConfrimPasword().equals(getPassword())){
+            getLoginMember().setPassword(getPassword());
+            pb.updateMember(getLoginMember());
+            setCheckPassword(Boolean.TRUE);
+            setMemberEditable(Boolean.FALSE);
+            System.out.println("hey");
+        }else if(getPassword().equals("")){            
+            pb.updateMember(getLoginMember());
+            setCheckPassword(Boolean.TRUE);
+            setMemberEditable(Boolean.FALSE);
+            System.out.println("heyya");
+        }else{
+            setCheckPassword(Boolean.FALSE);
+        }  
+        return "adminPage.xhtml";
     }
     
     public String saveEditMemberDetail(){
@@ -1532,7 +1666,7 @@ public class MainController implements Serializable {
         setCheckPassword(Boolean.TRUE);
         return "memberPage.xhtml?faces-redirect=true";
     }
-    public String saveMemberPassword(){
+    public String saveMemberPassword(String memberType){
         if(getConfrimPasword().equals(getPassword())){
             getLoginMember().setPassword(getPassword());
             pb.updateMember(getLoginMember());
@@ -1541,7 +1675,11 @@ public class MainController implements Serializable {
         }else{
             setCheckPassword(Boolean.FALSE);
         }   
-        return "memberPage.xhtml?faces-redirect=true";
+        if(memberType.equals("Member")){
+            return "memberPage.xhtml?faces-redirect=true";
+        }else{
+            return "adminPage.xhtml?faces-redirect=true";
+        }        
     }
     
     public void saveEditInventoryRequest(){
@@ -1558,6 +1696,20 @@ public class MainController implements Serializable {
         setInventoryEdit(Boolean.FALSE);
     }   
     
+    public void saveAdminEmail(){        
+        if(!getPassword().equals("") && getConfrimPasword().equals(getPassword())){
+            pb.updateMember(getLoginMember());
+            getAdminEmail().setEmailAddress(getLoginMember().getEmail());
+            getAdminEmail().setPassword(getPassword());
+            pb.updateAdminEmail(getAdminEmail());
+            setCheckPassword(Boolean.TRUE);
+            setEditEmail(Boolean.FALSE);
+            System.out.println("hey");        
+        }else{
+            setCheckPassword(Boolean.FALSE);
+        }  
+    }
+    
     public void editInventoryRequestDetail(){
         setInventoryEdit(Boolean.TRUE);
         setInventoryStatus(getChosenRequest().getStatus());
@@ -1567,10 +1719,10 @@ public class MainController implements Serializable {
         setInventoryEdit(Boolean.FALSE);
     }
     
-    public String cancelPasswordEdit(){
+    public void cancelPasswordEdit(){
         setConfrimPasword("");
         setEditPassword(Boolean.FALSE);
-        return "memberPage.xhtml?faces-redirect=true";
+//        return "memberPage.xhtml?faces-redirect=true";
     }
     
     public String cancelMemberEdit(){
@@ -1584,6 +1736,13 @@ public class MainController implements Serializable {
     
     public void editPasswordFunction(){
         setEditPassword(Boolean.TRUE);
+    }
+    public void editEmailFunction(){
+        setEditEmail(Boolean.TRUE);
+    }
+    
+    public void cancelEditEmail(){
+        setEditEmail(Boolean.FALSE);
     }
     
     public void editInventoryDetails(){
@@ -1606,6 +1765,14 @@ public class MainController implements Serializable {
     
     public void cancelBookingStatus(){
         setCheckFacility(Boolean.FALSE);
+    }
+    
+    public void setStatusEditable(){
+        setEditable(Boolean.TRUE);
+    }
+    
+    public void cancelStatusEdit(){
+        setEditable(Boolean.FALSE);
     }
         
     public String assignInventoryToMember(Inventory ivt){
@@ -1725,17 +1892,25 @@ public class MainController implements Serializable {
     
     public String resetMemberSearchResult(){
         getAllMember();
+        setSearchKeyword("");
         return "adminMember.xhtml";
     }
     
+    public void editFacilityDetails(Facility fc){
+        setChosenFacility(fc);
+        setSelectedFacilitId(getChosenFacility().getId());
+        setEditable(Boolean.TRUE);
+    }
     
     public void displayEquipmentDetail(Inventory inv){
         setChosenInventory(inv);
         setSelectedInvID(getChosenInventory().getId());
     }
     
-    public void displayMessageDetail(GeneralMessage gm){
+    public String displayMessageDetail(GeneralMessage gm){
+        setMessageDetailShow(Boolean.TRUE);
         setChosenMessage(gm);
+        return "adminPage.xhtml#messageDetailPanel";
     }
     
     public void todayDate(){
@@ -1778,6 +1953,9 @@ public class MainController implements Serializable {
         pb.saveInventoryRequestChanges(getChosenRequest());
         setInventoryEdit(Boolean.FALSE);     
         setTransactionList(pb.getChosenRequestTransaction(getChosenRequest().getId()));
+        setRequestList(pb.getMemberRequests(getEditMember().getId()));
+        setTransactionList(pb.getMemberTransaction(getEditMember().getId()));
+        setMemberInventoryList(pb.getMemberEquipment(getEditMember().getId()));
         
         if(getChosenRequest().getStatus().equals("Accepted")){
             setChosenInventory(getChosenRequest().getFirstInventoryId());
@@ -1869,6 +2047,15 @@ public class MainController implements Serializable {
         setMemberRequestShow(Boolean.FALSE);
     }
     
+    public void saveFacilityDetailChange(Facility fc){
+        if(getSelectedStatus() != null){
+            fc.setStatus(getSelectedStatus());
+        }
+        pb.updateFacility(fc);
+        setEditable(Boolean.FALSE);
+        setSelectedFacilitId(null);
+    }
+    
     public void sendMessage(){
         todayDate();
         newMessage.setUserID(getUserId());
@@ -1880,14 +2067,32 @@ public class MainController implements Serializable {
         newMessage.setDateIssued(getCurrentDate());
         pb.saveNewMessage(newMessage);
         setSaveStatus(Boolean.TRUE);
+        userMessageEmailSetting();
+        sendEmail(getContactInfo());
+        adminMessageEmailSetting();
+        sendEmail(getAdminEmail().getEmailAddress());
+    }
+    public String replyMessage(){
+        getChosenMessage().setStatus("Resolved");
+        pb.upadateMessage(getChosenMessage());
+        replyMessageEmailSetting();
+        sendEmail(getChosenMessage().getContactInfo());
+        return "messageEditPage.xhtml?faces-redirect=true";
+    }
+    
+    public void saveMessageChange(){
+        getChosenMessage().setStatus(getSelectedStatus());
+        pb.upadateMessage(getChosenMessage());
+        setEditable(Boolean.FALSE);
     }
     
         
-    /** All of these code for email function are retrieved from mkyong.com    **/
+    //Email functions
+    //sendEmail function set all detail required and send the email to the recipient//
     public void sendEmail(String email){
         System.out.println("here done");
-        final String username = "up835895@myport.ac.uk";
-        final String password = "14februari";        
+        final String username = getAdminEmail().getEmailAddress();
+        final String password = getAdminEmail().getPassword();        
 
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
@@ -1899,19 +2104,20 @@ public class MainController implements Serializable {
         Session session = Session.getInstance(props, new GMailAuthenticator(username, password));
         try {
 
-                Message message = new MimeMessage(session);
-                message.setFrom(new InternetAddress("up835895@myport.ac.uk"));
-                message.setRecipients(Message.RecipientType.TO,
-                        InternetAddress.parse(email));
-                message.setSubject(getEmailSubject());
-                message.setText(getEmailMessage());
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(getAdminEmail().getEmailAddress()));
+            message.setRecipients(Message.RecipientType.TO,
+                    InternetAddress.parse(email));
+            message.setSubject(getEmailSubject());
+            message.setText(getEmailMessage());
 
-                Transport.send(message);
+            //Transport.send(message);
 
-                System.out.println("Done..Email Sent");
+            System.out.println("Done..Email Sent");
 
         } catch (MessagingException e) {
-                throw new RuntimeException(e);
+            //throw new RuntimeException(e);
+            System.out.println("Error in email function");
         }
     }
     
@@ -1936,7 +2142,7 @@ public class MainController implements Serializable {
         final String portEcoLink = "http://localhost:8080/PortEcoHouse/faces/loginPage.xhtml";
         setEmailSubject("Registered Member For Port-Eco House System");
         setEmailMessage("Dear user, "
-                        + "\n\n This email is to infrom you that you are now a registered member for Port-Eco House System. Below are the login details to your account. Please complete your details once your login to the new system. \n"
+                        + "\n\n This email is to inform you that you are now a registered member for Port-Eco House System. Below are the login details to your account. Please complete your details once your login to the new system. \n"
                         + "\n Username: " + getUserName() + "\n Password: " + getPassword()
                         + "\n You can login from this link : " + portEcoLink
                         + "\n\n Hope you will enjoy our services."
@@ -1945,11 +2151,11 @@ public class MainController implements Serializable {
     }
     
     
-    public void bookingEmailSetting(){
+    public void adminBookingEmailSetting(){
     final String portEcoLink = "http://localhost:8080/PortEcoHouse/faces/loginPage.xhtml";       
         setEmailSubject("Port-Eco House Facility Booking Request");
         setEmailMessage("Dear admin, "
-                        + "\n\n This email is to infrom you that you are now a user have made a booking request. Below is the user details regarding the matters: \n"
+                        + "\n\n This email is to inform you that a user have made a booking request. Below is the user details regarding the matters: \n"
                         + "\n User Id: " + getUserId() 
                         + "\n Name: " + getFirstName() + " " + getLastName()
                         + "\n Faculty: " + getFaculty()
@@ -1961,18 +2167,74 @@ public class MainController implements Serializable {
                         + "\n Port-Eco House managemenet teams");
     }
     
+    public void adminInventoryRequestEmailSetting(){
+    final String portEcoLink = "http://localhost:8080/PortEcoHouse/faces/loginPage.xhtml";       
+        setEmailSubject("Port-Eco House Facility Booking Request");
+        setEmailMessage("Dear admin, "
+                        + "\n\n This email is to inform you that you have made a request for Port-Eco House's equipments. Below are the details regarding the matters: \n"
+                        + "\n User Id: " + getLoginMember().getUsername()
+                        + "\n Name: " + getLoginMember().getFirstName()+ " " + getLoginMember().getLastName()
+                        + "\n Email: " + getLoginMember().getEmail()
+                        + "\n First Equipement: " + getInventoryFirst().getEquipmentName()
+                        + "\n Second Equipement: " + getInventorySecond().getEquipmentName()
+                        + "\n First Equipement: " + getInventoryThird().getEquipmentName()
+                        + "\n You can login from this link to manage the request : " + portEcoLink
+                        + "\n\n Regards,"
+                        + "\n Port-Eco House managemenet teams");
+    }
+    
+    public void adminMessageEmailSetting(){
+        final String portEcoLink = "http://localhost:8080/PortEcoHouse/faces/loginPage.xhtml"; 
+        setEmailSubject("Port-Eco House Inventory Message");
+        setEmailMessage("Dear admin, "
+                        + "\n\n This email is to inform you that you have received the following message. The message details are as follow \n"
+                        + getMessage()
+                        + "\n You can login from this link to manage the message : " + portEcoLink
+                        + "\n\n Regards,"
+                        + "\n Port-Eco House managemenet teams");
+    }
+    
     public void memberBookingEmailSetting(){
     final String portEcoLink = "http://localhost:8080/PortEcoHouse/faces/loginPage.xhtml";       
         setEmailSubject("Port-Eco House Facility Booking Request");
         setEmailMessage("Dear admin, "
-                        + "\n\n This email is to infrom you that you are now a user have made a booking request. Below is the user details regarding the matters: \n"
-                        + "\n User Id: " + getLoginMember().getUsername()
-                        + "\n Name: " + getLoginMember().getFirstName()+ " " + getLoginMember().getLastName()
+                        + "\n\n This email is to inform you that you have made a booking request. Below are the details regarding the matters: \n"
+                        + "\n User Id: " + getUserId()
+                        + "\n Name: " + getFirstName()+ " " + getLastName()
                         + "\n Faculty: " + getFaculty()
-                        + "\n Email: " + getLoginMember().getEmail()
+                        + "\n Email: " + getEmail()
                         + "\n Purpose: " + getPurpose()
                         + "\n Message: " + getMessage()
-                        + "\n You can login from this link to manage the booking request : " + portEcoLink
+                        + "\n\n The team have received your booking request and it is currently being processed"
+                        + "\n You can login from this link to manage the request : " + portEcoLink
+                        + "\n\n Regards,"
+                        + "\n Port-Eco House managemenet teams");
+    }
+    
+    public void memberInventoryRequestEmailSetting(){
+        final String portEcoLink = "http://localhost:8080/PortEcoHouse/faces/loginPage.xhtml";       
+        setEmailSubject("Port-Eco House Inventory Equipement Request");
+        setEmailMessage("Dear " + getLoginMember().getFirstName()+ " " + getLoginMember().getLastName() + ", "
+                        + "\n\n This email is to inform you that you have made a request for Port-Eco House's equipments. Below are the details regarding the matters: \n"
+                        + "\n\n The team have received your request and it is currently being processed"
+                        + "\n You can login from this link to manage the request : " + portEcoLink
+                        + "\n\n Regards,"
+                        + "\n Port-Eco House managemenet teams");
+    }
+    
+    public void replyMessageEmailSetting(){
+        setEmailSubject("RE: " + getChosenMessage().getSubject());
+        setEmailMessage("Dear " + getChosenMessage().getUserName() + ", "                       
+                        + "\n\n" +  getMessage()
+                        + "\n\n Regards,"
+                        + "\n Port-Eco House managemenet teams");
+    }
+    
+    public void userMessageEmailSetting(){
+        setEmailSubject("Port-Eco House Inventory Message");
+        setEmailMessage("Dear " + getUserName() + ", "
+                        + "\n\n This email is to inform you that you have sent a message to the Port-Eco House teams. The message details are as follow \n"
+                        + getMessage()
                         + "\n\n Regards,"
                         + "\n Port-Eco House managemenet teams");
     }

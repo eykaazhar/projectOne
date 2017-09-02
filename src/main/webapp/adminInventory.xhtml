@@ -14,7 +14,8 @@
     <h:head>
         <title>Port-Eco House</title>
     </h:head>
-    <h:body id="bodyWhite">
+    <h:body id="bodyPage">
+        <h:panelGroup rendered="#{mainController.isAdmin}">
         <div class="container-fluid insideHeaderBackground">
             <!--
             <div class="logoBox">
@@ -27,7 +28,7 @@
             </div>
         </div>
         <div class="container-fluid navBarColumn">
-             <nav class="navbar navbar-default navbarColour">
+            <nav class="navbar navbar-default navbarColour">
                 <div class="container">
                     <div class="col-xs-12 secondNavColour">
                         <div class="nav navbar-nav">
@@ -36,7 +37,7 @@
                                     <a class="navbarItem" href="mainPage.xhtml">Port-Eco Home</a>
                                 </li>
                                 <li>
-                                    <a class="navbarItem" href="adminPage.xhtml">ADMIN</a>
+                                    <a class="navbarItem" href="adminPage.xhtml">MY ACCOUNT</a>
                                 </li>
                                 <li>
                                     <a class="navbarItem" href="adminMember.xhtml">MEMBER</a>
@@ -51,8 +52,15 @@
                         </div>  
                         <div class="nav navbar-nav navbar-right">
                             <ul class="nav navbar-nav">  
-                                <li>
-                                    <a class="navbarItem" href="loginPage.xhtml">LOGOUT</a>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle navbarItem" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">ADMINISTRATOR<span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <h:form class="navbarItem">
+                                                <h:commandLink class="navbarItem" style="text-decoration: none;" action="#{mainController.logout()}" value="LOG OUT"/>
+                                            </h:form>
+                                        </li>
+                                    </ul>
                                 </li>
                             </ul>
                         </div>            
@@ -61,11 +69,8 @@
             </nav>
         </div>
         <div class="container-fluid contentPanel">
-            <div class="container">
-                <div class="col-xs-12">
-                    <h1 class="webTitle2">Inventory Page</h1>                                 
-                </div>
-                <div class="col-xs-12">
+            <div class="container">                
+                <div class="col-xs-12" style="padding-top: 10px;">
                     <div class="col-xs-4">
                         <h2 class="font1">Inventory Action</h2>
                             <!--<a href="addNewInventory.xhtml" class="quickLink" target="_blank">Add New Equipment</a> -->
@@ -78,156 +83,182 @@
                         </div>    
                         <div class="informationBox">
                             <p class="infoFont">Available Equipments <span class="badge badgeStyle">#{mainController.totalInventoryAvaiblable}</span></p>                                
-                        </div>                     
+                        </div>   
+                        <div class="informationBox">
+                            <p class="infoFont">Inventory Request <span class="badge badgeStyle">#{mainController.totalRequest}</span></p>                                
+                        </div>   
                     </div>
                     <div class="col-xs-8">
-                        <div class="formPanel">
+                        <div class="row">
                             <h2 class="font1">Inventory Equipment List</h2>
-                            <div style="margin: 10px;">                                
-                                <h:form>
-                                    <h:panelGrid columns="4">
-                                        <h:outputText class="font1" value="Search"/>
-                                        <h:inputText value="#{mainController.invtSearchKeyword}" class="inputTextStyleM"  style="margin-right: 10px;"/>
-                                        <h:commandButton class="buttonStyle" value="Go" action="#{mainController.retrieveSearchResult()}"></h:commandButton>
-                                        <h:commandButton class="buttonStyle" value="Reset Search" action="#{mainController.resetSearchResult()}"></h:commandButton>
-                                    </h:panelGrid>
-                                </h:form>
-                            </div>
-                            <div style="height: 350px; overflow: auto;">
-                                <h:form id="inventoryList" style="margin: 10px;" target="_blank">
-                                    <h:dataTable border="1" value="#{mainController.inventoryList}" var="inv" styleClass="mainTable" headerClass="tableHeader" rowClasses="tableRowEven,tableRowOdd">                    
+                            <div class="memberInfoPanel">
+                                <div style="margin: 10px;">                                
+                                    <h:form>
+                                        <h:panelGrid columns="4">
+                                            <h:outputText class="font1" value="Search"/>
+                                            <h:inputText value="#{mainController.invtSearchKeyword}" class="inputTextStyleM"  style="margin-right: 10px;"/>
+                                            <h:commandButton class="buttonStyle" value="Go" action="#{mainController.retrieveSearchResult()}"></h:commandButton>
+                                            <h:commandButton class="buttonStyle" value="Reset Search" action="#{mainController.resetSearchResult()}"></h:commandButton>
+                                        </h:panelGrid>
+                                    </h:form>
+                                </div>
+                                <div style="height: 350px; overflow: auto;">
+                                    <h:form id="inventoryList" style="margin: 10px;">
+                                        <h:dataTable border="1" value="#{mainController.inventoryList}" var="inv" styleClass="mainTable" headerClass="tableHeader" rowClasses="tableRowEven,tableRowOdd">                    
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText class="tableItem" value="Equipment Name" />
+                                                </f:facet>
+                                                <h:outputText class="tableItem" value="#{inv.equipmentName}"/>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText class="tableItem" value="Make" />
+                                                </f:facet>
+                                                <h:outputText class="tableItem" value="#{inv.make}"/>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText class="tableItem" value="Model" />
+                                                </f:facet>
+                                                <h:outputText class="tableItem" value="#{inv.model}"/>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText class="tableItem" value="Action" />
+                                                </f:facet>
+                                                <div class="tableItem">
+                                                    <h:commandButton value="Assign To Member" action="#{mainController.assignInventoryToMember(inv)}" rendered="#{inv.status == 'available'}"></h:commandButton>
+                                                    <h:commandButton value="Return" action="#{mainController.returnInvetoryPage(inv)}" rendered="#{inv.status == 'unavailable'}"></h:commandButton>
+                                                    <h:outputText class="tableItem" value="Not Available" rendered="#{inv.status == 'obsolete'}" />
+                                                </div> 
+                                            </h:column>                                                                                         
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText class="tableItem" value="Detail" />
+                                                </f:facet>
+                                                <div class="tableItem">
+                                                    <h:commandButton value="View" action="#{mainController.selectedInventoryItem(inv)}"></h:commandButton> 
+                                                </div>                               
+                                            </h:column>
+                                        </h:dataTable>                    
+                                    </h:form>  
+                                </div>
+                                <div class="buttonPanel" style="text-align: right">
+                                    <h:form>
+                                        <h:commandButton class="buttonStyle" value="Open Table" action="#{mainController.goToAllInventoryPage()}"></h:commandButton>
+                                    </h:form>
+                                </div>                
+                            </div>  
+                        </div>
+                        <div class="row">
+                            <h2 class="font1">Inventory Equipment Request List</h2>
+                            <div class="memberInfoPanel">
+                                <div style="max-height: 450px; overflow: auto;">
+                                    <h:form id="inventoryRequestList" target="_blank" style="margin: 10px;" rendered="#{mainController.requestList.size() != 0}">
+                                    <h:dataTable border="1" value="#{mainController.requestList}" var="req" styleClass="mainTable" headerClass="tableHeader" rowClasses="tableRowEven,tableRowOdd">                    
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText class="tableItem" value="Username" />
+                                            </f:facet>
+                                            <h:outputText class="tableItem" value="#{req.memberId.username}"/>
+                                        </h:column>
+                                       <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText class="tableItem" value="Name" />
+                                            </f:facet>
+                                            <h:outputText class="tableItem" value="#{req.memberId.firstName} #{req.memberId.lastName}"/>
+                                        </h:column>
                                         <h:column>
                                             <f:facet name="header">
                                                 <h:outputText class="tableItem" value="Equipment Name" />
                                             </f:facet>
-                                            <h:outputText class="tableItem" value="#{inv.equipmentName}"/>
+                                           <h:outputText class="tableItem" value="#{req.firstInventoryId.equipmentName}"/>
                                         </h:column>
                                         <h:column>
                                             <f:facet name="header">
-                                                <h:outputText class="tableItem" value="Make" />
+                                                <h:outputText class="tableItem" value="Equipment Name (Second)" />
                                             </f:facet>
-                                            <h:outputText class="tableItem" value="#{inv.make}"/>
+                                           <h:outputText class="tableItem" value="#{req.secondInventoryId.equipmentName}"/>
                                         </h:column>
                                         <h:column>
                                             <f:facet name="header">
-                                                <h:outputText class="tableItem" value="Model" />
+                                                <h:outputText class="tableItem" value="Equipment Name (Third)" />
                                             </f:facet>
-                                            <h:outputText class="tableItem" value="#{inv.model}"/>
+                                           <h:outputText class="tableItem" value="#{req.thirdInventoryId.equipmentName}"/>
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText class="tableItem" value="Status" />
+                                            </f:facet>
+                                            <h:outputText class="tableItem" value="#{req.status}"/>
                                         </h:column>
                                         <h:column>
                                             <f:facet name="header">
                                                 <h:outputText class="tableItem" value="Action" />
                                             </f:facet>
                                             <div class="tableItem">
-                                                <h:commandButton value="Assign To Member" action="#{mainController.assignInventoryToMember(inv)}" rendered="#{inv.status == 'available'}"></h:commandButton>
-                                                <h:commandButton value="Return" action="#{mainController.returnInvetoryPage(inv)}" rendered="#{inv.status == 'unavailable'}"></h:commandButton>
-                                                <h:outputText class="tableItem" value="Not Available" rendered="#{inv.status == 'obsolete'}" />
-                                            </div> 
-                                        </h:column>                                                                                         
+                                                <h:commandButton value="Accept" action="#{mainController.invetoryRequestWithAction(req)}" rendered="#{req.status == 'Waiting'}"></h:commandButton> 
+                                                <h:commandButton value="Return" action="#{mainController.invetoryRequestWithAction(req)}" rendered="#{req.status == 'Accepted'}"></h:commandButton> 
+                                            </div>                              
+                                        </h:column>
                                         <h:column>
                                             <f:facet name="header">
                                                 <h:outputText class="tableItem" value="Detail" />
                                             </f:facet>
                                             <div class="tableItem">
-                                                <h:commandButton value="View" action="#{mainController.selectedInventoryItem(inv)}"></h:commandButton> 
+                                                <h:commandButton value="View" action="#{mainController.goToInventoryRequestDetailPage(req)}"></h:commandButton>
                                             </div>                               
                                         </h:column>
                                     </h:dataTable>                    
-                                </h:form>  
+                                    </h:form>
+                                    <div style="text-align: center">
+                                        <h:outputText class="outputLabelFont2" value="No current inventory equipment in posess"  rendered="#{mainController.requestList.size() == 0}"></h:outputText>
+                                    </div> 
+                                </div>
+                                <div class="buttonPanel" style="text-align: right">
+                                    <h:form rendered="#{mainController.requestList.size() != 0}">
+                                        <h:commandButton class="buttonStyle" value="Open Table" action="#{mainController.goToAllRequest()}"></h:commandButton>
+                                    </h:form>
+                                </div>  
                             </div>
-                            <div class="buttonPanel" style="text-align: right">
-                                <h:form target="_blank">
-                                    <h:commandButton class="buttonStyle" value="Open Table" action="#{mainController.goToAllInventoryPage()}"></h:commandButton>
-                                </h:form>
-                            </div>                            
-                        </div>
+                        </div>                        
                     </div>                    
                 </div>               
             </div>
-        </div>
-        <div class="container-fluid inventoryContentPanel2">
-            <div class="container">
-                <div class="col-xs-12">
-                    <div class="row">
-                        <div class="col-xs-12" style="margin-top: 20px;">
-                            <h1 class="titleFont">Inventory Equipment Request</h1>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div style="max-height: 450px; overflow: auto;">
-                            <h:form id="inventoryRequestList" style="margin: 10px;" target="_blank" rendered="#{mainController.requestList.size() != 0}">
-                            <h:dataTable border="1" value="#{mainController.requestList}" var="req" styleClass="mainTable" headerClass="tableHeader" rowClasses="tableRowEven,tableRowOdd">                    
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText class="tableItem" value="Username" />
-                                    </f:facet>
-                                    <h:outputText class="tableItem" value="#{req.memberId.username}"/>
-                                </h:column>
-                               <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText class="tableItem" value="Name" />
-                                    </f:facet>
-                                    <h:outputText class="tableItem" value="#{req.memberId.firstName} #{req.memberId.lastName}"/>
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText class="tableItem" value="Equipment Name" />
-                                    </f:facet>
-                                   <h:outputText class="tableItem" value="#{req.firstInventoryId.equipmentName}"/>
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText class="tableItem" value="Equipment Name (Second)" />
-                                    </f:facet>
-                                   <h:outputText class="tableItem" value="#{req.secondInventoryId.equipmentName}"/>
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText class="tableItem" value="Equipment Name (Third)" />
-                                    </f:facet>
-                                   <h:outputText class="tableItem" value="#{req.thirdInventoryId.equipmentName}"/>
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText class="tableItem" value="Status" />
-                                    </f:facet>
-                                    <h:outputText class="tableItem" value="#{req.status}"/>
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText class="tableItem" value="Action" />
-                                    </f:facet>
-                                    <div class="tableItem">
-                                        <h:commandButton value="Accept" action="#{mainController.invetoryRequestWithAction(req)}" rendered="#{req.status == 'Waiting'}"></h:commandButton> 
-                                        <h:commandButton value="Return" action="#{mainController.invetoryRequestWithAction(req)}" rendered="#{req.status == 'Accepted'}"></h:commandButton> 
-                                    </div>                              
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText class="tableItem" value="Detail" />
-                                    </f:facet>
-                                    <div class="tableItem">
-                                        <h:commandButton value="View" action="#{mainController.goToInventoryRequestDetailPage(req)}"></h:commandButton>
-                                    </div>                               
-                                </h:column>
-                            </h:dataTable>                    
-                            </h:form>
-                            <div style="text-align: center">
-                                <h:outputText class="outputLabelFont2" value="No current inventory equipment in posess"  rendered="#{mainController.requestList.size() == 0}"></h:outputText>
-                            </div> 
-                        </div>
-                        <div class="buttonPanel" style="text-align: right">
-                            <h:form target="_blank"  rendered="#{mainController.requestList.size() != 0}">
-                                <h:commandButton class="buttonStyle" value="Open Table" action="#{mainController.goToAllRequest()}"></h:commandButton>
-                            </h:form>
-                        </div>  
-                    </div>
-                </div>
-            </div>
-        </div>
+        </div>        
         <div class="footerPanel">           
             <p class="footerFont">&copy; BSc(Hons) Building Survey</p>
         </div>        
+        </h:panelGroup>
+        <h:panelGroup rendered="#{not mainController.isAdmin}">
+            <div class="container-fluid headerBackground">            
+                <div class="boxes">                
+                    <div class="firstBox">
+                        <h1 class="webTitle">Port-Eco House</h1>
+                    </div>
+                    <div class="secondBox">
+                        <p class="titleDescription">Installed with environmental monitoring equipment and video cameras to enable in-situ studies of the building’s performance and the behaviour of its occupants</p>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid navBarColumn">
+                <nav class ="navbar navbar-default navbarColour" style="min-width: 1000px;">
+                    <div class="container secondNavColour">
+                        <div class="nav navbar-nav">
+                            <ul class="nav navbar-nav">   
+                                <li>
+                                    <a class="navbarItem" href="mainPage.xhtml">HOME</a>
+                                </li>                                    
+                            </ul>
+                        </div>  
+                    </div>  
+                </nav>
+            </div>
+            <div>
+                <h2 class="fontFacility" style="color: red;">Sorry, You need to log in as administrator to be able to use administrator's functions and features</h2>
+            </div>
+        </h:panelGroup> 
     </h:body>
 </html>
 

@@ -14,168 +14,199 @@
     <h:head>
         <title>Port-Eco House</title>
     </h:head>
-    <h:body>
-        <div class="container-fluid insideHeaderBackground">
-            <!--
-            <div class="logoBox">
-                <h:graphicImage class="logoImage" value="Resources/Images/logo-left.jpg"/>
-            </div> -->
-            <div class="boxes2">                
-                <div class="insideBox">
-                    <h1 class="webTitle">Port-Eco House</h1>
-                </div>                
-            </div>
-        </div>
-        <div class="container-fluid navBarColumn">
-             <nav class="navbar navbar-default navbarColour">
-                <div class="container">
-                    <div class="col-xs-12 secondNavColour">
-                        <div class="nav navbar-nav">
-                            <ul class="nav navbar-nav"> 
-                                <li>
-                                    <a class="navbarItem" href="mainPage.xhtml">Port-Eco Home</a>
-                                </li>
-                                <li>
-                                    <a class="navbarItem" href="adminPage.xhtml">ADMIN</a>
-                                </li>
-                                <li>
-                                    <a class="navbarItem" href="adminMember.xhtml">MEMBER</a>
-                                </li>
-                                <li class="navbarItemActive">
-                                    <a class="navbarItem" href="adminFacility.xhtml">FACILITIES</a>
-                                </li>
-                                <li>
-                                    <a class="navbarItem" href="adminInventory.xhtml">INVENTORY</a>
-                                </li>
-                            </ul>
-                        </div>  
-                        <div class="nav navbar-nav navbar-right">
-                            <ul class="nav navbar-nav">  
-                                <li>
-                                    <a class="navbarItem" href="loginPage.xhtml">LOGOUT</a>
-                                </li>
-                            </ul>
-                        </div>            
-                    </div><!-- /.container-fluid -->            
-                </div>  
-            </nav>
-        </div>
-         <div id="bookingPanel" class="container-fluid bookingPanel">
-            <div class="container">
-                <div class="col-xs-12">
-                    <div class="inventoryPanel">
-                        <div class="row">
-                            <div class="col-xs-12" style="margin: 0 auto;margin-top:20px;">
-                                <h1 class="titleFont">Booking Detail</h1>
-                            </div>
-                            <div class="col-xs-12" style="margin: 0 auto;margin-top:20px;">
-                                <h:form id="memberForm" rendered="#{not mainController.checkFacility}">
-                                    <div class="detailsForm" style="width: 450px; margin: 0 auto;">
-                                        <h:panelGrid columns="3">                                    
-                                            <h:outputLabel class="formOutputLabel" value="Requester Id"/>
-                                            <h:outputLabel class="formOutputLabel2" value=" : "/>
-                                            <h:outputText class="formOutputLabel2" value="#{mainController.chosenBooking.userId}"/>                        
-
-                                            <h:outputLabel class="formOutputLabel" value="Name"/>
-                                            <h:outputLabel class="formOutputLabel2" value=" : "/>
-                                            <h:outputText class="formOutputLabel2" value="#{mainController.chosenBooking.firstName} #{mainController.chosenBooking.lastName}"/> 
-                                            
-                                            <h:outputLabel class="formOutputLabel" value="Email"/>
-                                            <h:outputLabel class="formOutputLabel2" value=" : "/>  
-                                            <h:outputText class="formOutputLabel" value="#{mainController.chosenBooking.userEmail}"/> 
-
-                                            <h:outputLabel class="formOutputLabel" value="Facility Name"/>
-                                            <h:outputLabel class="formOutputLabel2" value=" : "/>
-                                            <h:outputText class="formOutputLabel2" value="#{mainController.chosenBooking.facilityName}"/> 
-
-                                            <h:outputLabel class="formOutputLabel" value="Date (From)"/>
-                                            <h:outputLabel class="formOutputLabel2" value=" : "/>
-                                            <h:outputText class="formOutputLabel2" value="#{mainController.chosenBooking.dateFrom}">
-                                                <f:convertDateTime pattern="dd-MM-yyyy"/>
-                                            </h:outputText>
-                                            
-                                            <h:outputLabel class="formOutputLabel" value="Date (Until)"/>
-                                            <h:outputLabel class="formOutputLabel2" value=" : "/>
-                                            <h:outputText class="formOutputLabel2" value="#{mainController.chosenBooking.dateUntil}">
-                                                <f:convertDateTime pattern="dd-MM-yyyy"/>
-                                            </h:outputText>
-                                            
-                                            <h:outputLabel class="formOutputLabel" value="Purpose"/>
-                                            <h:outputLabel class="formOutputLabel2" value=" : "/>
-                                            <h:outputText class="formOutputLabel2" value="#{mainController.chosenBooking.purpose}"/>
-
-                                            <h:outputLabel class="formOutputLabel" value="Message"/>
-                                            <h:outputLabel class="formOutputLabel2" value=" : "/>
-                                            <h:outputText class="formOutputLabel2" value="#{mainController.chosenBooking.message}"/>
-                                            
-                                            <h:outputLabel class="formOutputLabel" value="Status"/>
-                                            <h:outputLabel class="formOutputLabel2" value=" : "/>
-                                            <h:outputText class="formOutputLabel2" value="#{mainController.chosenBooking.status}"/>
-                                                                                     
-                                        </h:panelGrid>                                         
-                                        <h:commandButton class="buttonStyle" value="Edit Booking" action="#{mainController.editBookingStatus()}"></h:commandButton> 
-                                    </div>                  
-                                </h:form> 
-                                <h:form id="editMemberForm" rendered="#{mainController.checkFacility}">
-                                    <div class="detailsForm" style="width: 450px; margin: 0 auto;">
-                                        <h:panelGrid columns="3">                                    
-                                            <h:outputLabel class="formOutputLabel" value="Requester Id"/>
-                                            <h:outputLabel class="formOutputLabel2" value=" : "/>
-                                            <h:outputText class="formOutputLabel2" value="#{mainController.chosenBooking.userId}"/>                        
-
-                                            <h:outputLabel class="formOutputLabel" value="Name"/>
-                                            <h:outputLabel class="formOutputLabel2" value=" : "/>
-                                            <h:outputText class="formOutputLabel2" value="#{mainController.chosenBooking.firstName} #{mainController.chosenBooking.lastName}"/> 
-                                            
-                                            <h:outputLabel class="formOutputLabel" value="Email"/>
-                                            <h:outputLabel class="formOutputLabel2" value=" : "/>  
-                                            <h:outputText class="formOutputLabel" value="#{mainController.chosenBooking.userEmail}"/> 
-
-                                            <h:outputLabel class="formOutputLabel" value="Facility Name"/>
-                                            <h:outputLabel class="formOutputLabel2" value=" : "/>
-                                            <h:outputText class="formOutputLabel2" value="#{mainController.chosenBooking.facilityName}"/> 
-
-                                            <h:outputLabel class="formOutputLabel" value="Date (From)"/>
-                                            <h:outputLabel class="formOutputLabel2" value=" : "/>
-                                            <h:outputText class="formOutputLabel2" value="#{mainController.chosenBooking.dateFrom}">
-                                                <f:convertDateTime pattern="dd-MM-yyyy"/>
-                                            </h:outputText>
-                                            
-                                            <h:outputLabel class="formOutputLabel" value="Date (Until)"/>
-                                            <h:outputLabel class="formOutputLabel2" value=" : "/>
-                                            <h:outputText class="formOutputLabel2" value="#{mainController.chosenBooking.dateUntil}">
-                                                <f:convertDateTime pattern="dd-MM-yyyy"/>
-                                            </h:outputText>
-                                            
-                                            <h:outputLabel class="formOutputLabel" value="Purpose"/>
-                                            <h:outputLabel class="formOutputLabel2" value=" : "/>
-                                            <h:outputText class="formOutputLabel2" value="#{mainController.chosenBooking.purpose}"/>
-
-                                            <h:outputLabel class="formOutputLabel" value="Message"/>
-                                            <h:outputLabel class="formOutputLabel2" value=" : "/>
-                                            <h:outputText class="formOutputLabel2" value="#{mainController.chosenBooking.message}"/>
-                                            
-                                            <h:outputLabel class="outputLabelFont" value="Status"/>
-                                            <h:outputLabel class="outputTextFont" value=" : "/>
-                                            <h:selectOneMenu class="outputTextFont" value="#{mainController.selectedStatus}" onchange="submit()"
-                                                             valueChangeListener="#{mainController.changeStatus}" style="margin:10px"> 
-                                                <f:selectItem itemValue="#{null}" itemLabel="--Select Status--"/>
-                                                <f:selectItem itemValue="Accepted" itemLabel="Accepted"/>
-                                                <f:selectItem itemValue="Rejected" itemLabel="Rejected"/>
-                                                <f:selectItem itemValue="Waiting" itemLabel="Waiting"/>  
-                                            </h:selectOneMenu>
-                                            
-                                        </h:panelGrid> 
-                                        <h:commandButton class="buttonStyle" value="Save" action="#{mainController.saveBookingStatus()}"></h:commandButton>
-                                        <h:commandButton class="buttonStyle" value="Cancel" action="#{mainController.cancelBookingStatus()}"></h:commandButton>    
-                                    </div>                  
-                                </h:form>
-                            </div>
-                        </div>
-                    </div>                    
+    <h:body id="bodyPage">
+        <h:panelGroup rendered="#{mainController.isAdmin}">
+            <div class="container-fluid insideHeaderBackground">
+                <!--
+                <div class="logoBox">
+                    <h:graphicImage class="logoImage" value="Resources/Images/logo-left.jpg"/>
+                </div> -->
+                <div class="boxes2">                
+                    <div class="insideBox">
+                        <h1 class="webTitle">Port-Eco House</h1>
+                    </div>                
                 </div>
             </div>
-        </div> 
+            <div class="container-fluid navBarColumn">
+                 <nav class="navbar navbar-default navbarColour">
+                    <div class="container">
+                        <div class="col-xs-12 secondNavColour">
+                            <div class="nav navbar-nav">
+                                <ul class="breadcrumb"> 
+                                    <li>
+                                        <a class="navbarItem" href="adminFacility.xhtml">FACILITY</a>
+                                    </li>
+                                    <li>
+                                        <a class="navbarItem navbarItemActive" href="#">BOOKING</a>
+                                    </li>                                
+                                </ul>
+                            </div>  
+                            <div class="nav navbar-nav navbar-right">
+                                <ul class="nav navbar-nav">  
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle navbarItem" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">ADMINISTRATOR<span class="caret"></span></a>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <a class="navbarItem" href="adminPage.xhtml">MY ACCOUNT</a>
+                                            </li>
+                                            <li>
+                                                <h:form class="navbarItem">
+                                                    <h:commandLink class="navbarItem" style="text-decoration: none;" action="#{mainController.logout()}" value="LOG OUT"/>
+                                                </h:form>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>            
+                        </div><!-- /.container-fluid -->            
+                    </div>  
+                </nav>
+            </div>
+             <div id="bookingPanel" class="container-fluid bookingPanel">
+                <div class="container">
+                    <div class="col-xs-12">
+                        <div class="inventoryPanel">
+                            <div class="row">
+                                <div class="col-xs-12" style="margin: 0 auto;margin-top:20px;">
+                                    <h1 class="titleFont">Booking Detail</h1>
+                                </div>
+                                <div class="col-xs-12" style="margin: 0 auto;margin-top:20px;">
+                                    <h:form id="memberForm" rendered="#{not mainController.checkFacility}">
+                                        <div class="detailsForm" style="width: 450px; margin: 0 auto;">
+                                            <h:panelGrid columns="3">                                    
+                                                <h:outputLabel class="formOutputLabel" value="Requester Id"/>
+                                                <h:outputLabel class="formOutputLabel2" value=" : "/>
+                                                <h:outputText class="formOutputLabel2" value="#{mainController.chosenBooking.userId}"/>                        
+
+                                                <h:outputLabel class="formOutputLabel" value="Name"/>
+                                                <h:outputLabel class="formOutputLabel2" value=" : "/>
+                                                <h:outputText class="formOutputLabel2" value="#{mainController.chosenBooking.firstName} #{mainController.chosenBooking.lastName}"/> 
+
+                                                <h:outputLabel class="formOutputLabel" value="Email"/>
+                                                <h:outputLabel class="formOutputLabel2" value=" : "/>  
+                                                <h:outputText class="formOutputLabel" value="#{mainController.chosenBooking.userEmail}"/> 
+
+                                                <h:outputLabel class="formOutputLabel" value="Facility Name"/>
+                                                <h:outputLabel class="formOutputLabel2" value=" : "/>
+                                                <h:outputText class="formOutputLabel2" value="#{mainController.chosenBooking.facilityName}"/> 
+
+                                                <h:outputLabel class="formOutputLabel" value="Date (From)"/>
+                                                <h:outputLabel class="formOutputLabel2" value=" : "/>
+                                                <h:outputText class="formOutputLabel2" value="#{mainController.chosenBooking.dateFrom}">
+                                                    <f:convertDateTime pattern="dd-MM-yyyy"/>
+                                                </h:outputText>
+
+                                                <h:outputLabel class="formOutputLabel" value="Date (Until)"/>
+                                                <h:outputLabel class="formOutputLabel2" value=" : "/>
+                                                <h:outputText class="formOutputLabel2" value="#{mainController.chosenBooking.dateUntil}">
+                                                    <f:convertDateTime pattern="dd-MM-yyyy"/>
+                                                </h:outputText>
+
+                                                <h:outputLabel class="formOutputLabel" value="Purpose"/>
+                                                <h:outputLabel class="formOutputLabel2" value=" : "/>
+                                                <h:outputText class="formOutputLabel2" value="#{mainController.chosenBooking.purpose}"/>
+
+                                                <h:outputLabel class="formOutputLabel" value="Message"/>
+                                                <h:outputLabel class="formOutputLabel2" value=" : "/>
+                                                <h:outputText class="formOutputLabel2" value="#{mainController.chosenBooking.message}"/>
+
+                                                <h:outputLabel class="formOutputLabel" value="Status"/>
+                                                <h:outputLabel class="formOutputLabel2" value=" : "/>
+                                                <h:outputText class="formOutputLabel2" value="#{mainController.chosenBooking.status}"/>
+
+                                            </h:panelGrid>                                         
+                                            <h:commandButton class="buttonStyle" value="Edit Booking" action="#{mainController.editBookingStatus()}"></h:commandButton> 
+                                        </div>                  
+                                    </h:form> 
+                                    <h:form id="editMemberForm" rendered="#{mainController.checkFacility}">
+                                        <div class="detailsForm" style="width: 450px; margin: 0 auto;">
+                                            <h:panelGrid columns="3">                                    
+                                                <h:outputLabel class="formOutputLabel" value="Requester Id"/>
+                                                <h:outputLabel class="formOutputLabel2" value=" : "/>
+                                                <h:outputText class="formOutputLabel2" value="#{mainController.chosenBooking.userId}"/>                        
+
+                                                <h:outputLabel class="formOutputLabel" value="Name"/>
+                                                <h:outputLabel class="formOutputLabel2" value=" : "/>
+                                                <h:outputText class="formOutputLabel2" value="#{mainController.chosenBooking.firstName} #{mainController.chosenBooking.lastName}"/> 
+
+                                                <h:outputLabel class="formOutputLabel" value="Email"/>
+                                                <h:outputLabel class="formOutputLabel2" value=" : "/>  
+                                                <h:outputText class="formOutputLabel" value="#{mainController.chosenBooking.userEmail}"/> 
+
+                                                <h:outputLabel class="formOutputLabel" value="Facility Name"/>
+                                                <h:outputLabel class="formOutputLabel2" value=" : "/>
+                                                <h:outputText class="formOutputLabel2" value="#{mainController.chosenBooking.facilityName}"/> 
+
+                                                <h:outputLabel class="formOutputLabel" value="Date (From)"/>
+                                                <h:outputLabel class="formOutputLabel2" value=" : "/>
+                                                <h:outputText class="formOutputLabel2" value="#{mainController.chosenBooking.dateFrom}">
+                                                    <f:convertDateTime pattern="dd-MM-yyyy"/>
+                                                </h:outputText>
+
+                                                <h:outputLabel class="formOutputLabel" value="Date (Until)"/>
+                                                <h:outputLabel class="formOutputLabel2" value=" : "/>
+                                                <h:outputText class="formOutputLabel2" value="#{mainController.chosenBooking.dateUntil}">
+                                                    <f:convertDateTime pattern="dd-MM-yyyy"/>
+                                                </h:outputText>
+
+                                                <h:outputLabel class="formOutputLabel" value="Purpose"/>
+                                                <h:outputLabel class="formOutputLabel2" value=" : "/>
+                                                <h:outputText class="formOutputLabel2" value="#{mainController.chosenBooking.purpose}"/>
+
+                                                <h:outputLabel class="formOutputLabel" value="Message"/>
+                                                <h:outputLabel class="formOutputLabel2" value=" : "/>
+                                                <h:outputText class="formOutputLabel2" value="#{mainController.chosenBooking.message}"/>
+
+                                                <h:outputLabel class="outputLabelFont" value="Status"/>
+                                                <h:outputLabel class="outputTextFont" value=" : "/>
+                                                <h:selectOneMenu class="outputTextFont" value="#{mainController.selectedStatus}" onchange="submit()"
+                                                                 valueChangeListener="#{mainController.changeStatus}" style="margin:10px"> 
+                                                    <f:selectItem itemValue="#{null}" itemLabel="--Select Status--"/>
+                                                    <f:selectItem itemValue="Accepted" itemLabel="Accepted"/>
+                                                    <f:selectItem itemValue="Rejected" itemLabel="Rejected"/>
+                                                    <f:selectItem itemValue="Waiting" itemLabel="Waiting"/>  
+                                                </h:selectOneMenu>
+
+                                            </h:panelGrid> 
+                                            <h:commandButton class="buttonStyle" value="Save" action="#{mainController.saveBookingStatus()}"></h:commandButton>
+                                            <h:commandButton class="buttonStyle" value="Cancel" action="#{mainController.cancelBookingStatus()}"></h:commandButton>    
+                                        </div>                  
+                                    </h:form>
+                                </div>
+                            </div>
+                        </div>                    
+                    </div>
+                </div>
+            </div> 
+        </h:panelGroup>
+        <h:panelGroup rendered="#{not mainController.isAdmin}">
+            <div class="container-fluid headerBackground">            
+                <div class="boxes">                
+                    <div class="firstBox">
+                        <h1 class="webTitle">Port-Eco House</h1>
+                    </div>
+                    <div class="secondBox">
+                        <p class="titleDescription">Installed with environmental monitoring equipment and video cameras to enable in-situ studies of the building’s performance and the behaviour of its occupants</p>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid navBarColumn">
+                <nav class ="navbar navbar-default navbarColour" style="min-width: 1000px;">
+                    <div class="container secondNavColour">
+                        <div class="nav navbar-nav">
+                            <ul class="nav navbar-nav">   
+                                <li>
+                                    <a class="navbarItem" href="mainPage.xhtml">HOME</a>
+                                </li>                                    
+                            </ul>
+                        </div>  
+                    </div>  
+                </nav>
+            </div>
+            <div>
+                <h2 class="fontFacility" style="color: red;">Sorry, You need to log in as administrator to be able to use administrator's functions and features</h2>
+            </div>
+        </h:panelGroup>   
     </h:body>
 </html>
 
